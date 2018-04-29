@@ -10,6 +10,8 @@ import org.exist.xmldb.EXistResource;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.xmlrpc.XmlRpcException;
 
+import java.io.IOException;
+
 
 public class AccountingDatabaseImpl {
 
@@ -20,15 +22,20 @@ public class AccountingDatabaseImpl {
     private static final String URI = "xmldb:exist://localhost:8080/exist/xmlrpc";
     private static final String COLNAME = "/db/accountingcollectionpb138";
     private static final String MAKECOLNAME = "accountingcollectionpb138";
+    private static final String LINUXSTARTUP = "/bin/startup.sh";
+    private static final String LINUXSHUTDOWN = "/bin/shutdown.sh";
+    private static final String WINDOWSSTARTUP = "\\bin\\startup.bat";
+    private static final String WINDOWSSHUTDOWN = "\\bin\\startup.bat";
 
     private String username;
     private String password;
 
     private Boolean dbDetected;
     private Database database;
-    Collection col;
+    private Collection col;
 
-    AccountingDatabaseImpl(String username, String password) throws Exception {
+    public AccountingDatabaseImpl(String username, String password) throws XMLDBException, ClassNotFoundException,
+            InstantiationException, IllegalAccessException {
         this.username = username;
         this.password = password;
         dbDetected = false;
@@ -41,17 +48,86 @@ public class AccountingDatabaseImpl {
         try {
             dbDetected = initCollection();
         } catch (XMLDBException ex) {
-            if (
-                    ( ex.errorCode == ErrorCodes.VENDOR_ERROR  &&
-                            equals(ex.getMessage(), toString("Failed to read server's response: " +
-                                    "Connection refused (Connection refused))")) ) )
+            if (ex.errorCode != ErrorCodes.VENDOR_ERROR  ||
+                            "Failed to read server's response: Connection refused (Connection refused))"
+                                    .compareTo(ex.getMessage()) != 0 ) {
+                throw new XMLDBException(ex.errorCode, ex.vendorErrorCode);
+            }
         }
-
-
-
     }
 
-    Boolean initCollection() throws XMLDBException {
+    public Boolean initDatabase(String path) throws XMLDBException {
+        return initDatabase(path, 60);
+    }
+
+    public Boolean initDatabase(String path, long waits) throws XMLDBException {
+        String start;
+        if (SystemUtils.IS_OS_WINDOWS) {
+            start = WINDOWSSTARTUP;
+        } else if (SystemUtils.IS_OS_LINUX) {
+            start = LINUXSTARTUP;
+        } else {
+            return false;
+        }
+
+        Process pr = null;
+        try {
+            pr = Runtime.getRuntime().exec(path + start);
+        } catch (IOException ex) {
+            return false;
+        }
+
+        for (int i = 0; i < 60; i++) {
+            try {
+                wait(1000);
+            } catch (InterruptedException ex) {
+                pr.destroy();
+                return false;
+            }
+            try {
+                dbDetected = initCollection();
+            } catch (XMLDBException ex) {
+                if (ex.errorCode != ErrorCodes.VENDOR_ERROR  ||
+                        "Failed to read server's response: Connection refused (Connection refused))"
+                                .compareTo(ex.getMessage()) != 0 ) {
+                    pr.destroy();
+                    if (ex.errorCode == ErrorCodes.PERMISSION_DENIED) {
+                        throw new XMLDBException(ex.errorCode, ex.vendorErrorCode);
+                    }
+                    return false;
+                }
+            }
+        }
+
+        return col != null;
+    }
+
+    public Process killDatabase(String path) {
+        String kill;
+        if (SystemUtils.IS_OS_WINDOWS) {
+            kill = WINDOWSSHUTDOWN;
+        } else if (SystemUtils.IS_OS_LINUX) {
+            kill = LINUXSHUTDOWN;
+        } else {
+            return null;
+        }
+
+        Process pr = null;
+        try {
+            pr = Runtime.getRuntime().exec(path + kill);
+        } catch (IOException ex) {
+            return null;
+        }
+        return pr;
+    }
+
+    public void updateLogin(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+
+    private Boolean initCollection() throws XMLDBException {
         col = DatabaseManager.getCollection(URI + COLNAME, username, password);
 
         if (col == null) {
