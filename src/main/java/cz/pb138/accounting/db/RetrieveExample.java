@@ -1,5 +1,6 @@
 package cz.pb138.accounting.db;
 
+import net.sf.saxon.trans.Err;
 import org.xmldb.api.base.*;
 import org.xmldb.api.modules.*;
 import org.xmldb.api.*;
@@ -39,10 +40,24 @@ public class RetrieveExample {
 
         Collection col = null;
         XMLResource res = null;
-        try {j
+        try {
             // get the collection
-            col = DatabaseManager.getCollection(URI + COLNAME);
-            col.setProperty(OutputKeys.INDENT, "no");
+//            try {
+            col = DatabaseManager.getCollection(URI + COLNAME, "testuser", "test");
+//            } catch (XMLDBException ex) {
+//                if (ex.errorCode == ErrorCodes.VENDOR_ERROR    ) {
+//                    System.out.println("database URI not found!");
+//                }
+//                return;
+//            }
+//            col.setProperty(OutputKeys.INDENT, "no");
+
+//            XPathQueryService xpqs = (XPathQueryService)col.getService("XPathQueryService", "1.0");
+//            ResourceSet result =
+//                    xpqs.query("let $create-collection := xmldb:create-collection(\"/db\", \"output\")\n"
+//                    + " return $create-collection");
+
+
             res = (XMLResource)col.getResource(RESNAME);
 
             if(res == null) {
