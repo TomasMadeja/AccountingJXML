@@ -49,7 +49,7 @@ public class AccountingDatabaseImpl {
             dbDetected = initCollection();
         } catch (XMLDBException ex) {
             if (ex.errorCode != ErrorCodes.VENDOR_ERROR  ||
-                            "Failed to read server's response: Connection refused (Connection refused))"
+                            "Failed to read server's response: Connection refused (Connection refused)"
                                     .compareTo(ex.getMessage()) != 0 ) {
                 throw new XMLDBException(ex.errorCode, ex.vendorErrorCode);
             }
@@ -61,6 +61,10 @@ public class AccountingDatabaseImpl {
     }
 
     public Boolean initDatabase(String path, long waits) throws XMLDBException {
+        if (dbDetected) {
+            return false;
+        }
+
         String start;
         if (SystemUtils.IS_OS_WINDOWS) {
             start = WINDOWSSTARTUP;
@@ -77,9 +81,9 @@ public class AccountingDatabaseImpl {
             return false;
         }
 
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < waits && !dbDetected; i++) {
             try {
-                wait(1000);
+                Thread.sleep(10);
             } catch (InterruptedException ex) {
                 pr.destroy();
                 return false;
@@ -88,14 +92,31 @@ public class AccountingDatabaseImpl {
                 dbDetected = initCollection();
             } catch (XMLDBException ex) {
                 if (ex.errorCode != ErrorCodes.VENDOR_ERROR  ||
-                        "Failed to read server's response: Connection refused (Connection refused))"
+                        "Failed to read server's response: Connection refused (Connection refused)"
                                 .compareTo(ex.getMessage()) != 0 ) {
-                    pr.destroy();
+                    try {
+                        Thread.sleep(10000);
+                        pr.destroy();
+                        killDatabase(path);
+                    } catch (InterruptedException e) {
+                        killDatabase(path);
+                        return false;
+                    }
                     if (ex.errorCode == ErrorCodes.PERMISSION_DENIED) {
                         throw new XMLDBException(ex.errorCode, ex.vendorErrorCode);
                     }
                     return false;
                 }
+            }
+        }
+
+        if (!dbDetected) {
+            try {
+                Thread.sleep(10000);
+                killDatabase(path);
+            } catch (InterruptedException ex) {
+                killDatabase(path);
+                return false;
             }
         }
 
@@ -114,7 +135,8 @@ public class AccountingDatabaseImpl {
 
         Process pr = null;
         try {
-            pr = Runtime.getRuntime().exec(path + kill);
+            pr = Runtime.getRuntime().exec(path + kill + " -u "
+                    + username + " -p " + password);
         } catch (IOException ex) {
             return null;
         }
@@ -124,6 +146,10 @@ public class AccountingDatabaseImpl {
     public void updateLogin(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public Boolean colFound() {
+        return dbDetected;
     }
 
 
