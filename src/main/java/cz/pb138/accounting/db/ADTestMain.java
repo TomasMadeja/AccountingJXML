@@ -6,7 +6,7 @@ import org.apache.commons.lang3.SystemUtils;
 public class ADTestMain {
 
     public static void main(String args[]) throws Exception {
-        AccountingDatabaseImpl db = new AccountingDatabaseImpl("testuser", "test");
+        AccountingDatabaseImpl db = new AccountingDatabaseImpl(null, null);
 
         if (!db.colFound()) {
             if (db.initDatabase("/home/adeom/eXist-db")) {

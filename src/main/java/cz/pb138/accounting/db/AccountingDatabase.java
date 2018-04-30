@@ -11,7 +11,7 @@ import org.xmldb.api.base.XMLDBException;
 public interface AccountingDatabase {
 
     /**
-     * Starts database, if not already active. Uses default sleep (60 iterations of sleep(1000))
+     * Starts database, if not already active. Will attempt to retrieve collection from database until successful.
      * @param path absolute path to given database
      * @return true if collection found, else false
      * @throws XMLDBException
@@ -19,20 +19,27 @@ public interface AccountingDatabase {
     Boolean initDatabase(String path) throws XMLDBException;
 
     /**
-     * Starts database, if not already active. Uses number of iterations based on waits parameter waits times sleep(1000)
+     * Starts database, if not already active. Will attempt to retrieve collection from database until successful or until waits count attempts.
      * @param path absolute path to given database
-     * @param waits number of sleep cycles
+     * @param waits number of attempts, how many cycles should function wait for database to start
      * @return true if collection found, else false
      * @throws XMLDBException
      */
     Boolean initDatabase(String path, long waits) throws XMLDBException;
 
     /**
-     * Kills database using default method
+     * Kills database using default method. Only guarantees execution of the command, not its success
      * @param path absolute path to given database
-     * @return kill process
+     * @return True if command was successfully executed, else false
      */
-    Process killDatabase(String path);
+    Boolean killDatabase(String path);
+
+    /**
+     * Updates login information for database. Including null
+     * @param username new username
+     * @param password new password
+     */
+    void updateLogin(String username, String password);
 
     /**
      * Detects whether collection was found

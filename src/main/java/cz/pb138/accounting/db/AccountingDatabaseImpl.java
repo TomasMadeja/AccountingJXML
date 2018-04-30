@@ -20,8 +20,10 @@ public class AccountingDatabaseImpl {
      */
     private static final String DRIVER = "org.exist.xmldb.DatabaseImpl";
     private static final String URI = "xmldb:exist://localhost:8080/exist/xmlrpc";
-    private static final String COLNAME = "/db/accountingcollectionpb138";
-    private static final String MAKECOLNAME = "accountingcollectionpb138";
+
+    private static final String COLNAME = "/db/accountingcollectionpb13";
+    private static final String MAKECOLNAME = "accountingcollectionpb13";
+
     private static final String LINUXSTARTUP = "/bin/startup.sh";
     private static final String LINUXSHUTDOWN = "/bin/shutdown.sh";
     private static final String WINDOWSSTARTUP = "\\bin\\startup.bat";
@@ -57,7 +59,7 @@ public class AccountingDatabaseImpl {
     }
 
     public Boolean initDatabase(String path) throws XMLDBException {
-        return initDatabase(path, 60);
+        return initDatabase(path, -1);
     }
 
     public Boolean initDatabase(String path, long waits) throws XMLDBException {
@@ -74,73 +76,41 @@ public class AccountingDatabaseImpl {
             return false;
         }
 
-        Process pr = null;
         try {
-            pr = Runtime.getRuntime().exec(path + start);
+            Runtime.getRuntime().exec(path + start);
         } catch (IOException ex) {
             return false;
         }
 
-        for (int i = 0; i < waits && !dbDetected; i++) {
+        while (!tryInit(path) && waits != 0) {
             try {
-                Thread.sleep(10);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
-                pr.destroy();
                 return false;
             }
-            try {
-                dbDetected = initCollection();
-            } catch (XMLDBException ex) {
-                if (ex.errorCode != ErrorCodes.VENDOR_ERROR  ||
-                        "Failed to read server's response: Connection refused (Connection refused)"
-                                .compareTo(ex.getMessage()) != 0 ) {
-                    try {
-                        Thread.sleep(10000);
-                        pr.destroy();
-                        killDatabase(path);
-                    } catch (InterruptedException e) {
-                        killDatabase(path);
-                        return false;
-                    }
-                    if (ex.errorCode == ErrorCodes.PERMISSION_DENIED) {
-                        throw new XMLDBException(ex.errorCode, ex.vendorErrorCode);
-                    }
-                    return false;
-                }
-            }
-        }
-
-        if (!dbDetected) {
-            try {
-                Thread.sleep(10000);
-                killDatabase(path);
-            } catch (InterruptedException ex) {
-                killDatabase(path);
-                return false;
-            }
+            waits--;
         }
 
         return col != null;
     }
 
-    public Process killDatabase(String path) {
+    public Boolean killDatabase(String path) {
         String kill;
         if (SystemUtils.IS_OS_WINDOWS) {
             kill = WINDOWSSHUTDOWN;
         } else if (SystemUtils.IS_OS_LINUX) {
             kill = LINUXSHUTDOWN;
         } else {
-            return null;
+            return false;
         }
 
-        Process pr = null;
         try {
-            pr = Runtime.getRuntime().exec(path + kill + " -u "
+            Runtime.getRuntime().exec(path + kill + " -u "
                     + username + " -p " + password);
         } catch (IOException ex) {
-            return null;
+            return false;
         }
-        return pr;
+        return true;
     }
 
     public void updateLogin(String username, String password) {
@@ -152,6 +122,21 @@ public class AccountingDatabaseImpl {
         return dbDetected;
     }
 
+    private Boolean tryInit(String path) throws XMLDBException{
+        try {
+            dbDetected = initCollection();
+        } catch (XMLDBException ex) {
+            if (ex.errorCode != ErrorCodes.VENDOR_ERROR  ||
+                    "Failed to read server's response: Connection refused (Connection refused)"
+                            .compareTo(ex.getMessage()) != 0 ) {
+                if (ex.getMessage().contains("not allowed to write to collection")) {
+                    throw new XMLDBException(ErrorCodes.PERMISSION_DENIED, ex.vendorErrorCode);
+                }
+                return false;
+            }
+        }
+        return dbDetected;
+    }
 
     private Boolean initCollection() throws XMLDBException {
         col = DatabaseManager.getCollection(URI + COLNAME, username, password);
