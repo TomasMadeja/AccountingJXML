@@ -1,0 +1,36 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+    <xsd:element name="pb138-accearnings">
+    	<xsd:complexType>
+    		<xsd:sequence>
+    			<xsd:element name="record" minOccurs="0" maxOccurs="unbounded">
+    				<xsd:complexType>
+    					<xsd:sequence>
+		    				<xsd:element name="entity-name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		    				<xsd:element name="entity-address" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		    				<xsd:element name="entity-ico" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		    				<xsd:element name="entity-dic" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		    				<xsd:element name="entity-bank-information" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		    				<xsd:element name="entity-note" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		    				<xsd:element name="entity-telephone" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		    				<xsd:element name="entity-email" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		    				<xsd:element name="billing-date" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		    				<xsd:element name="issuing-date" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		    				<xsd:element name="recipient-address" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		    				<xsd:element name="item"  minOccurs="1" maxOccurs="unbounded">
+		    					<xsd:complexType>
+		    						<xsd:sequence>
+		    							<xsd:element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		    							<xsd:element name="quanity" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		    							<xsd:element name="unit" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		    							<xsd:element name="price" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		    						</xsd:sequence>
+		    					</xsd:complexType>
+		    				</xsd:element>
+		    			</xsd:sequence>
+		    		</xsd:complexType>
+    			</xsd:element>
+    		</xsd:sequence>
+    	</xsd:complexType>
+    </xsd:element>
+</xsd:schema>

@@ -41,7 +41,7 @@ public class RetrieveExample {
         Collection col = null;
         XMLResource res = null;
         try {
-            // get the collection
+//             get the collection
 //            try {
             col = DatabaseManager.getCollection(URI + COLNAME, "testuser", "test");
 //            } catch (XMLDBException ex) {
@@ -51,12 +51,15 @@ public class RetrieveExample {
 //                return;
 //            }
 //            col.setProperty(OutputKeys.INDENT, "no");
+//
 
-//            XPathQueryService xpqs = (XPathQueryService)col.getService("XPathQueryService", "1.0");
+            XPathQueryService xpqs = (XPathQueryService)col.getService("XPathQueryService", "1.0");
+
 //            ResourceSet result =
 //                    xpqs.query("let $create-collection := xmldb:create-collection(\"/db\", \"output\")\n"
 //                    + " return $create-collection");
 
+//            res = (XMLResource) xpqs.query("for $r in /db/testdoc\n return $r").getResource(0);
 
             res = (XMLResource)col.getResource(RESNAME);
 

@@ -6,16 +6,16 @@ import org.apache.commons.lang3.SystemUtils;
 public class ADTestMain {
 
     public static void main(String args[]) throws Exception {
-        AccountingDatabaseImpl db = new AccountingDatabaseImpl(null, null);
+        AccountingDatabaseImpl db = new AccountingDatabaseImpl("testuser", "test");
 
         if (!db.colFound()) {
             if (db.initDatabase("/home/adeom/eXist-db")) {
-                System.out.println("...!!...");
+                System.out.println(db.getOwner());
             } else {
                 System.out.println("...No...");
             }
         }
-        db.killDatabase("/home/adeom/eXist-db");
+//        db.killDatabase("/home/adeom/eXist-db");
 //        Runtime.getRuntime().exec("/home/adeom/eXist-db/bin/startup.sh");
 //        new ProcessBuilder("/bin/bash", "~/eXist-db/bin/startup.sh").start();
     }
