@@ -5,11 +5,16 @@ import org.apache.commons.lang3.SystemUtils;
 
 public class ADTestMain {
 
+    private static final String USERNAME = "";
+    private static final String PASSWORD = "";
+    private static final String DIRECTORY = "";
+
+
     public static void main(String args[]) throws Exception {
-        AccountingDatabaseImpl db = new AccountingDatabaseImpl("testuser", "test");
+        AccountingDatabaseImpl db = new AccountingDatabaseImpl(USERNAME, PASSWORD);
 
         if (!db.colFound()) {
-            if (db.initDatabase("/home/adeom/eXist-db")) {
+            if (db.initDatabase(DIRECTORY)) {
                 System.out.println(db.getOwner());
             } else {
                 System.out.println("...No...");
