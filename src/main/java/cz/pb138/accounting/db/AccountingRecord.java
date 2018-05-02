@@ -1,5 +1,6 @@
 package cz.pb138.accounting.db;
 
+import com.github.krukow.clj_lang.Obj;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
@@ -26,8 +27,9 @@ public class AccountingRecord {
 
     public Boolean expense;
 
-    public AccountingRecord(Document doc) {
+    public AccountingRecord(Document doc, boolean expense) {
         this.doc = doc;
+        this.expense = expense;
         Element root = doc.getDocumentElement();
         Element e;
         for (String u : UNIQUE) {
@@ -36,7 +38,7 @@ public class AccountingRecord {
         }
     }
 
-    public AccountingRecord(Document doc, Node recordNode, Boolean expense) {
+    public AccountingRecord(Document doc, Node recordNode, boolean expense) {
         this.doc = doc;
         uniqueElements = new HashMap<String, Element>();
         contacts = new HashMap<String, List<Element>>();
@@ -103,5 +105,101 @@ public class AccountingRecord {
         item.appendChild(e);
         doc.getDocumentElement().appendChild(item);
     }
+
+    public void changeValue(String name, String value) {
+        Element e;
+        if (( e = uniqueElements.get(name)) != null) {
+            e.setTextContent(value);
+        }
+    }
+
+    public void changeValue(String name, String oldValue, String newValue){
+        List l;
+        if (contacts.containsKey(name)) {
+            l = contacts.get(name);
+            for (Object e :l) {
+                if (((Element) e).getTextContent().compareTo(oldValue) == 0) {
+                    ((Element) e).setTextContent(newValue);
+                }
+            }
+        }
+    }
+
+    public void editItem(String[] oldItem, String[] newItem) {
+        if (oldItem.length != 4 || newItem.length != 4) {
+            return;
+        }
+        for (Map<String, Element> subItem : itemList) {
+            if (subItem.get("description").getTextContent().compareTo(oldItem[0]) == 0 ||
+                    subItem.get("quantity").getTextContent().compareTo(oldItem[1]) == 0 ||
+                    subItem.get("unit").getTextContent().compareTo(oldItem[2]) == 0 ||
+                    subItem.get("price").getTextContent().compareTo(oldItem[3]) == 0) {
+                subItem.get("description").setTextContent(newItem[0]);
+                subItem.get("unit").setTextContent(newItem[1]);
+                subItem.get("description").setTextContent(newItem[2]);
+                subItem.get("price").setTextContent(newItem[3]);
+            }
+        }
+    }
+
+    public String getValue(String name) {
+        return uniqueElements.containsKey(name) ? uniqueElements.get(name).getTextContent() : null;
+    }
+
+    public String[] getContact(String name) {
+        String[] array = null;
+        if (contacts.containsKey(name)) {
+            array = new String[contacts.get(name).size()];
+            int i = 0;
+            for (Element e : contacts.get(name)) {
+                array[i] = e.getTextContent();
+                i++;
+            }
+        }
+        return array;
+    }
+
+    public String[][] getItems() {
+        String[][] items = new String[itemList.size()][4];
+        int i = 0;
+        for (Map<String, Element> m : itemList) {
+            items[i][0] = m.get("description").getTextContent();
+            items[i][1] = m.get("unit").getTextContent();
+            items[i][2] = m.get("description").getTextContent();
+            items[i][3] = m.get("price").getTextContent();
+        }
+        return items;
+    }
+
+    public void removeItem(String[] item) {
+        if (item.length != 4) {
+            return;
+        }
+        for (Map<String, Element> subItem : itemList) {
+            if (subItem.get("description").getTextContent().compareTo(item[0]) == 0 ||
+                    subItem.get("quantity").getTextContent().compareTo(item[1]) == 0 ||
+                    subItem.get("unit").getTextContent().compareTo(item[2]) == 0 ||
+                    subItem.get("price").getTextContent().compareTo(item[3]) == 0) {
+                subItem.get("decription").getParentNode().getParentNode().removeChild(
+                        subItem.get("description").getParentNode()
+                );
+                itemList.remove(subItem);
+            }
+        }
+    }
+
+    public void removeContact(String name, String value) {
+        if (contacts.containsKey(name)) {
+            for (Element e : contacts.get(name)) {
+                if (e.getTextContent().compareTo(value) == 0) {
+                    e.getParentNode().removeChild(
+                            e
+                    );
+                    contacts.get(name).remove(e);
+                }
+            }
+        }
+    }
+
 
 }

@@ -84,7 +84,13 @@ public class AccountingDatabaseImpl {
         }
 
         col = null;
-        dbDetected = initCollection();
+        try {
+            dbDetected = initCollection();
+        } catch (AccountingException ex) {
+            if (ex.errorCode != ADBErrorCodes.CONNECTION_ERROR) {
+                throw ex;
+            }
+        }
     }
 
     public boolean initDatabase(String path) throws AccountingException {
@@ -286,7 +292,24 @@ public class AccountingDatabaseImpl {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             dbf.setNamespaceAware(true);
             dbf.setSchema(schema);
-            return dbf.newDocumentBuilder().parse(new InputSource(new StringReader(doc)));
+            DocumentBuilder docBuild = dbf.newDocumentBuilder();
+            docBuild.setErrorHandler(new ErrorHandler() {
+                @Override
+                public void error(SAXParseException ex) throws SAXException {
+                    throw ex;
+                }
+
+                @Override
+                public void fatalError(SAXParseException ex) throws SAXException {
+                    throw ex;
+                }
+
+                @Override
+                public void warning(SAXParseException ex) throws SAXException {
+                    throw ex;
+                }
+            });
+            return docBuild.parse(new InputSource(new StringReader(doc)));
 
         } catch (SAXException ex) {
             throw new AccountingException(ADBErrorCodes.XML_PARSING_ERROR, "Error parsing " + type +
@@ -318,7 +341,71 @@ public class AccountingDatabaseImpl {
 
     public boolean isOwnerSet() { return ownerSet; }
 
-    public XMLResource getOwner() {
-        return owner;
+    public AccountingOwner getOwner() {
+        return new AccountingOwner(ownerDoc, ownerDoc.getDocumentElement());
     }
+
+    public AccountingOwner createOwner() throws AccountingException {
+        try {
+            if (owner != null) {
+                col.removeResource(owner);
+            }
+
+            owner = createRecordResource(OWNER);
+
+            ownerDoc = DocumentBuilderFactory
+                    .newInstance()
+                    .newDocumentBuilder()
+                    .parse(new InputSource(new StringReader((String) owner.getContent())));
+            new AccountingOwner(ownerDoc);
+            owner.setContentAsDOM(ownerDoc);
+            col.storeResource(owner);
+        } catch (ParserConfigurationException|IOException|SAXException ex) {
+            throw new AccountingException(ADBErrorCodes.UNKNOWN_ERROR,
+                    "Error occured while creating owner ()", ex);
+
+        } catch (XMLDBException ex) {
+            if (isDCError(ex.getMessage())) {
+                throw new AccountingException(ADBErrorCodes.CONNECTION_ERROR,
+                        "Unable to connect while creating resource (Connection error)", ex);
+            } else if (isDeniedError(ex.getMessage())) {
+                throw new AccountingException(ADBErrorCodes.ACCESS_ERROR,
+                        "Unable to create resource (Permission error)", ex);
+            }
+        }
+
+        return new AccountingOwner(ownerDoc, ownerDoc.getDocumentElement());
+    }
+
+    public AccountingRecord createRecord(boolean expense) {
+        Document doc = earningsDoc;
+        if (expense) {
+            doc = expensesDoc;
+        }
+        return new AccountingRecord(doc, expense);
+    }
+
+    public void commitChanges() throws AccountingException {
+        try {
+            owner.setContentAsDOM(ownerDoc);
+            col.storeResource(owner);
+            expenses.setContentAsDOM(expensesDoc);
+            col.storeResource(expenses);
+            earnings.setContentAsDOM(earningsDoc);
+            col.storeResource(earnings);
+        } catch (XMLDBException ex) {
+            if (ex.errorCode == ErrorCodes.WRONG_CONTENT_TYPE ||
+                    ex.errorCode == ErrorCodes.INVALID_RESOURCE) {
+                throw new AccountingException(ADBErrorCodes.RESOURCE_COMMIT_FAILURE, ex.getMessage(), ex);
+            } else if (isDCError(ex.getMessage())) {
+                throw new AccountingException(ADBErrorCodes.CONNECTION_ERROR,
+                        "Unable to connect while committing changes in resources (Connection error)", ex);
+            } else if (isDeniedError(ex.getMessage())) {
+                throw new AccountingException(ADBErrorCodes.ACCESS_ERROR,
+                        "Unable to commit resource changes (Permission error)", ex);
+            }
+        }
+    }
+
+
 }

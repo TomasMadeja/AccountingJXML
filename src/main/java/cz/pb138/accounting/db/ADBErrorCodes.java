@@ -41,4 +41,9 @@ public class ADBErrorCodes {
      * Error code for problems terminating database instance (server)
      */
     public static int DATABASE_TERMINATION_FAILURE = 11;
+
+    /**
+     * Error code for problems commiting changes in resource
+     */
+    public static int RESOURCE_COMMIT_FAILURE = 12;
 }
