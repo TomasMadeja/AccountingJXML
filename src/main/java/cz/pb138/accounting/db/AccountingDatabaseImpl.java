@@ -63,6 +63,10 @@ public class AccountingDatabaseImpl {
     private XMLResource expenses;
     private XMLResource earnings;
 
+    private Document ownerDoc;
+    private Document expensesDoc;
+    private Document earningsDoc;
+
     private  boolean ownerSet;
 
     public AccountingDatabaseImpl(String username, String password) throws AccountingException {
@@ -201,7 +205,7 @@ public class AccountingDatabaseImpl {
         try {
             owner = fillResource(OWNER);
             try {
-                validateResource((String) owner.getContent(), OWNER);
+                ownerDoc = validateResource((String) owner.getContent(), OWNER);
                 ownerSet = true;
             } catch (AccountingException ex) {
                 if (ex.errorCode != ADBErrorCodes.XML_PARSING_ERROR) {
@@ -210,9 +214,9 @@ public class AccountingDatabaseImpl {
                 ownerSet = false;
             }
             expenses = fillResource(EXPENSES);
-            validateResource((String) expenses.getContent(), EXPENSES);
+            expensesDoc = validateResource((String) expenses.getContent(), EXPENSES);
             earnings = fillResource(EARNINGS);
-            validateResource((String) earnings.getContent(), EARNINGS);
+            earningsDoc = validateResource((String) earnings.getContent(), EARNINGS);
 
         } catch (XMLDBException ex) {
             if (isDCError(ex.getMessage())) {
@@ -274,7 +278,7 @@ public class AccountingDatabaseImpl {
     }
 
 
-    private void validateResource(String doc, String type) throws AccountingException {
+    private Document validateResource(String doc, String type) throws AccountingException {
         try {
             Schema schema = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
                     .newSchema(new File(type + ".xsd"));
@@ -282,7 +286,7 @@ public class AccountingDatabaseImpl {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             dbf.setNamespaceAware(true);
             dbf.setSchema(schema);
-            dbf.newDocumentBuilder().parse(new InputSource(new StringReader(doc)));
+            return dbf.newDocumentBuilder().parse(new InputSource(new StringReader(doc)));
 
         } catch (SAXException ex) {
             throw new AccountingException(ADBErrorCodes.XML_PARSING_ERROR, "Error parsing " + type +
