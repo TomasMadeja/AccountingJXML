@@ -1,5 +1,6 @@
 package cz.pb138.accounting.db;
 
+import com.sun.xml.internal.ws.streaming.XMLReaderException;
 import org.apache.commons.lang3.SystemUtils;
 import org.exist.xquery.Except;
 import org.xmldb.api.base.*;
@@ -12,6 +13,9 @@ import org.apache.xmlrpc.XmlRpcException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.XMLConstants;
@@ -32,7 +36,7 @@ import org.xml.sax.InputSource;
 import java.io.StringReader;
 
 
-public class AccountingDatabaseImpl {
+public class AccountingDatabaseImpl implements AccountingDatabase {
 
     /**
      * Refers to eXist-db
@@ -377,7 +381,7 @@ public class AccountingDatabaseImpl {
         return new AccountingOwner(ownerDoc, ownerDoc.getDocumentElement());
     }
 
-    public AccountingRecord createRecord(boolean expense) {
+    private AccountingRecord createRecord(boolean expense) {
         Document doc = earningsDoc;
         if (expense) {
             doc = expensesDoc;
@@ -406,6 +410,81 @@ public class AccountingDatabaseImpl {
             }
         }
     }
+
+    public AccountingRecord addRevenue() {
+        return createRecord(false);
+    }
+
+    public AccountingRecord addExpenditure() {
+        return createRecord(true);
+    }
+
+    private List<AccountingRecord> getRecordsBetweenBilling(String name, String after, String before)
+            throws AccountingException {
+        List<AccountingRecord> list = new ArrayList<>();
+        try {
+            ResourceSet result = getBetweenReults(EXPENSES, name, after, before);
+            ResourceIterator i = result.getIterator();
+            DocumentBuilder docBuild = DocumentBuilderFactory
+                    .newInstance()
+                    .newDocumentBuilder();
+            XMLResource res;
+            Document resDoc;
+            while (i.hasMoreResources()) {
+                res = (XMLResource) i.nextResource();
+                resDoc = docBuild.parse(new InputSource(new StringReader((String) res.getContent())));
+                list.add(new AccountingRecord(resDoc, resDoc.getDocumentElement(), true));
+            }
+
+            result = getBetweenReults(EARNINGS, name, after, before);
+            i = result.getIterator();
+            while (i.hasMoreResources()) {
+                res = (XMLResource) i.nextResource();
+                resDoc = docBuild.parse(new InputSource(new StringReader((String) res.getContent())));
+                list.add(new AccountingRecord(resDoc, resDoc.getDocumentElement(), false));
+            }
+        } catch (XMLDBException ex) {
+            if (isDCError(ex.getMessage())) {
+                throw new AccountingException(ADBErrorCodes.CONNECTION_ERROR, "Lost connection" +
+                        " while retrieving records between " +
+                        after + " - " + before + " (Connection error)", ex);
+            } else if (isDeniedError(ex.getMessage())) {
+                throw new AccountingException(ADBErrorCodes.ACCESS_ERROR, "Could not access records" +
+                        " while retrieving records between " +
+                        after + " - " + before + " (Permission error)", ex);
+            } else {
+                throw new AccountingException(ADBErrorCodes.UNKNOWN_ERROR, "Unexpected error occured " +
+                        " while retrieving records between " +
+                        after + " - " + before, ex);
+            }
+        } catch (ParserConfigurationException|IOException|SAXException ex) {
+            throw new AccountingException(ADBErrorCodes.UNKNOWN_ERROR, "Unexpected error occured " +
+                    " while processing records between " +
+                    after + " - " + before, ex);
+        }
+
+        return list;
+    }
+
+    private ResourceSet getBetweenReults(String type, String name, String after, String before)
+            throws XMLDBException {
+        return ((XPathQueryService) col.getService("XPathQueryService", "1.0"))
+                .query("for $r in /" + type + "/record\n" +
+                        "where $r/" + name + " >= \'" + after + "\' and " +
+                        "$r/" + name + " <= \'" + before + "\'\n" +
+                        "return $r");
+    }
+
+    public List<AccountingRecord> getRecordsBetweenBilling(String after, String before)
+            throws AccountingException{
+        return getRecordsBetweenBilling("billing-date", after, before);
+    }
+
+    public List<AccountingRecord> getRecordsBetweenIssuing(String after, String before)
+            throws AccountingException {
+        return getRecordsBetweenBilling("issuing-date", after, before);
+    }
+
 
 
 }

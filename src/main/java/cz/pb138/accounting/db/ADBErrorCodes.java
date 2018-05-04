@@ -46,4 +46,9 @@ public class ADBErrorCodes {
      * Error code for problems commiting changes in resource
      */
     public static int RESOURCE_COMMIT_FAILURE = 12;
+
+    /**
+     * Error code for invalid date format inputed to database
+     */
+    public static int INVALID_DATE_FORMAT = 13;
 }

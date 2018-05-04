@@ -28,6 +28,10 @@ public class ADTestMain {
             db.commitChanges();
         }
 
+        db.getRecordsBetweenBilling();
+//        db.createRecord(true);
+//        db.commitChanges();
+
 //        db.killDatabase("/home/adeom/eXist-db");
 //        Runtime.getRuntime().exec("/home/adeom/eXist-db/bin/startup.sh");
 //        new ProcessBuilder("/bin/bash", "~/eXist-db/bin/startup.sh").start();

@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class AccountingRecord {
     private Document doc;
+    private Element record;
 
     public final static String[] CONTACT = {"entity-telephone", "entity-email"};
     public final static String[] UNIQUE = {"entity-name", "entity-address", "entity-ico",
@@ -21,33 +22,43 @@ public class AccountingRecord {
     public final static String ITEMLIST = "item";
     public final static String[] ITEM = {"description", "quantity", "unit", "price"};
 
-    public Map<String, Element> uniqueElements;
-    public Map<String, List<Element>> contacts;
-    public List<Map<String, Element>> itemList;
+    private Map<String, Element> uniqueElements;
+    private Map<String, List<Element>> contacts;
+    private List<Map<String, Element>> itemList;
 
-    public Boolean expense;
+    private Boolean expense;
 
     public AccountingRecord(Document doc, boolean expense) {
         this.doc = doc;
         this.expense = expense;
-        Element root = doc.getDocumentElement();
+        this.record = doc.createElement("record");
+        doc.getDocumentElement().appendChild(record);
         Element e;
         for (String u : UNIQUE) {
             e = doc.createElement(u);
-            root.appendChild(e);
+            if (u.compareTo("billing-date") == 0 ||
+                    u.compareTo("issuing-date") == 0) {
+                e.setTextContent("0001-01-01");
+            }
+            record.appendChild(e);
         }
     }
 
     public AccountingRecord(Document doc, Node recordNode, boolean expense) {
         this.doc = doc;
+        this.record = (Element) recordNode;
         uniqueElements = new HashMap<String, Element>();
         contacts = new HashMap<String, List<Element>>();
         itemList = new ArrayList<Map<String, Element>>();
 
         this.expense = expense;
 
-        domToDict((Element)recordNode);
+        domToDict((Element) recordNode);
     }
+
+    public boolean isExpense() { return expense; }
+
+    public boolean isRevenue() { return !expense; }
 
 
     private void domToDict(Element root) {
@@ -84,7 +95,7 @@ public class AccountingRecord {
             if (name.compareTo(matched) == 0) {
                 Element e = doc.createElement(matched);
                 e.setTextContent(value);
-                doc.getDocumentElement().appendChild(e);
+                record.appendChild(e);
             }
         }
     }
@@ -103,10 +114,18 @@ public class AccountingRecord {
         e = doc.createElement("price");
         e.setTextContent(price);
         item.appendChild(e);
-        doc.getDocumentElement().appendChild(item);
+        record.appendChild(item);
     }
 
-    public void changeValue(String name, String value) {
+    public void changeValue(String name, String value) throws AccountingException {
+        if (name.compareTo("billing-date") == 0 ||
+                name.compareTo("issuing-date") == 0) {
+            if (!value.matches("\\d{4}-(0\\d|1[12])-([012]\\d|3[01])")) {
+                throw new AccountingException(ADBErrorCodes.INVALID_DATE_FORMAT,
+                        "Invalid format inputting " + name + " should be YYYY-MM-DD");
+            }
+        }
+
         Element e;
         if (( e = uniqueElements.get(name)) != null) {
             e.setTextContent(value);
