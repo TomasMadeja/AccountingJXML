@@ -291,8 +291,14 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
 
     private Document validateResource(String doc, String type) throws AccountingException {
         try {
-            Schema schema = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
-                    .newSchema(new File(type + ".xsd"));
+            ClassLoader classLoader = getClass().getClassLoader();
+            Schema schema = SchemaFactory
+                    .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
+                    .newSchema(
+                            new File(classLoader
+                                    .getResource(type + ".xsd")
+                                    .getFile())
+                    );
 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             dbf.setNamespaceAware(true);
