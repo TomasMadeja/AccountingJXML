@@ -85,4 +85,6 @@ public interface AccountingDatabase {
      * @throws AccountingException contains error code coresponding to error
      */
     public void commitChanges() throws AccountingException;
+
+    void killLocalDB();
 }

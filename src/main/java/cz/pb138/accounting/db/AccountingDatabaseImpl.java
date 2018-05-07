@@ -485,6 +485,11 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         return getRecordsBetweenBilling("issuing-date", after, before);
     }
 
+    public void killLocalDB() {
+        DatabaseInstanceManager manager = (DatabaseInstanceManager)
+                col.getService("DatabaseInstanceManager", "1.0");
+        manager.shutdown();
+    }
 
 
 }
