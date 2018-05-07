@@ -1,4 +1,4 @@
-package cz.pb138.accounting.db;
+package cz.pb138.accounting.trying;
 
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;

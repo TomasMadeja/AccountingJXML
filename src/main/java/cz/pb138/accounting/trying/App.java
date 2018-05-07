@@ -1,4 +1,4 @@
-package cz.pb138;
+package cz.pb138.accounting.trying;
 
 import javax.swing.*;
 import java.awt.*;
