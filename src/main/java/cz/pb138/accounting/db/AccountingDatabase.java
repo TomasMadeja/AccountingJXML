@@ -29,7 +29,7 @@ public interface AccountingDatabase {
     boolean initDatabase(String path, long waits) throws AccountingException;
 
     /**
-     * Kills local database
+     * Kills embedded database
      * @throws AccountingException contains error code associated to corresponding error
      */
     void killDatabase() throws AccountingException;
