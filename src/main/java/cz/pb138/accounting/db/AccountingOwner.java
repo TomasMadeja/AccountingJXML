@@ -10,15 +10,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class representing owner document (as a record)
+ *
+ * @author Tomas Madeja
+ */
 public class AccountingOwner {
     private Document doc;
 
     public final static String[] CONTACT = {"telephone", "email"};
     public final static String[] UNIQUE = {"name", "address", "ico", "dic", "bank-information", "note"};
 
-    public Map<String, Element> uniqueElements;
-    public Map<String, List<Element>> contacts;
+    private Map<String, Element> uniqueElements;
+    private Map<String, List<Element>> contacts;
 
+    /**
+     * Creates new owner for document
+     * @param doc parent document
+     */
     public AccountingOwner(Document doc) {
         this.doc = doc;
         Element root = doc.getDocumentElement();
@@ -29,6 +38,11 @@ public class AccountingOwner {
         }
     }
 
+    /**
+     * Represents existing owner
+     * @param doc parent document
+     * @param recordNode root node of owner doc
+     */
     public AccountingOwner(Document doc, Node recordNode) {
         this.doc = doc;
         uniqueElements = new HashMap<String, Element>();
@@ -37,6 +51,97 @@ public class AccountingOwner {
         domToDict((Element)recordNode);
     }
 
+
+    /**
+     * Creates new contact (email, telephone)
+     * @param name name representing type of conact (email, telephone)
+     * @param value contact information
+     */
+    public void addContact(String name, String value) {
+        for (String matched : CONTACT) {
+            if (name.compareTo(matched) == 0) {
+                Element e = doc.createElement(matched);
+                e.setTextContent(value);
+                doc.getDocumentElement().appendChild(e);
+            }
+        }
+    }
+
+    /**
+     * Changes value of unique element
+     * @param name name of specified element
+     * @param value new value of element
+     * @throws AccountingException correpsonding error code
+     */
+    public void changeValue(String name, String value) {
+        Element e;
+        if (( e = uniqueElements.get(name)) != null) {
+            e.setTextContent(value);
+        }
+    }
+
+    /**
+     * Changes value of contact
+     * @param name name of contact
+     * @param oldValue previous value to be replaced
+     * @param newValue new value
+     */
+    public void changeValue(String name, String oldValue, String newValue){
+        List l;
+        if (contacts.containsKey(name)) {
+            l = contacts.get(name);
+            for (Object e :l) {
+                if (((Element) e).getTextContent().compareTo(oldValue) == 0) {
+                    ((Element) e).setTextContent(newValue);
+                }
+            }
+        }
+    }
+
+    /**
+     * FInd value of unique element
+     * @param name name of the searched element
+     * @return String containing value, null if not found
+     */
+    public String getValue(String name) {
+        return uniqueElements.containsKey(name) ? uniqueElements.get(name).getTextContent() : null;
+    }
+
+    /**
+     * Finds all contacts of certain type
+     * @param name contact type name
+     * @return Array of contact values
+     */
+    public String[] getContact(String name) {
+        String[] array = null;
+        if (contacts.containsKey(name)) {
+            array = new String[contacts.get(name).size()];
+            int i = 0;
+            for (Element e : contacts.get(name)) {
+                array[i] = e.getTextContent();
+                i++;
+            }
+        }
+        return array;
+    }
+
+    /**
+     * Removes specified contact
+     * @param name contact type name
+     * @param value contact value
+     */
+    public void removeContact(String name, String value) {
+        if (contacts.containsKey(name)) {
+            for (Element e : contacts.get(name)) {
+                if (e.getTextContent().compareTo(value) == 0) {
+                    e.getParentNode().removeChild(
+                            e
+                    );
+                    contacts.get(name).remove(e);
+                }
+            }
+        }
+    }
 
     private void domToDict(Element root) {
         for (String u : UNIQUE) {
@@ -53,65 +158,6 @@ public class AccountingOwner {
             for (int i = 0; i < list.getLength(); i++) {
                 e = (Element) list.item(i);
                 contacts.get(e.getTagName()).add(e);
-            }
-        }
-    }
-
-    public void addContact(String name, String value) {
-        for (String matched : CONTACT) {
-            if (name.compareTo(matched) == 0) {
-                Element e = doc.createElement(matched);
-                e.setTextContent(value);
-                doc.getDocumentElement().appendChild(e);
-            }
-        }
-    }
-
-    public void changeValue(String name, String value) {
-        Element e;
-        if (( e = uniqueElements.get(name)) != null) {
-            e.setTextContent(value);
-        }
-    }
-
-    public void changeValue(String name, String oldValue, String newValue){
-        List l;
-        if (contacts.containsKey(name)) {
-            l = contacts.get(name);
-            for (Object e :l) {
-                if (((Element) e).getTextContent().compareTo(oldValue) == 0) {
-                    ((Element) e).setTextContent(newValue);
-                }
-            }
-        }
-    }
-
-    public String getValue(String name) {
-        return uniqueElements.containsKey(name) ? uniqueElements.get(name).getTextContent() : null;
-    }
-
-    public String[] getContact(String name) {
-        String[] array = null;
-        if (contacts.containsKey(name)) {
-            array = new String[contacts.get(name).size()];
-            int i = 0;
-            for (Element e : contacts.get(name)) {
-                array[i] = e.getTextContent();
-                i++;
-            }
-        }
-        return array;
-    }
-
-    public void removeContact(String name, String value) {
-        if (contacts.containsKey(name)) {
-            for (Element e : contacts.get(name)) {
-                if (e.getTextContent().compareTo(value) == 0) {
-                    e.getParentNode().removeChild(
-                            e
-                    );
-                    contacts.get(name).remove(e);
-                }
             }
         }
     }

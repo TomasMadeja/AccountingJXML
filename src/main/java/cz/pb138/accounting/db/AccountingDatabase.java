@@ -1,7 +1,6 @@
 package cz.pb138.accounting.db;
 
-import org.exist.security.Account;
-import org.xmldb.api.base.XMLDBException;
+import org.xml.sax.InputSource;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public interface AccountingDatabase {
      * Starts database, if not already active. Will attempt to retrieve collection from database until successful.
      * @param path absolute path to given database
      * @return true if collection found, else false
-     * @throws AccountingException contains error code associated to coresponding error
+     * @throws AccountingException contains error code associated to corresponding error
      */
     boolean initDatabase(String path) throws AccountingException;
 
@@ -25,15 +24,21 @@ public interface AccountingDatabase {
      * @param path absolute path to given database
      * @param waits number of attempts, how many cycles should function wait for database to start
      * @return true if collection found, else false
-     * @throws AccountingException contains error code associated to coresponding error
+     * @throws AccountingException contains error code associated to corresponding error
      */
     boolean initDatabase(String path, long waits) throws AccountingException;
 
     /**
-     * Kills database using default method. Only guarantees execution of the command, not its success
+     * Kills local database
+     * @throws AccountingException contains error code associated to corresponding error
+     */
+    void killDatabase() throws AccountingException;
+
+    /**
+     * Kills database server using default method. Only guarantees execution of the command, not its success
      * @param path absolute path to given database
      * @return True if command was successfully executed, else false
-     * @throws AccountingException contains error code associated to coresponding error
+     * @throws AccountingException contains error code associated to corresponding error
      */
     boolean killDatabase(String path) throws AccountingException;
 
@@ -86,5 +91,18 @@ public interface AccountingDatabase {
      */
     public void commitChanges() throws AccountingException;
 
-    void killLocalDB() throws XMLDBException;
+    /**
+     * Converts entire database into single XML file with <root/> as it's root node
+     * @return database as InputSource
+     * @throws AccountingException contains error code coresponding to error
+     */
+    public InputSource dbAsInputSource()  throws AccountingException;
+
+    /**
+     * Converts entire database into single XML file with <root/> as it's root node
+     * @return database as String
+     * @throws AccountingException contains error code coresponding to error
+     */
+    public String dbAsString() throws AccountingException;
+
 }

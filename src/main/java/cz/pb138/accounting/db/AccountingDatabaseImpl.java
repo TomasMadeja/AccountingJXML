@@ -1,32 +1,22 @@
 package cz.pb138.accounting.db;
 
-import com.sun.xml.internal.ws.streaming.XMLReaderException;
+
 import org.apache.commons.lang3.SystemUtils;
 import org.exist.xmldb.DatabaseInstanceManager;
-import org.exist.xquery.Except;
 import org.xmldb.api.base.*;
 import org.xmldb.api.modules.*;
 import org.xmldb.api.*;
-import javax.xml.transform.OutputKeys;
-import org.exist.xmldb.EXistResource;
-import org.apache.commons.lang3.SystemUtils;
-import org.apache.xmlrpc.XmlRpcException;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-import javax.xml.ws.handler.Handler;
-import javax.xml.ws.handler.MessageContext;
 import org.w3c.dom.Document;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
@@ -36,14 +26,20 @@ import org.xml.sax.InputSource;
 
 import java.io.StringReader;
 
-
+/**
+ * Implementation of AccountingDatabase
+ * Uses eXistDB, supports both embedded and server mode, constructor expects embedded mode
+ *
+ * @author Tomas Madeja
+ */
 public class AccountingDatabaseImpl implements AccountingDatabase {
 
     /**
      * Refers to eXist-db
      */
     private static final String DRIVER = "org.exist.xmldb.DatabaseImpl";
-    private static final String URI = "xmldb:exist://";
+    private static final String SERVERTURI = "xmldb:exist://localhost:8080/exist/xmlrpc";
+    private static final String LOCALURI = "xmldb:exist://";
 
     private static final String COLNAME = "/db/pb138-accountingcollection";
     private static final String MAKECOLNAME = "pb138-accountingcollection";
@@ -93,7 +89,7 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
 
         col = null;
         try {
-            dbDetected = initCollection();
+            dbDetected = initCollection(LOCALURI);
         } catch (AccountingException ex) {
             if (ex.errorCode != ADBErrorCodes.CONNECTION_ERROR) {
                 throw ex;
@@ -139,6 +135,21 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         return col != null;
     }
 
+
+    public void killDatabase() throws AccountingException {
+        try {
+            DatabaseInstanceManager manager = (DatabaseInstanceManager)
+                    col.getService("DatabaseInstanceManager", "1.0");
+            manager.shutdown();
+        } catch (XMLDBException ex) {
+            throw new AccountingException(ADBErrorCodes.DATABASE_TERMINATION_FAILURE
+                    , ex.errorCode
+                    , ex.getMessage()
+                    , ex);
+        }
+    }
+
+
     public boolean killDatabase(String path) throws AccountingException {
         String kill;
         if (SystemUtils.IS_OS_WINDOWS) {
@@ -158,10 +169,141 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         return true;
     }
 
+    public void updateLogin(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public boolean colFound() { return dbDetected; }
+
+    public boolean isOwnerSet() { return ownerSet; }
+
+    public AccountingOwner getOwner() {
+        return new AccountingOwner(ownerDoc, ownerDoc.getDocumentElement());
+    }
+
+    public AccountingOwner createOwner() throws AccountingException {
+        try {
+            if (owner != null) {
+                col.removeResource(owner);
+            }
+
+            owner = createRecordResource(OWNER);
+
+            ownerDoc = DocumentBuilderFactory
+                    .newInstance()
+                    .newDocumentBuilder()
+                    .parse(new InputSource(new StringReader((String) owner.getContent())));
+            new AccountingOwner(ownerDoc);
+            owner.setContentAsDOM(ownerDoc);
+            col.storeResource(owner);
+        } catch (ParserConfigurationException|IOException|SAXException ex) {
+            throw new AccountingException(ADBErrorCodes.UNKNOWN_ERROR,
+                    "Error occured while creating owner ()", ex);
+
+        } catch (XMLDBException ex) {
+            if (isDCError(ex.getMessage())) {
+                throw new AccountingException(ADBErrorCodes.CONNECTION_ERROR,
+                        "Unable to connect while creating resource (Connection error)", ex);
+            } else if (isDeniedError(ex.getMessage())) {
+                throw new AccountingException(ADBErrorCodes.ACCESS_ERROR,
+                        "Unable to create resource (Permission error)", ex);
+            }
+        }
+
+        return new AccountingOwner(ownerDoc, ownerDoc.getDocumentElement());
+    }
+
+
+    public void commitChanges() throws AccountingException {
+        try {
+            owner.setContentAsDOM(ownerDoc);
+            col.storeResource(owner);
+            expenses.setContentAsDOM(expensesDoc);
+            col.storeResource(expenses);
+            earnings.setContentAsDOM(earningsDoc);
+            col.storeResource(earnings);
+        } catch (XMLDBException ex) {
+            if (ex.errorCode == ErrorCodes.WRONG_CONTENT_TYPE ||
+                    ex.errorCode == ErrorCodes.INVALID_RESOURCE) {
+                throw new AccountingException(ADBErrorCodes.RESOURCE_COMMIT_FAILURE, ex.getMessage(), ex);
+            } else if (isDCError(ex.getMessage())) {
+                throw new AccountingException(ADBErrorCodes.CONNECTION_ERROR,
+                        "Unable to connect while committing changes in resources (Connection error)", ex);
+            } else if (isDeniedError(ex.getMessage())) {
+                throw new AccountingException(ADBErrorCodes.ACCESS_ERROR,
+                        "Unable to commit resource changes (Permission error)", ex);
+            }
+        }
+    }
+
+    public AccountingRecord addRevenue() {
+        return createRecord(false);
+    }
+
+    public AccountingRecord addExpenditure() {
+        return createRecord(true);
+    }
+
+    public List<AccountingRecord> getRecordsBetweenBilling(String after, String before)
+            throws AccountingException{
+        return getRecordsBetweenBilling("billing-date", after, before);
+    }
+
+    public List<AccountingRecord> getRecordsBetweenIssuing(String after, String before)
+            throws AccountingException {
+        return getRecordsBetweenBilling("issuing-date", after, before);
+    }
+
+    public InputSource dbAsInputSource() throws AccountingException {
+        return new InputSource(new StringReader(dbAsString()));
+    }
+
+    public String dbAsString() throws AccountingException{
+        try {
+            return (String)
+                    ((XPathQueryService) col.getService("XPathQueryService", "1.0"))
+                            .query(
+                                    "let $a := /" + OWNER + "\n" +
+                                            "return <root>\n" +
+                                            "{\n" +
+                                            "for $o in $a\n" +
+                                            "return $o\n" +
+                                            "}\n" +
+                                            "{\n" +
+                                            "for $ex in /" + EXPENSES + "\n" +
+                                            "return $ex\n" +
+                                            "}\n" +
+                                            "{\n" +
+                                            "for $er in /" + EARNINGS + "\n" +
+                                            "return $er\n" +
+                                            "}\n" +
+                                            "</root>\n"
+                            )
+                            .getResource(0)
+                            .getContent();
+        } catch (XMLDBException ex) {
+            if (isDCError(ex.getMessage())) {
+                throw new AccountingException(ADBErrorCodes.CONNECTION_ERROR, ex.vendorErrorCode,
+                        "Error connecting while retrieving all records (Connection error)", ex);
+            } else if (isDeniedError(ex.getMessage()) || ex.errorCode == ErrorCodes.PERMISSION_DENIED) {
+                throw new AccountingException(ADBErrorCodes.ACCESS_ERROR, ex.vendorErrorCode,
+                        "Error retrieving (read) all records (Missing permissions)", ex);
+            } else {
+                throw new AccountingException(ADBErrorCodes.UNKNOWN_ERROR, ex.vendorErrorCode,
+                        "Error occurred while retrieving collection (Unknown error)", ex);
+            }
+        }
+    }
+
+    public String ownerRecord() throws XMLDBException { return (String) owner.getContent(); }
+    public String expensesRecord() throws XMLDBException { return (String) expenses.getContent(); }
+    public String earningsRecord() throws XMLDBException { return (String) earnings.getContent(); }
+
 
     private boolean tryInit(String path) throws AccountingException {
         try {
-            return (dbDetected = initCollection());
+            return (dbDetected = initCollection(SERVERTURI));
         } catch (AccountingException ex) {
             if (ex.errorCode == ADBErrorCodes.CONNECTION_ERROR) {
                 return false;
@@ -170,9 +312,9 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         }
     }
 
-    private boolean initCollection() throws AccountingException {
+    private boolean initCollection(String uri) throws AccountingException {
         try {
-            col = DatabaseManager.getCollection(URI + COLNAME, username, password);
+            col = DatabaseManager.getCollection(uri + COLNAME, username, password);
         } catch (XMLDBException ex) {
             if (isDCError(ex.getMessage())) {
                 throw new AccountingException(ADBErrorCodes.CONNECTION_ERROR, ex.vendorErrorCode,
@@ -188,13 +330,13 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
 
         try {
             if (col == null) {
-                col = DatabaseManager.getCollection(URI + "/db", username, password);
+                col = DatabaseManager.getCollection(uri + "/db", username, password);
                 ((XPathQueryService) col.getService("XPathQueryService", "1.0"))
                         .query("let $create-collection := xmldb:create-collection(\"/db\", \"" + MAKECOLNAME
                                 + "\")\n"
                                 + " return $create-collection").clear();
                 col.close();
-                col = DatabaseManager.getCollection(URI + COLNAME, username, password);
+                col = DatabaseManager.getCollection(uri + COLNAME, username, password);
             }
         } catch (XMLDBException ex) {
             if (isDCError(ex.getMessage())) {
@@ -258,14 +400,14 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
             if (isDCError(ex.getMessage())) {
                 throw new AccountingException(ADBErrorCodes.CONNECTION_ERROR, ex.vendorErrorCode,
                         "Error connecting while retrieving resource " + resourceName +
-                        " (Connection error)", ex);
+                                " (Connection error)", ex);
             } else if (isDeniedError(ex.getMessage())) {
                 throw new AccountingException(ADBErrorCodes.ACCESS_ERROR, ex.vendorErrorCode,
                         "Error accessing resource " + resourceName + " (Missing permissions)", ex);
             } else {
                 throw new AccountingException(ADBErrorCodes.UNKNOWN_ERROR, ex.vendorErrorCode,
                         "Error occurred while retrieving resource " + resourceName +
-                        " (Unknown error)", ex);
+                                " (Unknown error)", ex);
             }
         }
     }
@@ -337,98 +479,6 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         }
     }
 
-
-    private boolean isDCError(String ex) {
-        return ex.contains("Connection refused");
-    }
-
-    private boolean isDeniedError(String ex) {
-        return ex.contains("not allowed to");
-    }
-
-    public void updateLogin(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public boolean colFound() { return dbDetected; }
-
-    public boolean isOwnerSet() { return ownerSet; }
-
-    public AccountingOwner getOwner() {
-        return new AccountingOwner(ownerDoc, ownerDoc.getDocumentElement());
-    }
-
-    public AccountingOwner createOwner() throws AccountingException {
-        try {
-            if (owner != null) {
-                col.removeResource(owner);
-            }
-
-            owner = createRecordResource(OWNER);
-
-            ownerDoc = DocumentBuilderFactory
-                    .newInstance()
-                    .newDocumentBuilder()
-                    .parse(new InputSource(new StringReader((String) owner.getContent())));
-            new AccountingOwner(ownerDoc);
-            owner.setContentAsDOM(ownerDoc);
-            col.storeResource(owner);
-        } catch (ParserConfigurationException|IOException|SAXException ex) {
-            throw new AccountingException(ADBErrorCodes.UNKNOWN_ERROR,
-                    "Error occured while creating owner ()", ex);
-
-        } catch (XMLDBException ex) {
-            if (isDCError(ex.getMessage())) {
-                throw new AccountingException(ADBErrorCodes.CONNECTION_ERROR,
-                        "Unable to connect while creating resource (Connection error)", ex);
-            } else if (isDeniedError(ex.getMessage())) {
-                throw new AccountingException(ADBErrorCodes.ACCESS_ERROR,
-                        "Unable to create resource (Permission error)", ex);
-            }
-        }
-
-        return new AccountingOwner(ownerDoc, ownerDoc.getDocumentElement());
-    }
-
-    private AccountingRecord createRecord(boolean expense) {
-        Document doc = earningsDoc;
-        if (expense) {
-            doc = expensesDoc;
-        }
-        return new AccountingRecord(doc, expense);
-    }
-
-    public void commitChanges() throws AccountingException {
-        try {
-            owner.setContentAsDOM(ownerDoc);
-            col.storeResource(owner);
-            expenses.setContentAsDOM(expensesDoc);
-            col.storeResource(expenses);
-            earnings.setContentAsDOM(earningsDoc);
-            col.storeResource(earnings);
-        } catch (XMLDBException ex) {
-            if (ex.errorCode == ErrorCodes.WRONG_CONTENT_TYPE ||
-                    ex.errorCode == ErrorCodes.INVALID_RESOURCE) {
-                throw new AccountingException(ADBErrorCodes.RESOURCE_COMMIT_FAILURE, ex.getMessage(), ex);
-            } else if (isDCError(ex.getMessage())) {
-                throw new AccountingException(ADBErrorCodes.CONNECTION_ERROR,
-                        "Unable to connect while committing changes in resources (Connection error)", ex);
-            } else if (isDeniedError(ex.getMessage())) {
-                throw new AccountingException(ADBErrorCodes.ACCESS_ERROR,
-                        "Unable to commit resource changes (Permission error)", ex);
-            }
-        }
-    }
-
-    public AccountingRecord addRevenue() {
-        return createRecord(false);
-    }
-
-    public AccountingRecord addExpenditure() {
-        return createRecord(true);
-    }
-
     private List<AccountingRecord> getRecordsBetweenBilling(String name, String after, String before)
             throws AccountingException {
         List<AccountingRecord> list = new ArrayList<>();
@@ -485,21 +535,20 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
                         "return $r");
     }
 
-    public List<AccountingRecord> getRecordsBetweenBilling(String after, String before)
-            throws AccountingException{
-        return getRecordsBetweenBilling("billing-date", after, before);
+    private AccountingRecord createRecord(boolean expense) {
+        Document doc = earningsDoc;
+        if (expense) {
+            doc = expensesDoc;
+        }
+        return new AccountingRecord(doc, expense);
     }
 
-    public List<AccountingRecord> getRecordsBetweenIssuing(String after, String before)
-            throws AccountingException {
-        return getRecordsBetweenBilling("issuing-date", after, before);
+    private boolean isDCError(String ex) {
+        return ex.contains("Connection refused");
     }
 
-    public void killLocalDB() throws XMLDBException {
-        DatabaseInstanceManager manager = (DatabaseInstanceManager)
-                col.getService("DatabaseInstanceManager", "1.0");
-        manager.shutdown();
+    private boolean isDeniedError(String ex) {
+        return ex.contains("not allowed to");
     }
-
 
 }

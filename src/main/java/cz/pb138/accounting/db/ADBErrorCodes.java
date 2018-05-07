@@ -1,5 +1,10 @@
 package cz.pb138.accounting.db;
 
+/**
+ * Error codes for AccountingException
+ *
+ * @author Tomas Madeja
+ */
 public class ADBErrorCodes {
 
     /**

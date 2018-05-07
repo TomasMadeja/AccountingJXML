@@ -8,7 +8,7 @@ public class ADTestMain {
 
     private static final String USERNAME = "admin";
     private static final String PASSWORD = "";
-    private static final String DIRECTORY = "/Users/martintrubelik/Install/eXist-db";
+    private static final String DIRECTORY = "";
 
 
     public static void main(String args[]) throws Exception {
@@ -29,7 +29,13 @@ public class ADTestMain {
             db.commitChanges();
         }
 
-        db.killLocalDB();
+        System.out.println(db.ownerRecord());
+        System.out.println(db.earningsRecord());
+        System.out.println(db.expensesRecord());
+
+        System.out.println(db.dbAsString());
+
+        db.killDatabase();
 
         //db.getRecordsBetweenBilling();
 //        db.createRecord(true);
