@@ -83,7 +83,10 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         try {
             Class cl = Class.forName(DRIVER);
             database = (Database) cl.newInstance();
+            database.setProperty("create-database", "true");
+
             DatabaseManager.registerDatabase(database);
+
         } catch (ClassNotFoundException|IllegalAccessException|XMLDBException|InstantiationException ex) {
             throw new AccountingException(ADBErrorCodes.ACCDB_INSTANTIATING_FAILURE, ex.getMessage(), ex);
         }
