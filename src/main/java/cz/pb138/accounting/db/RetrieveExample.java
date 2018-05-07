@@ -1,6 +1,5 @@
 package cz.pb138.accounting.db;
 
-import net.sf.saxon.trans.Err;
 import org.xmldb.api.base.*;
 import org.xmldb.api.modules.*;
 import org.xmldb.api.*;

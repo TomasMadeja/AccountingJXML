@@ -15,7 +15,7 @@ public class TestDB {
 
         // try to read collection
         Collection col =
-                DatabaseManager.getCollection("xmldb:exist:///db", "admin", "potato");
+                DatabaseManager.getCollection("xmldb:exist:///db", "admin", "");
         String resources[] = col.listResources();
         System.out.println("Resources:");
         for (int i = 0; i < resources.length; i++) {

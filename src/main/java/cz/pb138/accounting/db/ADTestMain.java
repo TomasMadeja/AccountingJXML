@@ -7,7 +7,7 @@ public class ADTestMain {
 
     private static final String USERNAME = "testuser";
     private static final String PASSWORD = "test";
-    private static final String DIRECTORY = "/home/adeom/eXist-db";
+    private static final String DIRECTORY = "/Users/martintrubelik/Install/eXist-db";
 
 
     public static void main(String args[]) throws Exception {
@@ -28,7 +28,7 @@ public class ADTestMain {
             db.commitChanges();
         }
 
-        db.getRecordsBetweenBilling();
+        //db.getRecordsBetweenBilling();
 //        db.createRecord(true);
 //        db.commitChanges();
 
