@@ -2,6 +2,7 @@ package cz.pb138.accounting.db;
 
 import com.sun.xml.internal.ws.streaming.XMLReaderException;
 import org.apache.commons.lang3.SystemUtils;
+import org.exist.xmldb.DatabaseInstanceManager;
 import org.exist.xquery.Except;
 import org.xmldb.api.base.*;
 import org.xmldb.api.modules.*;
@@ -42,7 +43,7 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
      * Refers to eXist-db
      */
     private static final String DRIVER = "org.exist.xmldb.DatabaseImpl";
-    private static final String URI = "xmldb:exist://localhost:8080/exist/xmlrpc";
+    private static final String URI = "xmldb:exist://";
 
     private static final String COLNAME = "/db/pb138-accountingcollection";
     private static final String MAKECOLNAME = "pb138-accountingcollection";
@@ -485,7 +486,7 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         return getRecordsBetweenBilling("issuing-date", after, before);
     }
 
-    public void killLocalDB() {
+    public void killLocalDB() throws XMLDBException {
         DatabaseInstanceManager manager = (DatabaseInstanceManager)
                 col.getService("DatabaseInstanceManager", "1.0");
         manager.shutdown();

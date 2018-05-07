@@ -86,5 +86,5 @@ public interface AccountingDatabase {
      */
     public void commitChanges() throws AccountingException;
 
-    void killLocalDB();
+    void killLocalDB() throws XMLDBException;
 }
