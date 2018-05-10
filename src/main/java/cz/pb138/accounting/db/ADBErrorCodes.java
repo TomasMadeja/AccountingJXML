@@ -56,4 +56,9 @@ public class ADBErrorCodes {
      * Error code for invalid date format inputed to database
      */
     public static int INVALID_DATE_FORMAT = 13;
+
+    /**
+     * Wrong input error
+     */
+    public static int WRONG_INPUT = 14;
 }

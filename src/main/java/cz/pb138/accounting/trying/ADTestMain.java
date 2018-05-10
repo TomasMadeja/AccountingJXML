@@ -29,7 +29,7 @@ public class ADTestMain {
             db.commitChanges();
         }
 
-        db.getOwner().addContact("email", "test@test.tst");
+//        db.getOwner().addContact("email", "test@test.tst");
 //        db.commitChanges();
 
         System.out.println(db.ownerRecord());

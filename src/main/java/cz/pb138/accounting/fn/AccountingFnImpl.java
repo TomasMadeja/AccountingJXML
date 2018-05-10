@@ -1,6 +1,8 @@
 package cz.pb138.accounting.fn;
 
+import cz.pb138.accounting.db.ADBErrorCodes;
 import cz.pb138.accounting.db.AccountingDatabase;
+import cz.pb138.accounting.db.AccountingException;
 
 public class AccountingFnImpl {
 
@@ -12,9 +14,25 @@ public class AccountingFnImpl {
 
     }
 
-    public void setName(String name) throws Exception {
+//    private void duck() throws AccountingException {
+//        if (!quack()) {
+//            throw new AccountingException(ADBErrorCodes.WRONG_INPUT, "");
+//        }
+//    }
+//
+//    private boolean quack() {
+//        switch (1) {
+//            case 1:
+//                return true;
+//                default:
+//                    return false;
+//
+//        }
+//    }
+
+    public void setName(String name) throws AccountingException {
         if (!name.matches("[A-Za-z ]*")) {
-            throw new Exception("Wrong name input.");
+            throw new AccountingException(ADBErrorCodes.WRONG_INPUT, "Wrong name input.");
         }
         db.getOwner().changeValue("name", name);
     }
