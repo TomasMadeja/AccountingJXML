@@ -29,11 +29,14 @@ public class ADTestMain {
             db.commitChanges();
         }
 
+        db.getOwner().addContact("email", "test@test.tst");
+//        db.commitChanges();
+
         System.out.println(db.ownerRecord());
         System.out.println(db.earningsRecord());
         System.out.println(db.expensesRecord());
 
-        System.out.println(db.dbAsString());
+//        System.out.println(db.dbAsString());
 
         db.killDatabase();
 
