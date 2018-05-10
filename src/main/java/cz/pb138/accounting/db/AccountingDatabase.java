@@ -87,28 +87,33 @@ public interface AccountingDatabase {
 
     /**
      * Commits changes (added revenues and expenditures)
-     * @throws AccountingException contains error code coresponding to error
+     * @throws AccountingException contains error code corresponding to error
      */
     void commitChanges() throws AccountingException;
 
     /**
      * Converts entire database into single XML file with <root/> as it's root node
      * @return database as InputSource
-     * @throws AccountingException contains error code coresponding to error
+     * @throws AccountingException contains error code corresponding to error
      */
     InputSource dbAsInputSource()  throws AccountingException;
 
     /**
      * Converts entire database into single XML file with <root/> as it's root node
      * @return database as String
-     * @throws AccountingException contains error code coresponding to error
+     * @throws AccountingException contains error code corresponding to error
      */
     String dbAsString() throws AccountingException;
 
     /**
      * Get information about owner of this app
-     * @return AccountingOwner
+     * @return AccountingOwner representation of the owner
      */
     AccountingOwner getOwner();
 
+    /**
+     * Return database to the last commited state
+     * @throws AccountingException contains error code corresponding to error
+     */
+    void rollBack() throws AccountingException;
 }

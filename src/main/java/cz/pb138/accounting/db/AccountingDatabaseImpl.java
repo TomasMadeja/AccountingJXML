@@ -237,6 +237,14 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         }
     }
 
+    public void rollBack() throws AccountingException {
+        try {
+            fillResources();
+        } catch (AccountingException ex) {
+            throw new AccountingException(ex.errorCode, ex.passedErrorCode, "Error occurred while rolling back");
+        }
+    }
+
     public AccountingRecord addRevenue() {
         return createRecord(false);
     }
