@@ -32,19 +32,19 @@ public class ADTestMain {
         db.getOwner().addContact("email", "test@test.tst");
         db.commitChanges();
 
-//        db.addExpenditure().addItem("","","","","20")
-//                .addItem("","","","","30")
-//                .addItem("","","","","40")
+//        db.addExpenditure().addItem("","","","","10")
+//                .addItem("","","","","10")
+//                .addItem("","","","","10")
 //                .changeValue("billing-date", "2006-11-06")
 //                .changeValue("issuing-date", "2006-11-07");
 //
-//        db.addExpenditure().addItem("","","","","20")
-//                .addItem("","","","","30")
-//                .addItem("","","","","40")
+//        db.addExpenditure().addItem("","","","","10")
+//                .addItem("","","","","10")
+//                .addItem("","","","","10")
 //                .changeValue("billing-date", "2006-11-06")
 //                .changeValue("issuing-date", "2006-11-07");
-//
-//        db.commitChanges();
+
+        db.commitChanges();
 
         System.out.println(db.ownerRecord());
         System.out.println(db.earningsRecord());

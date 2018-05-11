@@ -73,15 +73,22 @@ public interface AccountingDatabase {
      */
     AccountingRecord addExpenditure();
 
+
     /**
      * Find all records of revenue and expenditure in the given year based on billing date
+     * @param after lower bound date after which records exist, including the date
+     * @param before upper bound date before which records exist, including the date
      * @return list of AccountingRecords
+     * @throws AccountingException contains error code corresponding to error
      */
     List<AccountingRecord> getRecordsBetweenBilling(String after, String before) throws AccountingException;
 
     /**
      * Find all records of revenue and expenditure in the given year based on issuing date
+     * @param after lower bound date after which records exist, including the date
+     * @param before upper bound date before which records exist, including the date
      * @return list of AccountingRecords
+     * @throws AccountingException contains error code corresponding to error
      */
     List<AccountingRecord> getRecordsBetweenIssuing(String after, String before) throws AccountingException;
 
@@ -116,4 +123,40 @@ public interface AccountingDatabase {
      * @throws AccountingException contains error code corresponding to error
      */
     void rollBack() throws AccountingException;
+
+    /**
+     * Find all records of revenue and expenditure in the given year based on issuing date
+     * @param after lower bound date after which records exist, including the date
+     * @param before upper bound date before which records exist, including the date
+     * @return double representting losses
+     * @throws AccountingException contains error code corresponding to error
+     */
+    double getLossesByIssuingDate(String after, String before) throws AccountingException;
+
+    /**
+     * Find all records of revenue and expenditure in the given year based on issuing date
+     * @param after lower bound date after which records exist, including the date
+     * @param before upper bound date before which records exist, including the date
+     * @return double representting earnings
+     * @throws AccountingException contains error code corresponding to error
+     */
+    double getEarningsByIssuingDate(String after, String before) throws AccountingException;
+
+    /**
+     * Find all records of revenue and expenditure in the given year based on billing date
+     * @param after lower bound date after which records exist, including the date
+     * @param before upper bound date before which records exist, including the date
+     * @return double representting losses
+     * @throws AccountingException contains error code corresponding to error
+     */
+    double getLossesByBillingDate(String after, String before) throws AccountingException;
+
+    /**
+     * Find all records of revenue and expenditure in the given year based on billing date
+     * @param after lower bound date after which records exist, including the date
+     * @param before upper bound date before which records exist, including the date
+     * @return double representting earnings
+     * @throws AccountingException contains error code corresponding to error
+     */
+    double getEarningsByBillingDate(String after, String before) throws AccountingException;
 }

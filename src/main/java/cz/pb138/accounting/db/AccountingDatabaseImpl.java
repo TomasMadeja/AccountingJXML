@@ -304,6 +304,22 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         }
     }
 
+    public  double getLossesByIssuingDate(String after, String before) throws AccountingException {
+        return getLosses(EXPENSES, "issuing-date", after, before);
+    }
+
+    public  double getEarningsByIssuingDate(String after, String before) throws AccountingException {
+        return getLosses(EARNINGS, "issuing-date", after, before);
+    }
+
+    public  double getLossesByBillingDate(String after, String before) throws AccountingException {
+        return getLosses(EXPENSES, "billing-date", after, before);
+    }
+
+    public  double getEarningsByBillingDate(String after, String before) throws AccountingException {
+        return getLosses(EARNINGS, "billing-date", after, before);
+    }
+
     public String ownerRecord() throws XMLDBException { return (String) owner.getContent(); }
     public String expensesRecord() throws XMLDBException { return (String) expenses.getContent(); }
     public String earningsRecord() throws XMLDBException { return (String) earnings.getContent(); }
@@ -559,22 +575,32 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         return ex.contains("not allowed to");
     }
 
-    public  double getLossesByIssuingDate(String after, String before) throws XMLDBException {
-        return getLosses("issuing-date", after, before);
-    }
 
-    private double getLosses(String name, String after, String before) throws XMLDBException{
-        return Double.parseDouble(
-                (String) getBetweenSumPrice(EXPENSES, name, after, before).getResource(0).getContent()
-        );
+    private double getLosses(String type, String name, String after, String before) throws AccountingException{
+        try {
+            double r = 0;
+            ResourceIterator i = getBetweenSumPrice(type, name, after, before).getIterator();
+            while (i.hasMoreResources()) {
+                r += Double.parseDouble((String) i.nextResource().getContent());
+            }
+            return r;
+        } catch (XMLDBException ex) {
+            if (isDCError(ex.getMessage()) || ex.errorCode == ErrorCodes.COLLECTION_CLOSED) {
+                throw new AccountingException(ADBErrorCodes.CONNECTION_ERROR, ex.errorCode, ex.getMessage(), ex);
+            } else if (isDeniedError(ex.getMessage()) || ex.errorCode == ErrorCodes.PERMISSION_DENIED) {
+                throw new AccountingException(ADBErrorCodes.ACCESS_ERROR, ex.errorCode, ex.getMessage(), ex);
+            } else {
+                throw new AccountingException(ADBErrorCodes.UNKNOWN_ERROR, ex.errorCode, ex.getMessage(), ex);
+            }
+        }
     }
 
     private ResourceSet getBetweenSumPrice(String type, String name, String after, String before)
             throws XMLDBException {
         return ((XPathQueryService) col.getService("XPathQueryService", "1.0"))
-                .query("for $r in /" + type + "/record" + "/item\n" +
+                .query("for $r in /" + type + "/record\n" +
                         "where $r/" + name + " >= \'" + after + "\' and " +
                         "$r/" + name + " <= \'" + before + "\'\n" +
-                        "return fn:sum($r/price)");
+                        "return fn:sum($r/item/price)");
     }
 }
