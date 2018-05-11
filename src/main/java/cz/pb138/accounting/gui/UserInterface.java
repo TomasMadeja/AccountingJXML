@@ -31,7 +31,10 @@ public class UserInterface {
         this.fn = fn;
 
         // If information missing make tabs un-click-able
-        if (!fn.checkOwnerIsGood()) enableTabs(false);
+        if (!this.fn.checkOwnerIsGood()) enableTabs(false);
+
+        //Listener
+
     }
 
     /**
