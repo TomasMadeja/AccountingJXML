@@ -14,7 +14,7 @@ public class UserInterface {
     private JTextField textField5;
     private JTextField textField6;
     private JComboBox comboBox1;
-    private JButton addContactButton;
+    private JButton addButton1;
     private JButton updateChangesButton;
     private JTable table1;
     private JTextField textField7;
@@ -27,6 +27,10 @@ public class UserInterface {
     private JTextField textField14;
     private JComboBox comboBox2;
     private JButton saveChangesButton;
+    private JTable table2;
+    private JButton addButton;
+    private JTextField textField15;
+    private JButton button1;
 
     // Functionality
     // Prepsat na Implementaci !!!!!
