@@ -24,7 +24,7 @@ public class AccountingRecord {
                                             "entity-dic", "entity-bank-information", "entity-note",
                                             "billing-date", "issuing-date", "recipient-address"};
     public final static String ITEMLIST = "item";
-    public final static String[] ITEM = {"description", "quantity", "unit", "price"};
+    public final static String[] ITEM = {"description", "quantity", "unit", "price", "name"};
 
     private Map<String, Element> uniqueElements;
     private Map<String, List<Element>> contacts;
