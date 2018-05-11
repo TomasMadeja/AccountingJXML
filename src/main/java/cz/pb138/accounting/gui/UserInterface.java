@@ -16,7 +16,6 @@ public class UserInterface {
     private JComboBox comboBox1;
     private JButton addButton1;
     private JButton updateChangesButton;
-    private JTable table1;
     private JTextField textField7;
     private JTextField textField8;
     private JTextField textField9;
@@ -27,10 +26,23 @@ public class UserInterface {
     private JTextField textField14;
     private JComboBox comboBox2;
     private JButton saveChangesButton;
-    private JTable table2;
     private JButton addButton;
     private JTextField textField15;
-    private JButton button1;
+    private JButton resetButton;
+    private JRadioButton payerRadioButton;
+    private JRadioButton sellerRadioButton;
+    private JComboBox comboBox3;
+    private JComboBox comboBox4;
+    private JTextField textField20;
+    private JTextField textField21;
+    private JTextField textField22;
+    private JButton addDocumentButton;
+    private JButton addItemButton;
+    private JTextField textField16;
+    private JTextField textField17;
+    private JTextField textField18;
+    private JTextField textField19;
+    private JTextField textField23;
 
     // Functionality
     // Prepsat na Implementaci !!!!!
@@ -56,8 +68,7 @@ public class UserInterface {
      * @param a boolean
      */
     private void enableTabs(boolean a) {
-        tabbedPane1.setEnabledAt(1, a);
-        tabbedPane1.setEnabledAt(2, a);
+        //tabbedPane1.setEnabledAt(1, a);
     }
 
     /**
