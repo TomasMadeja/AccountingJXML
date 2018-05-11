@@ -56,6 +56,7 @@ public class AccountingOwner {
      * Creates new contact (email, telephone)
      * @param name name representing type of conact (email, telephone)
      * @param value contact information
+     * @return returns this object, allows chaining
      */
     public AccountingOwner addContact(String name, String value) {
         for (String matched : CONTACT) {
@@ -72,6 +73,7 @@ public class AccountingOwner {
      * Changes value of unique element
      * @param name name of specified element
      * @param value new value of element
+     * @return returns this object, allows chaining
      * @throws AccountingException correpsonding error code
      */
     public AccountingOwner changeValue(String name, String value) {
@@ -132,6 +134,7 @@ public class AccountingOwner {
      * Removes specified contact
      * @param name contact type name
      * @param value contact value
+     * @return returns this object, allows chaining
      */
     public AccountingOwner removeContact(String name, String value) {
         if (contacts.containsKey(name)) {

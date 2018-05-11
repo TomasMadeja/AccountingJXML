@@ -29,13 +29,28 @@ public class ADTestMain {
             db.commitChanges();
         }
 
-//        db.getOwner().addContact("email", "test@test.tst");
-//        db.commitChanges();
+        db.getOwner().addContact("email", "test@test.tst");
+        db.commitChanges();
 
+//        db.addExpenditure().addItem("","","","","20")
+//                .addItem("","","","","30")
+//                .addItem("","","","","40")
+//                .changeValue("billing-date", "2006-11-06")
+//                .changeValue("issuing-date", "2006-11-07");
+//
+//        db.addExpenditure().addItem("","","","","20")
+//                .addItem("","","","","30")
+//                .addItem("","","","","40")
+//                .changeValue("billing-date", "2006-11-06")
+//                .changeValue("issuing-date", "2006-11-07");
+//
+//        db.commitChanges();
 
         System.out.println(db.ownerRecord());
         System.out.println(db.earningsRecord());
         System.out.println(db.expensesRecord());
+
+        System.out.println(db.getLossesByIssuingDate("2006-01-01", "2007-01-01"));
 
 //        System.out.println(db.dbAsString());
 

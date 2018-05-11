@@ -51,6 +51,12 @@ public class AccountingRecord {
             }
             record.appendChild(e);
         }
+
+        uniqueElements = new HashMap<String, Element>();
+        contacts = new HashMap<String, List<Element>>();
+        itemList = new ArrayList<Map<String, Element>>();
+
+        domToDict((Element) record);
     }
 
     /**
@@ -106,8 +112,9 @@ public class AccountingRecord {
      * @param quantity quantity of items
      * @param unit unit of measurement
      * @param price value of this item entity
+     * @return returns this object, allows chaining
      */
-    public AccountingRecord addItem(String description, String quantity, String unit, String price) {
+    public AccountingRecord addItem(String name, String description, String quantity, String unit, String price) {
         Element item = doc.createElement("item");
         Element e = doc.createElement("description");
         e.setTextContent(description);
@@ -121,6 +128,9 @@ public class AccountingRecord {
         e = doc.createElement("price");
         e.setTextContent(price);
         item.appendChild(e);
+        e = doc.createElement("name");
+        e.setTextContent(name);
+        item.appendChild(e);
         record.appendChild(item);
         return this;
     }
@@ -129,6 +139,7 @@ public class AccountingRecord {
      * Changes value of unique element
      * @param name name of specified element
      * @param value new value of element
+     * @return returns this object, allows chaining
      * @throws AccountingException correpsonding error code
      */
     public AccountingRecord changeValue(String name, String value) throws AccountingException {
@@ -152,6 +163,7 @@ public class AccountingRecord {
      * @param name name of contact
      * @param oldValue previous value to be replaced
      * @param newValue new value
+     * @return returns this object, allows chaining
      */
     public AccountingRecord changeValue(String name, String oldValue, String newValue){
         List l;
@@ -170,20 +182,23 @@ public class AccountingRecord {
      * Edit item in item list
      * @param oldItem old item to be edited [description, quanity, unit, value]
      * @param newItem new values of the item [description, quanity, unit, value]
+     * @return returns this object, allows chaining
      */
     public AccountingRecord editItem(String[] oldItem, String[] newItem) {
-        if (oldItem.length != 4 || newItem.length != 4) {
+        if (oldItem.length != 5 || newItem.length != 5) {
             return this;
         }
         for (Map<String, Element> subItem : itemList) {
-            if (subItem.get("description").getTextContent().compareTo(oldItem[0]) == 0 ||
-                    subItem.get("quantity").getTextContent().compareTo(oldItem[1]) == 0 ||
-                    subItem.get("unit").getTextContent().compareTo(oldItem[2]) == 0 ||
-                    subItem.get("price").getTextContent().compareTo(oldItem[3]) == 0) {
-                subItem.get("description").setTextContent(newItem[0]);
-                subItem.get("unit").setTextContent(newItem[1]);
-                subItem.get("description").setTextContent(newItem[2]);
-                subItem.get("price").setTextContent(newItem[3]);
+            if (subItem.get("name").getTextContent().compareTo(oldItem[0]) == 0 ||
+                    subItem.get("description").getTextContent().compareTo(oldItem[1]) == 0 ||
+                    subItem.get("quantity").getTextContent().compareTo(oldItem[2]) == 0 ||
+                    subItem.get("unit").getTextContent().compareTo(oldItem[3]) == 0 ||
+                    subItem.get("price").getTextContent().compareTo(oldItem[4]) == 0) {
+                subItem.get("name").setTextContent(newItem[0]);
+                subItem.get("description").setTextContent(newItem[1]);
+                subItem.get("unit").setTextContent(newItem[2]);
+                subItem.get("description").setTextContent(newItem[3]);
+                subItem.get("price").setTextContent(newItem[4]);
             }
         }
         return this;
@@ -221,13 +236,14 @@ public class AccountingRecord {
      * @return Array of Arrays ofitems
      */
     public String[][] getItems() {
-        String[][] items = new String[itemList.size()][4];
+        String[][] items = new String[itemList.size()][5];
         int i = 0;
         for (Map<String, Element> m : itemList) {
-            items[i][0] = m.get("description").getTextContent();
-            items[i][1] = m.get("unit").getTextContent();
-            items[i][2] = m.get("description").getTextContent();
-            items[i][3] = m.get("price").getTextContent();
+            items[i][0] = m.get("name").getTextContent();
+            items[i][1] = m.get("description").getTextContent();
+            items[i][2] = m.get("unit").getTextContent();
+            items[i][3] = m.get("description").getTextContent();
+            items[i][4] = m.get("price").getTextContent();
         }
         return items;
     }
@@ -235,16 +251,18 @@ public class AccountingRecord {
     /**
      * Erases specified item
      * @param item item to be erased, [description, quanity, unit, value]
+     * @return returns this object, allows chaining
      */
     public AccountingRecord removeItem(String[] item) {
         if (item.length != 4) {
             return this;
         }
         for (Map<String, Element> subItem : itemList) {
-            if (subItem.get("description").getTextContent().compareTo(item[0]) == 0 ||
-                    subItem.get("quantity").getTextContent().compareTo(item[1]) == 0 ||
-                    subItem.get("unit").getTextContent().compareTo(item[2]) == 0 ||
-                    subItem.get("price").getTextContent().compareTo(item[3]) == 0) {
+            if (subItem.get("name").getTextContent().compareTo(item[0]) == 0 ||
+                    subItem.get("description").getTextContent().compareTo(item[1]) == 0 ||
+                    subItem.get("quantity").getTextContent().compareTo(item[2]) == 0 ||
+                    subItem.get("unit").getTextContent().compareTo(item[3]) == 0 ||
+                    subItem.get("price").getTextContent().compareTo(item[4]) == 0) {
                 subItem.get("decription").getParentNode().getParentNode().removeChild(
                         subItem.get("description").getParentNode()
                 );
@@ -258,6 +276,7 @@ public class AccountingRecord {
      * Removes specified contact
      * @param name contact type name
      * @param value contact value
+     * @return returns this object, allows chaining
      */
     public AccountingRecord removeContact(String name, String value) {
         if (contacts.containsKey(name)) {
