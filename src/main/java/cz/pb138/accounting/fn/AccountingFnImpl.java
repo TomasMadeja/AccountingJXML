@@ -4,14 +4,20 @@ import cz.pb138.accounting.db.ADBErrorCodes;
 import cz.pb138.accounting.db.AccountingDatabase;
 import cz.pb138.accounting.db.AccountingException;
 
+import java.util.Map;
+import java.util.regex.Pattern;
+
 public class AccountingFnImpl {
 
     private AccountingDatabase db;
+
+    Map<Integer, Pattern> regexes;
 
     public AccountingFnImpl(AccountingDatabase db) {
         // Set server
         this.db = db;
 
+        regexes.put()
     }
 
 //    private void duck() throws AccountingException {
