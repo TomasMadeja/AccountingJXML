@@ -32,20 +32,20 @@ public class AccountingFnImpl {
 
     public void setName(String name) throws AccountingException {
         if (!name.matches("[A-Za-z ]*")) {
-            throw new AccountingException(ADBErrorCodes.WRONG_INPUT, "Wrong name input.");
+            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_NAME, "Wrong name input.");
         }
         db.getOwner().changeValue("name", name);
     }
 
     public void setAddress(String address) throws Exception {
-        if (!address.matches("A-Za-z ,0-9")) {
+        if (!address.matches("[A-Za-z ,0-9]*")) {
             throw new Exception("Wrong address input.");
         }
         db.getOwner().changeValue("address", address);
     }
 
     public void setICO(String ico) throws Exception {
-        if (!ico.matches("0-9")) {
+        if (!ico.matches("[0-9]*")) {
             throw new Exception("Wrong ICO input.");
         }
         db.getOwner().changeValue("ico", ico);

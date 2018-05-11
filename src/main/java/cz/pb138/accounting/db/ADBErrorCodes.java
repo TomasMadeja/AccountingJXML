@@ -58,7 +58,32 @@ public class ADBErrorCodes {
     public static int INVALID_DATE_FORMAT = 13;
 
     /**
-     * Wrong input error
+     * Wrong input error for name
      */
-    public static int WRONG_INPUT = 14;
+    public static int WRONG_INPUT_NAME = 14;
+
+    /**
+     * Wrong input error for address
+     */
+    public static int WRONG_INPUT_ADDRESS = 15;
+
+    /**
+     * Wrong input error for ico
+     */
+    public static int WRONG_INPUT_ICO = 16;
+
+    /**
+     * Wrong input error for dic
+     */
+    public static int WRONG_INPUT_DIC = 17;
+
+    /**
+     * Wrong input error for bank information
+     */
+    public static int WRONG_INPUT_BANK = 18;
+
+    /**
+     * Wrong input error for contact
+     */
+    public static int WRONG_INPUT_CONTACT = 19;
 }

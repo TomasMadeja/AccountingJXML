@@ -1,5 +1,5 @@
 package cz.pb138.accounting.fn;
 
-public enum Contact {
+public enum ContactType {
     EMAIL, TELEPHONE
 }
