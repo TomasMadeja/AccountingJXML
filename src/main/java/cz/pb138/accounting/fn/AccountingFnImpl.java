@@ -30,7 +30,7 @@ public class AccountingFnImpl {
 //        }
 //    }
 
-    private boolean matchInputs(String arg, InputType type) {
+    public boolean matchInputs(String arg, InputType type) {
         switch (type) {
             case NAME:
                 return arg.matches("^[A-Za-z ]*$");
@@ -47,7 +47,7 @@ public class AccountingFnImpl {
         }
     }
 
-    private boolean matchInputs(String arg, ContactType type) {
+    public boolean matchInputs(String arg, ContactType type) {
         switch (type) {
             case EMAIL:
                 return arg.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$");
