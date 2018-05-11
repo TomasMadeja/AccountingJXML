@@ -89,7 +89,7 @@ public class AccountingRecord {
      * @param name name representing type of conact (email, telephone)
      * @param value contact information
      */
-    public void addContact(String name, String value) {
+    public AccountingRecord addContact(String name, String value) {
         for (String matched : CONTACT) {
             if (name.compareTo(matched) == 0) {
                 Element e = doc.createElement(matched);
@@ -97,6 +97,7 @@ public class AccountingRecord {
                 record.appendChild(e);
             }
         }
+        return this;
     }
 
     /**
@@ -106,7 +107,7 @@ public class AccountingRecord {
      * @param unit unit of measurement
      * @param price value of this item entity
      */
-    public void addItem(String description, String quantity, String unit, String price) {
+    public AccountingRecord addItem(String description, String quantity, String unit, String price) {
         Element item = doc.createElement("item");
         Element e = doc.createElement("description");
         e.setTextContent(description);
@@ -121,6 +122,7 @@ public class AccountingRecord {
         e.setTextContent(price);
         item.appendChild(e);
         record.appendChild(item);
+        return this;
     }
 
     /**
@@ -129,7 +131,7 @@ public class AccountingRecord {
      * @param value new value of element
      * @throws AccountingException correpsonding error code
      */
-    public void changeValue(String name, String value) throws AccountingException {
+    public AccountingRecord changeValue(String name, String value) throws AccountingException {
         if (name.compareTo("billing-date") == 0 ||
                 name.compareTo("issuing-date") == 0) {
             if (!value.matches("\\d{4}-(0\\d|1[12])-([012]\\d|3[01])")) {
@@ -142,6 +144,7 @@ public class AccountingRecord {
         if (( e = uniqueElements.get(name)) != null) {
             e.setTextContent(value);
         }
+        return this;
     }
 
     /**
@@ -150,7 +153,7 @@ public class AccountingRecord {
      * @param oldValue previous value to be replaced
      * @param newValue new value
      */
-    public void changeValue(String name, String oldValue, String newValue){
+    public AccountingRecord changeValue(String name, String oldValue, String newValue){
         List l;
         if (contacts.containsKey(name)) {
             l = contacts.get(name);
@@ -160,6 +163,7 @@ public class AccountingRecord {
                 }
             }
         }
+        return this;
     }
 
     /**
@@ -167,9 +171,9 @@ public class AccountingRecord {
      * @param oldItem old item to be edited [description, quanity, unit, value]
      * @param newItem new values of the item [description, quanity, unit, value]
      */
-    public void editItem(String[] oldItem, String[] newItem) {
+    public AccountingRecord editItem(String[] oldItem, String[] newItem) {
         if (oldItem.length != 4 || newItem.length != 4) {
-            return;
+            return this;
         }
         for (Map<String, Element> subItem : itemList) {
             if (subItem.get("description").getTextContent().compareTo(oldItem[0]) == 0 ||
@@ -182,6 +186,7 @@ public class AccountingRecord {
                 subItem.get("price").setTextContent(newItem[3]);
             }
         }
+        return this;
     }
 
     /**
@@ -231,9 +236,9 @@ public class AccountingRecord {
      * Erases specified item
      * @param item item to be erased, [description, quanity, unit, value]
      */
-    public void removeItem(String[] item) {
+    public AccountingRecord removeItem(String[] item) {
         if (item.length != 4) {
-            return;
+            return this;
         }
         for (Map<String, Element> subItem : itemList) {
             if (subItem.get("description").getTextContent().compareTo(item[0]) == 0 ||
@@ -246,6 +251,7 @@ public class AccountingRecord {
                 itemList.remove(subItem);
             }
         }
+        return this;
     }
 
     /**
@@ -253,7 +259,7 @@ public class AccountingRecord {
      * @param name contact type name
      * @param value contact value
      */
-    public void removeContact(String name, String value) {
+    public AccountingRecord removeContact(String name, String value) {
         if (contacts.containsKey(name)) {
             for (Element e : contacts.get(name)) {
                 if (e.getTextContent().compareTo(value) == 0) {
@@ -264,6 +270,7 @@ public class AccountingRecord {
                 }
             }
         }
+        return this;
     }
 
     private void domToDict(Element root) {

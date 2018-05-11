@@ -57,7 +57,7 @@ public class AccountingOwner {
      * @param name name representing type of conact (email, telephone)
      * @param value contact information
      */
-    public void addContact(String name, String value) {
+    public AccountingOwner addContact(String name, String value) {
         for (String matched : CONTACT) {
             if (name.compareTo(matched) == 0) {
                 Element e = doc.createElement(matched);
@@ -65,6 +65,7 @@ public class AccountingOwner {
                 doc.getDocumentElement().appendChild(e);
             }
         }
+        return this;
     }
 
     /**
@@ -73,11 +74,12 @@ public class AccountingOwner {
      * @param value new value of element
      * @throws AccountingException correpsonding error code
      */
-    public void changeValue(String name, String value) {
+    public AccountingOwner changeValue(String name, String value) {
         Element e;
         if (( e = uniqueElements.get(name)) != null) {
             e.setTextContent(value);
         }
+        return this;
     }
 
     /**
@@ -86,7 +88,7 @@ public class AccountingOwner {
      * @param oldValue previous value to be replaced
      * @param newValue new value
      */
-    public void changeValue(String name, String oldValue, String newValue){
+    public AccountingOwner changeValue(String name, String oldValue, String newValue){
         List l;
         if (contacts.containsKey(name)) {
             l = contacts.get(name);
@@ -96,6 +98,7 @@ public class AccountingOwner {
                 }
             }
         }
+        return this;
     }
 
     /**
@@ -130,7 +133,7 @@ public class AccountingOwner {
      * @param name contact type name
      * @param value contact value
      */
-    public void removeContact(String name, String value) {
+    public AccountingOwner removeContact(String name, String value) {
         if (contacts.containsKey(name)) {
             for (Element e : contacts.get(name)) {
                 if (e.getTextContent().compareTo(value) == 0) {
@@ -141,6 +144,7 @@ public class AccountingOwner {
                 }
             }
         }
+        return this;
     }
 
     private void domToDict(Element root) {

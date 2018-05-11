@@ -559,4 +559,22 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         return ex.contains("not allowed to");
     }
 
+    public  double getLossesByIssuingDate(String after, String before) throws XMLDBException {
+        return getLosses("issuing-date", after, before);
+    }
+
+    private double getLosses(String name, String after, String before) throws XMLDBException{
+        return Double.parseDouble(
+                (String) getBetweenSumPrice(EXPENSES, name, after, before).getResource(0).getContent()
+        );
+    }
+
+    private ResourceSet getBetweenSumPrice(String type, String name, String after, String before)
+            throws XMLDBException {
+        return ((XPathQueryService) col.getService("XPathQueryService", "1.0"))
+                .query("for $r in /" + type + "/record" + "/item\n" +
+                        "where $r/" + name + " >= \'" + after + "\' and " +
+                        "$r/" + name + " <= \'" + before + "\'\n" +
+                        "return fn:sum($r/price)");
+    }
 }
