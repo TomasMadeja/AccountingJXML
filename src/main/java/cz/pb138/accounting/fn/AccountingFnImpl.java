@@ -17,7 +17,39 @@ public class AccountingFnImpl {
         // Set server
         this.db = db;
 
-        regexes.put()
+        regexes.put(getIntType(InputType.NAME), Pattern.compile("^[A-Za-z ]*$"));
+        regexes.put(getIntType(InputType.ADDRESS), Pattern.compile("^[A-Za-z ,0-9]*$"));
+        regexes.put(getIntType(InputType.ICO), Pattern.compile("^[0-9]*$"));
+        regexes.put(getIntType(InputType.DIC), Pattern.compile("^[A-Z]{2}[0-9]+$"));
+        regexes.put(getIntType(InputType.BANK), Pattern.compile("^[0-9]{0,6}[-]*[0-9]{1,10}/[0-9]{4}$"));
+        regexes.put(getIntType(ContactType.EMAIL), Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$"));
+        regexes.put(getIntType(ContactType.TELEPHONE), Pattern.compile("^\\+[0-9]{12}$"));
+    }
+
+    private Integer getIntType(InputType input) {
+        switch (input) {
+            case BANK:
+                return InputType.BANK.getValue();
+            case NAME:
+                return InputType.NAME.getValue();
+            case ICO:
+                return InputType.ICO.getValue();
+            case DIC:
+                return InputType.DIC.getValue();
+            case ADDRESS:
+                return InputType.ADDRESS.getValue();
+            default: return 1;
+        }
+    }
+
+    private Integer getIntType(ContactType contact) {
+        switch (contact) {
+            case TELEPHONE:
+                return ContactType.TELEPHONE.getValue();
+            case EMAIL:
+                return ContactType.EMAIL.getValue();
+            default: return 1;
+        }
     }
 
 //    private void duck() throws AccountingException {
