@@ -1,48 +1,52 @@
 package cz.pb138.accounting.gui;
 
 import cz.pb138.accounting.fn.AccountingFnImpl;
+import cz.pb138.accounting.fn.InputType;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class UserInterface {
     private JTabbedPane tabbedPane1;
     private JPanel panel1;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
-    private JComboBox comboBox1;
-    private JButton addButton1;
-    private JButton updateChangesButton;
-    private JTextField textField7;
-    private JTextField textField8;
-    private JTextField textField9;
-    private JTextField textField10;
-    private JTextField textField11;
-    private JTextField textField12;
-    private JTextField textField13;
-    private JTextField textField14;
-    private JComboBox comboBox2;
-    private JButton saveChangesButton;
-    private JButton addButton;
-    private JTextField textField15;
-    private JButton resetButton;
-    private JRadioButton payerRadioButton;
-    private JRadioButton sellerRadioButton;
-    private JComboBox comboBox3;
-    private JComboBox comboBox4;
-    private JTextField textField20;
-    private JTextField textField21;
-    private JTextField textField22;
-    private JButton addDocumentButton;
+
+    // Tab 1
+    private JTextField tfOwnerName;
+    private JTextField tfOwnerAddress;
+    private JTextField tfOwnerICO;
+    private JTextField tfOwnerDIC;
+    private JTextField tfOwnerBank;
+    private JTextField tfOwnerAddContact;
+    private JComboBox cbOwnerContactTypes;
+    private JButton btOwnerAddContact;
+    private JButton btOwnerSave;
+
+    // Tab 2
+    private JTextField tfRecordName;
+    private JTextField tfRecordAddress;
+    private JTextField tfRecordICO;
+    private JTextField tfRecordDIC;
+    private JTextField tfRecordBank;
+    private JTextField tfRecordNote;
+    private JTextField tfRecordAddContact;
+    private JComboBox cbRecordContactTypes;
+    private JButton btRecordAddContact;
+    private JTextField tfOwnerNote;
+    private JButton btOwnerReset;
+    private JRadioButton rbRecordPayer;
+    private JRadioButton rbRecordSeller;
+    private JTextField tfRecordBilling;
+    private JTextField tfRecordIssuing;
+    private JTextField tfRecordNameRec;
+    private JButton btRecordSave;
     private JButton addItemButton;
     private JTextField textField16;
     private JTextField textField17;
     private JTextField textField18;
     private JTextField textField19;
-    private JTextField textField23;
+    private JTextField tfRecordAddressRec;
+    private JScrollPane spOwnerAddedContacts;
+    private JScrollPane spRecordAddedContacts;
 
     // Functionality
     // Prepsat na Implementaci !!!!!
@@ -59,8 +63,9 @@ public class UserInterface {
         // If information missing make tabs un-click-able
         if (!this.fn.checkOwnerIsGood()) enableTabs(false);
 
-        //Listener
-
+        // Listeners
+        Integer tabOwner = 1;
+        tfOwnerName.getDocument().addDocumentListener(new TextFieldListener(tfOwnerName, InputType.NAME));
     }
 
     /**

@@ -26,8 +26,18 @@ public class Main {
         // Start gui
         EventQueue.invokeLater(() -> {
             JFrame frame = new JFrame("AccountingJXML");
+
+            // Set defaults
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+                System.out.println("Setting of UI goes wrong: " + ex.getMessage());
+            }
+
+            // End on X
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+            // Build Panel
             try {
                 frame.setContentPane(new UserInterface(fn).getPanel1());
             } catch (Exception e) {
@@ -36,8 +46,9 @@ public class Main {
 
             // Frame size
             Integer width = 900;
-            Integer height = 600;
+            Integer height = 700;
             frame.setMaximumSize(new Dimension(width, height));
+            frame.setPreferredSize(new Dimension(width, height));
             frame.setMinimumSize(new Dimension(width, height));
 
             frame.pack();

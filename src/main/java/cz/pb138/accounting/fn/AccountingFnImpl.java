@@ -4,6 +4,7 @@ import cz.pb138.accounting.db.ADBErrorCodes;
 import cz.pb138.accounting.db.AccountingDatabase;
 import cz.pb138.accounting.db.AccountingException;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -11,7 +12,7 @@ public class AccountingFnImpl {
 
     private AccountingDatabase db;
 
-    Map<Integer, Pattern> regexes;
+    private Map<Integer, Pattern> regexes = new HashMap<>();
 
     public AccountingFnImpl(AccountingDatabase db) {
         // Set server
@@ -69,70 +70,54 @@ public class AccountingFnImpl {
 //    }
 
     public boolean matchInputs(String arg, InputType type) {
-        switch (type) {
-            case NAME:
-                return arg.matches("^[A-Za-z ]*$");
-            case ADDRESS:
-                return arg.matches("^[A-Za-z ,0-9]*$");
-            case ICO:
-                return arg.matches("^[0-9]*$");
-            case DIC:
-                return arg.matches("^[A-Z]{2}[0-9]+$");
-            case BANK:
-                return arg.matches("^[0-9]{0,6}[-]*[0-9]{1,10}/[0-9]{4}$");
-            default:
-                return false;
-        }
+        return regexes.get(type).matcher(arg).matches();
     }
 
     public boolean matchInputs(String arg, ContactType type) {
-        switch (type) {
-            case EMAIL:
-                return arg.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$");
-            case TELEPHONE:
-                return arg.matches("^\\+[0-9]{12}$");
-            default:
-                return false;
-        }
+        return regexes.get(type).matcher(arg).matches();
     }
 
     public void setName(String name) throws AccountingException {
         if (!matchInputs(name, InputType.NAME)) {
-            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_NAME, "Name contains only spaces and alphabet.");
+            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_NAME, "A-Za-z and spaces");
         }
         db.getOwner().changeValue("name", name);
     }
 
     public void setAddress(String address) throws AccountingException {
         if (!matchInputs(address, InputType.ADDRESS)) {
-            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_ADDRESS, "Address contains \"A-Z,a-z\".");
+            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_ADDRESS, "A-Za-z0-9, spaces and comma");
         }
         db.getOwner().changeValue("address", address);
     }
 
     public void setICO(String ico) throws AccountingException {
         if (!matchInputs(ico, InputType.ICO)) {
-            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_ICO, "ICO contains numbers only.");
+            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_ICO, "Numbers");
         }
         db.getOwner().changeValue("ico", ico);
     }
 
     public void setDIC(String dic) throws AccountingException {
         if (!matchInputs(dic, InputType.DIC)) {
-            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_DIC, "DIC example is CZ0001111. You have wrong format.");
+            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_DIC, "Format like CZ00001111");
         }
         db.getOwner().changeValue("dic", dic);
     }
 
     public void setBank(String bank) throws AccountingException {
         if (!matchInputs(bank, InputType.BANK)) {
-            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_BANK, "Bank information example is 000022-11231313/1132. Prefixed number is optional. Bank code is always 4 numbers.");
+            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_BANK, "Format like 00000-1111111/3333");
         }
         db.getOwner().changeValue("bank-information", bank);
     }
 
     public void setNote(String note) {
         db.getOwner().changeValue("note", note);
+    }
+
+    public void setOwner(String name, String address, String ico, String dic, String bank, String note) {
+
     }
 
     private String getOwnerVal(String arg) {
