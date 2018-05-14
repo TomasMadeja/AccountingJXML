@@ -39,16 +39,24 @@ list of invoiced items</p>
 			</ul>
 		</footer>
 		<h1>Implementation</h1>
-	<p>This application was programmed in Java with markup language XML to store application data as xml documents. For GUI we used library Swing.
-		Whole graphical interface is created with .form file which is specific to IntelliJ IDEA and as such is necessary to build the project successfully.
-		We have decided to use eXist-db because it is opensource xml database supporting XSLT and XQuery. Another important factor was high quality documentation.
-	</p>
-	<p>
-		Here is a demonstration of latest version of our GUI:
-		<p/>
-		<img src ="https://files.slack.com/files-pri/TA8HYUT3R-FAQLRB10F/screenshot_from_2018-05-14_22-49-36.png" alt="pic1" width="50%" height="50%">
-		<p/>
-		<img src="https://files.slack.com/files-pri/TA8HYUT3R-FAPGE36TV/screenshot_from_2018-05-14_22-49-27.png" alt="pic2" width="50%" height="50%">
-	</p>
+			<p>This application was programmed in Java with markup language XML to store application data as xml documents. For GUI we used library Swing.
+				Whole graphical interface is created with .form file which is specific to IntelliJ IDEA and as such is necessary to build the project successfully.
+				We have decided to use eXist-db because it is opensource xml database supporting XSLT and XQuery. Another important factor was high quality documentation.
+			</p>
+		<h1>GUI</h1>
+			<p>
+				Here is a demonstration of latest version of our GUI:
+				<p/>
+				<img src ="https://files.slack.com/files-pri/TA8HYUT3R-FAQLRB10F/screenshot_from_2018-05-14_22-49-36.png" alt="pic1" width="50%" height="50%">
+				<p/>
+				<img src="https://files.slack.com/files-pri/TA8HYUT3R-FAPGE36TV/screenshot_from_2018-05-14_22-49-27.png" alt="pic2" width="50%" height="50%">
+			</p>
+		<h1>XML database</h1>
+			<p>
+				We are storing data about owner in database. The application is allowing only one owner to be stored and to be saved successfully from GUI all parameters except note
+				(name, address, ico, dic, bank, note, email, telephone) must be filled and in valid format. To test formating we are using regular expressions on every input and unless
+				the regular expression returns true on all tested parameters saving data is not possible.
+				His/her expansions and earnings are represented by transaction with entity and type of transaction (buying/selling).
+			</p>
 	</body>
 </html>
