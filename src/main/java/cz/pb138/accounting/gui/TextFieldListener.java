@@ -11,19 +11,19 @@ public class TextFieldListener implements DocumentListener {
 
     private InputType input = null;
     private ContactType contact = null;
-    private JTextField field;
+    private JLabel field;
 
-    public TextFieldListener(JTextField field, InputType input) {
+    public TextFieldListener(JLabel field, InputType input) {
         this.input = input;
         initConstruct(field);
     }
 
-    public TextFieldListener(JTextField field, ContactType contact) {
+    public TextFieldListener(JLabel field, ContactType contact) {
         this.contact = contact;
         initConstruct(field);
     }
 
-    private void initConstruct(JTextField field) {
+    private void initConstruct(JLabel field) {
         this.field = field;
     }
 
@@ -43,6 +43,6 @@ public class TextFieldListener implements DocumentListener {
     }
 
     private void actionTyping(DocumentEvent e) {
-
+        field.setText("Pise");
     }
 }

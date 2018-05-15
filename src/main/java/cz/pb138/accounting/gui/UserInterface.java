@@ -47,6 +47,11 @@ public class UserInterface {
     private JTextField tfRecordAddressRec;
     private JScrollPane spOwnerAddedContacts;
     private JScrollPane spRecordAddedContacts;
+    private JLabel lbOwnerName;
+    private JLabel lbOwnerAddress;
+    private JLabel lbOwnerICO;
+    private JLabel lbOwnerDIC;
+    private JLabel lbOwnerBank;
 
     // Functionality
     // Prepsat na Implementaci !!!!!
@@ -64,8 +69,7 @@ public class UserInterface {
         if (!this.fn.checkOwnerIsGood()) enableTabs(false);
 
         // Listeners
-        Integer tabOwner = 1;
-        tfOwnerName.getDocument().addDocumentListener(new TextFieldListener(tfOwnerName, InputType.NAME));
+        tfOwnerName.getDocument().addDocumentListener(new TextFieldListener(lbOwnerName, InputType.NAME));
     }
 
     /**
