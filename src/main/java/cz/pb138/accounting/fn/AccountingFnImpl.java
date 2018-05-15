@@ -18,9 +18,9 @@ public class AccountingFnImpl {
         // Set server
         this.db = db;
 
-        regexes.put(getIntType(InputType.NAME), Pattern.compile("^[A-Za-z ]*$"));
-        regexes.put(getIntType(InputType.ADDRESS), Pattern.compile("^[A-Za-z ,0-9]*$"));
-        regexes.put(getIntType(InputType.ICO), Pattern.compile("^[0-9]*$"));
+        regexes.put(getIntType(InputType.NAME), Pattern.compile("^[A-Za-z ]+$"));
+        regexes.put(getIntType(InputType.ADDRESS), Pattern.compile("^[A-Za-z ,0-9]+$"));
+        regexes.put(getIntType(InputType.ICO), Pattern.compile("^[0-9]+$"));
         regexes.put(getIntType(InputType.DIC), Pattern.compile("^[A-Z]{2}[0-9]+$"));
         regexes.put(getIntType(InputType.BANK), Pattern.compile("^[0-9]{0,6}[-]*[0-9]{1,10}/[0-9]{4}$"));
         regexes.put(getIntType(ContactType.EMAIL), Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$"));
@@ -39,7 +39,7 @@ public class AccountingFnImpl {
                 return InputType.DIC.getValue();
             case ADDRESS:
                 return InputType.ADDRESS.getValue();
-            default: return 1;
+            default: return 0;
         }
     }
 
@@ -49,75 +49,56 @@ public class AccountingFnImpl {
                 return ContactType.TELEPHONE.getValue();
             case EMAIL:
                 return ContactType.EMAIL.getValue();
-            default: return 1;
+            default: return 0;
         }
     }
 
-//    private void duck() throws AccountingException {
-//        if (!quack()) {
-//            throw new AccountingException(ADBErrorCodes.WRONG_INPUT, "");
-//        }
-//    }
-//
-//    private boolean quack() {
-//        switch (1) {
-//            case 1:
-//                return true;
-//                default:
-//                    return false;
-//
-//        }
-//    }
+    public String matchPoint(String arg, InputType type) {
+        if (matchInputs(arg, type)) {
+            return " ";
+        }
+
+        String prefix = "Wrong input [" + type.toString().toLowerCase() + "]: ";
+
+        switch (type) {
+            case NAME:
+                return prefix + "A-Z, a-z and spaces";
+            case ADDRESS:
+                return prefix + "A-Z, a-z, 0-9, spaces and comma";
+            case ICO:
+                return prefix + "Numbers";
+            case DIC:
+                return prefix + "Example CZ00001111";
+            case BANK:
+                return prefix + "Example 00000-1111111/3333";
+            default:
+                return " ";
+        }
+    }
+
+    public String matchPoint(String arg, ContactType type) {
+        if (matchInputs(arg, type)) {
+            return " ";
+        }
+
+        String prefix = "Wrong input [" + type.toString().toLowerCase() + "]: ";
+
+        switch (type) {
+            case TELEPHONE:
+                return prefix + "Example +420722633544";
+            case EMAIL:
+                return prefix + "Wrong format";
+            default:
+                return " ";
+        }
+    }
 
     public boolean matchInputs(String arg, InputType type) {
-        return regexes.get(type).matcher(arg).matches();
+        return regexes.get(type.getValue()).matcher(arg).matches();
     }
 
     public boolean matchInputs(String arg, ContactType type) {
-        return regexes.get(type).matcher(arg).matches();
-    }
-
-    public void setName(String name) throws AccountingException {
-        if (!matchInputs(name, InputType.NAME)) {
-            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_NAME, "A-Za-z and spaces");
-        }
-        db.getOwner().changeValue("name", name);
-    }
-
-    public void setAddress(String address) throws AccountingException {
-        if (!matchInputs(address, InputType.ADDRESS)) {
-            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_ADDRESS, "A-Za-z0-9, spaces and comma");
-        }
-        db.getOwner().changeValue("address", address);
-    }
-
-    public void setICO(String ico) throws AccountingException {
-        if (!matchInputs(ico, InputType.ICO)) {
-            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_ICO, "Numbers");
-        }
-        db.getOwner().changeValue("ico", ico);
-    }
-
-    public void setDIC(String dic) throws AccountingException {
-        if (!matchInputs(dic, InputType.DIC)) {
-            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_DIC, "Format like CZ00001111");
-        }
-        db.getOwner().changeValue("dic", dic);
-    }
-
-    public void setBank(String bank) throws AccountingException {
-        if (!matchInputs(bank, InputType.BANK)) {
-            throw new AccountingException(ADBErrorCodes.WRONG_INPUT_BANK, "Format like 00000-1111111/3333");
-        }
-        db.getOwner().changeValue("bank-information", bank);
-    }
-
-    public void setNote(String note) {
-        db.getOwner().changeValue("note", note);
-    }
-
-    public void setOwner(String name, String address, String ico, String dic, String bank, String note) {
-
+        return regexes.get(type.getValue()).matcher(arg).matches();
     }
 
     private String getOwnerVal(String arg) {

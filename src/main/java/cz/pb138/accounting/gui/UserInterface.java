@@ -1,6 +1,7 @@
 package cz.pb138.accounting.gui;
 
 import cz.pb138.accounting.fn.AccountingFnImpl;
+import cz.pb138.accounting.fn.ContactType;
 import cz.pb138.accounting.fn.InputType;
 
 import javax.swing.*;
@@ -16,10 +17,18 @@ public class UserInterface {
     private JTextField tfOwnerICO;
     private JTextField tfOwnerDIC;
     private JTextField tfOwnerBank;
+    private JLabel lbOwnerName;
+    private JLabel lbOwnerAddress;
+    private JLabel lbOwnerICO;
+    private JLabel lbOwnerDIC;
+    private JLabel lbOwnerBank;
     private JTextField tfOwnerAddContact;
     private JComboBox cbOwnerContactTypes;
     private JButton btOwnerAddContact;
     private JButton btOwnerSave;
+    private JTextField tfOwnerNote;
+    private JButton btOwnerReset;
+    private JScrollPane spOwnerAddedContacts;
 
     // Tab 2
     private JTextField tfRecordName;
@@ -31,27 +40,26 @@ public class UserInterface {
     private JTextField tfRecordAddContact;
     private JComboBox cbRecordContactTypes;
     private JButton btRecordAddContact;
-    private JTextField tfOwnerNote;
-    private JButton btOwnerReset;
     private JRadioButton rbRecordPayer;
     private JRadioButton rbRecordSeller;
-    private JTextField tfRecordBilling;
-    private JTextField tfRecordIssuing;
     private JTextField tfRecordNameRec;
     private JButton btRecordSave;
     private JButton addItemButton;
-    private JTextField textField16;
-    private JTextField textField17;
-    private JTextField textField18;
-    private JTextField textField19;
+    private JTextField tfRecordQuality;
+    private JTextField tfRecordUnit;
+    private JTextField tfRecordPrice;
+    private JTextField tfRecordDesc;
     private JTextField tfRecordAddressRec;
-    private JScrollPane spOwnerAddedContacts;
     private JScrollPane spRecordAddedContacts;
-    private JLabel lbOwnerName;
-    private JLabel lbOwnerAddress;
-    private JLabel lbOwnerICO;
-    private JLabel lbOwnerDIC;
-    private JLabel lbOwnerBank;
+    private JScrollPane spRecordItems;
+    private JLabel lbRecordName;
+    private JLabel lbRecordAddress;
+    private JLabel lbRecordICO;
+    private JLabel lbRecordDIC;
+    private JLabel lbRecordBank;
+    private JLabel lbRecordQuantity;
+    private JLabel lbRecordUnit;
+    private JLabel lbRecordPrice;
 
     // Functionality
     // Prepsat na Implementaci !!!!!
@@ -69,7 +77,19 @@ public class UserInterface {
         if (!this.fn.checkOwnerIsGood()) enableTabs(false);
 
         // Listeners
-        tfOwnerName.getDocument().addDocumentListener(new TextFieldListener(lbOwnerName, InputType.NAME));
+        setLabels(tfOwnerName, lbOwnerName, InputType.NAME);
+        setLabels(tfOwnerAddress, lbOwnerAddress, InputType.ADDRESS);
+        setLabels(tfOwnerICO, lbOwnerICO, InputType.ICO);
+        setLabels(tfOwnerDIC, lbOwnerDIC, InputType.DIC);
+        setLabels(tfOwnerBank, lbOwnerBank, InputType.BANK);
+    }
+
+    private void setLabels(JTextField field, JLabel label, InputType input) {
+        field.getDocument().addDocumentListener(new TextFieldListener(fn, field, label, input));
+    }
+
+    private void setLabels(JTextField field, JLabel label, ContactType contact) {
+        field.getDocument().addDocumentListener(new TextFieldListener(fn, field, label, contact));
     }
 
     /**

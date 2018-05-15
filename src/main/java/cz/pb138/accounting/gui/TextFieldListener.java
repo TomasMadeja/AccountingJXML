@@ -1,5 +1,6 @@
 package cz.pb138.accounting.gui;
 
+import cz.pb138.accounting.fn.AccountingFnImpl;
 import cz.pb138.accounting.fn.ContactType;
 import cz.pb138.accounting.fn.InputType;
 
@@ -12,19 +13,23 @@ public class TextFieldListener implements DocumentListener {
     private InputType input = null;
     private ContactType contact = null;
     private JLabel field;
+    private AccountingFnImpl fn;
+    private JTextField text;
 
-    public TextFieldListener(JLabel field, InputType input) {
+    public TextFieldListener(AccountingFnImpl fn, JTextField text, JLabel field, InputType input) {
         this.input = input;
-        initConstruct(field);
+        initConstruct(fn, text, field);
     }
 
-    public TextFieldListener(JLabel field, ContactType contact) {
+    public TextFieldListener(AccountingFnImpl fn, JTextField text, JLabel field, ContactType contact) {
         this.contact = contact;
-        initConstruct(field);
+        initConstruct(fn, text, field);
     }
 
-    private void initConstruct(JLabel field) {
+    private void initConstruct(AccountingFnImpl fn, JTextField text, JLabel field) {
         this.field = field;
+        this.fn = fn;
+        this.text = text;
     }
 
     @Override
@@ -43,6 +48,10 @@ public class TextFieldListener implements DocumentListener {
     }
 
     private void actionTyping(DocumentEvent e) {
-        field.setText("Pise");
+        if (input != null) {
+            field.setText(fn.matchPoint(text.getText(), input));
+        } else {
+            field.setText(fn.matchPoint(text.getText(), contact));
+        }
     }
 }
