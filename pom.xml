@@ -32,11 +32,6 @@
             <artifactId>exist-start</artifactId>
             <version>4.1.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.swinglabs.swingx</groupId>
-            <artifactId>swingx-all</artifactId>
-            <version>1.6.5-1</version>
-        </dependency>
     </dependencies>
 
     <repositories>

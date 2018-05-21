@@ -14,10 +14,7 @@ public class AccountingFnImpl {
 
     private Map<Integer, Pattern> regexes = new HashMap<>();
 
-    public AccountingFnImpl(AccountingDatabase db) {
-        // Set server
-        this.db = db;
-
+    public AccountingFnImpl() {
         regexes.put(getIntType(InputType.NAME), Pattern.compile("^[A-Za-z ]+$"));
         regexes.put(getIntType(InputType.ADDRESS), Pattern.compile("^[A-Za-z ,0-9]+$"));
         regexes.put(getIntType(InputType.ICO), Pattern.compile("^[0-9]+$"));
@@ -25,6 +22,15 @@ public class AccountingFnImpl {
         regexes.put(getIntType(InputType.BANK), Pattern.compile("^[0-9]{0,6}[-]*[0-9]{1,10}/[0-9]{4}$"));
         regexes.put(getIntType(ContactType.EMAIL), Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$"));
         regexes.put(getIntType(ContactType.TELEPHONE), Pattern.compile("^\\+[0-9]{12}$"));
+
+        regexes.put(getIntType(ItemsType.NAME), Pattern.compile("^[A-Za-z ]+$"));
+        regexes.put(getIntType(ItemsType.UNIT), Pattern.compile("^[a-z]+$"));
+        regexes.put(getIntType(ItemsType.PRICE), Pattern.compile("^[0-9]+$"));
+        regexes.put(getIntType(ItemsType.QUANTITY), Pattern.compile("^[0-9]+$"));
+    }
+
+    public void setDB(AccountingDatabase db) {
+        this.db = db;
     }
 
     private Integer getIntType(InputType input) {
@@ -53,9 +59,23 @@ public class AccountingFnImpl {
         }
     }
 
+    private Integer getIntType(ItemsType item) {
+        switch (item) {
+            case NAME:
+                return ItemsType.NAME.getValue();
+            case UNIT:
+                return ItemsType.UNIT.getValue();
+            case PRICE:
+                return ItemsType.PRICE.getValue();
+            case QUANTITY:
+                return ItemsType.QUANTITY.getValue();
+            default: return 0;
+        }
+    }
+
     public String matchPoint(String arg, InputType type) {
         if (matchInputs(arg, type)) {
-            return " ";
+            return "";
         }
 
         String prefix = "Wrong input [" + type.toString().toLowerCase() + "]: ";
@@ -72,13 +92,13 @@ public class AccountingFnImpl {
             case BANK:
                 return prefix + "Example 00000-1111111/3333";
             default:
-                return " ";
+                return "";
         }
     }
 
     public String matchPoint(String arg, ContactType type) {
         if (matchInputs(arg, type)) {
-            return " ";
+            return "";
         }
 
         String prefix = "Wrong input [" + type.toString().toLowerCase() + "]: ";
@@ -89,7 +109,28 @@ public class AccountingFnImpl {
             case EMAIL:
                 return prefix + "Wrong format";
             default:
-                return " ";
+                return "";
+        }
+    }
+
+    public String matchPoint(String arg, ItemsType type) {
+        if (matchInputs(arg, type)) {
+            return "";
+        }
+
+        String prefix = "Wrong input [" + type.toString().toLowerCase() + "]: ";
+
+        switch (type) {
+            case NAME:
+                return prefix + "A-Z, a-z and spaces";
+            case UNIT:
+                return prefix + "Only a-z";
+            case PRICE:
+                return prefix + "Only numbers";
+            case QUANTITY:
+                return prefix + "Only numbers";
+            default:
+                return "";
         }
     }
 
@@ -101,21 +142,7 @@ public class AccountingFnImpl {
         return regexes.get(type.getValue()).matcher(arg).matches();
     }
 
-    private String getOwnerVal(String arg) {
-        return db.getOwner().getValue(arg);
-    }
-
-    private String[] getOwnerCont(String arg) {
-        return db.getOwner().getContact(arg);
-    }
-
-    public boolean checkOwnerIsGood() {
-        return  !getOwnerVal("name").isEmpty() &&
-                !getOwnerVal("address").isEmpty() &&
-                !getOwnerVal("ico").isEmpty() &&
-                !getOwnerVal("dic").isEmpty() &&
-                !getOwnerVal("bank-information").isEmpty() &&
-                getOwnerCont("email").length != 0 &&
-                getOwnerCont("telephone").length != 0;
+    public boolean matchInputs(String arg, ItemsType type) {
+        return regexes.get(type.getValue()).matcher(arg).matches();
     }
 }

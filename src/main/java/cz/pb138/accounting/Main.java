@@ -1,62 +1,66 @@
 package cz.pb138.accounting;
 
 import cz.pb138.accounting.db.AccountingDatabaseImpl;
+import cz.pb138.accounting.db.AccountingException;
 import cz.pb138.accounting.fn.AccountingFnImpl;
-import cz.pb138.accounting.gui.UserInterface;
 
-import javax.swing.*;
-import java.awt.*;
+import cz.pb138.accounting.gui.AccountingGUI;
+import javafx.application.Application;
 
-public class Main {
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+
+public class Main extends Application {
+
+    // Set server
     private static final String USERNAME = "admin";
     private static final String PASSWORD = "";
 
-    public static void main(String[] args) throws Exception {
+    private AccountingDatabaseImpl db;
+
+    public Main() throws AccountingException {
         // Start server embedded mode
-        AccountingDatabaseImpl db = new AccountingDatabaseImpl(USERNAME,PASSWORD);
-        AccountingFnImpl fn = new AccountingFnImpl(db);
+        db = new AccountingDatabaseImpl(USERNAME,PASSWORD);
 
         // Check existence of owner
         if (!db.isOwnerSet()) {
             db.createOwner();
             db.commitChanges();
         }
-
-        // Start gui
-        EventQueue.invokeLater(() -> {
-            JFrame frame = new JFrame("AccountingJXML");
-
-            // Set defaults
-            try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-                System.out.println("Setting of UI goes wrong: " + ex.getMessage());
-            }
-
-            // End on X
-            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-            // Build Panel
-            try {
-                frame.setContentPane(new UserInterface(fn).getPanel1());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            // Frame size
-            Integer width = 900;
-            Integer height = 700;
-            frame.setMaximumSize(new Dimension(width, height));
-            frame.setPreferredSize(new Dimension(width, height));
-            frame.setMinimumSize(new Dimension(width, height));
-
-            frame.pack();
-            frame.setVisible(true);
-        });
-
-        // End server
-        db.killDatabase();
     }
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws IOException, AccountingException  {
+        // Get JavaFX
+        FXMLLoader fxml = new FXMLLoader(getClass().getResource("/AccountingGUI.fxml"));
+        Parent root = fxml.load();
+
+        // Set fn to controller
+        AccountingGUI controller = fxml.<AccountingGUI>getController();
+        controller.setFnObject(db);
+
+        // Set window
+        primaryStage.setTitle("AccountingJXML");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
+        primaryStage.show();
+
+        // Close window
+        primaryStage.setOnCloseRequest( event ->
+        {
+            try {
+                db.killDatabase();
+            } catch (AccountingException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 }

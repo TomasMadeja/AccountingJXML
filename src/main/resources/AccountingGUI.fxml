@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.embed.swing.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.pb138.accounting.gui.AccountingGUI">
+   <children>
+      <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tbOwner" text="Owner">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btOwnerPersonal" layoutX="460.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Personal data" />
+                        <Button fx:id="btOwnerContacts" layoutX="460.0" layoutY="40.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Contacts" />
+                        <Line endX="183.0" layoutX="450.0" layoutY="184.0" rotate="-90.0" startX="-183.0" stroke="#b2b2b2" />
+                        <Button fx:id="btOwnerReset" layoutX="460.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Reset" />
+                        <Pane fx:id="pnOwnerPersonal" prefHeight="367.0" prefWidth="450.0">
+                           <children>
+                              <Label layoutX="10.0" layoutY="10.0" text="Personal data">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="63.0" text="Name:" />
+                              <TextField fx:id="tfOwnerName" layoutX="136.0" layoutY="58.0" prefHeight="27.0" prefWidth="300.0" />
+                              <Label layoutX="10.0" layoutY="98.0" text="Address:" />
+                              <TextField fx:id="tfOwnerAddress" layoutX="136.0" layoutY="95.0" prefHeight="27.0" prefWidth="300.0" />
+                              <Label layoutX="10.0" layoutY="137.0" text="ICO:" />
+                              <TextField fx:id="tfOwnerICO" layoutX="136.0" layoutY="132.0" prefHeight="27.0" prefWidth="300.0" />
+                              <Label layoutX="10.0" layoutY="174.0" text="DIC:" />
+                              <TextField fx:id="tfOwnerDIC" layoutX="136.0" layoutY="169.0" prefHeight="27.0" prefWidth="300.0" />
+                              <Label layoutX="10.0" layoutY="211.0" text="Bank information:" />
+                              <TextField fx:id="tfOwnerBank" layoutX="136.0" layoutY="206.0" prefHeight="27.0" prefWidth="300.0" />
+                              <Label layoutX="10.0" layoutY="248.0" text="Note:" />
+                              <TextArea fx:id="tfOwnerNote" layoutX="136.0" layoutY="243.0" prefHeight="70.0" prefWidth="300.0" />
+                              <TextField fx:id="tfOwnerWarnName" disable="true" editable="false" layoutX="136.0" layoutY="85.0" prefHeight="27.0" prefWidth="300.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="tfOwnerWarnAddress" disable="true" editable="false" layoutX="136.0" layoutY="122.0" prefHeight="27.0" prefWidth="300.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="tfOwnerWarnICO" disable="true" editable="false" layoutX="136.0" layoutY="159.0" prefHeight="27.0" prefWidth="300.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="tfOwnerWarnDIC" disable="true" editable="false" layoutX="136.0" layoutY="196.0" prefHeight="27.0" prefWidth="300.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="tfOwnerWarnBank" disable="true" editable="false" layoutX="136.0" layoutY="233.0" prefHeight="27.0" prefWidth="300.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="pnOwnerContacts" disable="true" prefHeight="367.0" prefWidth="450.0" visible="false">
+                           <children>
+                              <Label layoutX="10.0" layoutY="10.0" text="Contacts">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="tvOwnerContacts" layoutX="10.0" layoutY="45.0" prefHeight="238.0" prefWidth="430.0">
+                                 <columns>
+                                    <TableColumn prefWidth="83.0" text="Type" />
+                                    <TableColumn minWidth="0.0" prefWidth="243.0" text="Value" />
+                                    <TableColumn prefWidth="103.0" />
+                                 </columns>
+                              </TableView>
+                              <TextField fx:id="tfOwnerAddContactEmail" layoutX="136.0" layoutY="330.0" prefHeight="27.0" prefWidth="210.0" />
+                              <Label layoutX="10.0" layoutY="335.0" text="Email:" />
+                              <Button fx:id="btOwnerAddContactEmail" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" text="Add email" />
+                              <Button fx:id="btOwnerAddContactTelephone" layoutX="320.0" layoutY="293.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" text="Add telephone" />
+                              <Label layoutX="10.0" layoutY="298.0" text="Telephone:" />
+                              <TextField fx:id="tfOwnerAddContactTelephone" layoutX="136.0" layoutY="293.0" prefHeight="27.0" prefWidth="174.0" />
+                              <TextField fx:id="tfOwnerWarnContactTelephone" disable="true" editable="false" layoutX="136.0" layoutY="320.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="tfOwnerWarnContactEmail" disable="true" editable="false" layoutX="136.0" layoutY="303.0" prefHeight="27.0" prefWidth="210.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </Pane>
+                        <Button fx:id="btOwnerSave" layoutX="460.0" layoutY="300.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Save changes" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tbInvoice" text="Invoice">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Line endX="183.0" layoutX="450.0" layoutY="184.0" rotate="-90.0" startX="-183.0" stroke="#b2b2b2" />
+                        <Button fx:id="btRecordTrader" layoutX="460.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Trader" />
+                        <Button fx:id="btRecordContacts" layoutX="460.0" layoutY="40.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Contacts" />
+                        <Button fx:id="btRecordItems" layoutX="460.0" layoutY="70.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Items" />
+                        <Button fx:id="btRecordInvoiceType" layoutX="460.0" layoutY="100.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Type of invoice" />
+                        <Button fx:id="btRecordCreateInvoice" layoutX="460.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Create invoice" />
+                        <Pane fx:id="pnRecordTrader" prefHeight="367.0" prefWidth="450.0">
+                           <children>
+                              <Label layoutX="10.0" layoutY="10.0" text="Trader">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="63.0" text="Name:" />
+                              <TextField fx:id="tfRecordName" layoutX="136.0" layoutY="58.0" prefHeight="27.0" prefWidth="300.0" />
+                              <Label layoutX="10.0" layoutY="98.0" text="Address:" />
+                              <TextField fx:id="tfRecordAddress" layoutX="136.0" layoutY="95.0" prefHeight="27.0" prefWidth="300.0" />
+                              <Label layoutX="10.0" layoutY="137.0" text="ICO:" />
+                              <TextField fx:id="tfRecordICO" layoutX="136.0" layoutY="132.0" prefHeight="27.0" prefWidth="300.0" />
+                              <Label layoutX="10.0" layoutY="174.0" text="DIC:" />
+                              <TextField fx:id="tfRecordDIC" layoutX="136.0" layoutY="169.0" prefHeight="27.0" prefWidth="300.0" />
+                              <Label layoutX="10.0" layoutY="211.0" text="Bank information:" />
+                              <TextField fx:id="tfRecordBank" layoutX="136.0" layoutY="206.0" prefHeight="27.0" prefWidth="300.0" />
+                              <Label layoutX="10.0" layoutY="248.0" text="Note:" />
+                              <TextArea fx:id="tfRecordNote" layoutX="136.0" layoutY="243.0" prefHeight="70.0" prefWidth="300.0" />
+                              <TextField fx:id="tfRecordWarnName" disable="true" editable="false" layoutX="136.0" layoutY="85.0" prefHeight="27.0" prefWidth="300.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="tfRecordWarnAddress" disable="true" editable="false" layoutX="136.0" layoutY="122.0" prefHeight="27.0" prefWidth="300.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="tfRecordWarnICO" disable="true" editable="false" layoutX="136.0" layoutY="159.0" prefHeight="27.0" prefWidth="300.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="tfRecordWarnDIC" disable="true" editable="false" layoutX="136.0" layoutY="196.0" prefHeight="27.0" prefWidth="300.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="tfRecordWarnBank" disable="true" editable="false" layoutX="136.0" layoutY="233.0" prefHeight="27.0" prefWidth="300.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                              <RadioButton fx:id="rbRecordPayer" layoutX="136.0" layoutY="333.0" mnemonicParsing="false" text="Payer">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="traderInvoice" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="rbRecordSeller" layoutX="212.0" layoutY="333.0" mnemonicParsing="false" text="Seller" toggleGroup="$traderInvoice" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="pnRecordContacts" disable="true" prefHeight="367.0" prefWidth="450.0" visible="false">
+                           <children>
+                              <Label layoutX="10.0" layoutY="10.0" text="Contacts">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="tvRecordContacts" layoutX="10.0" layoutY="45.0" prefHeight="238.0" prefWidth="430.0">
+                                <columns>
+                                  <TableColumn prefWidth="83.0" text="Type" />
+                                  <TableColumn minWidth="0.0" prefWidth="243.0" text="Value" />
+                                    <TableColumn prefWidth="103.0" />
+                                </columns>
+                              </TableView>
+                              <TextField fx:id="tfRecordAddContactEmail" layoutX="136.0" layoutY="330.0" prefHeight="27.0" prefWidth="210.0" />
+                              <Label layoutX="10.0" layoutY="335.0" text="Email:" />
+                              <Button fx:id="btRecordAddContactEmail" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" text="Add email" />
+                              <Button fx:id="btRecordAddContactTelephone" layoutX="320.0" layoutY="293.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" text="Add telephone" />
+                              <Label layoutX="10.0" layoutY="298.0" text="Telephone:" />
+                              <TextField fx:id="tfRecordAddContactTelephone" layoutX="136.0" layoutY="293.0" prefHeight="27.0" prefWidth="174.0" />
+                              <TextField fx:id="tfRecordWarnContactTelephone" disable="true" editable="false" layoutX="136.0" layoutY="320.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="tfRecordWarnContactEmail" disable="true" editable="false" layoutX="136.0" layoutY="303.0" prefHeight="27.0" prefWidth="210.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="pnRecordItems" disable="true" prefHeight="367.0" prefWidth="450.0" visible="false">
+                           <children>
+                              <Label layoutX="10.0" layoutY="10.0" text="Items">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="tvRecordItems" layoutX="10.0" layoutY="45.0" prefHeight="164.0" prefWidth="430.0">
+                                 <columns>
+                                    <TableColumn prefWidth="128.0" text="Name" />
+                                    <TableColumn minWidth="0.0" prefWidth="81.0" text="Quantity" />
+                                    <TableColumn prefWidth="47.0" text="Unit" />
+                                    <TableColumn prefWidth="71.0" text="Price" />
+                                    <TableColumn prefWidth="102.0" />
+                                 </columns>
+                              </TableView>
+                              <Label layoutX="10.0" layoutY="224.0" text="Name:" />
+                              <TextField fx:id="tfRecordItemName" layoutX="57.0" layoutY="219.0" prefHeight="27.0" prefWidth="145.0" />
+                              <Label layoutX="229.0" layoutY="224.0" text="Unit:" />
+                              <TextField fx:id="tfRecordItemUnit" layoutX="295.0" layoutY="219.0" prefHeight="27.0" prefWidth="145.0" />
+                              <Label layoutX="10.0" layoutY="261.0" text="Price:" />
+                              <TextField fx:id="tfRecordItemPrice" layoutX="57.0" layoutY="256.0" prefHeight="27.0" prefWidth="145.0" />
+                              <Label layoutX="229.0" layoutY="261.0" text="Quantity:" />
+                              <TextField fx:id="tfRecordItemQuantity" layoutX="295.0" layoutY="256.0" prefHeight="27.0" prefWidth="145.0" />
+                              <Label layoutX="10.0" layoutY="298.0" text="Description:" />
+                              <TextField fx:id="tfRecordItemDesc" layoutX="136.0" layoutY="293.0" prefHeight="27.0" prefWidth="304.0" />
+                              <Button fx:id="btRecordAddItem" layoutX="367.0" layoutY="330.0" mnemonicParsing="false" text="Add item" />
+                              <TextField fx:id="tfRecordWarnItemUnit" disable="true" editable="false" layoutX="295.0" layoutY="246.0" prefHeight="27.0" prefWidth="145.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="tfRecordWarnItemName" disable="true" editable="false" layoutX="57.0" layoutY="246.0" prefHeight="27.0" prefWidth="145.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="tfRecordWarnItemPrice" disable="true" editable="false" layoutX="57.0" layoutY="283.0" prefHeight="27.0" prefWidth="145.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="tfRecordWarnItemQuantity" disable="true" editable="false" layoutX="295.0" layoutY="283.0" prefHeight="27.0" prefWidth="145.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="pnRecordInvoiceType" disable="true" prefHeight="367.0" prefWidth="450.0" visible="false">
+                           <children>
+                              <Label layoutX="10.0" layoutY="10.0" text="Type of invoice">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfRecordRecAdd" layoutX="145.0" layoutY="54.0" prefHeight="27.0" prefWidth="295.0" />
+                              <Label layoutX="10.0" layoutY="59.0" text="Recipients address:" />
+                              <DatePicker fx:id="dpRecordBillingDate" layoutX="145.0" layoutY="111.0" />
+                              <DatePicker fx:id="dpRecordIssuingDate" layoutX="145.0" layoutY="148.0" />
+                              <Label layoutX="10.0" layoutY="116.0" text="Billing date:" />
+                              <Label layoutX="10.0" layoutY="153.0" text="Issuing date:" />
+                              <TextField fx:id="tfRecordWarnRecAdd" disable="true" editable="false" layoutX="145.0" layoutY="81.0" prefHeight="27.0" prefWidth="295.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="tfRecordWarnIssuingDate" disable="true" layoutX="145.0" layoutY="175.0" prefHeight="27.0" prefWidth="194.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" visible="false" />
+                              <TextField fx:id="tfRecordWarnBillingDate" disable="true" layoutX="145.0" layoutY="138.0" prefHeight="27.0" prefWidth="194.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" visible="false" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>
