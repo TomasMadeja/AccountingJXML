@@ -49,7 +49,9 @@ public class Main extends Application {
 
         // Set window
         primaryStage.setTitle("AccountingJXML");
-        primaryStage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        scene.getStylesheets().add("Style.css");
         primaryStage.setResizable(false);
         primaryStage.show();
 
