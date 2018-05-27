@@ -1,0 +1,18 @@
+.root{
+    -fx-background-color: #eee5de;
+}
+.rightPanel{
+    -fx-background-color: #eee5de;
+}
+.button{
+    -fx-background-color: #625D5D;
+}
+.textField{
+    -fx-background-color: #f6f2df;
+}
+.button2{
+    -fx-background-color: #ae9279;
+}
+.table{
+    -fx-background-color: #ae9279;
+}

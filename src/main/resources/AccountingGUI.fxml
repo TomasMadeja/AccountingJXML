@@ -19,17 +19,17 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@../java/cz/pb138/accounting/Style.css" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.pb138.accounting.gui.AccountingGUI">
    <children>
-      <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@Style.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="tbOwner" text="Owner">
+          <Tab fx:id="tbOwner" styleClass="rightPanel" text="Owner">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="root">
                      <children>
-                        <Button fx:id="btOwnerPersonal" layoutX="460.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Personal data" />
-                        <Button fx:id="btOwnerContacts" layoutX="460.0" layoutY="40.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Contacts" />
-                        <Line endX="183.0" layoutX="450.0" layoutY="184.0" rotate="-90.0" startX="-183.0" stroke="#b2b2b2" />
-                        <Button fx:id="btOwnerReset" layoutX="460.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Reset" />
-                        <Pane fx:id="pnOwnerPersonal" prefHeight="367.0" prefWidth="450.0">
+                        <Button fx:id="btOwnerPersonal" layoutX="460.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Personal data" textFill="#bf9671" />
+                        <Button fx:id="btOwnerContacts" layoutX="460.0" layoutY="40.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Contacts" textFill="#bf9671" />
+                        <Line endX="183.0" layoutX="450.0" layoutY="184.0" rotate="-90.0" startX="-183.0" stroke="#8e7985" />
+                        <Button fx:id="btOwnerReset" layoutX="460.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Reset" textFill="#bf9671" />
+                        <Pane fx:id="pnOwnerPersonal" prefHeight="367.0" prefWidth="450.0" styleClass="rightPanel" stylesheets="@Style.css">
                            <children>
                               <Label layoutX="10.0" layoutY="10.0" text="Personal data">
                                  <font>
@@ -84,15 +84,15 @@
                               </Label>
                               <TableView fx:id="tvOwnerContacts" layoutX="10.0" layoutY="45.0" prefHeight="238.0" prefWidth="430.0">
                                  <columns>
-                                    <TableColumn prefWidth="83.0" text="Type" />
-                                    <TableColumn minWidth="0.0" prefWidth="243.0" text="Value" />
-                                    <TableColumn prefWidth="103.0" />
+                                    <TableColumn prefWidth="83.0" styleClass="table" text="Type" />
+                                    <TableColumn minWidth="0.0" prefWidth="243.0" styleClass="table" text="Value" />
+                                    <TableColumn prefWidth="103.0" styleClass="table" />
                                  </columns>
                               </TableView>
                               <TextField fx:id="tfOwnerAddContactEmail" layoutX="136.0" layoutY="330.0" prefHeight="27.0" prefWidth="210.0" />
                               <Label layoutX="10.0" layoutY="335.0" text="Email:" />
-                              <Button fx:id="btOwnerAddContactEmail" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" text="Add email" />
-                              <Button fx:id="btOwnerAddContactTelephone" layoutX="320.0" layoutY="293.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" text="Add telephone" />
+                              <Button fx:id="btOwnerAddContactEmail" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" styleClass="button2" text="Add email" />
+                              <Button fx:id="btOwnerAddContactTelephone" layoutX="320.0" layoutY="293.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" styleClass="button2" text="Add telephone" />
                               <Label layoutX="10.0" layoutY="298.0" text="Telephone:" />
                               <TextField fx:id="tfOwnerAddContactTelephone" layoutX="136.0" layoutY="293.0" prefHeight="27.0" prefWidth="174.0" />
                               <TextField fx:id="tfOwnerWarnContactTelephone" disable="true" editable="false" layoutX="136.0" layoutY="320.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
@@ -107,21 +107,21 @@
                               </TextField>
                            </children>
                         </Pane>
-                        <Button fx:id="btOwnerSave" layoutX="460.0" layoutY="300.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Save changes" />
+                        <Button fx:id="btOwnerSave" layoutX="460.0" layoutY="300.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Save changes" textFill="#bf9671" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab fx:id="tbInvoice" text="Invoice">
+          <Tab fx:id="tbInvoice" styleClass="rightPanel" text="Invoice">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="rightPanel">
                      <children>
-                        <Line endX="183.0" layoutX="450.0" layoutY="184.0" rotate="-90.0" startX="-183.0" stroke="#b2b2b2" />
-                        <Button fx:id="btRecordTrader" layoutX="460.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Trader" />
-                        <Button fx:id="btRecordContacts" layoutX="460.0" layoutY="40.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Contacts" />
-                        <Button fx:id="btRecordItems" layoutX="460.0" layoutY="70.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Items" />
-                        <Button fx:id="btRecordInvoiceType" layoutX="460.0" layoutY="100.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Type of invoice" />
-                        <Button fx:id="btRecordCreateInvoice" layoutX="460.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Create invoice" />
+                        <Line endX="183.0" layoutX="450.0" layoutY="184.0" rotate="-90.0" startX="-183.0" stroke="#8c7984" />
+                        <Button fx:id="btRecordTrader" layoutX="460.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Trader" textFill="#bf9671" />
+                        <Button fx:id="btRecordContacts" layoutX="460.0" layoutY="40.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Contacts" textFill="#bf9671" />
+                        <Button fx:id="btRecordItems" layoutX="460.0" layoutY="70.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Items" textFill="#bf9671" />
+                        <Button fx:id="btRecordInvoiceType" layoutX="460.0" layoutY="100.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Type of invoice" textFill="#bf9671" />
+                        <Button fx:id="btRecordCreateInvoice" layoutX="460.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Create invoice" textFill="#bf9671" />
                         <Pane fx:id="pnRecordTrader" prefHeight="367.0" prefWidth="450.0">
                            <children>
                               <Label layoutX="10.0" layoutY="10.0" text="Trader">
@@ -183,15 +183,15 @@
                               </Label>
                               <TableView fx:id="tvRecordContacts" layoutX="10.0" layoutY="45.0" prefHeight="238.0" prefWidth="430.0">
                                 <columns>
-                                  <TableColumn prefWidth="83.0" text="Type" />
-                                  <TableColumn minWidth="0.0" prefWidth="243.0" text="Value" />
-                                    <TableColumn prefWidth="103.0" />
+                                  <TableColumn prefWidth="83.0" styleClass="table" text="Type" />
+                                  <TableColumn minWidth="0.0" prefWidth="243.0" styleClass="table" text="Value" />
+                                    <TableColumn prefWidth="103.0" styleClass="table" />
                                 </columns>
                               </TableView>
                               <TextField fx:id="tfRecordAddContactEmail" layoutX="136.0" layoutY="330.0" prefHeight="27.0" prefWidth="210.0" />
                               <Label layoutX="10.0" layoutY="335.0" text="Email:" />
-                              <Button fx:id="btRecordAddContactEmail" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" text="Add email" />
-                              <Button fx:id="btRecordAddContactTelephone" layoutX="320.0" layoutY="293.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" text="Add telephone" />
+                              <Button fx:id="btRecordAddContactEmail" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" styleClass="button2" text="Add email" />
+                              <Button fx:id="btRecordAddContactTelephone" layoutX="320.0" layoutY="293.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" styleClass="button2" text="Add telephone" />
                               <Label layoutX="10.0" layoutY="298.0" text="Telephone:" />
                               <TextField fx:id="tfRecordAddContactTelephone" layoutX="136.0" layoutY="293.0" prefHeight="27.0" prefWidth="174.0" />
                               <TextField fx:id="tfRecordWarnContactTelephone" disable="true" editable="false" layoutX="136.0" layoutY="320.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
@@ -215,11 +215,11 @@
                               </Label>
                               <TableView fx:id="tvRecordItems" layoutX="10.0" layoutY="45.0" prefHeight="164.0" prefWidth="430.0">
                                  <columns>
-                                    <TableColumn prefWidth="128.0" text="Name" />
-                                    <TableColumn minWidth="0.0" prefWidth="81.0" text="Quantity" />
-                                    <TableColumn prefWidth="47.0" text="Unit" />
-                                    <TableColumn prefWidth="71.0" text="Price" />
-                                    <TableColumn prefWidth="102.0" />
+                                    <TableColumn prefWidth="128.0" styleClass="table" text="Name" />
+                                    <TableColumn minWidth="0.0" prefWidth="81.0" styleClass="table" text="Quantity" />
+                                    <TableColumn prefWidth="47.0" styleClass="table" text="Unit" />
+                                    <TableColumn prefWidth="71.0" styleClass="table" text="Price" />
+                                    <TableColumn prefWidth="102.0" styleClass="table" />
                                  </columns>
                               </TableView>
                               <Label layoutX="10.0" layoutY="224.0" text="Name:" />
@@ -232,7 +232,7 @@
                               <TextField fx:id="tfRecordItemQuantity" layoutX="295.0" layoutY="256.0" prefHeight="27.0" prefWidth="145.0" />
                               <Label layoutX="10.0" layoutY="298.0" text="Description:" />
                               <TextField fx:id="tfRecordItemDesc" layoutX="136.0" layoutY="293.0" prefHeight="27.0" prefWidth="304.0" />
-                              <Button fx:id="btRecordAddItem" layoutX="367.0" layoutY="330.0" mnemonicParsing="false" text="Add item" />
+                              <Button fx:id="btRecordAddItem" layoutX="367.0" layoutY="330.0" mnemonicParsing="false" styleClass="button2" text="Add item" />
                               <TextField fx:id="tfRecordWarnItemUnit" disable="true" editable="false" layoutX="295.0" layoutY="246.0" prefHeight="27.0" prefWidth="145.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
