@@ -25,13 +25,22 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="root">
                      <children>
-                        <Button fx:id="btOwnerPersonal" layoutX="460.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Personal data" textFill="#bf9671" />
-                        <Button fx:id="btOwnerContacts" layoutX="460.0" layoutY="40.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Contacts" textFill="#bf9671" />
+                        <Button fx:id="btOwnerPersonal" layoutX="460.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Personal data" textFill="#bf9671">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font></Button>
+                        <Button fx:id="btOwnerContacts" layoutX="460.0" layoutY="40.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Contacts" textFill="#bf9671">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font></Button>
                         <Line endX="183.0" layoutX="450.0" layoutY="184.0" rotate="-90.0" startX="-183.0" stroke="#8e7985" />
-                        <Button fx:id="btOwnerReset" layoutX="460.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Reset" textFill="#bf9671" />
+                        <Button fx:id="btOwnerReset" layoutX="460.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Reset" textFill="#bf9671">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font></Button>
                         <Pane fx:id="pnOwnerPersonal" prefHeight="367.0" prefWidth="450.0" styleClass="rightPanel" stylesheets="@Style.css">
                            <children>
-                              <Label layoutX="10.0" layoutY="10.0" text="Personal data">
+                              <Label layoutX="10.0" layoutY="14.0" text="Personal data">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -91,8 +100,14 @@
                               </TableView>
                               <TextField fx:id="tfOwnerAddContactEmail" layoutX="136.0" layoutY="330.0" prefHeight="27.0" prefWidth="210.0" />
                               <Label layoutX="10.0" layoutY="335.0" text="Email:" />
-                              <Button fx:id="btOwnerAddContactEmail" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" styleClass="button2" text="Add email" />
-                              <Button fx:id="btOwnerAddContactTelephone" layoutX="320.0" layoutY="293.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" styleClass="button2" text="Add telephone" />
+                              <Button fx:id="btOwnerAddContactEmail" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" styleClass="button2" text="Add email">
+                                 <font>
+                                    <Font name="Verdana" size="11.0" />
+                                 </font></Button>
+                              <Button fx:id="btOwnerAddContactTelephone" layoutX="320.0" layoutY="293.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" styleClass="button2" text="Add telephone">
+                                 <font>
+                                    <Font name="Verdana" size="11.0" />
+                                 </font></Button>
                               <Label layoutX="10.0" layoutY="298.0" text="Telephone:" />
                               <TextField fx:id="tfOwnerAddContactTelephone" layoutX="136.0" layoutY="293.0" prefHeight="27.0" prefWidth="174.0" />
                               <TextField fx:id="tfOwnerWarnContactTelephone" disable="true" editable="false" layoutX="136.0" layoutY="320.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
@@ -107,7 +122,10 @@
                               </TextField>
                            </children>
                         </Pane>
-                        <Button fx:id="btOwnerSave" layoutX="460.0" layoutY="300.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Save changes" textFill="#bf9671" />
+                        <Button fx:id="btOwnerSave" layoutX="460.0" layoutY="300.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Save changes" textFill="#bf9671">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font></Button>
                      </children>
                   </AnchorPane>
             </content>
@@ -117,11 +135,26 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="rightPanel">
                      <children>
                         <Line endX="183.0" layoutX="450.0" layoutY="184.0" rotate="-90.0" startX="-183.0" stroke="#8c7984" />
-                        <Button fx:id="btRecordTrader" layoutX="460.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Trader" textFill="#bf9671" />
-                        <Button fx:id="btRecordContacts" layoutX="460.0" layoutY="40.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Contacts" textFill="#bf9671" />
-                        <Button fx:id="btRecordItems" layoutX="460.0" layoutY="70.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Items" textFill="#bf9671" />
-                        <Button fx:id="btRecordInvoiceType" layoutX="460.0" layoutY="100.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Type of invoice" textFill="#bf9671" />
-                        <Button fx:id="btRecordCreateInvoice" layoutX="460.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Create invoice" textFill="#bf9671" />
+                        <Button fx:id="btRecordTrader" layoutX="460.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Trader" textFill="#bf9671">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font></Button>
+                        <Button fx:id="btRecordContacts" layoutX="460.0" layoutY="40.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Contacts" textFill="#bf9671">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font></Button>
+                        <Button fx:id="btRecordItems" layoutX="460.0" layoutY="70.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Items" textFill="#bf9671">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font></Button>
+                        <Button fx:id="btRecordInvoiceType" layoutX="460.0" layoutY="100.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Type of invoice" textFill="#bf9671">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font></Button>
+                        <Button fx:id="btRecordCreateInvoice" layoutX="460.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Create invoice" textFill="#bf9671">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font></Button>
                         <Pane fx:id="pnRecordTrader" prefHeight="367.0" prefWidth="450.0">
                            <children>
                               <Label layoutX="10.0" layoutY="10.0" text="Trader">
@@ -190,8 +223,14 @@
                               </TableView>
                               <TextField fx:id="tfRecordAddContactEmail" layoutX="136.0" layoutY="330.0" prefHeight="27.0" prefWidth="210.0" />
                               <Label layoutX="10.0" layoutY="335.0" text="Email:" />
-                              <Button fx:id="btRecordAddContactEmail" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" styleClass="button2" text="Add email" />
-                              <Button fx:id="btRecordAddContactTelephone" layoutX="320.0" layoutY="293.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" styleClass="button2" text="Add telephone" />
+                              <Button fx:id="btRecordAddContactEmail" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" styleClass="button2" text="Add email">
+                                 <font>
+                                    <Font name="Verdana" size="11.0" />
+                                 </font></Button>
+                              <Button fx:id="btRecordAddContactTelephone" layoutX="320.0" layoutY="293.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" styleClass="button2" text="Add telephone">
+                                 <font>
+                                    <Font name="Verdana" size="11.0" />
+                                 </font></Button>
                               <Label layoutX="10.0" layoutY="298.0" text="Telephone:" />
                               <TextField fx:id="tfRecordAddContactTelephone" layoutX="136.0" layoutY="293.0" prefHeight="27.0" prefWidth="174.0" />
                               <TextField fx:id="tfRecordWarnContactTelephone" disable="true" editable="false" layoutX="136.0" layoutY="320.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
@@ -232,7 +271,10 @@
                               <TextField fx:id="tfRecordItemQuantity" layoutX="295.0" layoutY="256.0" prefHeight="27.0" prefWidth="145.0" />
                               <Label layoutX="10.0" layoutY="298.0" text="Description:" />
                               <TextField fx:id="tfRecordItemDesc" layoutX="136.0" layoutY="293.0" prefHeight="27.0" prefWidth="304.0" />
-                              <Button fx:id="btRecordAddItem" layoutX="367.0" layoutY="330.0" mnemonicParsing="false" styleClass="button2" text="Add item" />
+                              <Button fx:id="btRecordAddItem" layoutX="367.0" layoutY="330.0" mnemonicParsing="false" styleClass="button2" text="Add item">
+                                 <font>
+                                    <Font name="Verdana" size="11.0" />
+                                 </font></Button>
                               <TextField fx:id="tfRecordWarnItemUnit" disable="true" editable="false" layoutX="295.0" layoutY="246.0" prefHeight="27.0" prefWidth="145.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />

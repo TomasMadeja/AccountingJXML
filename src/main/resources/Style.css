@@ -7,12 +7,33 @@
 .button{
     -fx-background-color: #625D5D;
 }
+.button:hover{
+    -fx-background-color: #000000;
+}
 .textField{
     -fx-background-color: #f6f2df;
 }
 .button2{
     -fx-background-color: #ae9279;
 }
+.button2:hover{
+    -fx-background-color: #7f6a59;
+}
 .table{
     -fx-background-color: #ae9279;
+}
+.tab{
+    -fx-background-color: #ae9c8e;
+}
+.tab-pane{
+    -fx-tab-min-width: 90px;
+}
+.tab:selected{
+    -fx-background-color: #eee5de;
+}
+.tab:selected .tab-label{
+    -fx-font-weight: bold;
+}
+.tab-pane .tab-header-area .tab-header-background{
+    -fx-background-color: #ae9c8e;
 }
