@@ -78,19 +78,17 @@ public class AccountingFnImpl {
             return "";
         }
 
-        String prefix = "Wrong input [" + type.toString().toLowerCase() + "]: ";
-
         switch (type) {
             case NAME:
-                return prefix + "A-Z, a-z and spaces";
+                return "A-Z, a-z and spaces";
             case ADDRESS:
-                return prefix + "A-Z, a-z, 0-9, spaces and comma";
+                return "A-Z, a-z, 0-9, spaces and comma";
             case ICO:
-                return prefix + "Numbers";
+                return "Numbers";
             case DIC:
-                return prefix + "Example CZ00001111";
+                return "Example CZ00001111";
             case BANK:
-                return prefix + "Example 00000-1111111/3333";
+                return "Example 00000-1111111/3333";
             default:
                 return "";
         }
@@ -101,13 +99,11 @@ public class AccountingFnImpl {
             return "";
         }
 
-        String prefix = "Wrong input [" + type.toString().toLowerCase() + "]: ";
-
         switch (type) {
             case TELEPHONE:
-                return prefix + "Example +420722633544";
+                return "Example +420722633544";
             case EMAIL:
-                return prefix + "Wrong format";
+                return "Wrong format";
             default:
                 return "";
         }
@@ -118,17 +114,15 @@ public class AccountingFnImpl {
             return "";
         }
 
-        String prefix = "Wrong input [" + type.toString().toLowerCase() + "]: ";
-
         switch (type) {
             case NAME:
-                return prefix + "A-Z, a-z and spaces";
+                return "A-Z, a-z and spaces";
             case UNIT:
-                return prefix + "Only a-z";
+                return "Only a-z";
             case PRICE:
-                return prefix + "Only numbers";
+                return "Only numbers";
             case QUANTITY:
-                return prefix + "Only numbers";
+                return "Only numbers";
             default:
                 return "";
         }
@@ -145,4 +139,6 @@ public class AccountingFnImpl {
     public boolean matchInputs(String arg, ItemsType type) {
         return regexes.get(type.getValue()).matcher(arg).matches();
     }
+
+
 }

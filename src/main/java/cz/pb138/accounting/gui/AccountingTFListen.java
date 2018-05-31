@@ -24,6 +24,8 @@ public class AccountingTFListen implements ChangeListener<String> {
     private AccountingFnImpl fn;
     private TextField warn;
 
+    private String outMatch;
+
     AccountingTFListen(AccountingFnImpl fn,
                        TextField warn,
                        InputType input) {
@@ -59,16 +61,17 @@ public class AccountingTFListen implements ChangeListener<String> {
 
     @Override
     public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-        String outMatch;
-        if (input != null) {
-            outMatch = fn.matchPoint(newValue, input);
-        } else if(contact != null) {
-            outMatch = fn.matchPoint(newValue, contact);
-        } else {
-            outMatch = fn.matchPoint(newValue, items);
+        if (newValue.length() > 0) {
+            if (input != null) {
+                outMatch = fn.matchPoint(newValue, input);
+            } else if (contact != null) {
+                outMatch = fn.matchPoint(newValue, contact);
+            } else {
+                outMatch = fn.matchPoint(newValue, items);
+            }
         }
 
-        if (outMatch.trim().length() > 0) {
+        if (newValue.length() > 0 && outMatch.trim().length() > 0) {
             warn.setText(outMatch);
             warn.setDisable(false);
             warn.setVisible(true);
