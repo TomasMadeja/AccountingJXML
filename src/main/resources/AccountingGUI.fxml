@@ -40,7 +40,7 @@
                               <Font name="Verdana" size="11.0" />
                            </font></Button>
                         <Line endX="183.0" layoutX="450.0" layoutY="184.0" rotate="-90.0" startX="-183.0" stroke="#8e7985" />
-                        <Button fx:id="btOwnerReset" layoutX="460.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Reset" textFill="#bf9671">
+                        <Button fx:id="btOwnerReset" layoutX="460.0" layoutY="330.0" mnemonicParsing="false" onAction="#initOwner" prefHeight="27.0" prefWidth="130.0" text="Reset" textFill="#bf9671">
                            <font>
                               <Font name="Verdana" size="11.0" />
                            </font></Button>

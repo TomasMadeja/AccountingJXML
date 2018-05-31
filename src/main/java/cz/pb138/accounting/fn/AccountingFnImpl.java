@@ -2,6 +2,7 @@ package cz.pb138.accounting.fn;
 
 import cz.pb138.accounting.db.ADBErrorCodes;
 import cz.pb138.accounting.db.AccountingDatabase;
+import cz.pb138.accounting.db.AccountingDatabaseImpl;
 import cz.pb138.accounting.db.AccountingException;
 
 import java.util.HashMap;
@@ -14,7 +15,32 @@ public class AccountingFnImpl {
 
     private Map<Integer, Pattern> regexes = new HashMap<>();
 
-    public AccountingFnImpl() {
+    // Set server
+    private static final String USERNAME = "admin";
+    private static final String PASSWORD = "";
+
+    public AccountingFnImpl() throws AccountingException {
+        // Start server embedded mode
+        db = new AccountingDatabaseImpl(USERNAME, PASSWORD);
+
+        // Check existence of owner
+        if (!db.isOwnerSet()) {
+            db.createOwner();
+            db.commitChanges();
+        }
+
+        initRegexes();
+    }
+
+    public void killDatabase() {
+        try {
+            db.killDatabase();
+        } catch (AccountingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initRegexes() {
         regexes.put(getIntType(InputType.NAME), Pattern.compile("^[A-Za-z ]+$"));
         regexes.put(getIntType(InputType.ADDRESS), Pattern.compile("^[A-Za-z ,0-9]+$"));
         regexes.put(getIntType(InputType.ICO), Pattern.compile("^[0-9]+$"));
@@ -27,6 +53,8 @@ public class AccountingFnImpl {
         regexes.put(getIntType(ItemsType.UNIT), Pattern.compile("^[a-z]+$"));
         regexes.put(getIntType(ItemsType.PRICE), Pattern.compile("^[0-9]+$"));
         regexes.put(getIntType(ItemsType.QUANTITY), Pattern.compile("^[0-9]+$"));
+
+        regexes.put(getIntType(DateType.DATE), Pattern.compile("^([1-9]|1[0-2])/([1-9]|[12][0-9]|3[01])/\\d{4}$"));
     }
 
     public void setDB(AccountingDatabase db) {
@@ -70,6 +98,15 @@ public class AccountingFnImpl {
             case QUANTITY:
                 return ItemsType.QUANTITY.getValue();
             default: return 0;
+        }
+    }
+
+    private Integer getIntType(DateType date) {
+        switch (date) {
+            case DATE:
+                return DateType.DATE.getValue();
+            default:
+                return 0;
         }
     }
 
@@ -128,6 +165,19 @@ public class AccountingFnImpl {
         }
     }
 
+    public String matchPoint(String arg, DateType date) {
+        if (matchInputs(arg, date)) {
+            return "";
+        }
+
+        switch (date) {
+            case DATE:
+                return "Example 12/24/1989";
+            default:
+                return "";
+        }
+    }
+
     public boolean matchInputs(String arg, InputType type) {
         return regexes.get(type.getValue()).matcher(arg).matches();
     }
@@ -140,5 +190,21 @@ public class AccountingFnImpl {
         return regexes.get(type.getValue()).matcher(arg).matches();
     }
 
+    public boolean matchInputs(String arg, DateType type) {
+        return regexes.get(type.getValue()).matcher(arg).matches();
+    }
 
+    public String getOwner(String arg) {
+        try {
+            String val = db.getOwner().getValue(arg);
+            if (val.length() > 0) {
+                return val;
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+//    public String getOwnerCon
 }

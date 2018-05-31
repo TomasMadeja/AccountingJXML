@@ -1,9 +1,6 @@
 package cz.pb138.accounting.gui;
 
-import cz.pb138.accounting.fn.AccountingFnImpl;
-import cz.pb138.accounting.fn.ContactType;
-import cz.pb138.accounting.fn.InputType;
-import cz.pb138.accounting.fn.ItemsType;
+import cz.pb138.accounting.fn.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
@@ -20,6 +17,7 @@ public class AccountingTFListen implements ChangeListener<String> {
     private InputType input;
     private ContactType contact;
     private ItemsType items;
+    private DateType date;
 
     private AccountingFnImpl fn;
     private TextField warn;
@@ -29,34 +27,39 @@ public class AccountingTFListen implements ChangeListener<String> {
     AccountingTFListen(AccountingFnImpl fn,
                        TextField warn,
                        InputType input) {
-        initVars(fn, warn);
-        this.input = input;
-        this.contact = null;
-        this.items = null;
+        initVars(fn, warn, null, input, null, null);
     }
 
     AccountingTFListen(AccountingFnImpl fn,
                        TextField warn,
                        ContactType contact) {
-        initVars(fn, warn);
-        this.contact = contact;
-        this.input = null;
-        this.items = null;
+        initVars(fn, warn, contact, null, null, null);
     }
 
     AccountingTFListen(AccountingFnImpl fn,
                        TextField warn,
                        ItemsType items) {
-        initVars(fn, warn);
-        this.contact = null;
-        this.input = null;
-        this.items = items;
+        initVars(fn, warn, null, null, items, null);
+    }
+
+    AccountingTFListen(AccountingFnImpl fn,
+                       TextField warn,
+                       DateType date) {
+        initVars(fn, warn, null, null, null, date);
     }
 
     private void initVars(AccountingFnImpl fn,
-                          TextField warn) {
+                          TextField warn,
+                          ContactType contact,
+                          InputType input,
+                          ItemsType items,
+                          DateType date) {
         this.fn = fn;
         this.warn = warn;
+        this.contact = contact;
+        this.input = input;
+        this.items = items;
+        this.date = date;
     }
 
     @Override
@@ -66,8 +69,10 @@ public class AccountingTFListen implements ChangeListener<String> {
                 outMatch = fn.matchPoint(newValue, input);
             } else if (contact != null) {
                 outMatch = fn.matchPoint(newValue, contact);
-            } else {
+            } else if (items != null) {
                 outMatch = fn.matchPoint(newValue, items);
+            } else {
+                outMatch = fn.matchPoint(newValue, date);
             }
         }
 

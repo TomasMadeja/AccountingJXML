@@ -159,4 +159,11 @@ public interface AccountingDatabase {
      * @throws AccountingException contains error code corresponding to error
      */
     double getEarningsByBillingDate(String after, String before) throws AccountingException;
+
+    /**
+     * Creates table
+     * @return AccountingOwner
+     * @throws AccountingException
+     */
+    AccountingOwner createOwner() throws AccountingException;
 }

@@ -1,5 +1,6 @@
 package cz.pb138.accounting;
 
+import cz.pb138.accounting.db.AccountingDatabase;
 import cz.pb138.accounting.db.AccountingDatabaseImpl;
 import cz.pb138.accounting.db.AccountingException;
 import cz.pb138.accounting.fn.AccountingFnImpl;
@@ -16,23 +17,6 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    // Set server
-    private static final String USERNAME = "admin";
-    private static final String PASSWORD = "";
-
-    private AccountingDatabaseImpl db;
-
-    public Main() throws AccountingException {
-        // Start server embedded mode
-        db = new AccountingDatabaseImpl(USERNAME,PASSWORD);
-
-        // Check existence of owner
-        if (!db.isOwnerSet()) {
-            db.createOwner();
-            db.commitChanges();
-        }
-    }
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -45,7 +29,6 @@ public class Main extends Application {
 
         // Set fn to controller
         AccountingGUI controller = fxml.<AccountingGUI>getController();
-        controller.setFnObject(db);
 
         // Set window
         primaryStage.setTitle("AccountingJXML");
@@ -58,11 +41,7 @@ public class Main extends Application {
         // Close window
         primaryStage.setOnCloseRequest( event ->
         {
-            try {
-                db.killDatabase();
-            } catch (AccountingException e) {
-                e.printStackTrace();
-            }
+            controller.killDatabase();
         });
     }
 }

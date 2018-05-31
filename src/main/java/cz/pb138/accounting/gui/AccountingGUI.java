@@ -1,10 +1,8 @@
 package cz.pb138.accounting.gui;
 
 import cz.pb138.accounting.db.AccountingDatabase;
-import cz.pb138.accounting.fn.AccountingFnImpl;
-import cz.pb138.accounting.fn.ContactType;
-import cz.pb138.accounting.fn.InputType;
-import cz.pb138.accounting.fn.ItemsType;
+import cz.pb138.accounting.db.AccountingException;
+import cz.pb138.accounting.fn.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -98,6 +96,12 @@ public class AccountingGUI {
 
     // Invoice type
     @FXML private Pane pnRecordInvoiceType;
+    @FXML private DatePicker dpRecordBillingDate;
+    @FXML private DatePicker dpRecordIssuingDate;
+    @FXML private TextField tfRecordRecAdd;
+    @FXML private TextField tfRecordWarnBillingDate;
+    @FXML private TextField tfRecordWarnIssuingDate;
+    @FXML private TextField tfRecordWarnRecAdd;
 
     // Menu - tab 2
     @FXML private Button btRecordTrader;
@@ -115,12 +119,8 @@ public class AccountingGUI {
     // Kontrolovat u tlacitek zda jsou vyhazovaci okna zobrazena
     // zalozit list na ne
 
-    public void setFnObject(AccountingDatabase db) {
-        fn.setDB(db);
-    }
-
     @FXML
-    protected void initialize() {
+    protected void initialize() throws AccountingException {
         fn = new AccountingFnImpl();
 
         initPanes();
@@ -128,7 +128,21 @@ public class AccountingGUI {
 
         initListeners();
 
+        initOwner();
+    }
 
+    public void killDatabase() {
+        fn.killDatabase();
+    }
+
+    @FXML
+    private void initOwner() {
+        tfOwnerName.setText(fn.getOwner("name"));
+        tfOwnerAddress.setText(fn.getOwner("address"));
+        tfOwnerICO.setText(fn.getOwner("ico"));
+        tfOwnerDIC.setText(fn.getOwner("dic"));
+        tfOwnerBank.setText(fn.getOwner("bank-information"));
+        tfOwnerNote.setText(fn.getOwner("note"));
     }
 
     private void initPanes() {
@@ -195,6 +209,11 @@ public class AccountingGUI {
         tfListen(tfRecordItemUnit, tfRecordWarnItemUnit, ItemsType.UNIT);
         tfListen(tfRecordItemPrice, tfRecordWarnItemPrice, ItemsType.PRICE);
         tfListen(tfRecordItemQuantity, tfRecordWarnItemQuantity, ItemsType.QUANTITY);
+
+        tfListen(dpRecordBillingDate, tfRecordWarnBillingDate, DateType.DATE);
+        tfListen(dpRecordIssuingDate, tfRecordWarnIssuingDate, DateType.DATE);
+
+        tfListen(tfRecordRecAdd, tfRecordWarnRecAdd, InputType.ADDRESS);
     }
 
     private void tfListen(TextField theField, TextField theWarn, InputType input) {
@@ -216,5 +235,12 @@ public class AccountingGUI {
                 fn,
                 theWarn,
                 items));
+    }
+
+    private void tfListen(DatePicker theField, TextField theWarn, DateType date) {
+        theField.getEditor().textProperty().addListener(new AccountingTFListen(
+                fn,
+                theWarn,
+                date));
     }
 }

@@ -145,7 +145,7 @@ public class AccountingRecord {
     public AccountingRecord changeValue(String name, String value) throws AccountingException {
         if (name.compareTo("billing-date") == 0 ||
                 name.compareTo("issuing-date") == 0) {
-            if (!value.matches("\\d{4}-(0\\d|1[12])-([012]\\d|3[01])")) {
+            if (!value.matches("\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])")) {
                 throw new AccountingException(ADBErrorCodes.INVALID_DATE_FORMAT,
                         "Invalid format inputting " + name + " should be YYYY-MM-DD");
             }
