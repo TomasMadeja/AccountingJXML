@@ -34,7 +34,10 @@ public class Main extends Application {
         primaryStage.setTitle("AccountingJXML");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        scene.getStylesheets().add("Style.css");
+
+        // Set from FXML root stylesheet
+//        scene.getStylesheets().add("Style.css");
+
         primaryStage.setResizable(false);
         primaryStage.show();
 

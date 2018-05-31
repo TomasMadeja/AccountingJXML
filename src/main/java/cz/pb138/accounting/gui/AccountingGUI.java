@@ -4,8 +4,13 @@ import cz.pb138.accounting.db.AccountingDatabase;
 import cz.pb138.accounting.db.AccountingException;
 import cz.pb138.accounting.fn.*;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 import java.util.HashMap;
@@ -35,7 +40,11 @@ public class AccountingGUI {
     // Contacts - tab 1
     @FXML private Pane pnOwnerContacts;
 
-    @FXML private TableView tvOwnerContacts;
+    @FXML private TableView<ContactTable> tvOwnerContacts;
+    @FXML private TableColumn<ContactTable, String> tcOwnerType;
+    @FXML private TableColumn<ContactTable, String> tcOwnerVal;
+    @FXML private TableColumn<ContactTable, ContactTable> tcOwnerDelete;
+
     @FXML private TextField tfOwnerAddContactEmail;
     @FXML private Button btOwnerAddContactEmail;
     @FXML private TextField tfOwnerWarnContactEmail;
@@ -112,12 +121,6 @@ public class AccountingGUI {
 
     // Help variables
     private Map<Pane, Integer> menuPanes = new HashMap<>();
-    private Map<Button, Integer> menuButtons = new HashMap<>();
-    private Map<Pane, Map<TextField, Boolean>> tabOneWarns = new HashMap<>();
-    private Map<Pane, Map<TextField, Boolean>> tabTwoWarns = new HashMap<>();
-
-    // Kontrolovat u tlacitek zda jsou vyhazovaci okna zobrazena
-    // zalozit list na ne
 
     @FXML
     protected void initialize() throws AccountingException {
@@ -143,6 +146,40 @@ public class AccountingGUI {
         tfOwnerDIC.setText(fn.getOwner("dic"));
         tfOwnerBank.setText(fn.getOwner("bank-information"));
         tfOwnerNote.setText(fn.getOwner("note"));
+
+        ObservableList<ContactTable> ownerContacts = FXCollections.observableArrayList();
+        String[] contacts = fn.getOwnerContact("email");
+        if (contacts == null) {
+            return;
+        }
+        for (String arg : contacts) {
+            ownerContacts.add(new ContactTable("email", arg));
+        }
+
+        tcOwnerType.setCellValueFactory(new PropertyValueFactory<ContactTable, String>("type"));
+        tcOwnerVal.setCellValueFactory(new PropertyValueFactory<ContactTable, String>("value"));
+
+        tcOwnerDelete.setCellValueFactory(
+                param -> new ReadOnlyObjectWrapper<>(param.getValue())
+        );
+        tcOwnerDelete.setCellFactory(param -> new TableCell<ContactTable, ContactTable>() {
+            private final Button deleteButton = new Button("Delete");
+
+            @Override
+            protected void updateItem(ContactTable row, boolean empty) {
+                super.updateItem(row, empty);
+
+                if (row == null) {
+                    setGraphic(null);
+                    return;
+                }
+
+                setGraphic(deleteButton);
+                deleteButton.setOnAction(event -> getTableView().getItems().remove(row));
+            }
+        });
+
+        tvOwnerContacts.setItems(ownerContacts);
     }
 
     private void initPanes() {
@@ -180,9 +217,6 @@ public class AccountingGUI {
             thePane.setVisible(true);
             thePane.setDisable(false);
         });
-
-        // Set menuButtons
-        menuButtons.put(theButton, menuPanes.get(thePane));
     }
 
     private void initListeners() {

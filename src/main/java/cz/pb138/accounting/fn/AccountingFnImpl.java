@@ -178,19 +178,19 @@ public class AccountingFnImpl {
         }
     }
 
-    public boolean matchInputs(String arg, InputType type) {
+    private boolean matchInputs(String arg, InputType type) {
         return regexes.get(type.getValue()).matcher(arg).matches();
     }
 
-    public boolean matchInputs(String arg, ContactType type) {
+    private boolean matchInputs(String arg, ContactType type) {
         return regexes.get(type.getValue()).matcher(arg).matches();
     }
 
-    public boolean matchInputs(String arg, ItemsType type) {
+    private boolean matchInputs(String arg, ItemsType type) {
         return regexes.get(type.getValue()).matcher(arg).matches();
     }
 
-    public boolean matchInputs(String arg, DateType type) {
+    private boolean matchInputs(String arg, DateType type) {
         return regexes.get(type.getValue()).matcher(arg).matches();
     }
 
@@ -206,5 +206,12 @@ public class AccountingFnImpl {
         return "";
     }
 
-//    public String getOwnerCon
+    public String[] getOwnerContact(String arg) {
+        try {
+            return db.getOwner().getContact(arg);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
