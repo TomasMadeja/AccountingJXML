@@ -23,9 +23,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.pb138.accounting.gui.AccountingGUI">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.pb138.accounting.gui.AccountingGUI">
    <children>
-      <TabPane prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@Style.css" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="400.0" prefWidth="600.0" styleClass="root" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tbOwner" styleClass="rightPanel" text="Owner">
             <content>
@@ -44,7 +44,7 @@
                            <font>
                               <Font name="Verdana" size="11.0" />
                            </font></Button>
-                        <Pane fx:id="pnOwnerPersonal" prefHeight="367.0" prefWidth="450.0" styleClass="rightPanel" stylesheets="@Style.css">
+                        <Pane fx:id="pnOwnerPersonal" prefHeight="367.0" prefWidth="450.0" styleClass="rightPanel">
                            <children>
                               <Label layoutX="10.0" layoutY="14.0" text="Personal data">
                                  <font>
