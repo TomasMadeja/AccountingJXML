@@ -98,7 +98,7 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
     }
 
 
-    public void configureValidation() throws AccountingException {
+    private void configureValidation() throws AccountingException {
         try {
             Collection col_valid = DatabaseManager
                     .getCollection(LOCALURI + "/db/system/config/db/", username, password);
@@ -172,15 +172,16 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
                 }
             }
         } catch (XMLDBException ex) {
-            throw new AccountingException(ADBErrorCodes.UNKNOWN_ERROR , "RUN", ex);
+            throw new AccountingException(ADBErrorCodes.VALIDATION_SETUP_FAILURE , "Error occured" +
+                    " while setting up validation", ex);
         }
     }
 
-    public boolean initDatabase(String path) throws AccountingException {
+    private boolean initDatabase(String path) throws AccountingException {
         return initDatabase(path, -1);
     }
 
-    public boolean initDatabase(String path, long waits) throws AccountingException {
+    private boolean initDatabase(String path, long waits) throws AccountingException {
         if (dbDetected) {
             return false;
         }
@@ -229,7 +230,7 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
     }
 
 
-    public boolean killDatabase(String path) throws AccountingException {
+    private boolean killDatabase(String path) throws AccountingException {
         String kill;
         if (SystemUtils.IS_OS_WINDOWS) {
             kill = WINDOWSSHUTDOWN;
@@ -248,7 +249,7 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         return true;
     }
 
-    public void updateLogin(String username, String password) {
+    private void updateLogin(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -261,7 +262,7 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         return new AccountingOwner(ownerDoc, ownerDoc.getDocumentElement());
     }
 
-    public AccountingOwner createOwner() throws AccountingException {
+    private AccountingOwner createOwner() throws AccountingException {
         try {
             if (owner != null) {
                 col.removeResource(owner);
@@ -275,6 +276,7 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
                     .parse(new InputSource(new StringReader((String) owner.getContent())));
             new AccountingOwner(ownerDoc);
             owner.setContentAsDOM(ownerDoc);
+            System.out.println(owner.getContent());
             col.storeResource(owner);
         } catch (ParserConfigurationException|IOException|SAXException ex) {
             throw new AccountingException(ADBErrorCodes.UNKNOWN_ERROR,
@@ -321,7 +323,7 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         }
     }
 
-    public void rollBack() throws AccountingException {
+    public void rollback() throws AccountingException {
         try {
             fillResources();
         } catch (AccountingException ex) {

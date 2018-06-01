@@ -23,11 +23,11 @@ public class ADDBTestMain {
 //                System.out.println("...No...");
 //            }
 //        }
-
-        if (!db.isOwnerSet()) {
-            db.createOwner();
-            db.commitChanges();
-        }
+//        db.createOwner();
+//        if (!db.isOwnerSet()) {
+//            db.createOwner();
+//            db.commitChanges();
+//        }
 
 //        db.getOwner().addContact("email", "test@test.tst");
 //        db.commitChanges();

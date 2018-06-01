@@ -23,7 +23,7 @@ public class AccountingOwner extends AccountingEntity {
 
 
     public AccountingOwner(Document doc, Node rootNode) {
-        super(doc, rootNode, UNIQUE, CONTACT);
+        super(doc, ((Element )rootNode).getElementsByTagName("record").item(0), UNIQUE, CONTACT);
     }
 
 
