@@ -196,6 +196,7 @@ public class AccountingGUI {
         String arg = tf.getText();
         if (fn.matchPoint(arg, contact).equals("") && !contactExist(arg, type, ownerContacts)) {
             ownerContacts.add(new ContactTable(type, arg, false));
+            tf.setText("");
         }
     }
 
