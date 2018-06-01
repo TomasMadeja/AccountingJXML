@@ -241,7 +241,10 @@ public class AccountingGUI {
 
         tvRecordItems.setItems(recordItems);
 
-        setContactTable(tcRecordConType, tcRecordConVal, tcRecordConDelete, false);
+        setContactTable(tcRecordConType,
+                tcRecordConVal,
+                tcRecordConDelete,
+                false);
     }
 
     /**
@@ -424,14 +427,8 @@ public class AccountingGUI {
                                  TableColumn<ContactTable, String> val,
                                  TableColumn<ContactTable, ContactTable> del,
                                  Boolean isOwner) {
-        type.setCellValueFactory(new PropertyValueFactory<
-                ContactTable,
-                String
-                >("type"));
-        val.setCellValueFactory(new PropertyValueFactory<
-                ContactTable,
-                String
-                >("value"));
+        type.setCellValueFactory(new PropertyValueFactory<>("type"));
+        val.setCellValueFactory(new PropertyValueFactory<>("value"));
 
         setTableListener(del, isOwner);
 
