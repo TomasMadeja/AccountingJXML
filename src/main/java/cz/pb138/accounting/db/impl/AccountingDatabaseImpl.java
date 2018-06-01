@@ -259,11 +259,11 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
 
     public boolean isOwnerSet() { return ownerSet; }
 
-    public AccountingOwner getOwner() {
+    public Owner getOwner() {
         return new AccountingOwner(ownerDoc, ownerDoc.getDocumentElement());
     }
 
-    private AccountingOwner createOwner() throws AccountingException {
+    private Owner createOwner() throws AccountingException {
         try {
             if (owner != null) {
                 col.removeResource(owner);
@@ -332,20 +332,20 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         }
     }
 
-    public AccountingRecord addRevenue() {
+    public Record addRevenue() {
         return createRecord(false);
     }
 
-    public AccountingRecord addExpenditure() {
+    public Record addExpenditure() {
         return createRecord(true);
     }
 
-    public List<AccountingRecord> getRecordsBetweenBilling(String after, String before)
+    public List<Record> getRecordsBetweenBilling(String after, String before)
             throws AccountingException{
         return getRecordsBetweenBilling("billing-date", after, before);
     }
 
-    public List<AccountingRecord> getRecordsBetweenIssuing(String after, String before)
+    public List<Record> getRecordsBetweenIssuing(String after, String before)
             throws AccountingException {
         return getRecordsBetweenBilling("issuing-date", after, before);
     }
@@ -617,9 +617,9 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         }
     }
 
-    private List<AccountingRecord> getRecordsBetweenBilling(String name, String after, String before)
+    private List<Record> getRecordsBetweenBilling(String name, String after, String before)
             throws AccountingException {
-        List<AccountingRecord> list = new ArrayList<>();
+        List<Record> list = new ArrayList<>();
         try {
             ResourceSet result = getBetweenReults(EXPENSES, name, after, before);
             ResourceIterator i = result.getIterator();
@@ -673,7 +673,7 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
                         "return $r");
     }
 
-    private AccountingRecord createRecord(boolean expense) {
+    private Record createRecord(boolean expense) {
         Document doc = earningsDoc;
         if (expense) {
             doc = expensesDoc;
