@@ -56,8 +56,8 @@ public class AccountingGUI {
     @FXML private Button btOwnerContacts;
 
     // Tabs
-    @FXML private Tab tbOwner;
-    @FXML private Tab tbInvoice;
+//    @FXML private Tab tbOwner;
+//    @FXML private Tab tbInvoice;
 
     // Trader - tab 2
     @FXML private Pane pnRecordTrader;
@@ -81,7 +81,7 @@ public class AccountingGUI {
     // Contacts - tab 2
     @FXML private Pane pnRecordContacts;
 
-    @FXML private TableView tvRecordContacts;
+    @FXML private TableView<ContactTable> tvRecordContacts;
     @FXML private TextField tfRecordAddContactEmail;
     @FXML private TextField tfRecordWarnContactEmail;
     @FXML private TextField tfRecordAddContactTelephone;
@@ -94,7 +94,7 @@ public class AccountingGUI {
     // Items - tab 2
     @FXML private Pane pnRecordItems;
 
-    @FXML private TableView tvRecordItems;
+    @FXML private TableView<ItemTable> tvRecordItems;
     @FXML private TextField tfRecordItemName;
     @FXML private TextField tfRecordItemUnit;
     @FXML private TextField tfRecordItemPrice;
@@ -183,7 +183,7 @@ public class AccountingGUI {
         getContacts("email", ownerContacts);
         getContacts("telephone", ownerContacts);
 
-        setContactTable(tcOwnerType, tcOwnerVal, tcOwnerDelete);
+        setContactTable(tcOwnerType, tcOwnerVal, tcOwnerDelete, true);
     }
 
     /**
@@ -215,8 +215,33 @@ public class AccountingGUI {
         }
     }
 
+    /**
+     * Prepare table for items and contacts.
+     * Invoice tab.
+     */
     private void initInvoiceTables() {
+        tcRecordItemName.setCellValueFactory(new PropertyValueFactory<
+                ItemTable,
+                String
+                >("nameVal"));
+        tcRecordItemQuant.setCellValueFactory(new PropertyValueFactory<
+                ItemTable,
+                String
+                >("quantity"));
+        tcRecordItemUnit.setCellValueFactory(new PropertyValueFactory<
+                ItemTable,
+                String
+                >("unit"));
+        tcRecordItemPrice.setCellValueFactory(new PropertyValueFactory<
+                ItemTable,
+                String
+                >("price"));
 
+        setTableListener(tcRecordItemDelete, false);
+
+        tvRecordItems.setItems(recordItems);
+
+        setContactTable(tcRecordConType, tcRecordConVal, tcRecordConDelete, false);
     }
 
     /**
@@ -232,7 +257,12 @@ public class AccountingGUI {
      */
     @FXML
     private void recordAddEmail() {
-
+        addContact(
+                tfRecordAddContactEmail,
+                ContactType.EMAIL,
+                "email",
+                recordContacts
+        );
     }
 
     /**
@@ -240,7 +270,12 @@ public class AccountingGUI {
      */
     @FXML
     private void recordAddTelephone() {
-
+        addContact(
+                tfRecordAddContactTelephone,
+                ContactType.TELEPHONE,
+                "telephone",
+                recordContacts
+        );
     }
 
     /**
@@ -280,10 +315,11 @@ public class AccountingGUI {
      */
     @FXML
     private void ownerAddEmail() {
-        ownerAddContact(
+        addContact(
                 tfOwnerAddContactEmail,
                 ContactType.EMAIL,
-                "email"
+                "email",
+                ownerContacts
         );
     }
 
@@ -292,10 +328,11 @@ public class AccountingGUI {
      */
     @FXML
     private void ownerAddTelephone() {
-        ownerAddContact(
+        addContact(
                 tfOwnerAddContactTelephone,
                 ContactType.TELEPHONE,
-                "telephone"
+                "telephone",
+                ownerContacts
         );
     }
 
@@ -305,13 +342,14 @@ public class AccountingGUI {
      * @param contact type
      * @param type type string
      */
-    private void ownerAddContact(TextField tf,
+    private void addContact(TextField tf,
                                  ContactType contact,
-                                 String type) {
+                                 String type,
+                                 ObservableList<ContactTable> list) {
         String arg = tf.getText();
         if (fn.matchPoint(arg, contact).equals("") &&
-                !contactExist(arg, type, ownerContacts)) {
-            ownerContacts.add(new ContactTable(type, arg, false));
+                !contactExist(arg, type, list)) {
+            list.add(new ContactTable(type, arg, false));
             tf.setText("");
         }
     }
@@ -352,13 +390,15 @@ public class AccountingGUI {
 
     /**
      * Fill contact tables.
-     * @param type
-     * @param val
-     * @param del
+     * @param type column
+     * @param val column
+     * @param del column
+     * @param isOwner bool
      */
     private void setContactTable(TableColumn<ContactTable, String> type,
                                  TableColumn<ContactTable, String> val,
-                                 TableColumn<ContactTable, ContactTable> del) {
+                                 TableColumn<ContactTable, ContactTable> del,
+                                 Boolean isOwner) {
         type.setCellValueFactory(new PropertyValueFactory<
                 ContactTable,
                 String
@@ -368,11 +408,13 @@ public class AccountingGUI {
                 String
                 >("value"));
 
-        // TODO
+        setTableListener(del, isOwner);
 
-        setTableListener(tcOwnerDelete, true);
-
-        tvOwnerContacts.setItems(ownerContacts);
+        if (isOwner) {
+            tvOwnerContacts.setItems(ownerContacts);
+        } else {
+            tvRecordContacts.setItems(recordContacts);
+        }
     }
 
     /**
