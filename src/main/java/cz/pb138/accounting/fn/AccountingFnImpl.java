@@ -442,7 +442,9 @@ public class AccountingFnImpl {
                 matchInputs(bank, InputType.BANK) &&
                 matchInputs(recipient, InputType.ADDRESS) &&
                 matchInputs(issuingDate, DateType.DATE) &&
-                matchInputs(billingDate, DateType.DATE)
+                matchInputs(billingDate, DateType.DATE) &&
+                contacts.size() > 0 &&
+                items.size() > 0
                 ) {
             Record record = db.addExpenditure();
 
