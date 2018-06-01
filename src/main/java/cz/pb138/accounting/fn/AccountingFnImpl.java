@@ -1,6 +1,5 @@
 package cz.pb138.accounting.fn;
 
-import cz.pb138.accounting.db.ADBErrorCodes;
 import cz.pb138.accounting.db.AccountingDatabase;
 import cz.pb138.accounting.db.AccountingDatabaseImpl;
 import cz.pb138.accounting.db.AccountingException;
@@ -11,6 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+/**
+ * Functionality class.
+ */
 public class AccountingFnImpl {
 
     private AccountingDatabase db;
@@ -21,6 +23,11 @@ public class AccountingFnImpl {
     private static final String USERNAME = "admin";
     private static final String PASSWORD = "";
 
+    /**
+     * Setup database.
+     *
+     * @throws AccountingException the accounting exception
+     */
     public AccountingFnImpl() throws AccountingException {
         // Start server embedded mode
         db = new AccountingDatabaseImpl(USERNAME, PASSWORD);
@@ -34,6 +41,9 @@ public class AccountingFnImpl {
         initRegexes();
     }
 
+    /**
+     * Kill database.
+     */
     public void killDatabase() {
         try {
             db.killDatabase();
@@ -42,27 +52,54 @@ public class AccountingFnImpl {
         }
     }
 
+    /**
+     * Creates all regex instances.
+     */
     private void initRegexes() {
-        regexes.put(getIntType(InputType.NAME), Pattern.compile("^[A-Za-z ]+$"));
-        regexes.put(getIntType(InputType.ADDRESS), Pattern.compile("^[A-Za-z ,0-9]+$"));
-        regexes.put(getIntType(InputType.ICO), Pattern.compile("^[0-9]+$"));
-        regexes.put(getIntType(InputType.DIC), Pattern.compile("^[A-Z]{2}[0-9]+$"));
-        regexes.put(getIntType(InputType.BANK), Pattern.compile("^[0-9]{0,6}[-]*[0-9]{1,10}/[0-9]{4}$"));
-        regexes.put(getIntType(ContactType.EMAIL), Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$"));
-        regexes.put(getIntType(ContactType.TELEPHONE), Pattern.compile("^\\+[0-9]{12}$"));
+        regexes.put(getIntType(InputType.NAME),
+                Pattern.compile("^[A-Za-z ]+$"));
+        regexes.put(getIntType(InputType.ADDRESS),
+                Pattern.compile("^[A-Za-z ,0-9]+$"));
+        regexes.put(getIntType(InputType.ICO),
+                Pattern.compile("^[0-9]+$"));
+        regexes.put(getIntType(InputType.DIC),
+                Pattern.compile("^[A-Z]{2}[0-9]+$"));
+        regexes.put(getIntType(InputType.BANK),
+                Pattern.compile("^[0-9]{0,6}[-]*[0-9]{1,10}/[0-9]{4}$"));
+        regexes.put(getIntType(ContactType.EMAIL),
+                Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+" +
+                        "\\.[A-Za-z]{2,6}$"));
+        regexes.put(getIntType(ContactType.TELEPHONE),
+                Pattern.compile("^\\+[0-9]{12}$"));
 
-        regexes.put(getIntType(ItemsType.NAME), Pattern.compile("^[A-Za-z ]+$"));
-        regexes.put(getIntType(ItemsType.UNIT), Pattern.compile("^[a-z]+$"));
-        regexes.put(getIntType(ItemsType.PRICE), Pattern.compile("^[0-9]+$"));
-        regexes.put(getIntType(ItemsType.QUANTITY), Pattern.compile("^[0-9]+$"));
+        regexes.put(getIntType(ItemsType.NAME),
+                Pattern.compile("^[A-Za-z ]+$"));
+        regexes.put(getIntType(ItemsType.UNIT),
+                Pattern.compile("^[a-z]+$"));
+        regexes.put(getIntType(ItemsType.PRICE),
+                Pattern.compile("^[0-9]+$"));
+        regexes.put(getIntType(ItemsType.QUANTITY),
+                Pattern.compile("^[0-9]+$"));
 
-        regexes.put(getIntType(DateType.DATE), Pattern.compile("^([1-9]|1[0-2])/([1-9]|[12][0-9]|3[01])/\\d{4}$"));
+        regexes.put(getIntType(DateType.DATE),
+                Pattern.compile("^([1-9]|1[0-2])/([1-9]|[12][0-9]|3[01])/" +
+                        "\\d{4}$"));
     }
 
+    /**
+     * Sets db.
+     *
+     * @param db the db
+     */
     public void setDB(AccountingDatabase db) {
         this.db = db;
     }
 
+    /**
+     * Get code of warnings.
+     * @param input type
+     * @return code
+     */
     private Integer getIntType(InputType input) {
         switch (input) {
             case BANK:
@@ -112,6 +149,13 @@ public class AccountingFnImpl {
         }
     }
 
+    /**
+     * Match regex for input.
+     *
+     * @param arg  the arg
+     * @param type the type
+     * @return the string
+     */
     public String matchPoint(String arg, InputType type) {
         if (matchInputs(arg, type)) {
             return "";
@@ -133,6 +177,13 @@ public class AccountingFnImpl {
         }
     }
 
+    /**
+     * Match regex for contact.
+     *
+     * @param arg  the arg
+     * @param type the type
+     * @return the string
+     */
     public String matchPoint(String arg, ContactType type) {
         if (matchInputs(arg, type)) {
             return "";
@@ -148,6 +199,13 @@ public class AccountingFnImpl {
         }
     }
 
+    /**
+     * Match regex for items.
+     *
+     * @param arg  the arg
+     * @param type the type
+     * @return the string
+     */
     public String matchPoint(String arg, ItemsType type) {
         if (matchInputs(arg, type)) {
             return "";
@@ -167,6 +225,13 @@ public class AccountingFnImpl {
         }
     }
 
+    /**
+     * Match regex for date.
+     *
+     * @param arg  the arg
+     * @param date the date
+     * @return the string
+     */
     public String matchPoint(String arg, DateType date) {
         if (matchInputs(arg, date)) {
             return "";
@@ -180,6 +245,12 @@ public class AccountingFnImpl {
         }
     }
 
+    /**
+     * Is in match or not.
+     * @param arg string
+     * @param type type
+     * @return bool
+     */
     private boolean matchInputs(String arg, InputType type) {
         return regexes.get(type.getValue()).matcher(arg).matches();
     }
@@ -196,6 +267,12 @@ public class AccountingFnImpl {
         return regexes.get(type.getValue()).matcher(arg).matches();
     }
 
+    /**
+     * Gets owner.
+     *
+     * @param arg the arg
+     * @return the owner
+     */
     public String getOwner(String arg) {
         try {
             String val = db.getOwner().getValue(arg);
@@ -208,6 +285,12 @@ public class AccountingFnImpl {
         return "";
     }
 
+    /**
+     * Get owner contact string [ ].
+     *
+     * @param arg the arg
+     * @return the string [ ]
+     */
     public String[] getOwnerContact(String arg) {
         try {
             return db.getOwner().getContact(arg);
@@ -217,6 +300,13 @@ public class AccountingFnImpl {
         return null;
     }
 
+    /**
+     * Common update.
+     * @param arg string
+     * @param select type string
+     * @param input type
+     * @return bool
+     */
     private boolean updater(String arg, String select, InputType input) {
         if (matchInputs(arg, input)) {
             db.getOwner().changeValue(select, arg);
@@ -226,33 +316,77 @@ public class AccountingFnImpl {
         return false;
     }
 
+    /**
+     * Update name boolean.
+     *
+     * @param arg the arg
+     * @return the boolean
+     */
     public boolean updateName(String arg) {
         return updater(arg, "name", InputType.NAME);
     }
 
+    /**
+     * Update address boolean.
+     *
+     * @param arg the arg
+     * @return the boolean
+     */
     public boolean updateAddress(String arg) {
         return updater(arg, "address", InputType.ADDRESS);
     }
 
+    /**
+     * Update ico boolean.
+     *
+     * @param arg the arg
+     * @return the boolean
+     */
     public boolean updateICO(String arg) {
         return updater(arg, "ico", InputType.ICO);
     }
 
+    /**
+     * Update dic boolean.
+     *
+     * @param arg the arg
+     * @return the boolean
+     */
     public boolean updateDIC(String arg) {
         return updater(arg, "dic", InputType.DIC);
     }
 
+    /**
+     * Update bank boolean.
+     *
+     * @param arg the arg
+     * @return the boolean
+     */
     public boolean updateBank(String arg) {
         return updater(arg, "bank-information", InputType.BANK);
     }
 
+    /**
+     * Update note boolean.
+     *
+     * @param arg the arg
+     * @return the boolean
+     */
     public boolean updateNote(String arg) {
         db.getOwner().changeValue("note", arg);
 
         return commitMe();
     }
 
-    public boolean updateContacts(ObservableList<ContactTable> list, ObservableList<ContactTable> delList) {
+    /**
+     * Update contacts boolean.
+     *
+     * @param list    the list
+     * @param delList the del list
+     * @return the boolean
+     */
+    public boolean updateContacts(ObservableList<ContactTable> list,
+                                  ObservableList<ContactTable> delList) {
         if (delList.size() > 0) {
             for (ContactTable ele : delList) {
                 db.getOwner().removeContact(ele.getType(), ele.getValue());
@@ -262,9 +396,14 @@ public class AccountingFnImpl {
         if (list.size() > 0) {
             for (ContactTable elem : list) {
                 if (!elem.getInDatabase()) {
-                    if ((matchInputs(elem.getValue(), ContactType.EMAIL) && elem.getType().equals("email")) ||
-                            (matchInputs(elem.getValue(), ContactType.TELEPHONE) && elem.getType().equals("telephone"))) {
-                        db.getOwner().addContact(elem.getType(), elem.getValue());
+                    if ((matchInputs(elem.getValue(), ContactType.EMAIL) &&
+                            elem.getType().equals("email")) ||
+                            (matchInputs(elem.getValue(), ContactType.TELEPHONE)
+                                    && elem.getType().equals("telephone"))) {
+                        db.getOwner().addContact(
+                                elem.getType(),
+                                elem.getValue()
+                        );
                     }
                 }
             }
@@ -273,6 +412,10 @@ public class AccountingFnImpl {
         return commitMe();
     }
 
+    /**
+     * Commit changes.
+     * @return bool
+     */
     private boolean commitMe() {
         try {
             db.commitChanges();

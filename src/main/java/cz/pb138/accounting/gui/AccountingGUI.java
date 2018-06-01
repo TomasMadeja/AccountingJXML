@@ -14,6 +14,9 @@ import javafx.scene.layout.Pane;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controller for FXML.
+ */
 public class AccountingGUI {
 
     // Functionality
@@ -117,9 +120,16 @@ public class AccountingGUI {
     // Help variables
     private Map<Pane, Integer> menuPanes = new HashMap<>();
 
-    private ObservableList<ContactTable> ownerContacts = FXCollections.observableArrayList();
-    private ObservableList<ContactTable> ownerDeletedContacts = FXCollections.observableArrayList();
+    // Owner contact table
+    private ObservableList<ContactTable> ownerContacts =
+            FXCollections.observableArrayList();
+    private ObservableList<ContactTable> ownerDeletedContacts =
+            FXCollections.observableArrayList();
 
+    /**
+     * Constructor.
+     * @throws AccountingException error
+     */
     @FXML
     protected void initialize() throws AccountingException {
         fn = new AccountingFnImpl();
@@ -132,10 +142,16 @@ public class AccountingGUI {
         initOwner();
     }
 
+    /**
+     * Kill database.
+     */
     public void killDatabase() {
         fn.killDatabase();
     }
 
+    /**
+     * Fill fields from database.
+     */
     @FXML
     private void initOwner() {
         tfOwnerName.setText(fn.getOwner("name"));
@@ -156,6 +172,9 @@ public class AccountingGUI {
         setContactTable(tcOwnerType, tcOwnerVal, tcOwnerDelete);
     }
 
+    /**
+     * Click on Save changes.
+     */
     @FXML
     private void ownerSaveChanges() {
         if (fn.updateName(tfOwnerName.getText())) {
@@ -182,29 +201,61 @@ public class AccountingGUI {
         }
     }
 
+    /**
+     * Click on Create invoice.
+     */
     @FXML
     private void recordCreateInvoice() {
 
     }
 
+    /**
+     * Click on Add email.
+     */
     @FXML
     private void ownerAddEmail() {
-        ownerAddContact(tfOwnerAddContactEmail, ContactType.EMAIL, "email");
+        ownerAddContact(
+                tfOwnerAddContactEmail,
+                ContactType.EMAIL,
+                "email"
+        );
     }
 
+    /**
+     * Click on Add telephone.
+     */
     @FXML
     private void ownerAddTelephone() {
-        ownerAddContact(tfOwnerAddContactTelephone, ContactType.TELEPHONE, "telephone");
+        ownerAddContact(
+                tfOwnerAddContactTelephone,
+                ContactType.TELEPHONE,
+                "telephone"
+        );
     }
 
-    private void ownerAddContact(TextField tf, ContactType contact, String type) {
+    /**
+     * Add contact to table.
+     * @param tf field
+     * @param contact type
+     * @param type type string
+     */
+    private void ownerAddContact(TextField tf,
+                                 ContactType contact,
+                                 String type) {
         String arg = tf.getText();
-        if (fn.matchPoint(arg, contact).equals("") && !contactExist(arg, type, ownerContacts)) {
+        if (fn.matchPoint(arg, contact).equals("") &&
+                !contactExist(arg, type, ownerContacts)) {
             ownerContacts.add(new ContactTable(type, arg, false));
             tf.setText("");
         }
     }
 
+    /**
+     * Listener for deletes.
+     * @param del column
+     * @param isOwner bool
+     * @param <T> type of column
+     */
     private <T> void setTableListener(TableColumn<T, T> del, Boolean isOwner) {
         del.setCellValueFactory(
                 param -> new ReadOnlyObjectWrapper<>(param.getValue())
@@ -224,7 +275,8 @@ public class AccountingGUI {
                 setGraphic(deleteButton);
                 deleteButton.setOnAction(event -> {
                     getTableView().getItems().remove(row);
-                    if (isOwner && row instanceof ContactTable && ((ContactTable) row).getInDatabase()) {
+                    if (isOwner && row instanceof ContactTable &&
+                            ((ContactTable) row).getInDatabase()) {
                         ownerDeletedContacts.add((ContactTable) row);
                     }
                 });
@@ -232,17 +284,36 @@ public class AccountingGUI {
         });
     }
 
+    /**
+     * Fill contact tables.
+     * @param type
+     * @param val
+     * @param del
+     */
     private void setContactTable(TableColumn<ContactTable, String> type,
                                  TableColumn<ContactTable, String> val,
                                  TableColumn<ContactTable, ContactTable> del) {
-        type.setCellValueFactory(new PropertyValueFactory<ContactTable, String>("type"));
-        val.setCellValueFactory(new PropertyValueFactory<ContactTable, String>("value"));
+        type.setCellValueFactory(new PropertyValueFactory<
+                ContactTable,
+                String
+                >("type"));
+        val.setCellValueFactory(new PropertyValueFactory<
+                ContactTable,
+                String
+                >("value"));
+
+        // TODO
 
         setTableListener(tcOwnerDelete, true);
 
         tvOwnerContacts.setItems(ownerContacts);
     }
 
+    /**
+     * Get contacts from database.
+     * @param arg string
+     * @param list table
+     */
     private void getContacts(String arg, ObservableList<ContactTable> list) {
         String[] contacts = fn.getOwnerContact(arg);
         if (contacts == null) {
@@ -256,7 +327,17 @@ public class AccountingGUI {
         }
     }
 
-    private boolean contactExist(String val, String arg, ObservableList<ContactTable> list) {
+    /**
+     * Find a contact in ObservableList.
+     * Cannot add duplicities to table.
+     * @param val string
+     * @param arg string
+     * @param list table
+     * @return bool
+     */
+    private boolean contactExist(String val,
+                                 String arg,
+                                 ObservableList<ContactTable> list) {
         for (ContactTable ele : list) {
             if (ele.getType().equals(arg) && ele.getValue().equals(val)) {
                 return true;
@@ -265,6 +346,9 @@ public class AccountingGUI {
         return false;
     }
 
+    /**
+     * Pane groups.
+     */
     private void initPanes() {
         // Put all panes to map
         menuPanes.put(pnOwnerPersonal, 0);
@@ -275,6 +359,9 @@ public class AccountingGUI {
         menuPanes.put(pnRecordInvoiceType, 1);
     }
 
+    /**
+     * Menu initialization.
+     */
     private void initMenu() {
         // Set listeners for menu
         // Tab 1
@@ -288,6 +375,11 @@ public class AccountingGUI {
         menuSelect(btRecordInvoiceType, pnRecordInvoiceType);
     }
 
+    /**
+     * Menu realization.
+     * @param theButton button
+     * @param thePane pane
+     */
     private void menuSelect(Button theButton, Pane thePane) {
         theButton.setOnAction(event -> {
             Integer tab = menuPanes.get(thePane);
@@ -302,6 +394,9 @@ public class AccountingGUI {
         });
     }
 
+    /**
+     * Initialization for warnings and fields.
+     */
     private void initListeners() {
         tfListen(tfOwnerName, tfOwnerWarnName, InputType.NAME);
         tfListen(tfOwnerAddress, tfOwnerWarnAddress, InputType.ADDRESS);
@@ -309,8 +404,16 @@ public class AccountingGUI {
         tfListen(tfOwnerDIC, tfOwnerWarnDIC, InputType.DIC);
         tfListen(tfOwnerBank, tfOwnerWarnBank, InputType.BANK);
 
-        tfListen(tfOwnerAddContactEmail, tfOwnerWarnContactEmail, ContactType.EMAIL);
-        tfListen(tfOwnerAddContactTelephone, tfOwnerWarnContactTelephone, ContactType.TELEPHONE);
+        tfListen(
+                tfOwnerAddContactEmail,
+                tfOwnerWarnContactEmail,
+                ContactType.EMAIL
+        );
+        tfListen(
+                tfOwnerAddContactTelephone,
+                tfOwnerWarnContactTelephone,
+                ContactType.TELEPHONE
+        );
 
         // Tab 2
         tfListen(tfRecordName, tfRecordWarnName, InputType.NAME);
@@ -319,13 +422,25 @@ public class AccountingGUI {
         tfListen(tfRecordDIC, tfRecordWarnDIC, InputType.DIC);
         tfListen(tfRecordBank, tfRecordWarnBank, InputType.BANK);
 
-        tfListen(tfRecordAddContactEmail, tfRecordWarnContactEmail, ContactType.EMAIL);
-        tfListen(tfRecordAddContactTelephone, tfRecordWarnContactTelephone, ContactType.TELEPHONE);
+        tfListen(
+                tfRecordAddContactEmail,
+                tfRecordWarnContactEmail,
+                ContactType.EMAIL
+        );
+        tfListen(
+                tfRecordAddContactTelephone,
+                tfRecordWarnContactTelephone,
+                ContactType.TELEPHONE
+        );
 
         tfListen(tfRecordItemName, tfRecordWarnItemName, ItemsType.NAME);
         tfListen(tfRecordItemUnit, tfRecordWarnItemUnit, ItemsType.UNIT);
         tfListen(tfRecordItemPrice, tfRecordWarnItemPrice, ItemsType.PRICE);
-        tfListen(tfRecordItemQuantity, tfRecordWarnItemQuantity, ItemsType.QUANTITY);
+        tfListen(
+                tfRecordItemQuantity,
+                tfRecordWarnItemQuantity,
+                ItemsType.QUANTITY
+        );
 
         tfListen(dpRecordBillingDate, tfRecordWarnBillingDate, DateType.DATE);
         tfListen(dpRecordIssuingDate, tfRecordWarnIssuingDate, DateType.DATE);
@@ -333,28 +448,42 @@ public class AccountingGUI {
         tfListen(tfRecordRecAdd, tfRecordWarnRecAdd, InputType.ADDRESS);
     }
 
-    private void tfListen(TextField theField, TextField theWarn, InputType input) {
+    /**
+     * Set listener for textField.
+     * @param theField
+     * @param theWarn
+     * @param input
+     */
+    private void tfListen(TextField theField,
+                          TextField theWarn,
+                          InputType input) {
         theField.textProperty().addListener(new AccountingTFListen(
                 fn,
                 theWarn,
                 input));
     }
 
-    private void tfListen(TextField theField, TextField theWarn, ContactType contact) {
+    private void tfListen(TextField theField,
+                          TextField theWarn,
+                          ContactType contact) {
         theField.textProperty().addListener(new AccountingTFListen(
                 fn,
                 theWarn,
                 contact));
     }
 
-    private void tfListen(TextField theField, TextField theWarn, ItemsType items) {
+    private void tfListen(TextField theField,
+                          TextField theWarn,
+                          ItemsType items) {
         theField.textProperty().addListener(new AccountingTFListen(
                 fn,
                 theWarn,
                 items));
     }
 
-    private void tfListen(DatePicker theField, TextField theWarn, DateType date) {
+    private void tfListen(DatePicker theField,
+                          TextField theWarn,
+                          DateType date) {
         theField.getEditor().textProperty().addListener(new AccountingTFListen(
                 fn,
                 theWarn,

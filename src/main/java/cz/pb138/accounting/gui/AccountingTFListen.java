@@ -63,7 +63,9 @@ public class AccountingTFListen implements ChangeListener<String> {
     }
 
     @Override
-    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+    public void changed(ObservableValue<? extends String> observable,
+                        String oldValue,
+                        String newValue) {
         if (newValue.length() > 0) {
             if (input != null) {
                 outMatch = fn.matchPoint(newValue, input);
