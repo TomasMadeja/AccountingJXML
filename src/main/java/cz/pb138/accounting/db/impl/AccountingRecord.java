@@ -179,6 +179,10 @@ public class AccountingRecord extends AccountingEntity implements Record {
         return items;
     }
 
+    public void delete() {
+
+    }
+
 
     private void itemsToDict(Element root) {
         NodeList list = root.getElementsByTagName(ITEMLIST);

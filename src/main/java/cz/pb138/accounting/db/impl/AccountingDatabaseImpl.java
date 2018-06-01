@@ -277,7 +277,6 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
                     .parse(new InputSource(new StringReader((String) owner.getContent())));
             new AccountingOwner(ownerDoc);
             owner.setContentAsDOM(ownerDoc);
-            System.out.println(owner.getContent());
             col.storeResource(owner);
         } catch (ParserConfigurationException|IOException|SAXException ex) {
             throw new AccountingException(ADBErrorCodes.UNKNOWN_ERROR,

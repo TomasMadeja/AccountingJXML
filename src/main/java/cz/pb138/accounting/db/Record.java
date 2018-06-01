@@ -95,4 +95,9 @@ public interface Record {
      * @return array of attributes arrays in order of [name, description, quantity, unit, price]
      */
     String[][] getItems();
+
+    /**
+     * Deletes the record from database
+     */
+    void delete();
 }

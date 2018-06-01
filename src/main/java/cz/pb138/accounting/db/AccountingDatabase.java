@@ -62,7 +62,7 @@ public interface AccountingDatabase {
     List<Record> getRecordsBetweenIssuing(String after, String before) throws AccountingException;
 
     /**
-     * Commits changes (added revenues and expenditures)
+     * Commits changes (added revenues and expenditures). If conflict in database arises, may require rollback
      * @throws AccountingException contains error code corresponding to error
      */
     void commitChanges() throws AccountingException;
