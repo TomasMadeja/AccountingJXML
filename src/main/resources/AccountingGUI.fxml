@@ -106,11 +106,11 @@
                               </TableView>
                               <TextField fx:id="tfOwnerAddContactEmail" layoutX="136.0" layoutY="330.0" prefHeight="27.0" prefWidth="210.0" />
                               <Label layoutX="10.0" layoutY="335.0" text="Email:" />
-                              <Button fx:id="btOwnerAddContactEmail" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" styleClass="button2" text="Add email">
+                              <Button layoutX="356.0" layoutY="330.0" mnemonicParsing="false" onAction="#ownerAddEmail" prefHeight="27.0" prefWidth="84.0" styleClass="button2" text="Add email">
                                  <font>
                                     <Font name="Verdana" size="11.0" />
                                  </font></Button>
-                              <Button fx:id="btOwnerAddContactTelephone" layoutX="320.0" layoutY="293.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" styleClass="button2" text="Add telephone">
+                              <Button layoutX="320.0" layoutY="293.0" mnemonicParsing="false" onAction="#ownerAddTelephone" prefHeight="27.0" prefWidth="120.0" styleClass="button2" text="Add telephone">
                                  <font>
                                     <Font name="Verdana" size="11.0" />
                                  </font></Button>

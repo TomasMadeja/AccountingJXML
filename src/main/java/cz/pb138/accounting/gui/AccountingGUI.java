@@ -182,6 +182,23 @@ public class AccountingGUI {
 
     }
 
+    @FXML
+    private void ownerAddEmail() {
+        ownerAddContact(tfOwnerAddContactEmail, ContactType.EMAIL, "email");
+    }
+
+    @FXML
+    private void ownerAddTelephone() {
+        ownerAddContact(tfOwnerAddContactTelephone, ContactType.TELEPHONE, "telephone");
+    }
+
+    private void ownerAddContact(TextField tf, ContactType contact, String type) {
+        String arg = tf.getText();
+        if (fn.matchPoint(arg, contact).equals("") && !contactExist(arg, type, ownerContacts)) {
+            ownerContacts.add(new ContactTable(type, arg, false));
+        }
+    }
+
     private <T> void setTableListener(TableColumn<T, T> del, Boolean isOwner) {
         del.setCellValueFactory(
                 param -> new ReadOnlyObjectWrapper<>(param.getValue())

@@ -29,9 +29,6 @@ public class ADTestMain {
             db.commitChanges();
         }
 
-        db.getOwner().addContact("email", "test@test.tst");
-        db.commitChanges();
-
 //        db.addExpenditure().addItem("","","","","10")
 //                .addItem("","","","","10")
 //                .addItem("","","","","10")
@@ -49,8 +46,6 @@ public class ADTestMain {
         System.out.println(db.ownerRecord());
         System.out.println(db.earningsRecord());
         System.out.println(db.expensesRecord());
-
-        System.out.printf("Boom: " + db.getOwner().getValue("name").length());
 
         System.out.println(db.getLossesByIssuingDate("2006-01-01", "2007-01-01"));
 

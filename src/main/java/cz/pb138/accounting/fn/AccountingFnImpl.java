@@ -262,7 +262,10 @@ public class AccountingFnImpl {
         if (list.size() > 0) {
             for (ContactTable elem : list) {
                 if (!elem.getInDatabase()) {
-                    db.getOwner().addContact(elem.getType(), elem.getValue());
+                    if ((matchInputs(elem.getValue(), ContactType.EMAIL) && elem.getType().equals("email")) ||
+                            (matchInputs(elem.getValue(), ContactType.TELEPHONE) && elem.getType().equals("telephone"))) {
+                        db.getOwner().addContact(elem.getType(), elem.getValue());
+                    }
                 }
             }
         }
