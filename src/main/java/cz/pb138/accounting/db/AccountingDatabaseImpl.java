@@ -474,7 +474,7 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
                 ownerDoc = validateResource((String) owner.getContent(), OWNER);
                 ownerSet = true;
             } catch (AccountingException ex) {
-                System.out.println(owner.getContent());
+//                System.out.println(owner.getContent());
                 if (ex.errorCode != ADBErrorCodes.XML_PARSING_ERROR) {
                     throw new AccountingException(ex.errorCode, ex.passedErrorCode, ex.getMessage(), ex);
                 }
@@ -533,7 +533,7 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
                     ".xsd\" xmlns=\"\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n";
 
             if (resourceName.compareTo(OWNER) == 0) {
-                content += "    <record>" +
+                content += "    <record>\n" +
                         "        <name/>\n" +
                         "        <address/>\n" +
                         "        <ico/>\n" +
@@ -544,8 +544,8 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
                         "        <emailxs/>\n" +
                         "    </record>";
             }
-            System.out.println(content + "</"
-                    + resourceName + ">");
+//            System.out.println(content + "</"
+//                    + resourceName + ">");
             resource.setContent(content + "</"
                     + resourceName + ">");
 
@@ -569,7 +569,7 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
 
     private Document validateResource(String doc, String type) throws AccountingException {
         try {
-            System.out.println(doc);
+//            System.out.println(doc);
             ClassLoader classLoader = getClass().getClassLoader();
             Schema schema = SchemaFactory
                     .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)

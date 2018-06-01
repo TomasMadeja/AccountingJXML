@@ -29,31 +29,31 @@ public class ADDBTestMain {
             db.commitChanges();
         }
 
-//        db.getOwner().addContact("email", "test@test.tst");
+        db.getOwner().addContact("email", "test@test.tst");
         db.commitChanges();
-//        db.addExpenditure().addItem("","","","","10")
-//                .addItem("","","","","10")
-//                .addItem("","","","","10")
-//                .changeValue("billing-date", "2006-11-06")
-//                .changeValue("issuing-date", "2006-11-07");
-//
-//        db.addExpenditure().addItem("","","","","10")
-//                .addItem("","","","","10")
-//                .addItem("","","","","10")
-//                .changeValue("billing-date", "2006-11-06")
-//                .changeValue("issuing-date", "2006-11-07");
+        db.addExpenditure().addItem("","","","","10")
+                .addItem("","","","","10")
+                .addItem("","","","","10")
+                .changeValue("billing-date", "2006-11-06")
+                .changeValue("issuing-date", "2006-11-07");
 
-//        db.addRevenue().addItem("","","","","10")
-//                .addItem("","","","","10")
-//                .addItem("","","","","10")
-//                .changeValue("billing-date", "2006-11-06")
-//                .changeValue("issuing-date", "2006-11-07");
+        db.addExpenditure().addItem("","","","","10")
+                .addItem("","","","","10")
+                .addItem("","","","","10")
+                .changeValue("billing-date", "2006-11-06")
+                .changeValue("issuing-date", "2006-11-07");
+
+        db.addRevenue().addItem("","","","","10")
+                .addItem("","","","","10")
+                .addItem("","","","","10")
+                .changeValue("billing-date", "2006-11-06")
+                .changeValue("issuing-date", "2006-11-07");
 
         db.commitChanges();
 
         System.out.println(db.ownerRecord());
-//        System.out.println(db.earningsRecord());
-//        System.out.println(db.expensesRecord());
+        System.out.println(db.earningsRecord());
+        System.out.println(db.expensesRecord());
 
 
         System.out.println("Boom: " + db.getOwner().getValue("name").length());

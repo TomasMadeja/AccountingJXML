@@ -29,6 +29,7 @@ public class AccountingRecord extends AccountingEntity {
 
     public AccountingRecord(Document doc, boolean expense) {
         super(doc, UNIQUE, CONTACT);
+        itemList = new ArrayList<Map<String, Element>>();
         this.expense = expense;
         itemRoot = super.doc.createElement(ITEMLIST + SUFFIX);
         super.root.appendChild(itemRoot);
