@@ -1,8 +1,6 @@
 package cz.pb138.accounting.trying;
 
-import cz.pb138.accounting.db.AccountingDatabaseImpl;
-import org.apache.commons.lang3.SystemUtils;
-import org.xmldb.api.DatabaseManager;
+import cz.pb138.accounting.db.impl.AccountingDatabaseImpl;
 
 public class ADDBTestMain {
 
