@@ -145,6 +145,11 @@ public class AccountingGUI {
         tfOwnerBank.setText(fn.getOwner("bank-information"));
         tfOwnerNote.setText(fn.getOwner("note"));
 
+        ownerContacts.clear();
+        ownerDeletedContacts.clear();
+
+        System.out.printf("" + ownerContacts.size());
+
         getContacts("email", ownerContacts);
         getContacts("telephone", ownerContacts);
 
