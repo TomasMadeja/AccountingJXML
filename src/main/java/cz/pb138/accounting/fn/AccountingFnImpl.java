@@ -446,25 +446,24 @@ public class AccountingFnImpl {
                 contacts.size() > 0 &&
                 items.size() > 0
                 ) {
-            Record record = db.addExpenditure();
+
+            if (isPayer) {
+                Record record = db.addExpenditure();
+            } else {
+                Record record = db.addRevenue();
+            }
 
             for (ItemTable item : items) {
                 if (matchInputs(item.getNameVal(), ItemsType.NAME) &&
                         matchInputs(item.getUnit(), ItemsType.UNIT) &&
                         matchInputs(item.getQuantity(), ItemsType.QUANTITY) &&
                         matchInputs(item.getPrice(), ItemsType.PRICE)) {
-
-                    String price = item.getPrice();
-                    if (!isPayer) {
-                        price = "-" + price;
-                    }
-
                     record.addItem(
                             item.getNameVal(),
                             item.getDesc(),
                             item.getQuantity(),
                             item.getUnit(),
-                            price);
+                            item.getPrice());
                 } else {
                     record.delete();
                     return false;
