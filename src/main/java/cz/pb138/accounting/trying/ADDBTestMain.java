@@ -29,25 +29,25 @@ public class ADDBTestMain {
             db.commitChanges();
         }
 
-        db.getOwner().addContact("email", "test@test.tst");
-        db.commitChanges();
-        db.addExpenditure().addItem("","","","","10")
-                .addItem("","","","","10")
-                .addItem("","","","","10")
-                .changeValue("billing-date", "2006-11-06")
-                .changeValue("issuing-date", "2006-11-07");
-
-        db.addExpenditure().addItem("","","","","10")
-                .addItem("","","","","10")
-                .addItem("","","","","10")
-                .changeValue("billing-date", "2006-11-06")
-                .changeValue("issuing-date", "2006-11-07");
-
-        db.addRevenue().addItem("","","","","10")
-                .addItem("","","","","10")
-                .addItem("","","","","10")
-                .changeValue("billing-date", "2006-11-06")
-                .changeValue("issuing-date", "2006-11-07");
+//        db.getOwner().addContact("email", "test@test.tst");
+//        db.commitChanges();
+//        db.addExpenditure().addItem("","","","","10")
+//                .addItem("","","","","10")
+//                .addItem("","","","","10")
+//                .changeValue("billing-date", "2006-11-06")
+//                .changeValue("issuing-date", "2006-11-07");
+//
+//        db.addExpenditure().addItem("","","","","10")
+//                .addItem("","","","","10")
+//                .addItem("","","","","10")
+//                .changeValue("billing-date", "2006-11-06")
+//                .changeValue("issuing-date", "2006-11-07");
+//
+//        db.addRevenue().addItem("","","","","10")
+//                .addItem("","","","","10")
+//                .addItem("","","","","10")
+//                .changeValue("billing-date", "2006-11-06")
+//                .changeValue("issuing-date", "2006-11-07");
 
         db.commitChanges();
 

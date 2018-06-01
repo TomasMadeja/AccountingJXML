@@ -19,7 +19,7 @@ public class AccountingRecord extends AccountingEntity {
                                             "billing-date", "issuing-date", "recipient-address"};
     public final static String ITEMLIST = "item";
     public final static String[] ITEM = {"description", "quantity", "unit", "price", "name"};
-    public final static String SUFFIX = "XS";
+    public final static String SUFFIX = "xs";
 
     private Element itemRoot;
     private List<Map<String, Element>> itemList;
