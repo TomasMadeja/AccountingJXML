@@ -4,7 +4,7 @@ import cz.pb138.accounting.db.AccountingDatabaseImpl;
 import org.apache.commons.lang3.SystemUtils;
 import org.xmldb.api.DatabaseManager;
 
-public class ADTestMain {
+public class ADDBTestMain {
 
     private static final String USERNAME = "admin";
     private static final String PASSWORD = "";
@@ -29,6 +29,8 @@ public class ADTestMain {
             db.commitChanges();
         }
 
+//        db.getOwner().addContact("email", "test@test.tst");
+        db.commitChanges();
 //        db.addExpenditure().addItem("","","","","10")
 //                .addItem("","","","","10")
 //                .addItem("","","","","10")
@@ -41,11 +43,20 @@ public class ADTestMain {
 //                .changeValue("billing-date", "2006-11-06")
 //                .changeValue("issuing-date", "2006-11-07");
 
+//        db.addRevenue().addItem("","","","","10")
+//                .addItem("","","","","10")
+//                .addItem("","","","","10")
+//                .changeValue("billing-date", "2006-11-06")
+//                .changeValue("issuing-date", "2006-11-07");
+
         db.commitChanges();
 
         System.out.println(db.ownerRecord());
         System.out.println(db.earningsRecord());
         System.out.println(db.expensesRecord());
+
+
+        System.out.println("Boom: " + db.getOwner().getValue("name").length());
 
         System.out.println(db.getLossesByIssuingDate("2006-01-01", "2007-01-01"));
 

@@ -729,7 +729,7 @@
             to the parser.   
             
      -->
-    <validation mode="no">
+    <validation mode="auto">
         <!-- 
             Specify the location of one or more catalog files. Catalogs are 
             used to resolve external entities in XML documents.
@@ -738,6 +738,7 @@
         -->
         <entity-resolver>
             <catalog uri="${WEBAPP_HOME}/WEB-INF/catalog.xml"/>
+            <catalog uri="xmldb:exist:///db/pb138-accountingcollection/catalog.xml"/>
         </entity-resolver>
     </validation>
 
