@@ -1,11 +1,9 @@
-package cz.pb138.accounting.db;
+package cz.pb138.accounting.db.impl;
 
+import cz.pb138.accounting.db.Owner;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import java.util.*;
 
 /**
  * Class representing owner document (as a record)

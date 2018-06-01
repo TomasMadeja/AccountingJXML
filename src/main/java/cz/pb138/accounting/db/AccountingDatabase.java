@@ -1,5 +1,8 @@
 package cz.pb138.accounting.db;
 
+import cz.pb138.accounting.db.impl.AccountingException;
+import cz.pb138.accounting.db.impl.AccountingOwner;
+import cz.pb138.accounting.db.impl.AccountingRecord;
 import org.xml.sax.InputSource;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package cz.pb138.accounting.gui;
 
-import cz.pb138.accounting.db.AccountingException;
+import cz.pb138.accounting.db.impl.AccountingException;
 import cz.pb138.accounting.fn.*;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;

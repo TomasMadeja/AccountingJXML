@@ -1,5 +1,7 @@
-package cz.pb138.accounting.db;
+package cz.pb138.accounting.db.impl;
 
+import cz.pb138.accounting.db.ADBErrorCodes;
+import cz.pb138.accounting.db.Record;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;

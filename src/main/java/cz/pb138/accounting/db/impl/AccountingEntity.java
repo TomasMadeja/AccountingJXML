@@ -1,4 +1,4 @@
-package cz.pb138.accounting.db;
+package cz.pb138.accounting.db.impl;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

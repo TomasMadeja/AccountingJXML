@@ -1,5 +1,9 @@
 package cz.pb138.accounting.db;
 
+import cz.pb138.accounting.db.impl.AccountingEntity;
+import cz.pb138.accounting.db.impl.AccountingException;
+import cz.pb138.accounting.db.impl.AccountingRecord;
+
 public interface Record {
 
     /**

@@ -1,6 +1,6 @@
 package cz.pb138.accounting;
 
-import cz.pb138.accounting.db.AccountingException;
+import cz.pb138.accounting.db.impl.AccountingException;
 
 import cz.pb138.accounting.gui.AccountingGUI;
 import javafx.application.Application;
