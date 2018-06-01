@@ -1,18 +1,16 @@
-package cz.pb138.accounting.db;
+package cz.pb138.accounting.db.impl;
 
+import cz.pb138.accounting.db.Owner;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import java.util.*;
 
 /**
  * Class representing owner document (as a record)
  *
  * @author Tomas Madeja
  */
-public class AccountingOwner extends AccountingEntity {
+public class AccountingOwner extends AccountingEntity implements Owner {
     public final static String[] CONTACT = {"telephone", "email"};
     public final static String[] UNIQUE = {"name", "address", "ico", "dic", "bank-information", "note"};
 

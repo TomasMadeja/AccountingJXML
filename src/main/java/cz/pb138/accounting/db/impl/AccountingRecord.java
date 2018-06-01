@@ -1,5 +1,7 @@
-package cz.pb138.accounting.db;
+package cz.pb138.accounting.db.impl;
 
+import cz.pb138.accounting.db.ADBErrorCodes;
+import cz.pb138.accounting.db.Record;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
@@ -12,7 +14,7 @@ import java.util.*;
  *
  * @author Tomas Madeja
  */
-public class AccountingRecord extends AccountingEntity {
+public class AccountingRecord extends AccountingEntity implements Record {
     public final static String[] CONTACT = {"entity-telephone", "entity-email"};
     public final static String[] UNIQUE = {"entity-name", "entity-address", "entity-ico",
                                             "entity-dic", "entity-bank-information", "entity-note",
@@ -120,12 +122,7 @@ public class AccountingRecord extends AccountingEntity {
         return this;
     }
 
-    /**
-     * Edit item in item list
-     * @param oldItem old item to be edited [description, quanity, unit, value]
-     * @param newItem new values of the item [description, quanity, unit, value]
-     * @return returns this object, allows chaining
-     */
+
     public AccountingRecord editItem(String[] oldItem, String[] newItem) {
         if (oldItem.length != 5 || newItem.length != 5) {
             return this;

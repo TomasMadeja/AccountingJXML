@@ -1,4 +1,4 @@
-package cz.pb138.accounting.db;
+package cz.pb138.accounting.db.impl;
 
 /**
  * Exceptions for AccountingDatabase

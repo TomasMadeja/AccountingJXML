@@ -1,8 +1,8 @@
 package cz.pb138.accounting.fn;
 
 import cz.pb138.accounting.db.AccountingDatabase;
-import cz.pb138.accounting.db.AccountingDatabaseImpl;
-import cz.pb138.accounting.db.AccountingException;
+import cz.pb138.accounting.db.impl.AccountingDatabaseImpl;
+import cz.pb138.accounting.db.impl.AccountingException;
 import cz.pb138.accounting.gui.ContactTable;
 import cz.pb138.accounting.gui.ItemTable;
 import javafx.collections.ObservableList;

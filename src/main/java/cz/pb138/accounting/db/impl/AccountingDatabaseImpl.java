@@ -1,6 +1,7 @@
-package cz.pb138.accounting.db;
+package cz.pb138.accounting.db.impl;
 
 
+import cz.pb138.accounting.db.*;
 import org.apache.commons.lang3.SystemUtils;
 import org.exist.xmldb.DatabaseInstanceManager;
 import org.xmldb.api.base.*;
