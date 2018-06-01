@@ -1,11 +1,9 @@
 package cz.pb138.accounting.gui;
 
-import cz.pb138.accounting.db.AccountingDatabase;
 import cz.pb138.accounting.db.AccountingException;
 import cz.pb138.accounting.fn.*;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -55,8 +53,6 @@ public class AccountingGUI {
     // Menu - tab 1
     @FXML private Button btOwnerPersonal;
     @FXML private Button btOwnerContacts;
-    @FXML private Button btOwnerSave;
-    @FXML private Button btOwnerReset;
 
     // Tabs
     @FXML private Tab tbOwner;
@@ -117,10 +113,12 @@ public class AccountingGUI {
     @FXML private Button btRecordContacts;
     @FXML private Button btRecordItems;
     @FXML private Button btRecordInvoiceType;
-    @FXML private Button btRecordCreateInvoice;
 
     // Help variables
     private Map<Pane, Integer> menuPanes = new HashMap<>();
+
+    private ObservableList<ContactTable> ownerContacts = FXCollections.observableArrayList();
+    private ObservableList<ContactTable> ownerDeletedContacts = FXCollections.observableArrayList();
 
     @FXML
     protected void initialize() throws AccountingException {
@@ -147,26 +145,52 @@ public class AccountingGUI {
         tfOwnerBank.setText(fn.getOwner("bank-information"));
         tfOwnerNote.setText(fn.getOwner("note"));
 
-        ObservableList<ContactTable> ownerContacts = FXCollections.observableArrayList();
-        String[] contacts = fn.getOwnerContact("email");
-        if (contacts == null) {
-            return;
+        getContacts("email", ownerContacts);
+        getContacts("telephone", ownerContacts);
+
+        setContactTable(tcOwnerType, tcOwnerVal, tcOwnerDelete);
+    }
+
+    @FXML
+    private void ownerSaveChanges() {
+        if (fn.updateName(tfOwnerName.getText())) {
+            // TODO
         }
-        for (String arg : contacts) {
-            ownerContacts.add(new ContactTable("email", arg));
+        if (fn.updateAddress(tfOwnerAddress.getText())) {
+            // TODO
+        }
+        if (fn.updateICO(tfOwnerICO.getText())) {
+            // TODO
+        }
+        if (fn.updateDIC(tfOwnerDIC.getText())) {
+            // TODO
+        }
+        if (fn.updateBank(tfOwnerBank.getText())) {
+            // TODO
+        }
+        if (fn.updateNote(tfOwnerNote.getText())) {
+            // TODO
         }
 
-        tcOwnerType.setCellValueFactory(new PropertyValueFactory<ContactTable, String>("type"));
-        tcOwnerVal.setCellValueFactory(new PropertyValueFactory<ContactTable, String>("value"));
+        if (fn.updateContacts(ownerContacts, ownerDeletedContacts)) {
+            // TODO
+        }
+    }
 
-        tcOwnerDelete.setCellValueFactory(
+    @FXML
+    private void recordCreateInvoice() {
+
+    }
+
+    private <T> void setTableListener(TableColumn<T, T> del, Boolean isOwner) {
+        del.setCellValueFactory(
                 param -> new ReadOnlyObjectWrapper<>(param.getValue())
         );
-        tcOwnerDelete.setCellFactory(param -> new TableCell<ContactTable, ContactTable>() {
+        del.setCellFactory(param -> new TableCell<T, T>() {
             private final Button deleteButton = new Button("Delete");
 
             @Override
-            protected void updateItem(ContactTable row, boolean empty) {
+            protected void updateItem(T row, boolean empty) {
                 super.updateItem(row, empty);
 
                 if (row == null) {
@@ -175,11 +199,47 @@ public class AccountingGUI {
                 }
 
                 setGraphic(deleteButton);
-                deleteButton.setOnAction(event -> getTableView().getItems().remove(row));
+                deleteButton.setOnAction(event -> {
+                    getTableView().getItems().remove(row);
+                    if (isOwner && row instanceof ContactTable && ((ContactTable) row).getInDatabase()) {
+                        ownerDeletedContacts.add((ContactTable) row);
+                    }
+                });
             }
         });
+    }
+
+    private void setContactTable(TableColumn<ContactTable, String> type,
+                                 TableColumn<ContactTable, String> val,
+                                 TableColumn<ContactTable, ContactTable> del) {
+        type.setCellValueFactory(new PropertyValueFactory<ContactTable, String>("type"));
+        val.setCellValueFactory(new PropertyValueFactory<ContactTable, String>("value"));
+
+        setTableListener(tcOwnerDelete, true);
 
         tvOwnerContacts.setItems(ownerContacts);
+    }
+
+    private void getContacts(String arg, ObservableList<ContactTable> list) {
+        String[] contacts = fn.getOwnerContact(arg);
+        if (contacts == null) {
+            return;
+        }
+
+        for (String ele : contacts) {
+            if (!contactExist(ele, arg, list)) {
+                list.add(new ContactTable(arg, ele, true));
+            }
+        }
+    }
+
+    private boolean contactExist(String val, String arg, ObservableList<ContactTable> list) {
+        for (ContactTable ele : list) {
+            if (ele.getType().equals(arg) && ele.getValue().equals(val)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void initPanes() {

@@ -5,10 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class representing owner document (as a record)
@@ -138,12 +135,16 @@ public class AccountingOwner {
      */
     public AccountingOwner removeContact(String name, String value) {
         if (contacts.containsKey(name)) {
-            for (Element e : contacts.get(name)) {
-                if (e.getTextContent().compareTo(value) == 0) {
-                    e.getParentNode().removeChild(
-                            e
+            Iterator<Element> iterator = contacts.get(name).iterator();
+            while (iterator.hasNext()) {
+                Element ele = iterator.next();
+
+                if (ele.getTextContent().compareTo(value) == 0) {
+                    ele.getParentNode().removeChild(
+                            ele
                     );
-                    contacts.get(name).remove(e);
+
+                    iterator.remove();
                 }
             }
         }

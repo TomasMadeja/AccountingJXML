@@ -4,6 +4,8 @@ import cz.pb138.accounting.db.ADBErrorCodes;
 import cz.pb138.accounting.db.AccountingDatabase;
 import cz.pb138.accounting.db.AccountingDatabaseImpl;
 import cz.pb138.accounting.db.AccountingException;
+import cz.pb138.accounting.gui.ContactTable;
+import javafx.collections.ObservableList;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -213,5 +215,68 @@ public class AccountingFnImpl {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private boolean updater(String arg, String select, InputType input) {
+        if (matchInputs(arg, input)) {
+            db.getOwner().changeValue(select, arg);
+
+            return commitMe();
+        }
+        return false;
+    }
+
+    public boolean updateName(String arg) {
+        return updater(arg, "name", InputType.NAME);
+    }
+
+    public boolean updateAddress(String arg) {
+        return updater(arg, "address", InputType.ADDRESS);
+    }
+
+    public boolean updateICO(String arg) {
+        return updater(arg, "ico", InputType.ICO);
+    }
+
+    public boolean updateDIC(String arg) {
+        return updater(arg, "dic", InputType.DIC);
+    }
+
+    public boolean updateBank(String arg) {
+        return updater(arg, "bank-information", InputType.BANK);
+    }
+
+    public boolean updateNote(String arg) {
+        db.getOwner().changeValue("note", arg);
+
+        return commitMe();
+    }
+
+    public boolean updateContacts(ObservableList<ContactTable> list, ObservableList<ContactTable> delList) {
+        if (delList.size() > 0) {
+            for (ContactTable ele : delList) {
+                db.getOwner().removeContact(ele.getType(), ele.getValue());
+            }
+        }
+
+        if (list.size() > 0) {
+            for (ContactTable elem : list) {
+                if (!elem.getInDatabase()) {
+                    db.getOwner().addContact(elem.getType(), elem.getValue());
+                }
+            }
+        }
+
+        return commitMe();
+    }
+
+    private boolean commitMe() {
+        try {
+            db.commitChanges();
+            return true;
+        } catch (AccountingException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
