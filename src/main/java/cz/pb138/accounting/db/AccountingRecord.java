@@ -162,6 +162,7 @@ public class AccountingRecord extends AccountingEntity {
                     item.get("price").getTextContent().compareTo(attributes[4]) == 0) {
                 itemRoot.removeChild(item.get("name").getParentNode());
                 iterator.remove();
+                return this;
             }
         }
         return this;

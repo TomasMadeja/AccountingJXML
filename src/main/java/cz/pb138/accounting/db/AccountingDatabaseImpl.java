@@ -98,77 +98,81 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
     }
 
 
-    public void configureValidation() throws Exception {
-        Collection col_valid = DatabaseManager
-                .getCollection(LOCALURI + "/db/system/config/db/", username, password);
-        if (col.getResource(OWNER + ".xsd") == null) {
-            Resource res = col.createResource(OWNER + ".xsd", "XMLResource");
-            res.setContent(new File(getClass()
-                    .getClassLoader()
-                    .getResource(OWNER + ".xsd")
-                    .getFile()
-            ));
-            col.storeResource(res);
-        }
-        if (col.getResource(EXPENSES + ".xsd") == null) {
-            Resource res = col.createResource(EXPENSES + ".xsd", "XMLResource");
-            res.setContent(new File(getClass()
-                    .getClassLoader()
-                    .getResource(EXPENSES + ".xsd")
-                    .getFile()
-            ));
-            col.storeResource(res);
-        }
-        if (col.getResource(EARNINGS + ".xsd") == null) {
-            Resource res = col.createResource(EARNINGS + ".xsd", "XMLResource");
-            res.setContent(new File(getClass()
-                    .getClassLoader()
-                    .getResource(EARNINGS + ".xsd")
-                    .getFile()
-            ));
-            col.storeResource(res);
-        }
-        Resource res;
-        if ((res = col.getResource(  "catalog.xml")) == null) {
-            res = col.createResource("catalog.xml", "XMLResource");
-        }
-        res.setContent(
-                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                        "<catalog xmlns=\"urn:oasis:names:tc:entity:xmlns:xml:catalog\">\n" +
-                        "         <uri name=\"http://www.w3.org/2001/XMLSchema\" uri=\"" + OWNER +
-                        ".xsd\"/>\n" +
-                        "         <uri name=\"http://www.w3.org/2001/XMLSchema\" uri=\"" + EXPENSES+
-                        ".xsd\"/>\n" +
-                        "         <uri name=\"http://www.w3.org/2001/XMLSchema\" uri=\"" + EARNINGS +
-                        ".xsd\"/>\n" +
-                        "</catalog> "
-        );
-        col.storeResource(res);
-
-        if (col_valid.getResource("collection.xconf") == null) {
-            res = col_valid.createResource(  "collection.xconf", "XMLResource");
-            res.setContent("<collection xmlns=\"http://exist-db.org/collection-config/1.0\">\n" +
-                    "<validation mode=\"auto\">\n" +
-                    "<entity-resolver>\n" +
-                    "<catalog uri=\"xmldb:exist:///db/pb138-accountingcollection/catalog.xml\"/>\n" +
-                    "</entity-resolver>\n" +
-                    "</validation>\n" +
-                    "</collection>"
-            );
-            col_valid.storeResource(res);
-        } else {
-            if (((XQueryService) col_valid.getService("XPathQueryService", "1.0"))
-                    .query("for $c in /collection/validation\n" +
-                            "return $c").getSize() == 0) {
-                ((XQueryService) col_valid.getService("XPathQueryService", "1.0"))
-                        .query("let $c := /collection\n" +
-                                "return update insert <validation mode=\"auto\">" +
-                                "<entity-resolver>" +
-                                "<catalog uri=\"xmldb:exist:///db/pb138-accountingcollection/catalog.xml\"/>" +
-                                "</entity-resolver>" +
-                                "</validation> into $c");
-                int q = 1;
+    public void configureValidation() throws AccountingException {
+        try {
+            Collection col_valid = DatabaseManager
+                    .getCollection(LOCALURI + "/db/system/config/db/", username, password);
+            if (col.getResource(OWNER + ".xsd") == null) {
+                Resource res = col.createResource(OWNER + ".xsd", "XMLResource");
+                res.setContent(new File(getClass()
+                        .getClassLoader()
+                        .getResource(OWNER + ".xsd")
+                        .getFile()
+                ));
+                col.storeResource(res);
             }
+            if (col.getResource(EXPENSES + ".xsd") == null) {
+                Resource res = col.createResource(EXPENSES + ".xsd", "XMLResource");
+                res.setContent(new File(getClass()
+                        .getClassLoader()
+                        .getResource(EXPENSES + ".xsd")
+                        .getFile()
+                ));
+                col.storeResource(res);
+            }
+            if (col.getResource(EARNINGS + ".xsd") == null) {
+                Resource res = col.createResource(EARNINGS + ".xsd", "XMLResource");
+                res.setContent(new File(getClass()
+                        .getClassLoader()
+                        .getResource(EARNINGS + ".xsd")
+                        .getFile()
+                ));
+                col.storeResource(res);
+            }
+            Resource res;
+            if ((res = col.getResource("catalog.xml")) == null) {
+                res = col.createResource("catalog.xml", "XMLResource");
+            }
+            res.setContent(
+                    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                            "<catalog xmlns=\"urn:oasis:names:tc:entity:xmlns:xml:catalog\">\n" +
+                            "         <uri name=\"http://www.w3.org/2001/XMLSchema\" uri=\"" + OWNER +
+                            ".xsd\"/>\n" +
+                            "         <uri name=\"http://www.w3.org/2001/XMLSchema\" uri=\"" + EXPENSES +
+                            ".xsd\"/>\n" +
+                            "         <uri name=\"http://www.w3.org/2001/XMLSchema\" uri=\"" + EARNINGS +
+                            ".xsd\"/>\n" +
+                            "</catalog> "
+            );
+            col.storeResource(res);
+
+            if (col_valid.getResource("collection.xconf") == null) {
+                res = col_valid.createResource("collection.xconf", "XMLResource");
+                res.setContent("<collection xmlns=\"http://exist-db.org/collection-config/1.0\">\n" +
+                        "<validation mode=\"auto\">\n" +
+                        "<entity-resolver>\n" +
+                        "<catalog uri=\"xmldb:exist:///db/pb138-accountingcollection/catalog.xml\"/>\n" +
+                        "</entity-resolver>\n" +
+                        "</validation>\n" +
+                        "</collection>"
+                );
+                col_valid.storeResource(res);
+            } else {
+                if (((XQueryService) col_valid.getService("XPathQueryService", "1.0"))
+                        .query("for $c in /collection/validation\n" +
+                                "return $c").getSize() == 0) {
+                    ((XQueryService) col_valid.getService("XPathQueryService", "1.0"))
+                            .query("let $c := /collection\n" +
+                                    "return update insert <validation mode=\"auto\">" +
+                                    "<entity-resolver>" +
+                                    "<catalog uri=\"xmldb:exist:///db/pb138-accountingcollection/catalog.xml\"/>" +
+                                    "</entity-resolver>" +
+                                    "</validation> into $c");
+                    int q = 1;
+                }
+            }
+        } catch (XMLDBException ex) {
+            throw new AccountingException(ADBErrorCodes.UNKNOWN_ERROR , "RUN", ex);
         }
     }
 
@@ -474,7 +478,6 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
                 ownerDoc = validateResource((String) owner.getContent(), OWNER);
                 ownerSet = true;
             } catch (AccountingException ex) {
-//                System.out.println(owner.getContent());
                 if (ex.errorCode != ADBErrorCodes.XML_PARSING_ERROR) {
                     throw new AccountingException(ex.errorCode, ex.passedErrorCode, ex.getMessage(), ex);
                 }
@@ -544,8 +547,7 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
                         "        <emailxs/>\n" +
                         "    </record>";
             }
-//            System.out.println(content + "</"
-//                    + resourceName + ">");
+
             resource.setContent(content + "</"
                     + resourceName + ">");
 
@@ -569,7 +571,6 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
 
     private Document validateResource(String doc, String type) throws AccountingException {
         try {
-//            System.out.println(doc);
             ClassLoader classLoader = getClass().getClassLoader();
             Schema schema = SchemaFactory
                     .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
