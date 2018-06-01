@@ -1,7 +1,5 @@
 package cz.pb138.accounting.db;
 
-
-import cz.pb138.accounting.db.impl.AccountingEntity;
 import cz.pb138.accounting.db.impl.AccountingException;
 
 public interface Owner {
@@ -12,7 +10,7 @@ public interface Owner {
      * @param value contact value
      * @return reference to the current Owner object
      */
-    AccountingEntity addContact(String type, String value);
+    Owner addContact(String type, String value);
 
     /**
      * Removes contact specified by type and uniquely specified by value, erases all copies
@@ -20,7 +18,7 @@ public interface Owner {
      * @param value contact value
      * @return reference to the current Owner object
      */
-    AccountingEntity removeContact(String type, String value);
+    Owner removeContact(String type, String value);
 
     /**
      * Changes value of unique attribute (specified by it's type only)
@@ -29,7 +27,7 @@ public interface Owner {
      * @return reference to current Owner object
      * @throws AccountingException specified by ADBErrorCode
      */
-    AccountingEntity changeValue(String type, String value) throws AccountingException;
+    Owner changeValue(String type, String value) throws AccountingException;
 
     /**
      * Changes contact value, changes value of all identical contacts
@@ -38,7 +36,7 @@ public interface Owner {
      * @param newValue new contact value
      * @return reference to current Owner object
      */
-    AccountingEntity changeValue(String type, String oldValue, String newValue);
+    Owner changeValue(String type, String oldValue, String newValue);
 
     /**
      * Getter for unigue attribute values
