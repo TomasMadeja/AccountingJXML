@@ -446,11 +446,11 @@ public class AccountingFnImpl {
                 contacts.size() > 0 &&
                 items.size() > 0
                 ) {
-
+            Record record;
             if (isPayer) {
-                Record record = db.addExpenditure();
+                record = db.addExpenditure();
             } else {
-                Record record = db.addRevenue();
+                record = db.addRevenue();
             }
 
             for (ItemTable item : items) {
