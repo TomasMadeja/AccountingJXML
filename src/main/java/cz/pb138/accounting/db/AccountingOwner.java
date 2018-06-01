@@ -12,7 +12,7 @@ import java.util.*;
  *
  * @author Tomas Madeja
  */
-public class AccountingOwner extends AccountingEntity {
+public class AccountingOwner extends AccountingEntity implements Owner {
     public final static String[] CONTACT = {"telephone", "email"};
     public final static String[] UNIQUE = {"name", "address", "ico", "dic", "bank-information", "note"};
 
