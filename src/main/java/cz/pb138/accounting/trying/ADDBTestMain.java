@@ -52,13 +52,15 @@ public class ADDBTestMain {
         db.commitChanges();
 
         System.out.println(db.ownerRecord());
-        System.out.println(db.earningsRecord());
-        System.out.println(db.expensesRecord());
+//        System.out.println(db.earningsRecord());
+//        System.out.println(db.expensesRecord());
 
 
         System.out.println("Boom: " + db.getOwner().getValue("name").length());
 
         System.out.println(db.getLossesByIssuingDate("2006-01-01", "2007-01-01"));
+        System.out.println(db.getEarningsByIssuingDate("2006-01-01", "2007-01-01"));
+
 
 //        System.out.println(db.dbAsString());
 
