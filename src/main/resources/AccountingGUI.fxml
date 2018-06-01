@@ -99,9 +99,9 @@
                               </Label>
                               <TableView fx:id="tvOwnerContacts" layoutX="10.0" layoutY="45.0" prefHeight="238.0" prefWidth="430.0">
                                  <columns>
-                                    <TableColumn fx:id="tcOwnerType" prefWidth="83.0" styleClass="table" text="Type" />
-                                    <TableColumn fx:id="tcOwnerVal" minWidth="0.0" prefWidth="243.0" styleClass="table" text="Value" />
-                                    <TableColumn fx:id="tcOwnerDelete" prefWidth="95.0" styleClass="table" />
+                                    <TableColumn fx:id="tcOwnerType" prefWidth="83.0" text="Type" />
+                                    <TableColumn fx:id="tcOwnerVal" minWidth="0.0" prefWidth="243.0" text="Value" />
+                                    <TableColumn fx:id="tcOwnerDelete" prefWidth="95.0" />
                                  </columns>
                               </TableView>
                               <TextField fx:id="tfOwnerAddContactEmail" layoutX="136.0" layoutY="330.0" prefHeight="27.0" prefWidth="210.0" />
@@ -222,9 +222,9 @@
                               </Label>
                               <TableView fx:id="tvRecordContacts" layoutX="10.0" layoutY="45.0" prefHeight="238.0" prefWidth="430.0">
                                 <columns>
-                                  <TableColumn fx:id="tcRecordConType" prefWidth="83.0" styleClass="table" text="Type" />
-                                  <TableColumn fx:id="tcRecordConVal" minWidth="0.0" prefWidth="243.0" styleClass="table" text="Value" />
-                                    <TableColumn fx:id="tcRecordConDelete" prefWidth="95.0" styleClass="table" />
+                                  <TableColumn fx:id="tcRecordConType" prefWidth="83.0" text="Type" />
+                                  <TableColumn fx:id="tcRecordConVal" minWidth="0.0" prefWidth="243.0" text="Value" />
+                                    <TableColumn fx:id="tcRecordConDelete" prefWidth="95.0" />
                                 </columns>
                               </TableView>
                               <TextField fx:id="tfRecordAddContactEmail" layoutX="136.0" layoutY="330.0" prefHeight="27.0" prefWidth="210.0" />
@@ -260,11 +260,11 @@
                               </Label>
                               <TableView fx:id="tvRecordItems" layoutX="10.0" layoutY="45.0" prefHeight="164.0" prefWidth="430.0">
                                  <columns>
-                                    <TableColumn fx:id="tcRecordItemName" prefWidth="128.0" styleClass="table" text="Name" />
-                                    <TableColumn fx:id="tcRecordItemQuant" minWidth="0.0" prefWidth="81.0" styleClass="table" text="Quantity" />
-                                    <TableColumn fx:id="tcRecordItemUnit" prefWidth="47.0" styleClass="table" text="Unit" />
-                                    <TableColumn fx:id="tcRecordItemPrice" prefWidth="71.0" styleClass="table" text="Price" />
-                                    <TableColumn fx:id="tcRecordItemDelete" prefWidth="95.0" styleClass="table" />
+                                    <TableColumn fx:id="tcRecordItemName" prefWidth="128.0" text="Name" />
+                                    <TableColumn fx:id="tcRecordItemQuant" minWidth="0.0" prefWidth="81.0" text="Quantity" />
+                                    <TableColumn fx:id="tcRecordItemUnit" prefWidth="47.0" text="Unit" />
+                                    <TableColumn fx:id="tcRecordItemPrice" prefWidth="71.0" text="Price" />
+                                    <TableColumn fx:id="tcRecordItemDelete" prefWidth="95.0" />
                                  </columns>
                               </TableView>
                               <Label layoutX="10.0" layoutY="224.0" text="Name:" />

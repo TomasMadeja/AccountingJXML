@@ -249,7 +249,32 @@ public class AccountingGUI {
      */
     @FXML
     private void recordCreateInvoice() {
-        clearInvoice();
+        if (!rbRecordPayer.isSelected() && !rbRecordSeller.isSelected()) {
+            // TODO
+            return;
+        }
+
+        Boolean isPayer = rbRecordSeller.isSelected();
+
+        if (fn.saveInvoice(
+                tfRecordName.getText(),
+                tfRecordAddress.getText(),
+                tfRecordICO.getText(),
+                tfRecordDIC.getText(),
+                tfRecordBank.getText(),
+                tfRecordNote.getText(),
+                isPayer,
+                recordContacts,
+                recordItems,
+                tfRecordRecAdd.getText(),
+                dpRecordIssuingDate.getEditor().getText(),
+                dpRecordBillingDate.getEditor().getText()
+        )) {
+            // TODO
+            clearInvoice();
+            return;
+        }
+        // TODO
     }
 
     /**

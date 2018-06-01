@@ -4,6 +4,7 @@ import cz.pb138.accounting.db.AccountingDatabase;
 import cz.pb138.accounting.db.AccountingDatabaseImpl;
 import cz.pb138.accounting.db.AccountingException;
 import cz.pb138.accounting.gui.ContactTable;
+import cz.pb138.accounting.gui.ItemTable;
 import javafx.collections.ObservableList;
 
 import java.util.HashMap;
@@ -78,15 +79,6 @@ public class AccountingFnImpl {
         regexes.put(getIntType(DateType.DATE),
                 Pattern.compile("^([1-9]|1[0-2])/([1-9]|[12][0-9]|3[01])/" +
                         "\\d{4}$"));
-    }
-
-    /**
-     * Sets db.
-     *
-     * @param db the db
-     */
-    public void setDB(AccountingDatabase db) {
-        this.db = db;
     }
 
     /**
@@ -410,6 +402,47 @@ public class AccountingFnImpl {
         }
 
         return commitMe();
+    }
+
+    /**
+     * Save invoice.
+     * @param name string
+     * @param address string
+     * @param ico string
+     * @param dic string
+     * @param bank string
+     * @param note string
+     * @param isPayer type
+     * @param contacts contacts
+     * @param items items
+     * @param recipient address
+     * @param issuingDate date
+     * @param billingDate date
+     * @return bool
+     */
+    public boolean saveInvoice(
+            String name,
+            String address,
+            String ico,
+            String dic,
+            String bank,
+            String note,
+            Boolean isPayer,
+            ObservableList<ContactTable> contacts,
+            ObservableList<ItemTable> items,
+            String recipient,
+            String issuingDate,
+            String billingDate
+            ) {
+        if (matchInputs() &&
+                matchInputs() &&
+                matchInputs() &&
+                matchInputs() &&
+                matchInputs() &&
+                ) {
+
+        }
+        return true;
     }
 
     /**
