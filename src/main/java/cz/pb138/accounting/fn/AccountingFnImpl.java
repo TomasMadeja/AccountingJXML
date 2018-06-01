@@ -443,7 +443,7 @@ public class AccountingFnImpl {
                 matchInputs(issuingDate, DateType.DATE) &&
                 matchInputs(billingDate, DateType.DATE)
                 ) {
-
+            
         }
         return true;
     }
