@@ -224,7 +224,7 @@
                                 <columns>
                                   <TableColumn fx:id="tcRecordConType" prefWidth="83.0" styleClass="table" text="Type" />
                                   <TableColumn fx:id="tcRecordConVal" minWidth="0.0" prefWidth="243.0" styleClass="table" text="Value" />
-                                    <TableColumn fx:id="tcRecordConDelete" prefWidth="103.0" styleClass="table" />
+                                    <TableColumn fx:id="tcRecordConDelete" prefWidth="95.0" styleClass="table" />
                                 </columns>
                               </TableView>
                               <TextField fx:id="tfRecordAddContactEmail" layoutX="136.0" layoutY="330.0" prefHeight="27.0" prefWidth="210.0" />

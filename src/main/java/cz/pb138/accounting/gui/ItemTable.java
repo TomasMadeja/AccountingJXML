@@ -1,26 +1,26 @@
 package cz.pb138.accounting.gui;
 
 public class ItemTable {
-    private String name;
+    private String nameVal;
     private String quantity;
     private String unit;
     private String price;
     private String desc;
 
-    public ItemTable(String name,
+    public ItemTable(String nameVal,
                      String desc,
                      String quantity,
                      String unit,
                      String price) {
-        this.name = name;
+        this.nameVal = nameVal;
         this.quantity = quantity;
         this.unit = unit;
         this.price = price;
         this.desc = desc;
     }
 
-    public String getItemName() {
-        return name;
+    public String getNameVal() {
+        return nameVal;
     }
 
     public String getQuantity() {
