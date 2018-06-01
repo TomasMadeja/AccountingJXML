@@ -254,6 +254,7 @@ public class AccountingGUI {
     private void recordCreateInvoice() {
         if (!rbRecordPayer.isSelected() && !rbRecordSeller.isSelected()) {
             // TODO
+            System.out.printf("Neproslo");
             return;
         }
 
@@ -274,10 +275,12 @@ public class AccountingGUI {
                 dpRecordBillingDate.getEditor().getText()
         )) {
             // TODO
+            System.out.printf("Proslo");
             clearInvoice();
             return;
         }
         // TODO
+        System.out.printf("Neproslo");
     }
 
     /**

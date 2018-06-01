@@ -33,9 +33,9 @@ public class ADTestMain {
 //                .changeValue("billing-date", "2006-11-06")
 //                .changeValue("issuing-date", "2006-11-07");
 //
-//        db.addExpenditure().addItem("","","","","10")
-//                .addItem("","","","","10")
-//                .addItem("","","","","10")
+//        db.addExpenditure().addItem("","","","","6")
+//                .addItem("","","","","6")
+//                .addItem("","","","","6")
 //                .changeValue("billing-date", "2006-11-06")
 //                .changeValue("issuing-date", "2006-11-07");
 
@@ -45,7 +45,7 @@ public class ADTestMain {
         System.out.println(db.earningsRecord());
         System.out.println(db.expensesRecord());
 
-        System.out.println(db.getLossesByIssuingDate("2006-01-01", "2007-01-01"));
+//        System.out.println(db.getLossesByIssuingDate("2006-01-01", "2007-01-01"));
 
 //        System.out.println(db.dbAsString());
 

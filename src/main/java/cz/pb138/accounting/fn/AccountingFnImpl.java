@@ -1,6 +1,7 @@
 package cz.pb138.accounting.fn;
 
 import cz.pb138.accounting.db.AccountingDatabase;
+import cz.pb138.accounting.db.Record;
 import cz.pb138.accounting.db.impl.AccountingDatabaseImpl;
 import cz.pb138.accounting.db.impl.AccountingException;
 import cz.pb138.accounting.gui.ContactTable;
@@ -443,9 +444,79 @@ public class AccountingFnImpl {
                 matchInputs(issuingDate, DateType.DATE) &&
                 matchInputs(billingDate, DateType.DATE)
                 ) {
-            
+            Record record = db.addExpenditure();
+
+            for (ItemTable item : items) {
+                if (matchInputs(item.getNameVal(), ItemsType.NAME) &&
+                        matchInputs(item.getUnit(), ItemsType.UNIT) &&
+                        matchInputs(item.getQuantity(), ItemsType.QUANTITY) &&
+                        matchInputs(item.getPrice(), ItemsType.PRICE)) {
+
+                    String price = item.getPrice();
+                    if (!isPayer) {
+                        price = "-" + price;
+                    }
+
+                    record.addItem(
+                            item.getNameVal(),
+                            item.getDesc(),
+                            item.getQuantity(),
+                            item.getUnit(),
+                            price);
+                } else {
+                    record.delete();
+                    return false;
+                }
+            }
+
+            for (ContactTable contact : contacts) {
+                if (
+                        (contact.getType().equals("email") &&
+                        matchInputs(contact.getValue(), ContactType.EMAIL)) ||
+                        (contact.getType().equals("telephone") &&
+                        matchInputs(contact.getValue(), ContactType.TELEPHONE))
+                        ) {
+                    record.addContact("entity-" + contact.getType(),
+                            contact.getValue());
+                } else {
+                    record.delete();
+                    return false;
+                }
+            }
+
+            try {
+                record.changeValue("entity-name", name);
+                record.changeValue("entity-address", address);
+                record.changeValue("entity-ico", ico);
+                record.changeValue("entity-dic", dic);
+                record.changeValue("entity-bank-information", bank);
+                record.changeValue("entity-note", note);
+                record.changeValue("recipient-address", recipient);
+
+                String[] billing = billingDate.split("/");
+                String[] issuing = issuingDate.split("/");
+
+                record.changeValue("issuing-date", issuing[2] +
+                        "-" + expandDate(issuing[0]) + "-" +
+                        expandDate(issuing[1]));
+                record.changeValue("billing-date", billing[2] +
+                        "-" + expandDate(billing[0]) + "-" +
+                        expandDate(billing[1]));
+
+                commitMe();
+                return true;
+            } catch (AccountingException e) {
+                e.printStackTrace();
+            }
         }
-        return true;
+        return false;
+    }
+
+    private String expandDate(String arg) {
+        if (arg.length() == 1) {
+            return "0" + arg;
+        }
+        return arg;
     }
 
     /**
