@@ -101,7 +101,7 @@
                                  <columns>
                                     <TableColumn fx:id="tcOwnerType" prefWidth="83.0" styleClass="table" text="Type" />
                                     <TableColumn fx:id="tcOwnerVal" minWidth="0.0" prefWidth="243.0" styleClass="table" text="Value" />
-                                    <TableColumn fx:id="tcOwnerDelete" prefWidth="103.0" styleClass="table" />
+                                    <TableColumn fx:id="tcOwnerDelete" prefWidth="95.0" styleClass="table" />
                                  </columns>
                               </TableView>
                               <TextField fx:id="tfOwnerAddContactEmail" layoutX="136.0" layoutY="330.0" prefHeight="27.0" prefWidth="210.0" />

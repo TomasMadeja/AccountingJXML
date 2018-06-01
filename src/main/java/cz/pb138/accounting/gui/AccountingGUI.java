@@ -77,6 +77,9 @@ public class AccountingGUI {
     @FXML private TextField tfRecordWarnDIC;
     @FXML private TextField tfRecordWarnBank;
 
+    @FXML private RadioButton rbRecordSeller;
+    @FXML private RadioButton rbRecordPayer;
+
     // Contacts - tab 2
     @FXML private Pane pnRecordContacts;
 
@@ -87,6 +90,10 @@ public class AccountingGUI {
     @FXML private TextField tfRecordAddContactTelephone;
     @FXML private Button btRecordAddContactTelephone;
     @FXML private TextField tfRecordWarnContactTelephone;
+
+    @FXML private TableColumn<ContactTable, String> tcRecordConType;
+    @FXML private TableColumn<ContactTable, String> tcRecordConVal;
+    @FXML private TableColumn<ContactTable, ContactTable> tcRecordConDelete;
 
     // Items - tab 2
     @FXML private Pane pnRecordItems;
@@ -101,6 +108,12 @@ public class AccountingGUI {
     @FXML private TextField tfRecordWarnItemUnit;
     @FXML private TextField tfRecordWarnItemPrice;
     @FXML private TextField tfRecordWarnItemQuantity;
+
+    @FXML private TableColumn<ItemTable, String> tcRecordItemName;
+    @FXML private TableColumn<ItemTable, String> tcRecordItemQuant;
+    @FXML private TableColumn<ItemTable, String> tcRecordItemUnit;
+    @FXML private TableColumn<ItemTable, String> tcRecordItemPrice;
+    @FXML private TableColumn<ItemTable, ItemTable> tcRecordItemDelete;
 
     // Invoice type
     @FXML private Pane pnRecordInvoiceType;
@@ -124,6 +137,12 @@ public class AccountingGUI {
     private ObservableList<ContactTable> ownerContacts =
             FXCollections.observableArrayList();
     private ObservableList<ContactTable> ownerDeletedContacts =
+            FXCollections.observableArrayList();
+
+    // Record tables
+    private ObservableList<ContactTable> recordContacts =
+            FXCollections.observableArrayList();
+    private ObservableList<ItemTable> recordItems =
             FXCollections.observableArrayList();
 
     /**
@@ -163,8 +182,6 @@ public class AccountingGUI {
 
         ownerContacts.clear();
         ownerDeletedContacts.clear();
-
-        System.out.printf("" + ownerContacts.size());
 
         getContacts("email", ownerContacts);
         getContacts("telephone", ownerContacts);
@@ -206,7 +223,7 @@ public class AccountingGUI {
      */
     @FXML
     private void recordCreateInvoice() {
-
+        clearInvoice();
     }
 
     /**
@@ -488,5 +505,37 @@ public class AccountingGUI {
                 fn,
                 theWarn,
                 date));
+    }
+
+    /**
+     * Is called only if added invoice is correct.
+     * Clear all fields in tab Invoices.
+     */
+    private void clearInvoice() {
+        tfRecordName.setText("");
+        tfRecordAddress.setText("");
+        tfRecordICO.setText("");
+        tfRecordDIC.setText("");
+        tfRecordBank.setText("");
+        tfRecordNote.setText("");
+
+        rbRecordPayer.setSelected(false);
+        rbRecordSeller.setSelected(false);
+
+        recordContacts.clear();
+        recordItems.clear();
+
+        tfRecordAddContactEmail.setText("");
+        tfRecordAddContactTelephone.setText("");
+
+        tfRecordItemName.setText("");
+        tfRecordItemUnit.setText("");
+        tfRecordItemQuantity.setText("");
+        tfRecordItemPrice.setText("");
+        tfRecordItemDesc.setText("");
+
+        tfRecordRecAdd.setText("");
+        dpRecordBillingDate.getEditor().setText("");
+        dpRecordIssuingDate.getEditor().setText("");
     }
 }

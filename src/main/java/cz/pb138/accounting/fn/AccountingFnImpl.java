@@ -309,8 +309,11 @@ public class AccountingFnImpl {
      */
     private boolean updater(String arg, String select, InputType input) {
         if (matchInputs(arg, input)) {
-            db.getOwner().changeValue(select, arg);
-
+            try {
+                db.getOwner().changeValue(select, arg);
+            } catch (AccountingException e) {
+                e.printStackTrace();
+            }
             return commitMe();
         }
         return false;
@@ -373,8 +376,11 @@ public class AccountingFnImpl {
      * @return the boolean
      */
     public boolean updateNote(String arg) {
-        db.getOwner().changeValue("note", arg);
-
+        try {
+            db.getOwner().changeValue("note", arg);
+        } catch (AccountingException e) {
+            e.printStackTrace();
+        }
         return commitMe();
     }
 
