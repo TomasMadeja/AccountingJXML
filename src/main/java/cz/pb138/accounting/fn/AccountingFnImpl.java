@@ -32,12 +32,6 @@ public class AccountingFnImpl {
         // Start server embedded mode
         db = new AccountingDatabaseImpl(USERNAME, PASSWORD);
 
-        // Check existence of owner
-        if (!db.isOwnerSet()) {
-            db.createOwner();
-            db.commitChanges();
-        }
-
         initRegexes();
     }
 

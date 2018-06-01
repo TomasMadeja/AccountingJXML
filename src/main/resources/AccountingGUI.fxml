@@ -229,11 +229,11 @@
                               </TableView>
                               <TextField fx:id="tfRecordAddContactEmail" layoutX="136.0" layoutY="330.0" prefHeight="27.0" prefWidth="210.0" />
                               <Label layoutX="10.0" layoutY="335.0" text="Email:" />
-                              <Button fx:id="btRecordAddContactEmail" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" styleClass="button2" text="Add email">
+                              <Button layoutX="356.0" layoutY="330.0" mnemonicParsing="false" onAction="#recordAddEmail" prefHeight="27.0" prefWidth="84.0" styleClass="button2" text="Add email">
                                  <font>
                                     <Font name="Verdana" size="11.0" />
                                  </font></Button>
-                              <Button fx:id="btRecordAddContactTelephone" layoutX="320.0" layoutY="293.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" styleClass="button2" text="Add telephone">
+                              <Button layoutX="320.0" layoutY="293.0" mnemonicParsing="false" onAction="#recordAddTelephone" prefHeight="27.0" prefWidth="120.0" styleClass="button2" text="Add telephone">
                                  <font>
                                     <Font name="Verdana" size="11.0" />
                                  </font></Button>
@@ -264,7 +264,7 @@
                                     <TableColumn fx:id="tcRecordItemQuant" minWidth="0.0" prefWidth="81.0" styleClass="table" text="Quantity" />
                                     <TableColumn fx:id="tcRecordItemUnit" prefWidth="47.0" styleClass="table" text="Unit" />
                                     <TableColumn fx:id="tcRecordItemPrice" prefWidth="71.0" styleClass="table" text="Price" />
-                                    <TableColumn fx:id="tcRecordItemDelete" prefWidth="102.0" styleClass="table" />
+                                    <TableColumn fx:id="tcRecordItemDelete" prefWidth="95.0" styleClass="table" />
                                  </columns>
                               </TableView>
                               <Label layoutX="10.0" layoutY="224.0" text="Name:" />
@@ -277,7 +277,7 @@
                               <TextField fx:id="tfRecordItemQuantity" layoutX="295.0" layoutY="256.0" prefHeight="27.0" prefWidth="145.0" />
                               <Label layoutX="10.0" layoutY="298.0" text="Description:" />
                               <TextField fx:id="tfRecordItemDesc" layoutX="136.0" layoutY="293.0" prefHeight="27.0" prefWidth="304.0" />
-                              <Button fx:id="btRecordAddItem" layoutX="370.0" layoutY="330.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="27.0" prefWidth="70.0" styleClass="button2" text="Add item">
+                              <Button layoutX="370.0" layoutY="330.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#recordAddItem" prefHeight="27.0" prefWidth="70.0" styleClass="button2" text="Add item">
                                  <font>
                                     <Font name="Verdana" size="11.0" />
                                  </font></Button>

@@ -47,10 +47,8 @@ public class AccountingGUI {
     @FXML private TableColumn<ContactTable, ContactTable> tcOwnerDelete;
 
     @FXML private TextField tfOwnerAddContactEmail;
-    @FXML private Button btOwnerAddContactEmail;
     @FXML private TextField tfOwnerWarnContactEmail;
     @FXML private TextField tfOwnerAddContactTelephone;
-    @FXML private Button btOwnerAddContactTelephone;
     @FXML private TextField tfOwnerWarnContactTelephone;
 
     // Menu - tab 1
@@ -85,10 +83,8 @@ public class AccountingGUI {
 
     @FXML private TableView tvRecordContacts;
     @FXML private TextField tfRecordAddContactEmail;
-    @FXML private Button btRecordAddContactEmail;
     @FXML private TextField tfRecordWarnContactEmail;
     @FXML private TextField tfRecordAddContactTelephone;
-    @FXML private Button btRecordAddContactTelephone;
     @FXML private TextField tfRecordWarnContactTelephone;
 
     @FXML private TableColumn<ContactTable, String> tcRecordConType;
@@ -159,6 +155,7 @@ public class AccountingGUI {
         initListeners();
 
         initOwner();
+        initInvoiceTables();
     }
 
     /**
@@ -218,12 +215,64 @@ public class AccountingGUI {
         }
     }
 
+    private void initInvoiceTables() {
+
+    }
+
     /**
      * Click on Create invoice.
      */
     @FXML
     private void recordCreateInvoice() {
         clearInvoice();
+    }
+
+    /**
+     * Click on Add email.
+     */
+    @FXML
+    private void recordAddEmail() {
+
+    }
+
+    /**
+     * Click on Add telephone.
+     */
+    @FXML
+    private void recordAddTelephone() {
+
+    }
+
+    /**
+     * Click on Add item.
+     */
+    @FXML
+    private void recordAddItem() {
+        String[] args = new String[5];
+
+        args[0] = tfRecordItemName.getText();
+        args[1] = tfRecordItemDesc.getText();
+        args[2] = tfRecordItemQuantity.getText();
+        args[3] = tfRecordItemUnit.getText();
+        args[4] = tfRecordItemPrice.getText();
+
+        if (
+                fn.matchPoint(args[0], ItemsType.NAME).equals("") &&
+                fn.matchPoint(args[2], ItemsType.QUANTITY).equals("") &&
+                fn.matchPoint(args[3], ItemsType.UNIT).equals("") &&
+                fn.matchPoint(args[4], ItemsType.PRICE).equals("")
+                ) {
+            recordItems.add(new ItemTable(
+                    args[0],
+                    args[1],
+                    args[2],
+                    args[3],
+                    args[4]
+            ));
+            clearItemFields();
+            return;
+        }
+        // TODO
     }
 
     /**
@@ -467,9 +516,9 @@ public class AccountingGUI {
 
     /**
      * Set listener for textField.
-     * @param theField
-     * @param theWarn
-     * @param input
+     * @param theField field
+     * @param theWarn warn
+     * @param input type
      */
     private void tfListen(TextField theField,
                           TextField theWarn,
@@ -528,14 +577,18 @@ public class AccountingGUI {
         tfRecordAddContactEmail.setText("");
         tfRecordAddContactTelephone.setText("");
 
+        clearItemFields();
+
+        tfRecordRecAdd.setText("");
+        dpRecordBillingDate.getEditor().setText("");
+        dpRecordIssuingDate.getEditor().setText("");
+    }
+
+    private void clearItemFields() {
         tfRecordItemName.setText("");
         tfRecordItemUnit.setText("");
         tfRecordItemQuantity.setText("");
         tfRecordItemPrice.setText("");
         tfRecordItemDesc.setText("");
-
-        tfRecordRecAdd.setText("");
-        dpRecordBillingDate.getEditor().setText("");
-        dpRecordIssuingDate.getEditor().setText("");
     }
 }

@@ -8,10 +8,10 @@ public class ItemTable {
     private String desc;
 
     public ItemTable(String name,
+                     String desc,
                      String quantity,
                      String unit,
-                     String price,
-                     String desc) {
+                     String price) {
         this.name = name;
         this.quantity = quantity;
         this.unit = unit;
