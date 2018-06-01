@@ -86,4 +86,9 @@ public class ADBErrorCodes {
      * Wrong input error for contact
      */
     public static int WRONG_INPUT_CONTACT = 19;
+
+    /**
+     * Error occured while setting up validation
+     */
+    public static int VALIDATION_SETUP_FAILURE = 20;
 }

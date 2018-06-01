@@ -24,10 +24,10 @@ public class ADTestMain {
 //            }
 //        }
 
-        if (!db.isOwnerSet()) {
-            db.createOwner();
-            db.commitChanges();
-        }
+//        if (!db.isOwnerSet()) {
+//            db.createOwner();
+//            db.commitChanges();
+//        }
 
 //        db.addExpenditure().addItem("","","","","10")
 //                .addItem("","","","","10")
