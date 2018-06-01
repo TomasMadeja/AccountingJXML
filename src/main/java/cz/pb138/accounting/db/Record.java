@@ -97,7 +97,15 @@ public interface Record {
     String[][] getItems();
 
     /**
-     * Deletes the record from database
+     * Check if the record is open, has not been deleted
+     * @return true if open, else false
+     */
+    boolean isOpen();
+
+    /**
+     * Clears all resources within Record object, using it after delete will result in undefined behavior and
+     * exceptions.
+     * If it represented editable record, delete() erases it from the database.
      */
     void delete();
 }

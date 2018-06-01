@@ -179,8 +179,16 @@ public class AccountingRecord extends AccountingEntity implements Record {
         return items;
     }
 
-    public void delete() {
+    public boolean isOpen() {
+        return super.doc != null;
+    }
 
+    public void delete() {
+        super.delete();
+
+        itemRoot = null;
+        itemList = null;
+        expense = null;
     }
 
 

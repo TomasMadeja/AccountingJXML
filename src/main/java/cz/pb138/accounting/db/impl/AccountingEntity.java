@@ -129,7 +129,19 @@ public class AccountingEntity {
         return array;
     }
 
+    protected void delete() {
+        if (doc == null) {
+            return;
+        }
 
+        doc.getDocumentElement().removeChild(root);
+
+        doc = null;
+        root = null;
+        contactRoots = null;
+        contacts = null;
+        uniqueElements = null;
+    }
 
     private void domToDict(Element root) {
         for (String u : unique) {

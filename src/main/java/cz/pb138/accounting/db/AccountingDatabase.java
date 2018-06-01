@@ -8,6 +8,10 @@ import java.util.List;
 /**
  * Interface for manipulating with accounting records
  *
+ * All records returned by database can either be
+ *      editable - changes in record are reflected in database, stored after commit or dropped by rollback
+ *      static - changes in record are independent of the database
+ *
  * @author Tomas Madeja
  */
 public interface AccountingDatabase {
@@ -32,13 +36,13 @@ public interface AccountingDatabase {
 
     /**
      * Creates single revenue record
-     * @return Empty accounting record with preset issuing and billing date
+     * @return Empty accounting record with preset issuing and billing date, editable record
      */
     Record addRevenue();
 
     /**
      * Creates single expenditure record
-     * @return Empty accounting record with preset issuing and billing date
+     * @return Empty accounting record with preset issuing and billing date, editable record
      */
     Record addExpenditure();
 
@@ -47,7 +51,7 @@ public interface AccountingDatabase {
      * Find all records of revenue and expenditure in the given year based on billing date
      * @param after lower bound date after which records exist, including the date
      * @param before upper bound date before which records exist, including the date
-     * @return list of Records
+     * @return list of Records, static records
      * @throws AccountingException contains error code corresponding to error
      */
     List<Record> getRecordsBetweenBilling(String after, String before) throws AccountingException;
@@ -56,7 +60,7 @@ public interface AccountingDatabase {
      * Find all records of revenue and expenditure in the given year based on issuing date
      * @param after lower bound date after which records exist, including the date
      * @param before upper bound date before which records exist, including the date
-     * @return list of Records
+     * @return list of Records, static records
      * @throws AccountingException contains error code corresponding to error
      */
     List<Record> getRecordsBetweenIssuing(String after, String before) throws AccountingException;
@@ -83,7 +87,7 @@ public interface AccountingDatabase {
 
     /**
      * Get information about owner of this app
-     * @return AccountingOwner representation of the owner
+     * @return Owner object representation of database owner, editable record
      */
     Owner getOwner();
 
