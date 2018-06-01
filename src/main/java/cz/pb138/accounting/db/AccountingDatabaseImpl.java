@@ -385,19 +385,19 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
     }
 
     public  double getLossesByIssuingDate(String after, String before) throws AccountingException {
-        return getLosses(EXPENSES, "issuing-date", after, before);
+        return sumPrices(EXPENSES, "issuing-date", after, before);
     }
 
     public  double getEarningsByIssuingDate(String after, String before) throws AccountingException {
-        return getLosses(EARNINGS, "issuing-date", after, before);
+        return sumPrices(EARNINGS, "issuing-date", after, before);
     }
 
     public  double getLossesByBillingDate(String after, String before) throws AccountingException {
-        return getLosses(EXPENSES, "billing-date", after, before);
+        return sumPrices(EXPENSES, "billing-date", after, before);
     }
 
     public  double getEarningsByBillingDate(String after, String before) throws AccountingException {
-        return getLosses(EARNINGS, "billing-date", after, before);
+        return sumPrices(EARNINGS, "billing-date", after, before);
     }
 
     public String ownerRecord() throws XMLDBException { return (String) owner.getContent(); }
@@ -686,7 +686,7 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
     }
 
 
-    private double getLosses(String type, String name, String after, String before) throws AccountingException{
+    private double sumPrices(String type, String name, String after, String before) throws AccountingException{
         try {
             double r = 0;
             ResourceIterator i = getBetweenSumPrice(type, name, after, before).getIterator();
@@ -711,6 +711,6 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
                 .query("for $r in /" + type + "/record\n" +
                         "where $r/" + name + " >= \'" + after + "\' and " +
                         "$r/" + name + " <= \'" + before + "\'\n" +
-                        "return fn:sum($r/item/price)");
+                        "return fn:sum($r/itemxs/item/price)");
     }
 }
