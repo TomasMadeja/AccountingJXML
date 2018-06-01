@@ -1,8 +1,6 @@
 package cz.pb138.accounting.db;
 
-import cz.pb138.accounting.db.impl.AccountingEntity;
 import cz.pb138.accounting.db.impl.AccountingException;
-import cz.pb138.accounting.db.impl.AccountingRecord;
 
 public interface Record {
 
@@ -24,7 +22,7 @@ public interface Record {
      * @param value contact value
      * @return reference to the current Record object
      */
-    AccountingEntity addContact(String type, String value);
+    Record addContact(String type, String value);
 
     /**
      * Removes contact specified by type and uniquely specified by value, erases all copies
@@ -32,7 +30,7 @@ public interface Record {
      * @param value contact value
      * @return reference to the current Record object
      */
-    AccountingEntity removeContact(String type, String value);
+    Record removeContact(String type, String value);
 
     /**
      * Changes value of unique attribute (specified by it's type only)
@@ -41,7 +39,7 @@ public interface Record {
      * @return reference to current Record object
      * @throws AccountingException specified by ADBErrorCode
      */
-    AccountingEntity changeValue(String type, String value) throws AccountingException;
+    Record changeValue(String type, String value) throws AccountingException;
 
     /**
      * Changes contact value, changes value of all identical contacts
@@ -50,7 +48,7 @@ public interface Record {
      * @param newValue new contact value
      * @return reference to current Record object
      */
-    AccountingEntity changeValue(String type, String oldValue, String newValue);
+    Record changeValue(String type, String oldValue, String newValue);
 
     /**
      * Getter for unigue attribute values
@@ -75,7 +73,7 @@ public interface Record {
      * @param price item total price
      * @return reference to the current Record object
      */
-    AccountingRecord addItem(String name, String description, String quantity, String unit, String price);
+    Record addItem(String name, String description, String quantity, String unit, String price);
 
     /**
      * Edit item in item list
@@ -83,14 +81,14 @@ public interface Record {
      * @param newItem new values of the item [description, quanity, unit, value]
      * @return reference to the current Record object
      */
-    AccountingRecord editItem(String[] oldItem, String[] newItem);
+    Record editItem(String[] oldItem, String[] newItem);
 
     /**
      * Removes first occurance of the object
      * @param attributes item attributes in order of [name, description, quantity, unit, price]
      * @return reference to the current Record object
      */
-    AccountingRecord removeItem(String[] attributes);
+    Record removeItem(String[] attributes);
 
     /**
      * Tranforms all items into array of arays of attributes

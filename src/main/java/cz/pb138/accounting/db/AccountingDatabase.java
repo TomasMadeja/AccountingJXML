@@ -1,8 +1,6 @@
 package cz.pb138.accounting.db;
 
 import cz.pb138.accounting.db.impl.AccountingException;
-import cz.pb138.accounting.db.impl.AccountingOwner;
-import cz.pb138.accounting.db.impl.AccountingRecord;
 import org.xml.sax.InputSource;
 
 import java.util.List;
@@ -36,32 +34,32 @@ public interface AccountingDatabase {
      * Creates single revenue record
      * @return Empty accounting record with preset issuing and billing date
      */
-    AccountingRecord addRevenue();
+    Record addRevenue();
 
     /**
      * Creates single expenditure record
      * @return Empty accounting record with preset issuing and billing date
      */
-    AccountingRecord addExpenditure();
+    Record addExpenditure();
 
 
     /**
      * Find all records of revenue and expenditure in the given year based on billing date
      * @param after lower bound date after which records exist, including the date
      * @param before upper bound date before which records exist, including the date
-     * @return list of AccountingRecords
+     * @return list of Records
      * @throws AccountingException contains error code corresponding to error
      */
-    List<AccountingRecord> getRecordsBetweenBilling(String after, String before) throws AccountingException;
+    List<Record> getRecordsBetweenBilling(String after, String before) throws AccountingException;
 
     /**
      * Find all records of revenue and expenditure in the given year based on issuing date
      * @param after lower bound date after which records exist, including the date
      * @param before upper bound date before which records exist, including the date
-     * @return list of AccountingRecords
+     * @return list of Records
      * @throws AccountingException contains error code corresponding to error
      */
-    List<AccountingRecord> getRecordsBetweenIssuing(String after, String before) throws AccountingException;
+    List<Record> getRecordsBetweenIssuing(String after, String before) throws AccountingException;
 
     /**
      * Commits changes (added revenues and expenditures)
@@ -87,7 +85,7 @@ public interface AccountingDatabase {
      * Get information about owner of this app
      * @return AccountingOwner representation of the owner
      */
-    AccountingOwner getOwner();
+    Owner getOwner();
 
     /**
      * Return database to the last commited state
