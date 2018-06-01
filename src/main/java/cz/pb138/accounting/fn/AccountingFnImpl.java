@@ -434,11 +434,14 @@ public class AccountingFnImpl {
             String issuingDate,
             String billingDate
             ) {
-        if (matchInputs() &&
-                matchInputs() &&
-                matchInputs() &&
-                matchInputs() &&
-                matchInputs() &&
+        if (matchInputs(name, InputType.NAME) &&
+                matchInputs(address, InputType.ADDRESS) &&
+                matchInputs(ico, InputType.ICO) &&
+                matchInputs(dic, InputType.DIC) &&
+                matchInputs(bank, InputType.BANK) &&
+                matchInputs(recipient, InputType.ADDRESS) &&
+                matchInputs(issuingDate, DateType.DATE) &&
+                matchInputs(billingDate, DateType.DATE)
                 ) {
 
         }
