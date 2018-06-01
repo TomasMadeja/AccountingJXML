@@ -19,14 +19,14 @@
 							<xsd:element name="entity-telephonexs" minOccurs="1" maxOccurs="1">
 								<xsd:complexType>
 									<xsd:sequence>
-										<xsd:element name="telephone" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+										<xsd:element name="entity-telephone" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
 									</xsd:sequence>
 								</xsd:complexType>
 							</xsd:element>
 							<xsd:element name="entity-emailxs" minOccurs="1" maxOccurs="1">
 								<xsd:complexType>
 									<xsd:sequence>
-										<xsd:element name="email" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+										<xsd:element name="entity-email" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
 									</xsd:sequence>
 								</xsd:complexType>
 							</xsd:element>
