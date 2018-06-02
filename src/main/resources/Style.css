@@ -26,6 +26,7 @@
 }
 .tab{
     -fx-background-color: #ae9c8e;
+    -fx-focus-color: #20bdc5;
 }
 .tab-pane{
     -fx-tab-min-width: 90px;
@@ -42,4 +43,16 @@
 .layoutPanel{
     -fx-background-radius: 5;
     -fx-background-color: #625D5D;
+}
+.text-field{
+    -fx-focus-color: #20bdc5;
+}
+.table-view{
+    -fx-focus-color: #20bdc5;
+}
+.radio-button{
+    -fx-focus-color: #20bdc5;
+}
+.text-area{
+    -fx-focus-color: #20bdc5;
 }

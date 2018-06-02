@@ -87,9 +87,9 @@
                         </Pane>
                         <Pane fx:id="pnOwnerContacts" disable="true" prefHeight="367.0" prefWidth="450.0" visible="false">
                            <children>
-                              <Label layoutX="10.0" layoutY="10.0" text="Contacts">
+                              <Label layoutX="10.0" layoutY="10.0" text="Contacts" textFill="#625d5d">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="System Bold" size="24.0" />
                                  </font>
                               </Label>
                               <TableView fx:id="tvOwnerContacts" layoutX="10.0" layoutY="45.0" prefHeight="238.0" prefWidth="430.0">
@@ -158,23 +158,24 @@
                            </font></Button>
                         <Pane fx:id="pnRecordTrader" prefHeight="367.0" prefWidth="450.0">
                            <children>
-                              <Label layoutX="10.0" layoutY="10.0" text="Trader">
+                              <Pane layoutX="-15.0" layoutY="40.0" prefHeight="291.0" prefWidth="455.0" styleClass="layoutPanel" />
+                              <Label layoutX="136.0" layoutY="8.0" text="Trader" textFill="#625d5d">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="System Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="10.0" layoutY="63.0" text="Name:" />
-                              <TextField fx:id="tfRecordName" layoutX="136.0" layoutY="58.0" prefHeight="27.0" prefWidth="300.0" />
-                              <Label layoutX="10.0" layoutY="98.0" text="Address:" />
-                              <TextField fx:id="tfRecordAddress" layoutX="136.0" layoutY="95.0" prefHeight="27.0" prefWidth="300.0" />
-                              <Label layoutX="10.0" layoutY="137.0" text="ICO:" />
-                              <TextField fx:id="tfRecordICO" layoutX="136.0" layoutY="132.0" prefHeight="27.0" prefWidth="300.0" />
-                              <Label layoutX="10.0" layoutY="174.0" text="DIC:" />
-                              <TextField fx:id="tfRecordDIC" layoutX="136.0" layoutY="169.0" prefHeight="27.0" prefWidth="300.0" />
-                              <Label layoutX="10.0" layoutY="211.0" text="Bank information:" />
-                              <TextField fx:id="tfRecordBank" layoutX="136.0" layoutY="206.0" prefHeight="27.0" prefWidth="300.0" />
-                              <Label layoutX="10.0" layoutY="248.0" text="Note:" />
-                              <TextArea fx:id="tfRecordNote" layoutX="136.0" layoutY="243.0" prefHeight="70.0" prefWidth="300.0" />
+                              <Label layoutX="10.0" layoutY="63.0" text="Name:" textFill="#20bdc5" />
+                              <TextField fx:id="tfRecordName" layoutX="136.0" layoutY="58.0" prefHeight="27.0" prefWidth="290.0" />
+                              <Label layoutX="10.0" layoutY="98.0" text="Address:" textFill="#20bdc5" />
+                              <TextField fx:id="tfRecordAddress" layoutX="136.0" layoutY="95.0" prefHeight="27.0" prefWidth="290.0" />
+                              <Label layoutX="10.0" layoutY="137.0" text="ICO:" textFill="#20bdc5" />
+                              <TextField fx:id="tfRecordICO" layoutX="136.0" layoutY="132.0" prefHeight="27.0" prefWidth="290.0" />
+                              <Label layoutX="10.0" layoutY="174.0" text="DIC:" textFill="#20bdc5" />
+                              <TextField fx:id="tfRecordDIC" layoutX="136.0" layoutY="169.0" prefHeight="27.0" prefWidth="290.0" />
+                              <Label layoutX="10.0" layoutY="211.0" text="Bank information:" textFill="#20bdc5" />
+                              <TextField fx:id="tfRecordBank" layoutX="136.0" layoutY="206.0" prefHeight="27.0" prefWidth="290.0" />
+                              <Label layoutX="10.0" layoutY="248.0" text="Note:" textFill="#20bdc5" />
+                              <TextArea fx:id="tfRecordNote" layoutX="136.0" layoutY="243.0" prefHeight="70.0" prefWidth="290.0" />
                               <TextField fx:id="tfRecordWarnName" disable="true" editable="false" layoutX="136.0" layoutY="85.0" prefHeight="27.0" prefWidth="300.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
@@ -200,19 +201,19 @@
                                     <Cursor fx:constant="DEFAULT" />
                                  </cursor>
                               </TextField>
-                              <RadioButton fx:id="rbRecordPayer" layoutX="136.0" layoutY="333.0" mnemonicParsing="false" text="Payer">
+                              <RadioButton fx:id="rbRecordPayer" layoutX="136.0" layoutY="337.0" mnemonicParsing="false" text="Payer">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="traderInvoice" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton fx:id="rbRecordSeller" layoutX="212.0" layoutY="333.0" mnemonicParsing="false" text="Seller" toggleGroup="$traderInvoice" />
+                              <RadioButton fx:id="rbRecordSeller" layoutX="212.0" layoutY="337.0" mnemonicParsing="false" text="Seller" toggleGroup="$traderInvoice" />
                            </children>
                         </Pane>
                         <Pane fx:id="pnRecordContacts" disable="true" prefHeight="367.0" prefWidth="450.0" visible="false">
                            <children>
-                              <Label layoutX="10.0" layoutY="10.0" text="Contacts">
+                              <Label layoutX="10.0" layoutY="10.0" text="Contacts" textFill="#625d5d">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="System Bold" size="24.0" />
                                  </font>
                               </Label>
                               <TableView fx:id="tvRecordContacts" layoutX="10.0" layoutY="45.0" prefHeight="238.0" prefWidth="430.0">
@@ -248,9 +249,9 @@
                         </Pane>
                         <Pane fx:id="pnRecordItems" disable="true" prefHeight="367.0" prefWidth="450.0" visible="false">
                            <children>
-                              <Label layoutX="10.0" layoutY="10.0" text="Items">
+                              <Label layoutX="10.0" layoutY="10.0" text="Items" textFill="#625d5d">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="System Bold" size="24.0" />
                                  </font>
                               </Label>
                               <TableView fx:id="tvRecordItems" layoutX="10.0" layoutY="45.0" prefHeight="164.0" prefWidth="430.0">
@@ -300,9 +301,9 @@
                         </Pane>
                         <Pane fx:id="pnRecordInvoiceType" disable="true" prefHeight="367.0" prefWidth="450.0" visible="false">
                            <children>
-                              <Label layoutX="10.0" layoutY="10.0" text="Type of invoice">
+                              <Label layoutX="10.0" layoutY="10.0" text="Type of invoice" textFill="#625d5d">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="System Bold" size="24.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="tfRecordRecAdd" layoutX="145.0" layoutY="54.0" prefHeight="27.0" prefWidth="295.0" />
@@ -328,9 +329,9 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="10.0" layoutY="10.0" text="Tools">
+                        <Label layoutX="10.0" layoutY="10.0" text="Tools" textFill="#625d5d">
                            <font>
-                              <Font size="24.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
                         <Label layoutX="10.0" layoutY="50.0" text="Export all invoices to PDF:" />
