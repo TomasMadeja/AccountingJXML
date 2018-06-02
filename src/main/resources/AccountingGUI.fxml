@@ -338,18 +338,27 @@
                         <Button layoutX="460.0" layoutY="45.0" mnemonicParsing="false" onAction="#selectFolder" prefHeight="27.0" prefWidth="130.0" text="Select folder" />
                         <TextField fx:id="tfFolderSave" layoutX="180.0" layoutY="45.0" prefHeight="27.0" prefWidth="270.0" />
                         <Button layoutX="532.0" layoutY="82.0" mnemonicParsing="false" onAction="#export2PDF" text="Export" />
-                        <Label layoutX="10.0" layoutY="199.0" text="Summarize Revenue/Expediture:" />
-                        <Label fx:id="lbShowMoney" layoutX="248.0" layoutY="193.0" prefHeight="29.0" prefWidth="245.0" text="-">
+                        <Label layoutX="10.0" layoutY="155.0" text="Summarize Revenue/Expediture:" />
+                        <Label fx:id="lbShowMoney" layoutX="246.0" layoutY="261.0" prefHeight="29.0" prefWidth="245.0" text="-">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label layoutX="227.0" layoutY="193.0" prefHeight="29.0" prefWidth="21.0" text="\$">
+                        <Label layoutX="225.0" layoutY="263.0" prefHeight="29.0" prefWidth="21.0" text="\$">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Button layoutX="503.0" layoutY="194.0" mnemonicParsing="false" onAction="#summarizeMoney" text="Summarize" />
+                        <Button layoutX="507.0" layoutY="194.0" mnemonicParsing="false" onAction="#summarizeMoney" text="Summarize" />
+                        <DatePicker layoutX="276.0" layoutY="151.0" />
+                        <DatePicker layoutX="276.0" layoutY="194.0" />
+                        <Label layoutX="208.0" layoutY="155.0" text="From date" />
+                        <Label layoutX="209.0" layoutY="198.0" text="To date" />
+                        <Label layoutX="146.0" layoutY="267.0" text="Sum:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
               </content>
