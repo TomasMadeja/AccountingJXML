@@ -132,4 +132,7 @@ public interface AccountingDatabase {
      * @throws AccountingException contains error code corresponding to error
      */
     double getEarningsByBillingDate(String after, String before) throws AccountingException;
+
+    public String revenues() throws AccountingException;
+    public String expenditures() throws AccountingException;
 }

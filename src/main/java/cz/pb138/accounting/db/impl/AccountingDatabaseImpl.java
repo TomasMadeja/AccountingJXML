@@ -407,9 +407,37 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
         return sumPrices(EARNINGS, "billing-date", after, before);
     }
 
-    public String ownerRecord() throws XMLDBException { return (String) owner.getContent(); }
-    public String expensesRecord() throws XMLDBException { return (String) expenses.getContent(); }
-    public String earningsRecord() throws XMLDBException { return (String) earnings.getContent(); }
+    public String revenues() throws AccountingException {
+        return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<root>" + ownerRecord()
+                + earningsRecord() + "\n</root>";
+    }
+
+    public String expenditures() throws AccountingException {
+        return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<root>" + ownerRecord()
+                + expensesRecord() + "\n</root>";
+    }
+
+    public String ownerRecord() throws AccountingException {
+        try {
+            return ((String) owner.getContent());
+        } catch (XMLDBException ex) {
+            throw new AccountingException(ADBErrorCodes.UNKNOWN_ERROR, ex);
+        }
+    }
+    public String expensesRecord() throws AccountingException {
+        try {
+            return ((String) expenses.getContent());
+        } catch (XMLDBException ex) {
+            throw new AccountingException(ADBErrorCodes.UNKNOWN_ERROR, ex);
+        }
+    }
+    public String earningsRecord() throws AccountingException {
+        try {
+        return ((String) earnings.getContent());
+        } catch (XMLDBException ex) {
+            throw new AccountingException(ADBErrorCodes.UNKNOWN_ERROR, ex);
+        }
+    }
 
 
     private boolean tryInit(String path) throws AccountingException {
