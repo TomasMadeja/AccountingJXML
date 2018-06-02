@@ -355,11 +355,12 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
 
     public String dbAsString() throws AccountingException{
         try {
-            return (String)
+            return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + (String)
                     ((XPathQueryService) col.getService("XPathQueryService", "1.0"))
                             .query(
                                     "let $a := /" + OWNER + "\n" +
-                                            "return <root>\n" +
+                                            "return " + //"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                                            "<root>\n" +
                                             "{\n" +
                                             "for $o in $a\n" +
                                             "return $o\n" +
