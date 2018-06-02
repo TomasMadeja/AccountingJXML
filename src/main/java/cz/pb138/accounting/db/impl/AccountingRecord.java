@@ -19,7 +19,8 @@ public class AccountingRecord extends AccountingEntity implements Record {
     public final static String[] CONTACT = {"entity-telephone", "entity-email"};
     public final static String[] UNIQUE = {"entity-name", "entity-address", "entity-ico",
                                             "entity-dic", "entity-bank-information", "entity-note",
-                                            "billing-date", "issuing-date", "recipient-address"};
+                                            "billing-date", "issuing-date", "recipient-address",
+                                            "total-price"};
     public final static String ITEMLIST = "item";
     public final static String[] ITEM = {"description", "quantity", "unit", "price", "name"};
     public final static String SUFFIX = "xs";
@@ -40,6 +41,10 @@ public class AccountingRecord extends AccountingEntity implements Record {
         this.expense = expense;
         itemRoot = super.doc.createElement(ITEMLIST + SUFFIX);
         super.root.appendChild(itemRoot);
+
+        try {
+            super.changeValue("total-price", "0");
+        } catch (AccountingException ex) {}
     }
 
 
@@ -50,6 +55,10 @@ public class AccountingRecord extends AccountingEntity implements Record {
 
         itemRoot = (Element) ((Element) recordNode).getElementsByTagName(ITEMLIST+SUFFIX).item(0);
         itemsToDict(itemRoot);
+
+        try {
+            super.changeValue("total-price", "0");
+        } catch (AccountingException ex) {}
     }
 
 
@@ -141,6 +150,7 @@ public class AccountingRecord extends AccountingEntity implements Record {
                 e = (Element) item.getElementsByTagName(it).item(0);
                 attributes.put(it, e);
             }
+            addPrice();
         }
 
         AccountingItem(String name, String description,
@@ -155,6 +165,7 @@ public class AccountingRecord extends AccountingEntity implements Record {
             creatAttribute(NAME, name);
 
             itemRoot.appendChild(item);
+            addPrice();
         }
 
         public String value(String name) {
@@ -183,6 +194,9 @@ public class AccountingRecord extends AccountingEntity implements Record {
 
         public AccountingItem changeValue(String name, String value) {
             if (attributes.containsKey(name)) {
+                if (name.compareTo(PRICE) == 0) {
+                    changePrice(value);
+                }
                 attributes.get(name).setTextContent(value);
             }
             return this;
@@ -209,6 +223,7 @@ public class AccountingRecord extends AccountingEntity implements Record {
         }
 
         public void delete() {
+            changePrice("0");
             itemRoot.removeChild(item);
             item = null;
             attributes = null;
@@ -219,6 +234,29 @@ public class AccountingRecord extends AccountingEntity implements Record {
             e.setTextContent(value);
             item.appendChild(e);
             attributes.put(name, e);
+        }
+
+        private void changePrice(String newPrice) {
+            try {
+                AccountingRecord.this.changeValue("total-price",
+                        Double.toString(
+                                Double.parseDouble(getValue("total-price"))
+                                - Double.parseDouble(this.price())
+                                + Double.parseDouble(newPrice)
+
+                        ));
+            } catch (AccountingException ex) {}
+        }
+
+        private void addPrice() {
+            try {
+                AccountingRecord.this.changeValue("total-price",
+                        Double.toString(
+                                Double.parseDouble(getValue("total-price"))
+                                        + Double.parseDouble(this.price())
+
+                        ));
+            } catch (AccountingException ex) {}
         }
     }
 }

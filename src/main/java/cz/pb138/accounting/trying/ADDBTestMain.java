@@ -32,25 +32,25 @@ public class ADDBTestMain {
 //
 //        db.addExpenditure().addItem("","","","","10").getItems()[0]
 //                .setName("duck").name();
-
+//
 //        db.addExpenditure().addItem("sadsad","adadas","23","l","10");
 //
 //        db.addRevenue().addItem("qweq","qwe","231","s","30");
-
+//
 //        db.addRevenue().addItem("gveg","qwe","231","s","30").getItems()[0]
 //                .setName("quack").delete();
-//
-//        db.commitChanges();
-//
-//        System.out.println(db.ownerRecord());
-//        System.out.println(db.earningsRecord());
-//        System.out.println(db.expensesRecord());
-//
-//
-//        System.out.println("Boom: " + db.getOwner().getValue("name").length());
-//
-//        System.out.println(db.getLossesByIssuingDate("2000-01-01", "2100-01-01"));
-//        System.out.println(db.getEarningsByIssuingDate("2000-01-01", "2100-01-01"));
+
+        db.commitChanges();
+
+        System.out.println(db.ownerRecord());
+        System.out.println(db.earningsRecord());
+        System.out.println(db.expensesRecord());
+
+
+        System.out.println("Boom: " + db.getOwner().getValue("name").length());
+
+        System.out.println(db.getLossesByIssuingDate("0000-01-01", "2100-01-01"));
+        System.out.println(db.getEarningsByIssuingDate("0000-01-01", "2100-01-01"));
 
 
 //        System.out.println(db.dbAsString());

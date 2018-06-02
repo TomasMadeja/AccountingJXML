@@ -16,6 +16,7 @@
             				<xsd:element name="billing-date" type="xsd:date" minOccurs="1" maxOccurs="1"/>
             				<xsd:element name="issuing-date" type="xsd:date" minOccurs="1" maxOccurs="1"/>
             				<xsd:element name="recipient-address" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+							<xsd:element name="total-price" type="xsd:string" minOccurs="1" maxOccurs="1"/>
 							<xsd:element name="entity-telephonexs" minOccurs="1" maxOccurs="1">
 								<xsd:complexType>
 									<xsd:sequence>
