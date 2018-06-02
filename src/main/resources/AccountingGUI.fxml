@@ -329,32 +329,42 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
+                        <Pane layoutX="-17.0" layoutY="253.0" prefHeight="55.0" prefWidth="467.0" styleClass="layoutPanel" />
                         <Label layoutX="10.0" layoutY="10.0" text="Tools" textFill="#625d5d">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
                         <Label layoutX="10.0" layoutY="50.0" text="Export all invoices to PDF:" />
-                        <Button layoutX="460.0" layoutY="45.0" mnemonicParsing="false" onAction="#selectFolder" prefHeight="27.0" prefWidth="130.0" text="Select folder" />
+                        <Button layoutX="460.0" layoutY="45.0" mnemonicParsing="false" onAction="#selectFolder" prefHeight="27.0" prefWidth="130.0" text="Select folder" textFill="#bf9671">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font></Button>
                         <TextField fx:id="tfFolderSave" layoutX="180.0" layoutY="45.0" prefHeight="27.0" prefWidth="270.0" />
-                        <Button layoutX="532.0" layoutY="82.0" mnemonicParsing="false" onAction="#export2PDF" text="Export" />
+                        <Button layoutX="460.0" layoutY="82.0" mnemonicParsing="false" onAction="#export2PDF" prefHeight="27.0" prefWidth="130.0" text="Export" textFill="#bf9671">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font></Button>
                         <Label layoutX="10.0" layoutY="155.0" text="Summarize Revenue/Expediture:" />
-                        <Label fx:id="lbShowMoney" layoutX="246.0" layoutY="261.0" prefHeight="29.0" prefWidth="245.0" text="-">
+                        <Label fx:id="lbShowMoney" layoutX="246.0" layoutY="261.0" prefHeight="29.0" prefWidth="245.0" text="-" textFill="#20bdc5">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label layoutX="225.0" layoutY="263.0" prefHeight="29.0" prefWidth="21.0" text="\$">
+                        <Label layoutX="225.0" layoutY="263.0" prefHeight="29.0" prefWidth="21.0" text="\$" textFill="#20bdc5">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Button layoutX="507.0" layoutY="194.0" mnemonicParsing="false" onAction="#summarizeMoney" text="Summarize" />
+                        <Button layoutX="460.0" layoutY="193.0" mnemonicParsing="false" onAction="#summarizeMoney" prefHeight="27.0" prefWidth="130.0" text="Summarize" textFill="#bf9671">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font></Button>
                         <DatePicker layoutX="276.0" layoutY="151.0" />
                         <DatePicker layoutX="276.0" layoutY="194.0" />
                         <Label layoutX="208.0" layoutY="155.0" text="From date" />
                         <Label layoutX="209.0" layoutY="198.0" text="To date" />
-                        <Label layoutX="146.0" layoutY="267.0" text="Sum:">
+                        <Label layoutX="146.0" layoutY="267.0" text="Sum:" textFill="#20bdc5">
                            <font>
                               <Font size="18.0" />
                            </font>
