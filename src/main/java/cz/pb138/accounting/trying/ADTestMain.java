@@ -39,7 +39,7 @@ public class ADTestMain {
 //                .changeValue("billing-date", "2006-11-06")
 //                .changeValue("issuing-date", "2006-11-07");
 
-        db.commitChanges();
+//        db.commitChanges();
 
         System.out.println(db.ownerRecord());
         System.out.println(db.earningsRecord());

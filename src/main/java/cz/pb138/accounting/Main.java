@@ -26,6 +26,7 @@ public class Main extends Application {
 
         // Set fn to controller
         AccountingGUI controller = fxml.<AccountingGUI>getController();
+        controller.setPrimaryStage(primaryStage);
 
         // Set window
         primaryStage.setTitle("AccountingJXML");

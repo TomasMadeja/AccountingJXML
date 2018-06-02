@@ -21,7 +21,15 @@
         </plugins>
     </build>
 
+    <properties>
+        <!-- Define the version of OPEN HTML TO PDF in the properties section of your POM. -->
+        <openhtml.version>0.0.1-RC13</openhtml.version>
+    </properties>
+
     <dependencies>
+
+        <!-- Server -->
+
         <dependency>
             <groupId>org.exist-db</groupId>
             <artifactId>exist-core</artifactId>
@@ -31,6 +39,33 @@
             <groupId>org.exist-db</groupId>
             <artifactId>exist-start</artifactId>
             <version>4.1.0</version>
+        </dependency>
+
+        <!-- PDF -->
+
+        <dependency>
+            <!-- ALWAYS required. -->
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-core</artifactId>
+            <version>${openhtml.version}</version>
+        </dependency>
+        <dependency>
+            <!-- Required for PDF output. -->
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-pdfbox</artifactId>
+            <version>${openhtml.version}</version>
+        </dependency>
+        <dependency>
+            <!-- Required for image output only. -->
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-java2d</artifactId>
+            <version>${openhtml.version}</version>
+        </dependency>
+        <dependency>
+            <!-- Optional, leave out if you do not need HTML5 parsing support. -->
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-jsoup-dom-converter</artifactId>
+            <version>${openhtml.version}</version>
         </dependency>
     </dependencies>
 

@@ -10,8 +10,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -129,8 +132,14 @@ public class AccountingGUI {
     @FXML private Button btRecordItems;
     @FXML private Button btRecordInvoiceType;
 
+    // Tools - tab 2
+    @FXML private Label lbShowMoney;
+    @FXML private TextField tfFolderSave;
+
     // Help variables
     private Map<Pane, Integer> menuPanes = new HashMap<>();
+
+    private Stage primaryStage;
 
     // Owner contact table
     private ObservableList<ContactTable> ownerContacts =
@@ -162,6 +171,10 @@ public class AccountingGUI {
 
         formatDates(dpRecordBillingDate);
         formatDates(dpRecordIssuingDate);
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 
     private void formatDates(DatePicker picker) {
@@ -689,5 +702,28 @@ public class AccountingGUI {
         tfRecordItemQuantity.setText("");
         tfRecordItemPrice.setText("");
         tfRecordItemDesc.setText("");
+    }
+
+    @FXML
+    private void selectFolder() {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedDirectory =
+                directoryChooser.showDialog(primaryStage);
+
+        if(selectedDirectory == null){
+            tfFolderSave.setText("No Directory selected");
+        }else{
+            tfFolderSave.setText(selectedDirectory.getAbsolutePath());
+        }
+    }
+
+    @FXML
+    private void export2PDF() {
+
+    }
+
+    @FXML
+    private void summarizeMoney() {
+
     }
 }

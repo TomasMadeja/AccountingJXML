@@ -329,6 +329,35 @@
                   </AnchorPane>
             </content>
           </Tab>
+            <Tab text="Tools">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="10.0" text="Tools">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="50.0" text="Export all invoices to PDF:" />
+                        <Button layoutX="460.0" layoutY="45.0" mnemonicParsing="false" onAction="#selectFolder" prefHeight="27.0" prefWidth="130.0" text="Select folder" />
+                        <TextField fx:id="tfFolderSave" layoutX="180.0" layoutY="45.0" prefHeight="27.0" prefWidth="270.0" />
+                        <Button layoutX="532.0" layoutY="82.0" mnemonicParsing="false" onAction="#export2PDF" text="Export" />
+                        <Label layoutX="10.0" layoutY="199.0" text="Summarize Revenue/Expediture:" />
+                        <Label fx:id="lbShowMoney" layoutX="248.0" layoutY="193.0" prefHeight="29.0" prefWidth="245.0" text="-">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="227.0" layoutY="193.0" prefHeight="29.0" prefWidth="21.0" text="\$">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="503.0" layoutY="194.0" mnemonicParsing="false" onAction="#summarizeMoney" text="Summarize" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>
