@@ -32,6 +32,10 @@ public class AccountingRecord extends AccountingEntity implements Record {
 
     public AccountingRecord(Document doc, boolean expense) {
         super(doc, UNIQUE, CONTACT);
+        try {
+            super.changeValue("billing-date", "1000-10-10");
+            super.changeValue("issuing-date", "1000-10-10");
+        } catch (AccountingException ex) {}
         itemList = new ArrayList<>();
         this.expense = expense;
         itemRoot = super.doc.createElement(ITEMLIST + SUFFIX);
@@ -95,7 +99,7 @@ public class AccountingRecord extends AccountingEntity implements Record {
 
 
     public Item[] getItems() {
-        return (Item[]) itemList.toArray();
+        return itemList.toArray(new Item[0]);
     }
 
     public boolean isOpen() {
@@ -211,10 +215,10 @@ public class AccountingRecord extends AccountingEntity implements Record {
         }
 
         private void creatAttribute(String name, String value) {
-            Element e = doc.createElement("description");
+            Element e = doc.createElement(name);
             e.setTextContent(value);
             item.appendChild(e);
-            attributes.put("description", e);
+            attributes.put(name, e);
         }
     }
 }

@@ -29,35 +29,28 @@ public class ADDBTestMain {
 
 //        db.getOwner().addContact("email", "test@test.tst");
 //        db.commitChanges();
-//        db.addExpenditure().addItem("","","","","10")
-//                .addItem("","","","","10")
-//                .addItem("","","","","10")
-//                .changeValue("billing-date", "2006-11-06")
-//                .changeValue("issuing-date", "2006-11-07");
 //
-//        db.addExpenditure().addItem("","","","","10")
-//                .addItem("","","","","10")
-//                .addItem("","","","","10")
-//                .changeValue("billing-date", "2006-11-06")
-//                .changeValue("issuing-date", "2006-11-07");
+//        db.addExpenditure().addItem("","","","","10").getItems()[0]
+//                .setName("duck").name();
+
+//        db.addExpenditure().addItem("sadsad","adadas","23","l","10");
 //
-//        db.addRevenue().addItem("","","","","10")
-//                .addItem("","","","","10")
-//                .addItem("","","","","10")
-//                .changeValue("billing-date", "2006-11-06")
-//                .changeValue("issuing-date", "2006-11-07");
+//        db.addRevenue().addItem("qweq","qwe","231","s","30");
 
-        db.commitChanges();
-
-        System.out.println(db.ownerRecord());
-        System.out.println(db.earningsRecord());
-        System.out.println(db.expensesRecord());
-
-
-        System.out.println("Boom: " + db.getOwner().getValue("name").length());
-
-        System.out.println(db.getLossesByIssuingDate("2000-01-01", "2100-01-01"));
-        System.out.println(db.getEarningsByIssuingDate("2000-01-01", "2100-01-01"));
+//        db.addRevenue().addItem("gveg","qwe","231","s","30").getItems()[0]
+//                .setName("quack").delete();
+//
+//        db.commitChanges();
+//
+//        System.out.println(db.ownerRecord());
+//        System.out.println(db.earningsRecord());
+//        System.out.println(db.expensesRecord());
+//
+//
+//        System.out.println("Boom: " + db.getOwner().getValue("name").length());
+//
+//        System.out.println(db.getLossesByIssuingDate("2000-01-01", "2100-01-01"));
+//        System.out.println(db.getEarningsByIssuingDate("2000-01-01", "2100-01-01"));
 
 
 //        System.out.println(db.dbAsString());
