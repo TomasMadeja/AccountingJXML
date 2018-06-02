@@ -39,3 +39,7 @@
 .tab-pane .tab-header-area .tab-header-background{
     -fx-background-color: #ae9c8e;
 }
+.layoutPanel{
+    -fx-background-radius: 5;
+    -fx-background-color: #625D5D;
+}
