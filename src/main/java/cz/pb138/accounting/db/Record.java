@@ -76,25 +76,10 @@ public interface Record {
     Record addItem(String name, String description, String quantity, String unit, String price);
 
     /**
-     * Edit item in item list
-     * @param oldItem old item to be edited [description, quanity, unit, value]
-     * @param newItem new values of the item [description, quanity, unit, value]
-     * @return reference to the current Record object
-     */
-    Record editItem(String[] oldItem, String[] newItem);
-
-    /**
-     * Removes first occurance of the object
-     * @param attributes item attributes in order of [name, description, quantity, unit, price]
-     * @return reference to the current Record object
-     */
-    Record removeItem(String[] attributes);
-
-    /**
      * Tranforms all items into array of arays of attributes
      * @return array of attributes arrays in order of [name, description, quantity, unit, price]
      */
-    String[][] getItems();
+    Item[] getItems();
 
     /**
      * Check if the record is open, has not been deleted

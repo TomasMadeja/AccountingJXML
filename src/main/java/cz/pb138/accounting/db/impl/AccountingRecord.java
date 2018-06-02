@@ -1,6 +1,7 @@
 package cz.pb138.accounting.db.impl;
 
 import cz.pb138.accounting.db.ADBErrorCodes;
+import cz.pb138.accounting.db.Item;
 import cz.pb138.accounting.db.Record;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -24,14 +25,14 @@ public class AccountingRecord extends AccountingEntity implements Record {
     public final static String SUFFIX = "xs";
 
     private Element itemRoot;
-    private List<Map<String, Element>> itemList;
+    private List<Item> itemList;
 
     private Boolean expense;
 
 
     public AccountingRecord(Document doc, boolean expense) {
         super(doc, UNIQUE, CONTACT);
-        itemList = new ArrayList<Map<String, Element>>();
+        itemList = new ArrayList<>();
         this.expense = expense;
         itemRoot = super.doc.createElement(ITEMLIST + SUFFIX);
         super.root.appendChild(itemRoot);
@@ -40,7 +41,7 @@ public class AccountingRecord extends AccountingEntity implements Record {
 
     public AccountingRecord(Document doc, Node recordNode, boolean expense) {
         super(doc, recordNode, UNIQUE, CONTACT);
-        itemList = new ArrayList<Map<String, Element>>();
+        itemList = new ArrayList<>();
         this.expense = expense;
 
         itemRoot = (Element) ((Element) recordNode).getElementsByTagName(ITEMLIST+SUFFIX).item(0);
@@ -88,95 +89,13 @@ public class AccountingRecord extends AccountingEntity implements Record {
     }
 
     public AccountingRecord addItem(String name, String description, String quantity, String unit, String price) {
-
-        Element item = doc.createElement("item");
-        Map<String, Element> m = new HashMap<>();
-
-        Element e = doc.createElement("description");
-        e.setTextContent(description);
-        item.appendChild(e);
-        m.put("description", e);
-
-        e = doc.createElement("quantity");
-        e.setTextContent(quantity);
-        item.appendChild(e);
-        m.put("quantity", e);
-
-        e = doc.createElement("unit");
-        e.setTextContent(unit);
-        item.appendChild(e);
-        m.put("unit", e);
-
-        e = doc.createElement("price");
-        e.setTextContent(price);
-        item.appendChild(e);
-        m.put("price", e);
-
-        e = doc.createElement("name");
-        e.setTextContent(name);
-        item.appendChild(e);
-        m.put("name", e);
-
-        itemRoot.appendChild(item);
-        itemList.add(m);
+        itemList.add(new AccountingItem(name, description, quantity, unit, price));
         return this;
     }
 
 
-    public AccountingRecord editItem(String[] oldItem, String[] newItem) {
-        if (oldItem.length != 5 || newItem.length != 5) {
-            return this;
-        }
-        for (Map<String, Element> subItem : itemList) {
-            if (subItem.get("name").getTextContent().compareTo(oldItem[0]) == 0 ||
-                    subItem.get("description").getTextContent().compareTo(oldItem[1]) == 0 ||
-                    subItem.get("quantity").getTextContent().compareTo(oldItem[2]) == 0 ||
-                    subItem.get("unit").getTextContent().compareTo(oldItem[3]) == 0 ||
-                    subItem.get("price").getTextContent().compareTo(oldItem[4]) == 0) {
-                subItem.get("name").setTextContent(newItem[0]);
-                subItem.get("description").setTextContent(newItem[1]);
-                subItem.get("unit").setTextContent(newItem[2]);
-                subItem.get("description").setTextContent(newItem[3]);
-                subItem.get("price").setTextContent(newItem[4]);
-            }
-        }
-        return this;
-    }
-
-
-    public AccountingRecord removeItem(String[] attributes) {
-        if (attributes.length != 4) {
-            return this;
-        }
-        Iterator<Map<String, Element>> iterator = itemList.iterator();
-        while (iterator.hasNext()) {
-            Map<String, Element> item = iterator.next();
-
-            if (item.get("name").getTextContent().compareTo(attributes[0]) == 0 ||
-                    item.get("description").getTextContent().compareTo(attributes[1]) == 0 ||
-                    item.get("quantity").getTextContent().compareTo(attributes[2]) == 0 ||
-                    item.get("unit").getTextContent().compareTo(attributes[3]) == 0 ||
-                    item.get("price").getTextContent().compareTo(attributes[4]) == 0) {
-                itemRoot.removeChild(item.get("name").getParentNode());
-                iterator.remove();
-                return this;
-            }
-        }
-        return this;
-    }
-
-
-    public String[][] getItems() {
-        String[][] items = new String[itemList.size()][5];
-        int i = 0;
-        for (Map<String, Element> m : itemList) {
-            items[i][0] = m.get("name").getTextContent();
-            items[i][1] = m.get("description").getTextContent();
-            items[i][2] = m.get("unit").getTextContent();
-            items[i][3] = m.get("description").getTextContent();
-            items[i][4] = m.get("price").getTextContent();
-        }
-        return items;
+    public Item[] getItems() {
+        return (Item[]) itemList.toArray();
     }
 
     public boolean isOpen() {
@@ -195,12 +114,107 @@ public class AccountingRecord extends AccountingEntity implements Record {
     private void itemsToDict(Element root) {
         NodeList list = root.getElementsByTagName(ITEMLIST);
         for (int i = 0; i < list.getLength(); i++) {
-            itemList.add(new HashMap<String, Element>());
+            itemList.add(new AccountingItem((Element) list.item(i)));
+        }
+    }
+
+    public class AccountingItem implements Item {
+        private Element item;
+        private Map<String, Element> attributes;
+
+        private final static String NAME = "name";
+        private final static String DESCRIPTION = "description";
+        private final static String QUANTITY = "quantity";
+        private final static String UNIT = "unit";
+        private final static String PRICE = "price";
+        private final String[] ATTRIBUTES = {DESCRIPTION, QUANTITY, UNIT, PRICE, NAME};
+
+        AccountingItem(Element item) {
+            this.item = item;
+            attributes = new HashMap<>();
             Element e;
-            for (String it : ITEM) {
-                e = (Element) root.getElementsByTagName(it).item(0);
-                itemList.get(i).put(it, e);
+            for (String it : ATTRIBUTES) {
+                e = (Element) item.getElementsByTagName(it).item(0);
+                attributes.put(it, e);
             }
+        }
+
+        AccountingItem(String name, String description,
+                              String quantity, String unit, String price) {
+            attributes = new HashMap<>();
+            this.item = doc.createElement("item");
+
+            creatAttribute(DESCRIPTION, description);
+            creatAttribute(QUANTITY, quantity);
+            creatAttribute(UNIT, unit);
+            creatAttribute(PRICE, price);
+            creatAttribute(NAME, name);
+
+            itemRoot.appendChild(item);
+        }
+
+        public String value(String name) {
+            return attributes.containsKey(name) ? attributes.get(name).getTextContent() : null;
+        }
+
+        public String name() {
+            return value(NAME);
+        }
+
+        public String description() {
+            return value(DESCRIPTION);
+        }
+
+        public String quanitity() {
+            return value(QUANTITY);
+        }
+
+        public String unit() {
+            return value(UNIT);
+        }
+
+        public String price() {
+            return value(PRICE);
+        }
+
+        public AccountingItem changeValue(String name, String value) {
+            if (attributes.containsKey(name)) {
+                attributes.get(name).setTextContent(value);
+            }
+            return this;
+        }
+
+        public AccountingItem setName(String value) {
+            return changeValue(NAME, value);
+        }
+
+        public AccountingItem setDescription(String value) {
+            return changeValue(DESCRIPTION, value);
+        }
+
+        public AccountingItem setQuantity(String value) {
+            return changeValue(QUANTITY, value);
+        }
+
+        public AccountingItem setUnit(String value) {
+            return changeValue(UNIT, value);
+        }
+
+        public AccountingItem setPrice(String value) {
+            return changeValue(PRICE, value);
+        }
+
+        public void delete() {
+            itemRoot.removeChild(item);
+            item = null;
+            attributes = null;
+        }
+
+        private void creatAttribute(String name, String value) {
+            Element e = doc.createElement("description");
+            e.setTextContent(value);
+            item.appendChild(e);
+            attributes.put("description", e);
         }
     }
 }
