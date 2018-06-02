@@ -8,6 +8,7 @@ import cz.pb138.accounting.gui.ContactTable;
 import cz.pb138.accounting.gui.ItemTable;
 import javafx.collections.ObservableList;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -532,5 +533,38 @@ public class AccountingFnImpl {
             e.printStackTrace();
         }
         return false;
+    }
+
+    /**
+     * Create PDF invoices
+     */
+    public void getPDF(String out) {
+
+        try {
+            if (db.getRecordsBetweenBilling("0000-01-01", "3000-01-01").size() == 0) {
+                return;
+            }
+        } catch (AccountingException e) {
+            e.printStackTrace();
+        }
+
+        File file = new File(out);
+
+        if (!file.isDirectory()) {
+            out = "";
+        } else {
+            out += "/";
+        }
+
+        try {
+            String data = AccountingXSLT.getHTML(db.dbAsString());
+            String[] htmls = data.split("<!-- Nobody expects the spanish inquisition! -->");
+
+            for (int i = 0; i < (htmls.length - 1); i++) {
+                AccountingPDF.savePDF(htmls[i], out + "invoice_" + (i + 1) + ".pdf");
+            }
+        } catch (AccountingException | NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 }

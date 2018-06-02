@@ -10,7 +10,7 @@ import java.io.OutputStream;
 
 public class AccountingPDF {
 
-    public void savePDF(String data, String out)
+    public static void savePDF(String data, String out)
     {
         OutputStream os = null;
 
@@ -42,7 +42,7 @@ public class AccountingPDF {
         }
     }
 
-    private org.w3c.dom.Document html5ParseDocument(String html5) {
+    private static org.w3c.dom.Document html5ParseDocument(String html5) {
         org.jsoup.nodes.Document doc;
         doc = Jsoup.parse(html5);
         return DOMBuilder.jsoup2DOM(doc);

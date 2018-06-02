@@ -1,6 +1,7 @@
 package cz.pb138.accounting.trying;
 
 import cz.pb138.accounting.db.impl.AccountingDatabaseImpl;
+import cz.pb138.accounting.fn.AccountingXSLT;
 
 public class ADTestMain {
 
@@ -41,9 +42,11 @@ public class ADTestMain {
 
 //        db.commitChanges();
 
-        System.out.println(db.ownerRecord());
-        System.out.println(db.earningsRecord());
-        System.out.println(db.expensesRecord());
+//        System.out.println(db.ownerRecord());
+//        System.out.println(db.earningsRecord());
+        System.out.println(AccountingXSLT.getHTML(db.dbAsString()));
+//        System.out.println(""+db.getRecordsBetweenBilling("0000-01-01", "3000-01-01").size());
+//        System.out.println(""+db.getRecordsBetweenIssuing("0000-01-01", "3000-01-01").size());
 
 //        System.out.println(db.getLossesByIssuingDate("2006-01-01", "2007-01-01"));
 

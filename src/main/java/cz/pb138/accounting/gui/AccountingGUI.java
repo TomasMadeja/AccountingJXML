@@ -719,7 +719,7 @@ public class AccountingGUI {
 
     @FXML
     private void export2PDF() {
-
+        fn.getPDF(tfFolderSave.getText());
     }
 
     @FXML
