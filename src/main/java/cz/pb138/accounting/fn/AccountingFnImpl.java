@@ -488,6 +488,11 @@ public class AccountingFnImpl implements AccountingFn {
             return null;
         }
 
+        if (!matchInputs(after, DateType.DATE) ||
+                !matchInputs(before, DateType.DATE)) {
+            return null;
+        }
+
         try {
             return Double.toString(
                     (db.getEarningsByIssuingDate(

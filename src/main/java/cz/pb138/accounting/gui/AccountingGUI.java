@@ -737,16 +737,6 @@ public class AccountingGUI {
 
     @FXML
     private void summarizeMoney() {
-        if (!fn.matchPoint(
-                dpToolsFromDate.getEditor().getText(),
-                DateType.DATE).equals("") ||
-                !fn.matchPoint(dpToolsToDate.getEditor().getText(),
-                        DateType.DATE).equals("")) {
-            // TODO
-            // Nespravny format datumu
-            return;
-        }
-
         String result = fn.summarizeMoney(
                 dpToolsFromDate.getEditor().getText(),
                 dpToolsToDate.getEditor().getText());
