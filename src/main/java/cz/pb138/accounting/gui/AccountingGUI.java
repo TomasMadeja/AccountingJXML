@@ -267,22 +267,14 @@ public class AccountingGUI {
      * Invoice tab.
      */
     private void initInvoiceTables() {
-        tcRecordItemName.setCellValueFactory(new PropertyValueFactory<
-                ItemTable,
-                String
-                >("nameVal"));
-        tcRecordItemQuant.setCellValueFactory(new PropertyValueFactory<
-                ItemTable,
-                String
-                >("quantity"));
-        tcRecordItemUnit.setCellValueFactory(new PropertyValueFactory<
-                ItemTable,
-                String
-                >("unit"));
-        tcRecordItemPrice.setCellValueFactory(new PropertyValueFactory<
-                ItemTable,
-                String
-                >("price"));
+        tcRecordItemName.setCellValueFactory(
+                new PropertyValueFactory<>("nameVal"));
+        tcRecordItemQuant.setCellValueFactory(
+                new PropertyValueFactory<>("quantity"));
+        tcRecordItemUnit.setCellValueFactory(
+                new PropertyValueFactory<>("unit"));
+        tcRecordItemPrice.setCellValueFactory(
+                new PropertyValueFactory<>("price"));
 
         setTableListener(tcRecordItemDelete, false);
 
@@ -428,7 +420,7 @@ public class AccountingGUI {
                                  ObservableList<ContactTable> list) {
         String arg = tf.getText();
         if (fn.matchPoint(arg, contact).equals("") &&
-                !contactExist(arg, type, list)) {
+                contactNotExist(arg, type, list)) {
             list.add(new ContactTable(type, arg, false));
             tf.setText("");
             return;
@@ -506,7 +498,7 @@ public class AccountingGUI {
         }
 
         for (String ele : contacts) {
-            if (!contactExist(ele, arg, list)) {
+            if (contactNotExist(ele, arg, list)) {
                 list.add(new ContactTable(arg, ele, true));
             }
         }
@@ -520,15 +512,15 @@ public class AccountingGUI {
      * @param list table
      * @return bool
      */
-    private boolean contactExist(String val,
+    private boolean contactNotExist(String val,
                                  String arg,
                                  ObservableList<ContactTable> list) {
         for (ContactTable ele : list) {
             if (ele.getType().equals(arg) && ele.getValue().equals(val)) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     /**

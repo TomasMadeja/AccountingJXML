@@ -38,7 +38,7 @@
                     padding: 5px;
                     vertical-align: top;
                     }
-                    .invoice-box table tr td:nth-child(2) {
+                    .invoice-box table tr td:nth-child(3) {
                     text-align: right;
                     }
                     .invoice-box table tr.top table td {
@@ -66,7 +66,7 @@
                     .invoice-box table tr.item td {
                     border-bottom: 1px solid #eee;
                     }
-                    .invoice-box table tr.total td:nth-child(2) {
+                    .invoice-box table tr.total td:nth-child(3) {
                     border-top: 2px solid #eee;
                     font-weight: bold;
                     }
@@ -78,7 +78,7 @@
                     .rtl table {
                     text-align: right;
                     }
-                    .rtl table tr td:nth-child(2) {
+                    .rtl table tr td:nth-child(3) {
                     text-align: left;
                     }
                     .bill-to {
