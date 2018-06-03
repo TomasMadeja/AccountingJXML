@@ -51,15 +51,15 @@ public class AccountingFnImpl implements AccountingFn {
      */
     private void initRegexes() {
         regexes.put(getIntType(InputType.NAME),
-                Pattern.compile("^[A-Za-z ]+$"));
+                Pattern.compile("^.*[a-zA-Z].*$"));
         regexes.put(getIntType(InputType.ADDRESS),
-                Pattern.compile("^[A-Za-z ,0-9]+$"));
+                Pattern.compile("^[A-Za-z ,0-9.]+$"));
         regexes.put(getIntType(InputType.ICO),
-                Pattern.compile("^[0-9]+$"));
+                Pattern.compile("^\\d{8}$"));
         regexes.put(getIntType(InputType.DIC),
-                Pattern.compile("^[A-Z]{2}[0-9]+$"));
+                Pattern.compile("^CZ\\d{8,10}|SK\\d{10}$"));
         regexes.put(getIntType(InputType.BANK),
-                Pattern.compile("^[0-9]{0,6}[-]*[0-9]{1,10}/[0-9]{4}$"));
+                Pattern.compile("^[0-9]{0,6}[-]?[0-9]{1,10}/[0-9]{4}$"));
         regexes.put(getIntType(ContactType.EMAIL),
                 Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+" +
                         "\\.[A-Za-z]{2,6}$"));
@@ -67,7 +67,7 @@ public class AccountingFnImpl implements AccountingFn {
                 Pattern.compile("^\\+[0-9]{12}$"));
 
         regexes.put(getIntType(ItemsType.NAME),
-                Pattern.compile("^[A-Za-z ]+$"));
+                Pattern.compile("^.*[a-zA-Z].*$"));
         regexes.put(getIntType(ItemsType.UNIT),
                 Pattern.compile("^[a-z]+$"));
         regexes.put(getIntType(ItemsType.PRICE),
@@ -141,15 +141,15 @@ public class AccountingFnImpl implements AccountingFn {
 
         switch (type) {
             case NAME:
-                return "A-Z, a-z and spaces";
+                return "Name must contain at least one letter.";
             case ADDRESS:
-                return "A-Z, a-z, 0-9, spaces and comma";
+                return "Letters and numbers.";
             case ICO:
-                return "Numbers";
+                return "8 numbers.";
             case DIC:
-                return "Example CZ00001111";
+                return "Example CZ00001111.";
             case BANK:
-                return "Example 00000-1111111/3333";
+                return "Example 00000-1111111/3333.";
             default:
                 return "";
         }
@@ -162,9 +162,9 @@ public class AccountingFnImpl implements AccountingFn {
 
         switch (type) {
             case TELEPHONE:
-                return "Example +420722633544";
+                return "Example +420722633544.";
             case EMAIL:
-                return "Wrong format";
+                return "Wrong email format.";
             default:
                 return "";
         }
@@ -177,13 +177,13 @@ public class AccountingFnImpl implements AccountingFn {
 
         switch (type) {
             case NAME:
-                return "A-Z, a-z and spaces";
+                return "Name must contain at least one letter.";
             case UNIT:
-                return "Only a-z";
+                return "Only low letters.";
             case PRICE:
-                return "Only numbers";
+                return "Only numbers.";
             case QUANTITY:
-                return "Only numbers";
+                return "Only numbers.";
             default:
                 return "";
         }
@@ -196,7 +196,7 @@ public class AccountingFnImpl implements AccountingFn {
 
         switch (date) {
             case DATE:
-                return "Example 12/24/1989";
+                return "Example 12/24/1989.";
             default:
                 return "";
         }

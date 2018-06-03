@@ -137,6 +137,8 @@ public class AccountingGUI {
     @FXML private DatePicker dpToolsFromDate;
     @FXML private DatePicker dpToolsToDate;
     @FXML private TextField tfFolderSave;
+    @FXML private TextField tfToolsWarnToDate;
+    @FXML private TextField tfToolsWarnFromDate;
 
     // Help variables
     private Map<Pane, Integer> menuPanes = new HashMap<>();
@@ -625,6 +627,9 @@ public class AccountingGUI {
         tfListen(dpRecordIssuingDate, tfRecordWarnIssuingDate, DateType.DATE);
 
         tfListen(tfRecordRecAdd, tfRecordWarnRecAdd, InputType.ADDRESS);
+
+        tfListen(dpToolsFromDate, tfToolsWarnFromDate, DateType.DATE);
+        tfListen(dpToolsToDate, tfToolsWarnToDate, DateType.DATE);
     }
 
     /**
@@ -732,6 +737,16 @@ public class AccountingGUI {
 
     @FXML
     private void summarizeMoney() {
+        if (!fn.matchPoint(
+                dpToolsFromDate.getEditor().getText(),
+                DateType.DATE).equals("") ||
+                !fn.matchPoint(dpToolsToDate.getEditor().getText(),
+                        DateType.DATE).equals("")) {
+            // TODO
+            // Nespravny format datumu
+            return;
+        }
+
         String result = fn.summarizeMoney(
                 dpToolsFromDate.getEditor().getText(),
                 dpToolsToDate.getEditor().getText());

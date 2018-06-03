@@ -323,8 +323,8 @@
                                     <Cursor fx:constant="DEFAULT" />
                                  </cursor>
                               </TextField>
-                              <TextField fx:id="tfRecordWarnIssuingDate" disable="true" layoutX="145.0" layoutY="175.0" prefHeight="27.0" prefWidth="194.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" visible="false" />
-                              <TextField fx:id="tfRecordWarnBillingDate" disable="true" layoutX="145.0" layoutY="138.0" prefHeight="27.0" prefWidth="194.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" visible="false" />
+                              <TextField fx:id="tfRecordWarnIssuingDate" disable="true" editable="false" layoutX="145.0" layoutY="175.0" prefHeight="27.0" prefWidth="194.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" visible="false" />
+                              <TextField fx:id="tfRecordWarnBillingDate" disable="true" editable="false" layoutX="145.0" layoutY="138.0" prefHeight="27.0" prefWidth="194.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" visible="false" />
                            </children>
                         </Pane>
                      </children>
@@ -377,6 +377,8 @@
                         <DatePicker fx:id="dpToolsToDate" layoutX="276.0" layoutY="194.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="174.0" />
                         <Label layoutX="202.0" layoutY="156.0" text="From date:" />
                         <Label layoutX="202.0" layoutY="199.0" text="To date:" />
+                        <TextField fx:id="tfToolsWarnFromDate" disable="true" editable="false" layoutX="276.0" layoutY="178.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" visible="false" />
+                        <TextField fx:id="tfToolsWarnToDate" disable="true" editable="false" layoutX="276.0" layoutY="221.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" visible="false" />
                      </children>
                   </AnchorPane>
               </content>
