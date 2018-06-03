@@ -19,36 +19,36 @@ public class AccountingTFListen implements ChangeListener<String> {
     private ItemsType items;
     private DateType date;
 
-    private AccountingFnImpl fn;
+    private AccountingFn fn;
     private TextField warn;
 
     private String outMatch;
 
-    AccountingTFListen(AccountingFnImpl fn,
+    AccountingTFListen(AccountingFn fn,
                        TextField warn,
                        InputType input) {
         initVars(fn, warn, null, input, null, null);
     }
 
-    AccountingTFListen(AccountingFnImpl fn,
+    AccountingTFListen(AccountingFn fn,
                        TextField warn,
                        ContactType contact) {
         initVars(fn, warn, contact, null, null, null);
     }
 
-    AccountingTFListen(AccountingFnImpl fn,
+    AccountingTFListen(AccountingFn fn,
                        TextField warn,
                        ItemsType items) {
         initVars(fn, warn, null, null, items, null);
     }
 
-    AccountingTFListen(AccountingFnImpl fn,
+    AccountingTFListen(AccountingFn fn,
                        TextField warn,
                        DateType date) {
         initVars(fn, warn, null, null, null, date);
     }
 
-    private void initVars(AccountingFnImpl fn,
+    private void initVars(AccountingFn fn,
                           TextField warn,
                           ContactType contact,
                           InputType input,

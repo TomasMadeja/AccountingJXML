@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 /**
  * Functionality class.
  */
-public class AccountingFnImpl {
+public class AccountingFnImpl implements AccountingFn {
 
     private AccountingDatabase db;
 
@@ -38,9 +38,6 @@ public class AccountingFnImpl {
         initRegexes();
     }
 
-    /**
-     * Kill database.
-     */
     public void killDatabase() {
         try {
             db.killDatabase();
@@ -137,13 +134,6 @@ public class AccountingFnImpl {
         }
     }
 
-    /**
-     * Match regex for input.
-     *
-     * @param arg  the arg
-     * @param type the type
-     * @return the string
-     */
     public String matchPoint(String arg, InputType type) {
         if (matchInputs(arg, type)) {
             return "";
@@ -165,13 +155,6 @@ public class AccountingFnImpl {
         }
     }
 
-    /**
-     * Match regex for contact.
-     *
-     * @param arg  the arg
-     * @param type the type
-     * @return the string
-     */
     public String matchPoint(String arg, ContactType type) {
         if (matchInputs(arg, type)) {
             return "";
@@ -187,13 +170,6 @@ public class AccountingFnImpl {
         }
     }
 
-    /**
-     * Match regex for items.
-     *
-     * @param arg  the arg
-     * @param type the type
-     * @return the string
-     */
     public String matchPoint(String arg, ItemsType type) {
         if (matchInputs(arg, type)) {
             return "";
@@ -213,13 +189,6 @@ public class AccountingFnImpl {
         }
     }
 
-    /**
-     * Match regex for date.
-     *
-     * @param arg  the arg
-     * @param date the date
-     * @return the string
-     */
     public String matchPoint(String arg, DateType date) {
         if (matchInputs(arg, date)) {
             return "";
@@ -255,12 +224,6 @@ public class AccountingFnImpl {
         return regexes.get(type.getValue()).matcher(arg).matches();
     }
 
-    /**
-     * Gets owner.
-     *
-     * @param arg the arg
-     * @return the owner
-     */
     public String getOwner(String arg) {
         try {
             String val = db.getOwner().getValue(arg);
@@ -273,12 +236,6 @@ public class AccountingFnImpl {
         return "";
     }
 
-    /**
-     * Get owner contact string [ ].
-     *
-     * @param arg the arg
-     * @return the string [ ]
-     */
     public String[] getOwnerContact(String arg) {
         try {
             return db.getOwner().getContact(arg);
@@ -307,62 +264,26 @@ public class AccountingFnImpl {
         return false;
     }
 
-    /**
-     * Update name boolean.
-     *
-     * @param arg the arg
-     * @return the boolean
-     */
     public boolean updateName(String arg) {
         return updater(arg, "name", InputType.NAME);
     }
 
-    /**
-     * Update address boolean.
-     *
-     * @param arg the arg
-     * @return the boolean
-     */
     public boolean updateAddress(String arg) {
         return updater(arg, "address", InputType.ADDRESS);
     }
 
-    /**
-     * Update ico boolean.
-     *
-     * @param arg the arg
-     * @return the boolean
-     */
     public boolean updateICO(String arg) {
         return updater(arg, "ico", InputType.ICO);
     }
 
-    /**
-     * Update dic boolean.
-     *
-     * @param arg the arg
-     * @return the boolean
-     */
     public boolean updateDIC(String arg) {
         return updater(arg, "dic", InputType.DIC);
     }
 
-    /**
-     * Update bank boolean.
-     *
-     * @param arg the arg
-     * @return the boolean
-     */
     public boolean updateBank(String arg) {
         return updater(arg, "bank-information", InputType.BANK);
     }
 
-    /**
-     * Update note boolean.
-     *
-     * @param arg the arg
-     * @return the boolean
-     */
     public boolean updateNote(String arg) {
         try {
             db.getOwner().changeValue("note", arg);
@@ -372,13 +293,6 @@ public class AccountingFnImpl {
         return commitMe();
     }
 
-    /**
-     * Update contacts boolean.
-     *
-     * @param list    the list
-     * @param delList the del list
-     * @return the boolean
-     */
     public boolean updateContacts(ObservableList<ContactTable> list,
                                   ObservableList<ContactTable> delList) {
         if (delList.size() > 0) {
@@ -535,9 +449,6 @@ public class AccountingFnImpl {
         return false;
     }
 
-    /**
-     * Create PDF invoices
-     */
     public boolean getPDF(String out) {
 
         try {

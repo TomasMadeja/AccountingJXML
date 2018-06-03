@@ -26,7 +26,7 @@ import java.util.Map;
 public class AccountingGUI {
 
     // Functionality
-    private AccountingFnImpl fn;
+    private AccountingFn fn;
 
     // Personal data - tab 1
     @FXML private Pane pnOwnerPersonal;

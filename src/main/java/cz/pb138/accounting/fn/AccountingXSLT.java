@@ -18,7 +18,8 @@ public class AccountingXSLT {
 
         try {
             xsltProc = tf.newTransformer(
-                    new StreamSource(new File("src/main/resources/invoice.xsl")));
+                new StreamSource(
+                    new File("src/main/resources/invoice.xsl")));
         } catch (TransformerConfigurationException e) {
             e.printStackTrace();
         }
