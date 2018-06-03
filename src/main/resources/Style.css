@@ -56,3 +56,11 @@
 .text-area{
     -fx-focus-color: #20bdc5;
 }
+.warning{
+    -fx-background-color: #cc0000;
+    -fx-text-inner-color: #FFFFFF;
+}
+.notification{
+    -fx-background-color: #20bdc5;
+    -fx-text-inner-color: #FFFFFF;
+}
