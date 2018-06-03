@@ -61,6 +61,8 @@ public class AccountingGUI {
     @FXML private Button btOwnerPersonal;
     @FXML private Button btOwnerContacts;
 
+    @FXML private TextField tfWarningSaveChanges;
+
     // Tabs
 //    @FXML private Tab tbOwner;
 //    @FXML private Tab tbInvoice;
@@ -131,6 +133,9 @@ public class AccountingGUI {
     @FXML private Button btRecordContacts;
     @FXML private Button btRecordItems;
     @FXML private Button btRecordInvoiceType;
+
+    @FXML private TextField tfNotifyCreateInvoice;
+    @FXML private TextField tfWarningCreateInvoice;
 
     // Tools - tab 2
     @FXML private Label lbShowMoney;
@@ -241,26 +246,26 @@ public class AccountingGUI {
     @FXML
     private void ownerSaveChanges() {
         if (!fn.updateName(tfOwnerName.getText())) {
-            // TODO
+            tfWarningSaveChanges.setText("Failed to add name");
         }
         if (!fn.updateAddress(tfOwnerAddress.getText())) {
-            // TODO
+            tfWarningSaveChanges.setText("Failed to add address");
         }
         if (!fn.updateICO(tfOwnerICO.getText())) {
-            // TODO
+            tfWarningSaveChanges.setText("Failed to add ICO");
         }
         if (!fn.updateDIC(tfOwnerDIC.getText())) {
-            // TODO
+            tfWarningSaveChanges.setText("Failed to add DIC");
         }
         if (!fn.updateBank(tfOwnerBank.getText())) {
-            // TODO
+            tfWarningSaveChanges.setText("Failed to add bank information");
         }
         if (!fn.updateNote(tfOwnerNote.getText())) {
-            // TODO
+            tfWarningSaveChanges.setText("Failed to add note");
         }
 
         if (!fn.updateContacts(ownerContacts, ownerDeletedContacts)) {
-            // TODO
+            tfWarningSaveChanges.setText("Failed to add contact");
         }
 
         // Lze vypisovat hlasky ze tu nebo onu polozku se nepovedlo pridat
@@ -295,8 +300,9 @@ public class AccountingGUI {
      */
     @FXML
     private void recordCreateInvoice() {
-        if (!rbRecordPayer.isSelected() && !rbRecordSeller.isSelected()) {
-            // TODO
+        if (!rbRecordPayer.isSelected() && !rbRecordSeller.isSelected()){
+            tfWarningCreateInvoice.setText("Failed to create invoice, select type of contract");
+
             // Lze vypsat hlasku ze se nezdarilo vytvorit Invoice
             // protoze neni vybran typ smlouvy Payer nebo Seller
             return;
@@ -318,12 +324,14 @@ public class AccountingGUI {
                 dpRecordIssuingDate.getEditor().getText(),
                 dpRecordBillingDate.getEditor().getText()
         )) {
-            // TODO
+            tfNotifyCreateInvoice.setText("Invoice was created");
+            
             // Lze vypsat hlasku ze se podarilo vytvorit Invoice
             clearInvoice();
             return;
         }
-        // TODO
+        tfWarningCreateInvoice.setText("Failed to create invoice");
+
         // Lze vypsat hlasku ze se nezdarilo vytvorit Invoice
     }
 

@@ -127,7 +127,7 @@
                            <font>
                               <Font name="Verdana" size="11.0" />
                            </font></Button>
-                        <TextField disable="true" editable="false" layoutX="460.0" layoutY="230.0" prefHeight="60.0" prefWidth="130.0" styleClass="warning" visible="false" />
+                        <TextField fx:id="tfWarningSaveChanges" disable="true" editable="false" layoutX="460.0" layoutY="230.0" prefHeight="60.0" prefWidth="130.0" styleClass="warning" visible="false" />
                      </children>
                   </AnchorPane>
             </content>
@@ -153,8 +153,8 @@
                            <font>
                               <Font name="Verdana" size="11.0" />
                            </font></Button>
-                        <TextField disable="true" editable="false" layoutX="460.0" layoutY="261.0" prefHeight="60.0" prefWidth="130.0" styleClass="warning" visible="false" />
-                        <TextField disable="true" editable="false" layoutX="460.0" layoutY="261.0" prefHeight="60.0" prefWidth="130.0" styleClass="notification" visible="false" />
+                        <TextField fx:id="tfWarningCreateInvoice" disable="true" editable="false" layoutX="460.0" layoutY="261.0" prefHeight="60.0" prefWidth="130.0" styleClass="warning" visible="false" />
+                        <TextField fx:id="tfNotifyCreateInvoice" disable="true" editable="false" layoutX="460.0" layoutY="261.0" prefHeight="60.0" prefWidth="130.0" styleClass="notification" visible="false" />
                         <Button layoutX="460.0" layoutY="330.0" mnemonicParsing="false" onAction="#recordCreateInvoice" prefHeight="27.0" prefWidth="130.0" text="Create invoice" textFill="#bf9671">
                            <font>
                               <Font name="Verdana" size="11.0" />
