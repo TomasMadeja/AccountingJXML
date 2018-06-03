@@ -236,28 +236,30 @@ public class AccountingGUI {
      */
     @FXML
     private void ownerSaveChanges() {
-        if (fn.updateName(tfOwnerName.getText())) {
+        if (!fn.updateName(tfOwnerName.getText())) {
             // TODO
         }
-        if (fn.updateAddress(tfOwnerAddress.getText())) {
+        if (!fn.updateAddress(tfOwnerAddress.getText())) {
             // TODO
         }
-        if (fn.updateICO(tfOwnerICO.getText())) {
+        if (!fn.updateICO(tfOwnerICO.getText())) {
             // TODO
         }
-        if (fn.updateDIC(tfOwnerDIC.getText())) {
+        if (!fn.updateDIC(tfOwnerDIC.getText())) {
             // TODO
         }
-        if (fn.updateBank(tfOwnerBank.getText())) {
+        if (!fn.updateBank(tfOwnerBank.getText())) {
             // TODO
         }
-        if (fn.updateNote(tfOwnerNote.getText())) {
+        if (!fn.updateNote(tfOwnerNote.getText())) {
             // TODO
         }
 
-        if (fn.updateContacts(ownerContacts, ownerDeletedContacts)) {
+        if (!fn.updateContacts(ownerContacts, ownerDeletedContacts)) {
             // TODO
         }
+
+        // Lze vypisovat hlasky ze tu nebo onu polozku se nepovedlo pridat
     }
 
     /**
@@ -299,7 +301,8 @@ public class AccountingGUI {
     private void recordCreateInvoice() {
         if (!rbRecordPayer.isSelected() && !rbRecordSeller.isSelected()) {
             // TODO
-//            System.out.printf("Neproslo");
+            // Lze vypsat hlasku ze se nezdarilo vytvorit Invoice
+            // protoze neni vybran typ smlouvy Payer nebo Seller
             return;
         }
 
@@ -320,12 +323,12 @@ public class AccountingGUI {
                 dpRecordBillingDate.getEditor().getText()
         )) {
             // TODO
-//            System.out.printf("Proslo");
+            // Lze vypsat hlasku ze se podarilo vytvorit Invoice
             clearInvoice();
             return;
         }
         // TODO
-//        System.out.printf("Neproslo");
+        // Lze vypsat hlasku ze se nezdarilo vytvorit Invoice
     }
 
     /**
@@ -384,6 +387,7 @@ public class AccountingGUI {
             return;
         }
         // TODO
+        // Lze vypsat hlasku ze se nepovedl pridat obsah do tabulky
     }
 
     /**
@@ -427,7 +431,10 @@ public class AccountingGUI {
                 !contactExist(arg, type, list)) {
             list.add(new ContactTable(type, arg, false));
             tf.setText("");
+            return;
         }
+        // TODO
+        // Lze vypsat hlasku ze kontakt se nepovedlo pridat
     }
 
     /**
@@ -719,7 +726,14 @@ public class AccountingGUI {
 
     @FXML
     private void export2PDF() {
-        fn.getPDF(tfFolderSave.getText());
+        if (!fn.getPDF(tfFolderSave.getText())) {
+            // TODO
+            // Nepodarilo se vytvorit PDF
+            // Hlaska
+            return;
+        }
+        // TODO
+        // Uspesne se povedly vytvorit smlouvy v PDF
     }
 
     @FXML

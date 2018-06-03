@@ -299,10 +299,10 @@ public class AccountingFnImpl {
         if (matchInputs(arg, input)) {
             try {
                 db.getOwner().changeValue(select, arg);
+                return commitMe();
             } catch (AccountingException e) {
                 e.printStackTrace();
             }
-            return commitMe();
         }
         return false;
     }
@@ -538,11 +538,13 @@ public class AccountingFnImpl {
     /**
      * Create PDF invoices
      */
-    public void getPDF(String out) {
+    public boolean getPDF(String out) {
 
         try {
-            if (db.getRecordsBetweenBilling("0000-01-01", "3000-01-01").size() == 0) {
-                return;
+            if (db.getRecordsBetweenBilling(
+                    "0000-01-01",
+                    "3000-01-01").size() == 0) {
+                return false;
             }
         } catch (AccountingException e) {
             e.printStackTrace();
@@ -558,13 +560,22 @@ public class AccountingFnImpl {
 
         try {
             String data = AccountingXSLT.getHTML(db.dbAsString());
-            String[] htmls = data.split("<!-- Nobody expects the spanish inquisition! -->");
+            String[] htmls = new String[0];
+            if (data != null) {
+                htmls = data.split(
+                    "<!-- Nobody expects the spanish inquisition! -->");
+            } else {
+                return false;
+            }
 
             for (int i = 0; i < (htmls.length - 1); i++) {
-                AccountingPDF.savePDF(htmls[i], out + "invoice_" + (i + 1) + ".pdf");
+                AccountingPDF.savePDF(htmls[i], out +
+                        "invoice_" + (i + 1) + ".pdf");
             }
-        } catch (AccountingException | NullPointerException e) {
+            return true;
+        } catch (AccountingException e) {
             e.printStackTrace();
         }
+        return false;
     }
 }

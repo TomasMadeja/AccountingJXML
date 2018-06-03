@@ -19,9 +19,11 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException, AccountingException  {
+    public void start(Stage primaryStage) throws IOException,
+            AccountingException  {
         // Get JavaFX
-        FXMLLoader fxml = new FXMLLoader(getClass().getResource("/AccountingGUI.fxml"));
+        FXMLLoader fxml = new FXMLLoader(
+                getClass().getResource("/AccountingGUI.fxml"));
         Parent root = fxml.load();
 
         // Set fn to controller
