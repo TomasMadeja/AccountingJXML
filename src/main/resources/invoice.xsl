@@ -66,20 +66,10 @@
                     .invoice-box table tr.item td {
                     border-bottom: 1px solid #eee;
                     }
-                    .invoice-box table tr.total td:nth-child(3) {
+                    .invoice-box table tr.total td:nth-child(2) {
                     border-top: 2px solid #eee;
                     font-weight: bold;
-                    }
-                    /** RTL **/
-                    .rtl {
-                    direction: rtl;
-                    font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-                    }
-                    .rtl table {
                     text-align: right;
-                    }
-                    .rtl table tr td:nth-child(3) {
-                    text-align: left;
                     }
                     .bill-to {
                     background-color: #fcfcfc;
@@ -165,8 +155,8 @@
                         <xsl:apply-templates select="./itemxs/item" />
 
                         <tr class="total">
-                            <td colspan="4"></td>
-                            <td>
+                            <td colspan="2"></td>
+                            <td colspan="3">
                                 Total: $<xsl:value-of select="total-price" />
                             </td>
                         </tr>
