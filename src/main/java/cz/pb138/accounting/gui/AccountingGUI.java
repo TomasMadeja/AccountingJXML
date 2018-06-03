@@ -134,6 +134,8 @@ public class AccountingGUI {
 
     // Tools - tab 2
     @FXML private Label lbShowMoney;
+    @FXML private DatePicker dpToolsFromDate;
+    @FXML private DatePicker dpToolsToDate;
     @FXML private TextField tfFolderSave;
 
     // Help variables
@@ -730,6 +732,16 @@ public class AccountingGUI {
 
     @FXML
     private void summarizeMoney() {
+        String result = fn.summarizeMoney(
+                dpToolsFromDate.getEditor().getText(),
+                dpToolsToDate.getEditor().getText());
 
+        if (result != null) {
+            lbShowMoney.setText(result.trim());
+            return;
+        }
+
+        // TODO
+        // Lze vypsat hlasku ze neni co scitat Invoice nebyl vytvoren
     }
 }

@@ -158,4 +158,12 @@ public interface AccountingFn {
      * @param out string
      */
     boolean getPDF(String out);
+
+    /**
+     * Get value sum.
+     * @param after date
+     * @param before date
+     * @return string
+     */
+    String summarizeMoney(String after, String before);
 }

@@ -409,18 +409,10 @@ public class AccountingFnImpl implements AccountingFn {
                 record.changeValue("entity-note", note);
                 record.changeValue("recipient-address", recipient);
 
-                String[] billing = billingDate.split("/");
-                String[] issuing = issuingDate.split("/");
+                record.changeValue("issuing-date", getDate(issuingDate));
+                record.changeValue("billing-date", getDate(billingDate));
 
-                record.changeValue("issuing-date", issuing[2] +
-                        "-" + expandDate(issuing[0]) + "-" +
-                        expandDate(issuing[1]));
-                record.changeValue("billing-date", billing[2] +
-                        "-" + expandDate(billing[0]) + "-" +
-                        expandDate(billing[1]));
-
-                commitMe();
-                return true;
+                return commitMe();
             } catch (AccountingException e) {
                 e.printStackTrace();
             }
@@ -471,7 +463,7 @@ public class AccountingFnImpl implements AccountingFn {
 
         try {
             String data = AccountingXSLT.getHTML(db.dbAsString());
-            String[] htmls = new String[0];
+            String[] htmls;
             if (data != null) {
                 htmls = data.split(
                     "<!-- Nobody expects the spanish inquisition! -->");
@@ -488,5 +480,33 @@ public class AccountingFnImpl implements AccountingFn {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public String summarizeMoney(String after, String before) {
+        if (after.trim().length() == 0 ||
+                before.trim().length() == 0) {
+            return null;
+        }
+
+        try {
+            return Double.toString(
+                    (db.getEarningsByIssuingDate(
+                            getDate(after),
+                            getDate(before)) -
+                    db.getLossesByIssuingDate(
+                            getDate(after),
+                            getDate(before))
+                    ));
+        } catch (AccountingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private String getDate(String date) {
+        String[] dateA = date.split("/");
+
+        return dateA[2] + "-" +
+                expandDate(dateA[0]) + "-" + expandDate(dateA[1]);
     }
 }
