@@ -3,6 +3,8 @@ package cz.pb138.accounting.gui;
 import cz.pb138.accounting.db.impl.AccountingException;
 import cz.pb138.accounting.fn.*;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.util.StringConverter;
 
 import java.io.File;
@@ -145,6 +148,8 @@ public class AccountingGUI {
     @FXML private TextField tfToolsWarnToDate;
     @FXML private TextField tfToolsWarnFromDate;
 
+    @FXML private TextField tfWarningSummarize;
+
     // Help variables
     private Map<Pane, Integer> menuPanes = new HashMap<>();
 
@@ -162,6 +167,8 @@ public class AccountingGUI {
     private ObservableList<ItemTable> recordItems =
             FXCollections.observableArrayList();
 
+    private FadeTransition hideNotice;
+
     /**
      * Constructor.
      * @throws AccountingException error
@@ -177,6 +184,8 @@ public class AccountingGUI {
 
         initOwner();
         initInvoiceTables();
+
+        initTransition();
 
         formatDates(dpRecordBillingDate);
         formatDates(dpRecordIssuingDate);
@@ -325,7 +334,7 @@ public class AccountingGUI {
                 dpRecordBillingDate.getEditor().getText()
         )) {
             tfNotifyCreateInvoice.setText("Invoice was created");
-            
+
             // Lze vypsat hlasku ze se podarilo vytvorit Invoice
             clearInvoice();
             return;
@@ -754,7 +763,18 @@ public class AccountingGUI {
             return;
         }
 
-        // TODO
+        tfWarningSummarize.setText("Nothing to summarize, invoice has not been created");
+        tfWarningSummarize.setVisible(true);
+        hideNotice.play();
+
         // Lze vypsat hlasku ze neni co scitat Invoice nebyl vytvoren
     }
+
+    private void initTransition(){
+        hideNotice = new FadeTransition(Duration.seconds(5));
+        hideNotice.setNode(tfWarningSummarize);
+        hideNotice.setFromValue(1.0);
+        hideNotice.setToValue(0.0);
+    }
+
 }
