@@ -261,28 +261,35 @@ public class AccountingGUI {
     private void ownerSaveChanges() {
         if (!fn.updateName(tfOwnerName.getText())) {
             tfWarningSaveChanges.setText("Failed to add name");
+            revealHideNotice(tfWarningSaveChanges);
         }
         if (!fn.updateAddress(tfOwnerAddress.getText())) {
             tfWarningSaveChanges.setText("Failed to add address");
+            revealHideNotice(tfWarningSaveChanges);
         }
         if (!fn.updateICO(tfOwnerICO.getText())) {
             tfWarningSaveChanges.setText("Failed to add ICO");
+            revealHideNotice(tfWarningSaveChanges);
         }
         if (!fn.updateDIC(tfOwnerDIC.getText())) {
             tfWarningSaveChanges.setText("Failed to add DIC");
+            revealHideNotice(tfWarningSaveChanges);
         }
         if (!fn.updateBank(tfOwnerBank.getText())) {
             tfWarningSaveChanges.setText("Failed to add bank information");
+            revealHideNotice(tfWarningSaveChanges);
         }
         if (!fn.updateNote(tfOwnerNote.getText())) {
             tfWarningSaveChanges.setText("Failed to add note");
+            revealHideNotice(tfWarningSaveChanges);
         }
 
         if (!fn.updateContacts(ownerContacts, ownerDeletedContacts)) {
             tfWarningSaveChanges.setText("Failed to add contact");
+            revealHideNotice(tfWarningSaveChanges);
         }
-
         // Lze vypisovat hlasky ze tu nebo onu polozku se nepovedlo pridat
+
     }
 
     /**
@@ -316,6 +323,7 @@ public class AccountingGUI {
     private void recordCreateInvoice() {
         if (!rbRecordPayer.isSelected() && !rbRecordSeller.isSelected()){
             tfWarningCreateInvoice.setText("Failed to create invoice, select type of contract");
+            revealHideNotice(tfWarningCreateInvoice);
 
             // Lze vypsat hlasku ze se nezdarilo vytvorit Invoice
             // protoze neni vybran typ smlouvy Payer nebo Seller
@@ -339,12 +347,14 @@ public class AccountingGUI {
                 dpRecordBillingDate.getEditor().getText()
         )) {
             tfNotifyCreateInvoice.setText("Invoice was created");
+            revealHideNotice(tfNotifyCreateInvoice);
 
             // Lze vypsat hlasku ze se podarilo vytvorit Invoice
             clearInvoice();
             return;
         }
         tfWarningCreateInvoice.setText("Failed to create invoice");
+        revealHideNotice(tfWarningCreateInvoice);
 
         // Lze vypsat hlasku ze se nezdarilo vytvorit Invoice
     }
@@ -405,7 +415,7 @@ public class AccountingGUI {
             return;
         }
         tfWarningAddItem.setText("Failed to add content to the table");
-
+        revealHideNotice(tfWarningAddItem);
         // Lze vypsat hlasku ze se nepovedl pridat obsah do tabulky
     }
 
@@ -453,6 +463,7 @@ public class AccountingGUI {
             return;
         }
         tfWarningAddContact.setText("Failed to add contact");
+        revealHideNotice(tfWarningAddContact);
 
         // Lze vypsat hlasku ze kontakt se nepovedlo pridat
     }
@@ -751,12 +762,14 @@ public class AccountingGUI {
     private void export2PDF() {
         if (!fn.getPDF(tfFolderSave.getText())) {
             tfWarningExport.setText("Failed to create PDF");
+            revealHideNotice(tfWarningExport);
 
             // Nepodarilo se vytvorit PDF
             // Hlaska
             return;
         }
-        tfWarningExport.setText("PDF was successfully created");
+        tfNotifyExport.setText("PDF was successfully created");
+        revealHideNotice(tfNotifyExport);
 
         // Uspesne se povedly vytvorit smlouvy v PDF
     }
@@ -773,15 +786,19 @@ public class AccountingGUI {
         }
 
         tfWarningSummarize.setText("Nothing to summarize, invoice has not been created");
-        tfWarningSummarize.setVisible(true);
-        hideNotice.play();
+        revealHideNotice(tfWarningSummarize);
 
         // Lze vypsat hlasku ze neni co scitat Invoice nebyl vytvoren
     }
 
+    private void revealHideNotice(TextField field){
+        field.setVisible(true);
+        hideNotice.setNode(field);
+        hideNotice.playFromStart();
+    }
+
     private void initTransition(){
         hideNotice = new FadeTransition(Duration.seconds(5));
-        hideNotice.setNode(tfWarningSummarize);
         hideNotice.setFromValue(1.0);
         hideNotice.setToValue(0.0);
     }
