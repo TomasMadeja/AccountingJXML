@@ -65,6 +65,7 @@ public class AccountingGUI {
     @FXML private Button btOwnerContacts;
 
     @FXML private TextField tfWarningSaveChanges;
+    @FXML private TextField tfWarningAddContact;
 
     // Tabs
 //    @FXML private Tab tbOwner;
@@ -116,6 +117,8 @@ public class AccountingGUI {
     @FXML private TextField tfRecordWarnItemPrice;
     @FXML private TextField tfRecordWarnItemQuantity;
 
+    @FXML private TextField tfWarningAddItem;
+
     @FXML private TableColumn<ItemTable, String> tcRecordItemName;
     @FXML private TableColumn<ItemTable, String> tcRecordItemQuant;
     @FXML private TableColumn<ItemTable, String> tcRecordItemUnit;
@@ -148,6 +151,8 @@ public class AccountingGUI {
     @FXML private TextField tfToolsWarnToDate;
     @FXML private TextField tfToolsWarnFromDate;
 
+    @FXML private TextField tfWarningExport;
+    @FXML private TextField tfNotifyExport;
     @FXML private TextField tfWarningSummarize;
 
     // Help variables
@@ -399,7 +404,8 @@ public class AccountingGUI {
             clearItemFields();
             return;
         }
-        // TODO
+        tfWarningAddItem.setText("Failed to add content to the table");
+
         // Lze vypsat hlasku ze se nepovedl pridat obsah do tabulky
     }
 
@@ -446,7 +452,8 @@ public class AccountingGUI {
             tf.setText("");
             return;
         }
-        // TODO
+        tfWarningAddContact.setText("Failed to add contact");
+
         // Lze vypsat hlasku ze kontakt se nepovedlo pridat
     }
 
@@ -743,12 +750,14 @@ public class AccountingGUI {
     @FXML
     private void export2PDF() {
         if (!fn.getPDF(tfFolderSave.getText())) {
-            // TODO
+            tfWarningExport.setText("Failed to create PDF");
+
             // Nepodarilo se vytvorit PDF
             // Hlaska
             return;
         }
-        // TODO
+        tfWarningExport.setText("PDF was successfully created");
+
         // Uspesne se povedly vytvorit smlouvy v PDF
     }
 

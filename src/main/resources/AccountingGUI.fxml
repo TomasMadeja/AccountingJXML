@@ -33,6 +33,7 @@
                            <font>
                               <Font name="Verdana" size="11.0" />
                            </font></Button>
+                        <TextField fx:id="tfWarningAddContact" disable="true" editable="false" layoutX="460.0" layoutY="82.0" prefHeight="60.0" prefWidth="130.0" styleClass="warning" visible="false" />
                         <Line endX="183.0" layoutX="450.0" layoutY="184.0" rotate="-90.0" startX="-183.0" stroke="#8e7985" />
                         <Button layoutX="460.0" layoutY="330.0" mnemonicParsing="false" onAction="#initOwner" prefHeight="27.0" prefWidth="130.0" text="Reset" textFill="#bf9671">
                            <font>
@@ -155,6 +156,7 @@
                            </font></Button>
                         <TextField fx:id="tfWarningCreateInvoice" disable="true" editable="false" layoutX="460.0" layoutY="261.0" prefHeight="60.0" prefWidth="130.0" styleClass="warning" visible="false" />
                         <TextField fx:id="tfNotifyCreateInvoice" disable="true" editable="false" layoutX="460.0" layoutY="261.0" prefHeight="60.0" prefWidth="130.0" styleClass="notification" visible="false" />
+                        <TextField fx:id="tfWarningAddContact" disable="true" editable="false" layoutX="460.0" layoutY="142.0" prefHeight="60.0" prefWidth="130.0" styleClass="warning" visible="false" />
                         <Button layoutX="460.0" layoutY="330.0" mnemonicParsing="false" onAction="#recordCreateInvoice" prefHeight="27.0" prefWidth="130.0" text="Create invoice" textFill="#bf9671">
                            <font>
                               <Font name="Verdana" size="11.0" />
@@ -280,7 +282,7 @@
                                  <font>
                                     <Font name="Verdana" size="11.0" />
                                  </font></Button>
-                              <TextField disable="true" editable="false" layoutX="137.0" layoutY="329.0" prefHeight="30.0" prefWidth="215.0" styleClass="warning" visible="false" />
+                              <TextField fx:id="tfWarningAddItem" disable="true" editable="false" layoutX="137.0" layoutY="329.0" prefHeight="30.0" prefWidth="215.0" styleClass="warning" visible="false" />
                               <TextField fx:id="tfRecordWarnItemUnit" disable="true" editable="false" layoutX="295.0" layoutY="246.0" prefHeight="27.0" prefWidth="145.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
@@ -366,6 +368,8 @@
                            <font>
                               <Font name="Verdana" size="11.0" />
                            </font></Button>
+                        <TextField fx:id="tfWarningExport" disable="true" editable="false" layoutX="180.0" layoutY="81.0" prefHeight="30.0" prefWidth="270.0" styleClass="warning" visible="false" />
+                        <TextField fx:id="tfNotifyExport" disable="true" editable="false" layoutX="180.0" layoutY="81.0" prefHeight="30.0" prefWidth="270.0" styleClass="notification" visible="false" />
                         <Label layoutX="10.0" layoutY="155.0" text="Summarize invoices:" />
                         <Button layoutX="460.0" layoutY="193.0" mnemonicParsing="false" onAction="#summarizeMoney" prefHeight="27.0" prefWidth="130.0" text="Summarize" textFill="#bf9671">
                            <font>
