@@ -1,141 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-            <meta charset="windows-1250">
-	<title>AccountingJXML: Records of incomes and expenditures</title>
-	<link rel="stylesheet" type="text/css" href="main.css">
-	</head>
-	<body>
-		<nav>
-    		
-			<a href="index.html">Home</a> <a href="database.html">Database</a>
-                        <a href="functionality.html">Functionality</a> <a href="gui.html">GUI</a>
-    		
-		</nav>
-        	<h1>AccountingJXML!</h1>
-                <h2>Assignment</h2>
-                <p>
-                    Student are to design and develop Java application for recording income and spending of small business owner, that stores data
-                    in fitting format within native XML database. To this end, students are to design structure of XML data and describe it using XML schema.
-		</p>
-                <p>
-                    Functionality is to be capable of:
-                </p>
-                <ul>
-                    <li>new revenue</li>
-                    <li>adding new expenditure</li>
-                    <li>calculating gains/losses since the start of accounting period (year)</li>
-                    <li>exporting data in fitting format into PDF</li>
-		</ul>
-                <p>
-                    Every store income will include the following information:
-                </p>
-		<ul>
-                    <li>payer information</li>
-                    <li>recipient information</li>
-                    <li>date of issuing of the document</li>
-                    <li>billing date of the document</li>
-                    <li>list of invoiced items</li>
-		</ul>
-                <h2>Overview</h2>
-                <p>
-                    We were assigned to design and develop Java application for recording incomes and expanditures for small
-                    business owner, that stores data in native XML database.
-                </p>
-                <p>
-                    Every record contains:
-                </p>
-                <ul>
-                    <li>payer information</li>
-                    <li>recipient information</li>
-                    <li>issuing date</li>
-                    <li>billing date</li>
-                    <li>list of invoiced items</li>
-                </ul>
-                <p>
-                    Applications functionality:
-                </p>
-                <ul>
-                    <li>adding new revenue and expenditure</li>
-                    <li>calculating income(losses) since the start of accounting period</li>
-                    <li>exporting stored invoices into PDF format</li>
-                </ul>
-                
-                <h2>Development team:</h2>
-                <p>Head of the project : <a href="https://github.com/Zdendav">Mgr. Luděk Bártek, Ph.D</a></p>
-                <p>Team members:</p>
-                <ul>
-                    <li><a href="https://github.com/TomasMadeja">Tomáš Madeja</a></li>
-                    <li><a href="https://github.com/MartinTrubelik">Martin Trubelík</a></li>
-                    <li><a href="https://github.com/MonikaLezatkova">Monika Ležatková</a></li>
-                    <li><a href="https://github.com/Zdendav">Zdeněk David</a></li>                    
-                </ul>
-                <h2>Application Design</h2>
-                <p>
-                    We have decided on splitting the application into three independent layers, with upper layers using the services
-                    of the layer directly below it.
-                </p>
-                <p>
-                    Going from bottom up, the layers are:
-                </p>
-                <ul>
-                    <li>GUI</li>
-                    <li>Functionality</li>
-                    <li>Database</li>
-                </ul>
-                <p>
-                    Database as the first layer handles all communication with native XML database and handles any
-                    data retrieval of storage.<br/>
-                    Second layer, Functionality, processes data and provides required application functionality.<br/>
-                    Third layer is GUI, which providesinterface for interaction with the user.
-                </p>
-                <h3>Database</h3>
-                <p>
-                    Uses eXist-db as it's native XML database. Provides interface for storing new invoices into the
-                    database as well as handling consistency of the database. For the purposes of the project it only
-                    allows retrieval ability.<br/>
-                    For more information on database -> <a href="database.html">Database</a>
-                </p>
-                <h3>Functionality</h3>
-                <p>
-                    Handles application functionality, such as storing new invoices, calculating earnings and losses
-                    and exporting data into PDF format. This layer is responsible for checking all input data for
-                    validity before being inserted ino the database.<br/>
-                    For more information on functionality -> <a href="functionality.html">Functionality</a>
-                </p>
-                <h3>GUI</h3>
-                <p>
-                    Provides user interface using JavaFX. Also provides hints for user as to a format of input data as well
-                    as validation of the data using Functionality layer's functions.<br/>
-                    For more information on GUI -> <a href="gui.html">GUI</a>
-                </p>
-                <h2>Implementation</h2>
-		<p>
-                    This application was programmed in Java with markup language XML to store application data as xml documents. For GUI we used library Swing.
-                    Whole graphical interface is created with .form file which is specific to IntelliJ IDEA and as such is necessary to build the project successfully.
-                    We have decided to use eXist-db because it is opensource xml database supporting XSLT and XQuery. Another important factor was high quality documentation.
-                </p>
-		<img src="Diagram2.png" alt="diagram2" width="15%" height="15%">
-		<br/>
-                <p>
-		    This graph represents how are we working with every request. The request starts from user who is using our GUI.
-                    Next our GUI creates a request into functionality layer TODO
-                </p>
-                <h2>Team assignments</h2>
-                <p>Team members:</p>
-                <ul>
-                    <li><a href="https://github.com/TomasMadeja">Tomáš Madeja</a> - XML database</li>
-                    <li><a href="https://github.com/MartinTrubelik">Martin Trubelík</a> - Functionality layer</li>
-                    <li><a href="https://github.com/MonikaLezatkova">Monika Ležatková</a> - GUI</li>
-                    <li><a href="https://github.com/Zdendav">Zdeněk David</a> - Wiki, web</li>                    
-                </ul>
-                <h2>Reports</h2>
-                <ul>
-                    <li><a href="https://github.com/TomasMadeja">Tomáš Madeja</a> - ODKAZ NA REPORT TODO</li>
-                    <li><a href="https://github.com/MartinTrubelik">Martin Trubelík</a> - ODKAZ NA REPORT TODO</li>
-                    <li><a href="https://github.com/MonikaLezatkova">Monika Ležatková</a> - ODKAZ NA REPORT TODO</li>
-                    <li><a href="https://github.com/Zdendav">Zdeněk David</a> - ODKAZ NA REPORT TODO</li> 
-                </ul>
-		
-	</body>
+    <meta charset="UTF-8">
+    <title>AccountingJXML: Records of incomes and expenditures</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <body>
+        <nav>
+            <ul>    
+                <li><a href="index.html">Home</a></li>
+                <li><a href="database.html">Database</a></li>
+                <li><a href="functionality.html">Functionality</a></li>
+                <li><a href="gui.html">GUI</a></li>
+            </ul>
+        </nav>
+        <h1>AccountingJXML</h1>
+        <h2>Overview</h2>
+        <p>
+            We were assigned to design and develop Java application for recording incomes and expanditures for small
+            business owner, that stores data in native XML database.
+        </p>
+        <p>
+            Every record contains:
+        </p>
+        <ul>
+            <li>payer information</li>
+            <li>recipient information</li>
+            <li>issuing date</li>
+            <li>billing date</li>
+            <li>list of invoiced items</li>
+        </ul>
+        <p>
+            Applications functionality:
+        </p>
+        <ul>
+            <li>adding new revenue and expenditure</li>
+            <li>calculating income(losses) since the start of accounting period</li>
+            <li>exporting stored invoices into PDF format</li>
+        </ul>                
+        <h2>Development team:</h2>
+        <p>
+            Head of the project : <a href="https://github.com/Zdendav">Mgr. LudÄ›k BĂˇrtek, Ph.D</a>
+        </p>
+        <p>Team members:
+        </p>
+        <ul>
+            <li><a href="https://github.com/TomasMadeja">TomĂˇĹˇ Madeja</a></li>
+            <li><a href="https://github.com/MartinTrubelik">Martin TrubelĂ­k</a></li>
+            <li><a href="https://github.com/MonikaLezatkova">Monika LeĹľatkovĂˇ</a></li>
+            <li><a href="https://github.com/Zdendav">ZdenÄ›k David</a></li>                    
+        </ul>
+        <h2>Application Design</h2>
+        <p>
+            We have decided on splitting the application into three independent layers, with upper layers using the services
+            of the layer directly below it.
+        </p>
+        <p>
+            Going from bottom up, the layers are:
+        </p>
+        <ul>
+            <li>GUI</li>
+            <li>Functionality</li>
+            <li>Database</li>
+        </ul>
+        <p>
+            Database as the first layer handles all communication with native XML database and handles any
+            data retrieval of storage.<br/>
+            Second layer, Functionality, processes data and provides required application functionality.<br/>
+            Third layer is GUI, which providesinterface for interaction with the user.
+        </p>
+        <h3>Database</h3>
+        <p>
+            Uses eXist-db as it's native XML database. Provides interface for storing new invoices into the
+            database as well as handling consistency of the database. For the purposes of the project it only
+            allows retrieval ability.<br/>
+            For more information on database -> <a href="database.html">Database</a>
+        </p>
+        <h3>Functionality</h3>
+        <p>
+            Handles application functionality, such as storing new invoices, calculating earnings and losses
+            and exporting data into PDF format. This layer is responsible for checking all input data for
+            validity before being inserted ino the database.<br/>
+            For more information on functionality -> <a href="functionality.html">Functionality</a>
+        </p>
+        <h3>GUI</h3>
+        <p>
+            Provides user interface using JavaFX. Also provides hints for user as to a format of input data as well
+            as validation of the data using Functionality layer's functions.<br/>
+            For more information on GUI -> <a href="gui.html">GUI</a>
+        </p>
+        <img src="Diagram2.png" alt="diagram2" width="15%" height="15%"><br/>
+        <p>
+            This graph represents how are we working with every request.
+        </p>
+        <h2>Team assignments</h2>
+        <p>Team members:</p>
+        <ul>
+            <li><a href="https://github.com/TomasMadeja">TomĂˇĹˇ Madeja</a> - XML database</li>
+            <li><a href="https://github.com/MartinTrubelik">Martin TrubelĂ­k</a> - Functionality layer</li>
+            <li><a href="https://github.com/MonikaLezatkova">Monika LeĹľatkovĂˇ</a> - GUI</li>
+            <li><a href="https://github.com/Zdendav">ZdenÄ›k David</a> - Wiki, web</li>                    
+        </ul>
+        <h2>Reports</h2>
+        <ul>
+            <li><a href="https://github.com/TomasMadeja">TomĂˇĹˇ Madeja</a> - ODKAZ NA REPORT TODO</li>
+            <li><a href="https://github.com/MartinTrubelik">Martin TrubelĂ­k</a> - ODKAZ NA REPORT TODO</li>
+            <li><a href="https://github.com/MonikaLezatkova">Monika LeĹľatkovĂˇ</a> - ODKAZ NA REPORT TODO</li>
+            <li><a href="https://github.com/Zdendav">ZdenÄ›k David</a> - ODKAZ NA REPORT TODO</li> 
+        </ul>	
+    </body>
 </html>
