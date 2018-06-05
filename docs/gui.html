@@ -1,4 +1,129 @@
 <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Simple Sidebar - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap-journal.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index.html">
+                        AccountingJXML
+                    </a>
+                </li>
+                <li>
+                    <a href="database.html">Database</a>
+                </li>
+                <li>
+                    <a href="functionality.html">Functionality</a>
+                </li>
+                <li>
+                    <a href="gui.html">GUI</a>
+                </li>
+                <li>
+                    <a href="resources.html">Resources</a>
+                </li>
+                <li>
+                    <a href="reports.html">Reports</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            
+            <h1>GUI</h1>
+            <p>
+                Graphical user interface (or GUI for short) is user interface which allows interaction between user
+                and electronic device through graphical icons and indicators.
+            </p>
+            
+            <h2>Application GUI</h2>
+            
+            <p>
+                Our application's interface consists of three sections.
+            </p>
+            <ul>
+                <li>Owner</li>
+                <li>Invoice</li>
+                <li>Tools</li>
+            </ul>
+
+            <h3>Owner</h3>
+            
+            <p>
+                Section Owner is divided into two subsections and allows reset of all personal data.
+            </p>
+            <ul>
+                <li>Subsection Personal data offers user to set up save and edit his personal information.</li>
+                <li>Subsection Contacts gives access to database of telephone numbers and emails.</li>
+            </ul>
+            <img src="resources/GUI1.png" alt="pic1" width="40%" height="40%">
+            <img src="resources/GUIContacts.png" alt="pic2" width="40%" height="40%">
+            <br/>
+            <h3>Invoice</h3>
+            <p>
+                Section Invoice is divided into four subsections.
+            </p>
+            <ul>
+                <li>Subsection Trader ...</li>
+                <li>Subsection Contacts...</li>
+                <li>Subsection Items ...</li>
+                <li>Subsection Type of invoice ...</li>
+            </ul>
+            <img src="resources/GUI4.png" alt="pic4" width="40%" height="40%">
+            <img src="resources/GUI2.png" alt="pic2" width="40%" height="40%">
+            <br/>
+            <h3>Tools</h3>
+            <p>
+                Section Tools allowes to export stored data into PDF file
+            </p>
+            <img src="resources/GUI3.png" alt="pic3" width="40%" height="40%">
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>
+
+
+<!-- 
+<!DOCTYPE html>
 <html lang=en>
     <meta charset="UTF-8">
     <title>AccountingJXML: Records of incomes and expenditures</title>
@@ -58,4 +183,4 @@
 	
 
     </body>
-</html>
+</html> -->

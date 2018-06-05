@@ -1,56 +1,114 @@
 <!DOCTYPE html>
-<html lang=en>
-    <meta charset="UTF-8">
-    <title>AccountingJXML: Records of incomes and expenditures</title>
-    <link rel="stylesheet" type="text/css" href="main.css">
-    <body>
-        <nav>
-            <ul>    
-                <li><a href="index.html">Home</a></li>
-                <li><a href="database.html">Database</a></li>
-                <li><a href="functionality.html">Functionality</a></li>
-                <li><a href="gui.html">GUI</a></li>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Simple Sidebar - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap-journal.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index.html">
+                        AccountingJXML
+                    </a>
+                </li>
+                <li>
+                    <a href="database.html">Database</a>
+                </li>
+                <li>
+                    <a href="functionality.html">Functionality</a>
+                </li>
+                <li>
+                    <a href="gui.html">GUI</a>
+                </li>
+                <li>
+                    <a href="resources.html">Resources</a>
+                </li>
+                <li>
+                    <a href="reports.html">Reports</a>
+                </li>
             </ul>
-        </nav>
-        <h1>Database</h1>
-        <h2>eXist-db</h2>
-	<p>
-            eXist-db (or eXist for short) is an open source software project for NoSQL databases built
-            on XML technology.<br/>
-            It is classified as both a NoSQL document-oriented database system and a native XML database 
-            (and it provides support for XML, JSON, HTML and Binary documents). Unlike most relational 
-            database management systems (RDBMS) and NoSQL databases eXist provides XQuery and XSLT as its 
-            query and Application programming languages.<br/>
-            For web -> <a href="http://exist-db.org/exist/apps/homepage/index.html">exist-db.org</a><br/>
-            For github -> <a href="https://github.com/eXist-db/exist">exist-db git</a><br/>
-        </p>
-        <h2>Database Implementation</h2>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <h1>Database</h1>
+            <h2>eXist-db</h2>
         <p>
-            Database layer uses eXist-db as it's native XML database with eXist being started in embedded mode.
-            eXist is used for data storage in xml form as well as it's validation using provided schema.
-        </p>
-	<img src="Diagram1.png" alt="diagram1" width="50%" height="50%">
-        <p>
-            Invoices are stored within a database as records with every invoice being represented as a single record.
-            Every record contains list of invoices, invoice information, shipping address and information about entity.
-            Depending on type of invoice (expanse, revenue), the entity is interpreted as either the payer or seller
-            and contains bank, identification, name, address and contact information. Owner information are stored 
-            separately from the records as the owner (user) is expected to be part of every provided invoice.
-        </p>
-        <p>
-            Records themselves are represented as objects with provided getter and setter function for given atribute.
-            Invoice items are represented as separe objects kept within each record. These records can then be static or
-            dynamic. Changes to static records do not reflect on database while dynamic do. For some transaction control
-            the Database provides commit and rollback functionality.
-        </p>
-        <p>
-            Database consistency is insured with XML validation both within the eXist-db as well as within the Database 
-            class. However it only enforces the format necessary for the database (including types) and leaves more
-            specific content format upper layers.
-        </p>
-        <p>
-            For exporting invoices into PDF the Database provides several output formats of the database contents. For
-            calculating earnings and losses it provides getters in range as well as sum using XQuery.
-        </p>
-    </body>
+                eXist-db (or eXist for short) is an open source software project for NoSQL databases built
+                on XML technology.<br/>
+                It is classified as both a NoSQL document-oriented database system and a native XML database 
+                (and it provides support for XML, JSON, HTML and Binary documents). Unlike most relational 
+                database management systems (RDBMS) and NoSQL databases eXist provides XQuery and XSLT as its 
+                query and Application programming languages.<br/>
+                <a href="http://exist-db.org/exist/apps/homepage/index.html">Web</a><br/>
+                <a href="https://github.com/eXist-db/exist">Github</a><br/>
+            </p>
+            <h2>Database Implementation</h2>
+            <p>
+                Database layer uses eXist-db as it's native XML database with eXist being started in embedded mode.
+                eXist is used for data storage in xml form as well as it's validation using provided schema.
+            </p>
+        <img src="resources/Diagram1.png" alt="diagram1" width="50%" height="50%">
+            <p>
+                Invoices are stored within a database as records with every invoice being represented as a single record.
+                Every record contains list of invoices, invoice information, shipping address and information about entity.
+                Depending on type of invoice (expanse, revenue), the entity is interpreted as either the payer or seller
+                and contains bank, identification, name, address and contact information. Owner information are stored 
+                separately from the records as the owner (user) is expected to be part of every provided invoice.
+            </p>
+            <p>
+                Records themselves are represented as objects with provided getter and setter function for given atribute.
+                Invoice items are represented as separe objects kept within each record. These records can then be static or
+                dynamic. Changes to static records do not reflect on database while dynamic do. For some transaction control
+                the Database provides commit and rollback functionality.
+            </p>
+            <p>
+                Database consistency is insured with XML validation both within the eXist-db as well as within the Database 
+                class. However it only enforces the format necessary for the database (including types) and leaves more
+                specific content format upper layers.
+            </p>
+            <p>
+                For exporting invoices into PDF the Database provides several output formats of the database contents. For
+                calculating earnings and losses it provides getters in range as well as sum using XQuery.
+            </p>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
 </html>
