@@ -194,6 +194,8 @@ public class AccountingGUI {
 
         formatDates(dpRecordBillingDate);
         formatDates(dpRecordIssuingDate);
+        formatDates(dpToolsFromDate);
+        formatDates(dpToolsToDate);
     }
 
     public void setPrimaryStage(Stage primaryStage) {
