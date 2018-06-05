@@ -4,8 +4,9 @@
 .rightPanel{
     -fx-background-color: #eee5de;
 }
-.button{
+.button {
     -fx-background-color: #625D5D;
+    -fx-text-fill: #d6a880;
 }
 .button:hover{
     -fx-background-color: #000000;
@@ -15,14 +16,14 @@
 }
 .button2{
     -fx-background-color: #ae9279;
+    -fx-text-fill: #000000;
 }
 .button2:hover{
     -fx-background-color: #7f6a59;
 }
-
-/* TODO */
-.table{
+.table-view .column-header{
     -fx-background-color: #ae9279;
+    -fx-border-color: #625D5D;;
 }
 .tab{
     -fx-background-color: #ae9c8e;
@@ -77,4 +78,10 @@
 .notifyArea{
     -fx-background-color: #20bdc5;
     -fx-text-inner-color: #FFFFFF;
+}
+.labelBlue{
+    -fx-text-fill: #20bdc5;
+}
+.date-picker > .arrow-button{
+    -fx-background-color: #ae9279;
 }
