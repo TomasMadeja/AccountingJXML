@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <article xmlns="http/docbook.org/ns/docbook/">
 	<info>
-		<title></title>
+		<title>Závěrečná zpráva k projektu</title>
 		<author>
-			<firstname></firstname>
-			<surname></surname>
+			<firstname>Martin</firstname>
+			<surname>Trubelík</surname>
 		</author>
+		<abstract>
+			<para>Mým úkolem bylo vypracování funkcionality mezi databází a grafickým rozhraním, což v sobě zahrnovalo vypracování kontroly vstupů, vracení výstupů, generování PDF. Při plnění těchto úkolů se spolupracovalo vzájemně mezi členy. Podílel jsem se též na návrhu projektu.</para>
+		</abstract>
 	</info>
-	<para></para>
+	<section>
+		<title>AccountingFn - funkcionalita projektu</title>
+		<para>Je třída, která je mostem mezi databází a grafickým prostředím. Obsahuje v sobě funkce pro zpracování vstupů z GUI a také pro generování obsahu z databáze. Uvnitř této třídy, při jejím spuštění, se zakládá instance s databází v embedded módu, přes její interface.</para>
+		<para>Kontrola vstupů probíhá za pomoci regexů v metodě matchPoint. Regexy jsou uloženy v seznamu, aby se při každém volání nezakládal znovu new match. Z této metody vychází i hlášky uvedené v našeptávačích varování v GUI.</para>
+		<para>Tato třída dále pracuje s třídou pro přepis databáze do HTML5 a zpracováním do PDF formátu.</para>
+	</section>
+	<section>
+		<title>AccountingXSLT - třída pro převod do HTML5</title>
+		<para>Přepisuje databazi v XML do HTML5 za pomocí XSLT. Na tvorbě XSLT jsme spolupracovali s Tomášem. Je to prakticky jediná statická metoda vracející HTML5 ve String. Všechno je řízeno funkcí transform.</para>
+		<para>Vypracovaní HTML stránky s invoice je upravená šablona z internetu. Využívá se v ní CSS 2.1.</para>
+	</section>
+	<section>
+		<title>AccountingPDF - převod HTML5 do PDF</title>
+		<para>Ke zpracování HTML5 je využita veřejná knihovna openhtmltopdf. Jedno generované PDF symbolizuje jednu fakturu či dobropis. Třídá má opět jednu statickou metodu, která při úspěšném zpracování vrací bool hodnotu.</para>
+	</section>
+	<section>
+		<title>Návrh projektu</title>
+		<para>Původní návrh projektu pracoval s GUI frameworkem Swing. S aplikací byla v tomto frameworku jen těžká práce, proto jsem navrhnul přechod na framework JavaFX, který byl nezávislý na IDEA a umožňoval práci za pomocí CSS.</para>
+		<para>Navrhoval jsem též, aby celá aplikace byla command-line application, avšak tento návrh mi byl zamítnut.</para>
+	</section>
 </article>
