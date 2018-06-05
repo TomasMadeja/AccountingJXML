@@ -50,7 +50,7 @@ public class ADDBTestMain {
         System.out.println("Boom: " + db.getOwner().getValue("name").length());
 
         System.out.println(db.getLossesByIssuingDate("0000-01-01", "2100-01-01"));
-        System.out.println(db.getEarningsByIssuingDate("0000-01-01", "2100-01-01"));
+        System.out.println(db.getEarningsByIssuingDate("0000-01-01", "1000-01-01"));
 
 //        System.out.println(db.expenditures());
 //        System.out.println(db.revenues());

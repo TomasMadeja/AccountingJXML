@@ -53,13 +53,14 @@ public class AccountingFnImpl implements AccountingFn {
         regexes.put(getIntType(InputType.NAME),
                 Pattern.compile("^.*[a-zA-Z].*$"));
         regexes.put(getIntType(InputType.ADDRESS),
-                Pattern.compile("^[A-Za-z ,0-9.]+$"));
+                Pattern.compile("^[A-Za-z ,0-9.\\-]+$"));
         regexes.put(getIntType(InputType.ICO),
                 Pattern.compile("^\\d{8}$"));
         regexes.put(getIntType(InputType.DIC),
                 Pattern.compile("^CZ\\d{8,10}|SK\\d{10}$"));
         regexes.put(getIntType(InputType.BANK),
-                Pattern.compile("^[0-9]{0,6}[-]?[0-9]{1,10}/[0-9]{4}$"));
+                Pattern.compile("^\\d{4}-\\d{10}\\/\\d{4}|" +
+                        "[A-Z]{2}\\d{2}[0-9A-Z]{11,30}$"));
         regexes.put(getIntType(ContactType.EMAIL),
                 Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+" +
                         "\\.[A-Za-z]{2,6}$"));
@@ -71,9 +72,9 @@ public class AccountingFnImpl implements AccountingFn {
         regexes.put(getIntType(ItemsType.UNIT),
                 Pattern.compile("^[a-z]+$"));
         regexes.put(getIntType(ItemsType.PRICE),
-                Pattern.compile("^[0-9]+$"));
+                Pattern.compile("^[0-9]+|[0-9]+.[0-9]+$"));
         regexes.put(getIntType(ItemsType.QUANTITY),
-                Pattern.compile("^[0-9]+$"));
+                Pattern.compile("^[0-9]+|[0-9]+.[0-9]+$"));
 
         regexes.put(getIntType(DateType.DATE),
                 Pattern.compile("^([1-9]|1[0-2])/([1-9]|[12][0-9]|3[01])/" +
@@ -149,7 +150,7 @@ public class AccountingFnImpl implements AccountingFn {
             case DIC:
                 return "Example CZ00001111.";
             case BANK:
-                return "Example 00000-1111111/3333.";
+                return "Bank number or IBAN.";
             default:
                 return "";
         }
