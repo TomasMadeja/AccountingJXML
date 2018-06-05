@@ -64,8 +64,8 @@ public class AccountingGUI {
     @FXML private Button btOwnerPersonal;
     @FXML private Button btOwnerContacts;
 
-    @FXML private TextField tfWarningSaveChanges;
-    @FXML private TextField tfWarningAddContact;
+    @FXML private TextArea tfWarningSaveChanges;
+    @FXML private TextArea tfWarningAddContact;
 
     // Tabs
 //    @FXML private Tab tbOwner;
@@ -140,8 +140,8 @@ public class AccountingGUI {
     @FXML private Button btRecordItems;
     @FXML private Button btRecordInvoiceType;
 
-    @FXML private TextField tfNotifyCreateInvoice;
-    @FXML private TextField tfWarningCreateInvoice;
+    @FXML private TextArea tfNotifyCreateInvoice;
+    @FXML private TextArea tfWarningCreateInvoice;
 
     // Tools - tab 2
     @FXML private Label lbShowMoney;
@@ -262,27 +262,27 @@ public class AccountingGUI {
     @FXML
     private void ownerSaveChanges() {
         if (!fn.updateName(tfOwnerName.getText())) {
-            tfWarningSaveChanges.setText("Failed to add name");
+            tfWarningSaveChanges.appendText("Failed to add name ");
             revealHideNotice(tfWarningSaveChanges);
         }
         if (!fn.updateAddress(tfOwnerAddress.getText())) {
-            tfWarningSaveChanges.setText("Failed to add address");
+            tfWarningSaveChanges.appendText("Failed to add address ");
             revealHideNotice(tfWarningSaveChanges);
         }
         if (!fn.updateICO(tfOwnerICO.getText())) {
-            tfWarningSaveChanges.setText("Failed to add ICO");
+            tfWarningSaveChanges.appendText("Failed to add ICO ");
             revealHideNotice(tfWarningSaveChanges);
         }
         if (!fn.updateDIC(tfOwnerDIC.getText())) {
-            tfWarningSaveChanges.setText("Failed to add DIC");
+            tfWarningSaveChanges.appendText("Failed to add DIC ");
             revealHideNotice(tfWarningSaveChanges);
         }
         if (!fn.updateBank(tfOwnerBank.getText())) {
-            tfWarningSaveChanges.setText("Failed to add bank information");
+            tfWarningSaveChanges.appendText("Failed to add bank information ");
             revealHideNotice(tfWarningSaveChanges);
         }
         if (!fn.updateNote(tfOwnerNote.getText())) {
-            tfWarningSaveChanges.setText("Failed to add note");
+            tfWarningSaveChanges.appendText("Failed to add note ");
             revealHideNotice(tfWarningSaveChanges);
         }
 
@@ -290,6 +290,7 @@ public class AccountingGUI {
             tfWarningSaveChanges.setText("Failed to add contact");
             revealHideNotice(tfWarningSaveChanges);
         }
+
         // Lze vypisovat hlasky ze tu nebo onu polozku se nepovedlo pridat
 
     }
@@ -787,20 +788,20 @@ public class AccountingGUI {
             return;
         }
 
-        tfWarningSummarize.setText("Nothing to summarize, invoice has not been created");
+        tfWarningSummarize.setText("Date was not selected");
         revealHideNotice(tfWarningSummarize);
 
         // Lze vypsat hlasku ze neni co scitat Invoice nebyl vytvoren
     }
 
-    private void revealHideNotice(TextField field){
+    private void revealHideNotice(TextInputControl field){
         field.setVisible(true);
         hideNotice.setNode(field);
         hideNotice.playFromStart();
     }
 
     private void initTransition(){
-        hideNotice = new FadeTransition(Duration.seconds(5));
+        hideNotice = new FadeTransition(Duration.seconds(6));
         hideNotice.setFromValue(1.0);
         hideNotice.setToValue(0.0);
     }

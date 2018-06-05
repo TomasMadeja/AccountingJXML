@@ -64,3 +64,17 @@
     -fx-background-color: #20bdc5;
     -fx-text-inner-color: #FFFFFF;
 }
+.warningArea .content{
+    -fx-background-color: #cc0000;
+}
+.warningArea{
+    -fx-background-color: #cc0000;
+    -fx-text-inner-color: #FFFFFF;
+}
+.notifyArea .content{
+    -fx-background-color: #20bdc5;
+}
+.notifyArea{
+    -fx-background-color: #20bdc5;
+    -fx-text-inner-color: #FFFFFF;
+}
