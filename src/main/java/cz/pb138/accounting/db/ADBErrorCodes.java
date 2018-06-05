@@ -91,4 +91,9 @@ public class ADBErrorCodes {
      * Error occured while setting up validation
      */
     public static int VALIDATION_SETUP_FAILURE = 20;
+
+    /**
+     * Incorrect data type for attribute
+     */
+    public static int INVALID_ATTRIBUTE_TYPE = 21;
 }

@@ -133,6 +133,19 @@ public interface AccountingDatabase {
      */
     double getEarningsByBillingDate(String after, String before) throws AccountingException;
 
-    public String revenues() throws AccountingException;
-    public String expenditures() throws AccountingException;
+    /**
+     * Returns content of revenues as xml doc in form of
+     * <root><pb138-accowner><record></record></pb138-accowner><pb138-accearnings><record></record></pb138-accearnings></root>
+     * @return String containing XML content
+     * @throws AccountingException contains error code corresponding to error
+     */
+    String revenues() throws AccountingException;
+
+    /**
+     * Returns content of expenditures as xml doc in form of
+     * <root><pb138-accowner><record></record></pb138-accowner><pb138-expenses><record></record></pb138-expenses></root>
+     * @return String containing XML content
+     * @throws AccountingException contains error code corresponding to error
+     */
+    String expenditures() throws AccountingException;
 }

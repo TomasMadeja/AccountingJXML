@@ -30,7 +30,7 @@ public class ADDBTestMain {
 //        db.getOwner().addContact("email", "test@test.tst");
 //        db.commitChanges();
 //
-//        db.addExpenditure().addItem("","","","","10").getItems()[0]
+//        db.addExpenditure().addItem("","","1","","10").getItems()[0]
 //                .setName("duck").name();
 //
 //        db.addExpenditure().addItem("sadsad","adadas","23","l","10");
@@ -40,7 +40,7 @@ public class ADDBTestMain {
 //        db.addRevenue().addItem("gveg","qwe","231","s","30").getItems()[0]
 //                .setName("quack").delete();
 
-        db.commitChanges();
+//        db.commitChanges();
 
         System.out.println(db.ownerRecord());
         System.out.println(db.earningsRecord());
@@ -52,7 +52,8 @@ public class ADDBTestMain {
         System.out.println(db.getLossesByIssuingDate("0000-01-01", "2100-01-01"));
         System.out.println(db.getEarningsByIssuingDate("0000-01-01", "2100-01-01"));
 
-
+//        System.out.println(db.expenditures());
+//        System.out.println(db.revenues());
 //        System.out.println(db.dbAsString());
 
         db.killDatabase();
