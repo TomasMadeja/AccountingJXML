@@ -31,7 +31,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="root">
                      <children>
-                        <Button fx:id="btOwnerPersonal" layoutX="460.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Personal data" textFill="#bf9671">
+                        <Button fx:id="btOwnerPersonal" layoutX="460.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Personal data" textFill="#d6a880">
                            <font>
                               <Font name="Verdana" size="11.0" />
                            </font></Button>
@@ -55,38 +55,38 @@
                                  </font>
                               </Label>
                               <Label layoutX="10.0" layoutY="63.0" text="Name:" textFill="#20bdc5" />
-                              <TextField fx:id="tfOwnerName" layoutX="136.0" layoutY="58.0" prefHeight="27.0" prefWidth="288.0" />
+                              <TextField fx:id="tfOwnerName" layoutX="136.0" layoutY="58.0" prefHeight="27.0" prefWidth="290.0" />
                               <Label layoutX="10.0" layoutY="98.0" text="Address:" textFill="#20bdc5" />
-                              <TextField fx:id="tfOwnerAddress" layoutX="136.0" layoutY="95.0" prefHeight="27.0" prefWidth="288.0" />
+                              <TextField fx:id="tfOwnerAddress" layoutX="136.0" layoutY="95.0" prefHeight="27.0" prefWidth="290.0" />
                               <Label layoutX="10.0" layoutY="137.0" text="ICO:" textFill="#20bdc5" />
-                              <TextField fx:id="tfOwnerICO" layoutX="136.0" layoutY="132.0" prefHeight="27.0" prefWidth="288.0" />
+                              <TextField fx:id="tfOwnerICO" layoutX="136.0" layoutY="132.0" prefHeight="27.0" prefWidth="291.0" />
                               <Label layoutX="10.0" layoutY="174.0" text="DIC:" textFill="#20bdc5" />
-                              <TextField fx:id="tfOwnerDIC" layoutX="136.0" layoutY="169.0" prefHeight="27.0" prefWidth="288.0" />
+                              <TextField fx:id="tfOwnerDIC" layoutX="136.0" layoutY="169.0" prefHeight="27.0" prefWidth="290.0" />
                               <Label layoutX="10.0" layoutY="211.0" text="Bank information:" textFill="#20bdc5" />
-                              <TextField fx:id="tfOwnerBank" layoutX="136.0" layoutY="206.0" prefHeight="27.0" prefWidth="288.0" />
+                              <TextField fx:id="tfOwnerBank" layoutX="136.0" layoutY="206.0" prefHeight="27.0" prefWidth="290.0" />
                               <Label layoutX="10.0" layoutY="248.0" text="Note:" textFill="#20bdc5" />
-                              <TextArea fx:id="tfOwnerNote" layoutX="136.0" layoutY="243.0" prefHeight="70.0" prefWidth="288.0" />
-                              <TextField fx:id="tfOwnerWarnName" disable="true" editable="false" layoutX="136.0" layoutY="85.0" prefHeight="27.0" prefWidth="288.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                              <TextArea fx:id="tfOwnerNote" layoutX="136.0" layoutY="243.0" prefHeight="70.0" prefWidth="290.0" />
+                              <TextField fx:id="tfOwnerWarnName" disable="true" editable="false" layoutX="136.0" layoutY="85.0" prefHeight="27.0" prefWidth="290.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
                                  </cursor>
                               </TextField>
-                              <TextField fx:id="tfOwnerWarnAddress" disable="true" editable="false" layoutX="136.0" layoutY="122.0" prefHeight="27.0" prefWidth="288.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                              <TextField fx:id="tfOwnerWarnAddress" disable="true" editable="false" layoutX="136.0" layoutY="122.0" prefHeight="27.0" prefWidth="290.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
                                  </cursor>
                               </TextField>
-                              <TextField fx:id="tfOwnerWarnICO" disable="true" editable="false" layoutX="136.0" layoutY="159.0" prefHeight="27.0" prefWidth="288.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                              <TextField fx:id="tfOwnerWarnICO" disable="true" editable="false" layoutX="136.0" layoutY="159.0" prefHeight="27.0" prefWidth="290.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
                                  </cursor>
                               </TextField>
-                              <TextField fx:id="tfOwnerWarnDIC" disable="true" editable="false" layoutX="136.0" layoutY="196.0" prefHeight="27.0" prefWidth="288.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                              <TextField fx:id="tfOwnerWarnDIC" disable="true" editable="false" layoutX="136.0" layoutY="196.0" prefHeight="27.0" prefWidth="290.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
                                  </cursor>
                               </TextField>
-                              <TextField fx:id="tfOwnerWarnBank" disable="true" editable="false" layoutX="136.0" layoutY="233.0" prefHeight="27.0" prefWidth="288.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                              <TextField fx:id="tfOwnerWarnBank" disable="true" editable="false" layoutX="136.0" layoutY="233.0" prefHeight="27.0" prefWidth="290.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
                                  </cursor>
@@ -167,7 +167,7 @@
                         <TextArea fx:id="tfWarningCreateInvoice" disable="true" editable="false" layoutX="460.0" layoutY="248.0" prefHeight="70.0" prefWidth="130.0" styleClass="warningArea" visible="false" wrapText="true" />
                         <TextArea fx:id="tfNotifyCreateInvoice" disable="true" editable="false" layoutX="460.0" layoutY="248.0" prefHeight="70.0" prefWidth="130.0" styleClass="notifyArea" visible="false" wrapText="true" />
                         <TextArea fx:id="tfWarningAddContact" disable="true" editable="false" layoutX="460.0" layoutY="140.0" prefHeight="70.0" prefWidth="130.0" styleClass="warningArea" visible="false" wrapText="true" />
-                        <Pane fx:id="pnRecordTrader" prefHeight="367.0" prefWidth="450.0">
+                        <Pane fx:id="pnRecordTrader" disable="true" prefHeight="367.0" prefWidth="450.0" visible="false">
                            <children>
                               <Pane layoutX="-15.0" layoutY="40.0" prefHeight="291.0" prefWidth="455.0" styleClass="layoutPanel" />
                               <Label layoutX="136.0" layoutY="8.0" text="Trader" textFill="#625d5d">
@@ -175,7 +175,7 @@
                                     <Font name="System Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="10.0" layoutY="63.0" text="Name:" textFill="#20bdc5" />
+                              <Label layoutX="10.0" layoutY="63.0" styleClass="labelBlue" text="Name:" textFill="#20bdc5" />
                               <TextField fx:id="tfRecordName" layoutX="136.0" layoutY="58.0" prefHeight="27.0" prefWidth="290.0" />
                               <Label layoutX="10.0" layoutY="98.0" text="Address:" textFill="#20bdc5" />
                               <TextField fx:id="tfRecordAddress" layoutX="136.0" layoutY="95.0" prefHeight="27.0" prefWidth="290.0" />
@@ -311,7 +311,7 @@
                               </TextField>
                            </children>
                         </Pane>
-                        <Pane fx:id="pnRecordInvoiceType" disable="true" prefHeight="367.0" prefWidth="450.0" visible="false">
+                        <Pane fx:id="pnRecordInvoiceType" prefHeight="367.0" prefWidth="450.0">
                            <children>
                               <Label layoutX="10.0" layoutY="10.0" text="Type of invoice" textFill="#625d5d">
                                  <font>
@@ -369,7 +369,7 @@
                            <font>
                               <Font name="Verdana" size="11.0" />
                            </font></Button>
-                        <TextField fx:id="tfFolderSave" layoutX="180.0" layoutY="45.0" prefHeight="27.0" prefWidth="270.0" />
+                        <TextField fx:id="tfFolderSave" layoutX="190.0" layoutY="45.0" prefHeight="27.0" prefWidth="260.0" />
                         <Button layoutX="460.0" layoutY="82.0" mnemonicParsing="false" onAction="#export2PDF" prefHeight="27.0" prefWidth="130.0" text="Export" textFill="#bf9671">
                            <font>
                               <Font name="Verdana" size="11.0" />
