@@ -1,7 +1,11 @@
-<article xmlns='http/docbook.org/ns/docbook/'>
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http/docbook.org/ns/docbook/">
 	<info>
 		<title></title>
-		<author></author>
+		<author>
+			<firstname></firstname>
+			<surname></surname>
+		</author>
 	</info>
 	<para></para>
 </article>
