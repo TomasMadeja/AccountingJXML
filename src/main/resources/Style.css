@@ -23,7 +23,10 @@
 }
 .table-view .column-header{
     -fx-background-color: #ae9279;
-    -fx-border-color: #625D5D;;
+    -fx-border-color: #625D5D;
+}
+.table-view .filler{
+    -fx-background-color: #ae9279;
 }
 .tab{
     -fx-background-color: #ae9c8e;
@@ -56,6 +59,35 @@
 }
 .text-area{
     -fx-focus-color: #20bdc5;
+}
+.date-picker{
+    -fx-focus-color: #20bdc5;
+}
+.date-picker-popup > .month-year-pane{
+    -fx-background-color: #ccbfb6;
+}
+.date-picker-popup > * > .date-cell:hover{
+    -fx-background-color: #20bdc5;
+    -fx-text-fill: #FFFFFF;
+}
+.date-picker-popup > * > .date-cell-today{
+    -fx-focus-color: #20bdc5;
+}
+.date-picker-popup > * > .date-cell.selected{
+    -fx-background-color: #20bdc5;
+    -fx-text-fill: #FFFFFF;
+}
+.date-picker-popup > * > .date-cell{
+    -fx-cell-focus-inner-border: #20bdc5;
+}
+.date-picker-popup > * > .date-cell{
+    -fx-text-fill: #20bdc5;
+}
+.date-picker-popup > * > .week-number-cell{
+    -fx-text-fill: #625D5D;
+}
+.date-picker-popup > * > .day-name-cell{
+    -fx-text-fill: #625D5D;
 }
 .warning{
     -fx-background-color: #cc0000;
