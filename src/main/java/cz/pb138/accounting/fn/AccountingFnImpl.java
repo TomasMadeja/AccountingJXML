@@ -296,13 +296,14 @@ public class AccountingFnImpl implements AccountingFn {
 
     public boolean updateContacts(ObservableList<ContactTable> list,
                                   ObservableList<ContactTable> delList) {
-        if (delList.size() > 0) {
-            for (ContactTable ele : delList) {
-                db.getOwner().removeContact(ele.getType(), ele.getValue());
-            }
-        }
-
         if (list.size() > 0) {
+
+            if (delList.size() > 0) {
+                for (ContactTable ele : delList) {
+                    db.getOwner().removeContact(ele.getType(), ele.getValue());
+                }
+            }
+
             for (ContactTable elem : list) {
                 if (!elem.getInDatabase()) {
                     if ((matchInputs(elem.getValue(), ContactType.EMAIL) &&
@@ -316,9 +317,11 @@ public class AccountingFnImpl implements AccountingFn {
                     }
                 }
             }
+
+            return commitMe();
         }
 
-        return commitMe();
+        return false;
     }
 
     /**
