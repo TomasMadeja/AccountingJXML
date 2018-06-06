@@ -58,7 +58,7 @@
                 XML databázov (získavanie, zapisovanie záznamov, tvorba tabuliek,...). Taktie som sa
                 podielal na návrhu štruktúry projektu.
             </p>
-            <h3>db package</h3>
+            <h4>db package</h4>
             <p>
                 Výsledkom bol balík db a v ňom obsiahnuté triedy AccountingDatabase, Record, Owner a 
                 Item. AccountingDatabase pre vyššie vrstvy predstavuje celú databázu a skrýva za sebou
@@ -72,7 +72,7 @@
                 sú reprezentované triedou Item, ktorý obsahuje informácie o položke (názov, popis, cena, 
                 kvantita, jednotka).
             </p>
-            <h3>Natívna XML databáza</h3>
+            <h4>Natívna XML databáza</h4>
             <p>
                 Využitou natívnou XML databázou je eXist-db. Pri začiatku implementácie bol eXist 
                 používaný v server mode, po čom sa v AccountingDatabaseImpl stále nachádzajú zostatkové
@@ -85,7 +85,7 @@
                 k nastaveniu automatickej validácie. Errory vo spojené s prácou s databázou sú obalené
                 do vlastného erroru AccountingError.
             </p>
-            <h3>Reprezentácia databázy</h3>
+            <h4>Reprezentácia databázy</h4>
             <p>
                 Vo vnútri aplikácie je databáza reprezentovaná pomocou DOM. Tvorba nových záznamov
                 a zmena hodnôt je vyobrazená ako tvorba nových elementov a zmena ich hodnôt. Toto ja
@@ -94,7 +94,7 @@
                 ktorých implementácie vynucujú dodržiavanie len základných typov atribútov (presnejšie
                 požiadavky na formát sú prenechané vyšším vrstvám).
             </p>
-            <h3>Ostatné</h3>
+            <h4>Ostatné</h4>
             <p>
                 Mimo hlavnej časti som sa podieľal na návrhu projektu, popisoch projektu na webe, wiki, 
                 a pridávanie funkcionality pre požiadavky ostatných modulov.
