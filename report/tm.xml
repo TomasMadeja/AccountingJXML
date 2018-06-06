@@ -15,42 +15,22 @@
 
 	<section>
 		<title>db package</title>
-	<para>Výsledkom bol balík db a v ňom obsiahnuté triedy AccountingDatabase, Record, Owner a Item.
-	AccountingDatabase pre vyššie vrstvy predstavuje celú databázu a skrýva za sebou celú interkaciu
-	s nativnou XML databázou. Owner class predstavuje záznam majiteľa databáze(uívateľ) a informácie
-	spojené s týmto záznamom (meno, adresa, ičo, dič, bankové informacie, kontaktné informacie). Record
-	class predstavuje dokument, jedna instancia predstavuje jeden dokument. Record obsahuje informácie o
-	predajcovy/platiacom (meno, adresa, ićo, dič, bankové informácie) v zavyslosti od typu dokumentu
-	(zisk, útrata). Ďalej Record obsahuje informacie o dokumente (dátum splatnosti, dátum zhotovenia),
-	mieste dodania a fakturačné položky. Instancie fakturačnej položky sú reprezentované triedou Item,
-		ktorý  obsahuje informácie o polžke (nazov, popis, cena, kvantita, jednotka).</para>
+	<para>Výsledkom bol balík db a v ňom obsiahnuté triedy AccountingDatabase, Record, Owner a Item. AccountingDatabase pre vyššie vrstvy predstavuje celú databázu a skrýva za sebou celú interakciu s natívnou XML databázou. Owner class predstavuje záznam majiteľa databáze(užívateľ) a informácie spojené s týmto záznamom (meno, adresa, ičo, dič, bankové informacie, kontaktné informacie). Record class predstavuje dokument, jedna instancia predstavuje jeden dokument. Record obsahuje informácie o predajcovy/platiacom (meno, adresa, ićo, dič, bankové informácie) v závislosti od typu dokumentu (zisk, útrata). Ďalej Record obsahuje informácie o dokumente (dátum splatnosti, dátum zhotovenia), mieste dodania a fakturačné položky. Instancie fakturačnej položky sú reprezentované triedou Item, ktorý  obsahuje informácie o položke (názov, popis, cena, kvantita, jednotka). </para>
 	</section>
 
 	<section>
 		<title>Natívna XML databáza</title>
-	<para>Využitou nativnou XML databázou je eXist-db. Pri začiatku implementacie bol eXist používaný v
-	server mode, počom sa v AccountingDatabaseImpl stále nachádzajú zostatkové metódy. Momentálne je eXist
-	v implemenacií v embedded mode (na rozbehnutí embedded mode sa taktiež zúćasnil Martin). Tabuľky sú v ňom ukladané ako XML dokumenty a ich konzistencia
-	udržiavaná pomocou XML Schema. Tabuľky sú ukladané v troch rôznych dokumentoch a ku kadej je priradená
-	validačná schema, vyuívajúc automatickú XML verifikáciu v eXiste. Z funkcionality eXist je ďalej
-	vyuitý XQuery k výpočtu strát a ziskou, k získaniu záznamov a celého obsahu databázy, a rozšírené
-	XQuery update funkcie k nastaveniu automatickej validácie. Errory</para>
+	<para>Využitou natívnou XML databázou je eXist-db. Pri začiatku implementácie bol eXist používaný v    server mode, po čom sa v AccountingDatabaseImpl stále nachádzajú zostatkové metódy. Momentálne je eXist v implementácií v embedded mode (na rozbehnutí embedded mode sa taktiež zúčastnil Martin). Tabuľky sú v ňom ukladané ako XML dokumenty a ich konzistencia udržiavaná pomocou XML Schema. Tabuľky sú ukladané v troch rôznych dokumentoch a ku každej je priradená validačná schema, využívajúc automatickú XML verifikáciu v eXiste. Z funkcionality eXist je ďalej využitý XQuery k výpočtu strát a ziskov, k získaniu záznamov a celého obsahu databázy, a rozšírené XQuery update funkcie k nastaveniu automatickej validácie. Errory vo spojené s prácou s databázou sú obalené do vlastného erroru AccountingError.</para>
 	</section>
 
 	<section>
 		<title>Reprezentácia databázy</title>
-		<para>Vo vnútry aplikacie je databáza reprezentovaná pomocou DOM. Tvorba nových záznamov
-		a zmena hodnôt je vyobrazená ako tvorba nových elementov a zmena ich hodnôt. Toto ja využívané
-		namiesto XQuery update funkcionality pre vynútenie zachovania konzistencie databázy. Jednotlivé
-		DOM záznamy sú neprijamo prístupné z Owner, Record a Item objektov, ktorých implementacie vynucujú
-		dodržiavanie len základných typov atributov (presnejšie požiadavky na formát sú prenechané vyšším
-			vrstvam). </para>
+		<para>Vo vnútri aplikácie je databáza reprezentovaná pomocou DOM. Tvorba nových záznamov a zmena hodnôt je vyobrazená ako tvorba nových elementov a zmena ich hodnôt. Toto ja využívané namiesto XQuery update funkcionality pre vynútenie zachovania konzistencie databázy. Jednotlivé DOM záznamy sú nepriamo prístupné z Owner, Record a Item objektov, ktorých implementácie vynucujú dodržiavanie len základných typov atribútov (presnejšie požiadavky na formát sú prenechané vyšším vrstvám). </para>
 	</section>
 
 	<section>
 		<title>Ostatné</title>
-		<para>Mimo hlavnej časti som sa podielal na návrhu projektu, popisoch projektu na webe, wiki, a
-		pridávanie funkcionality pre požiadavky ostatných modulov.</para>
+		<para>Mimo hlavnej časti som sa podieľal na návrhu projektu, popisoch projektu na webe, wiki, a pridávanie funkcionality pre požiadavky ostatných modulov.</para>
 	</section>
 
 
