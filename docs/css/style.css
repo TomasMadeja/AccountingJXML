@@ -5,3 +5,26 @@
 .clear {
     clear: both;
 }
+
+.underline {
+	padding-top: 0.5em;
+    padding-bottom: 0.17em;
+	border-bottom: 1px solid rgb(0,0,0);
+}
+
+#toc, .toc, .mw-warning, .toccolours {
+    background-color: #f9faff;
+    border: 1px solid #d7dfe3;
+}
+
+#toc, .toc {
+    display: inline-block;
+    display: table;
+    zoom: 1;
+    padding: 7px;
+    margin: 30px 0px;
+}
+
+#toc .toctitle, .toc .toctitle {
+    text-align: center;
+}
