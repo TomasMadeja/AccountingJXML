@@ -51,6 +51,28 @@
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
+            <h1>Functionality</h1>
+            <p>
+                Functionality is the middle layer between GUI and Database. As such this layer has to connect all requests from
+                users and store/read data from database. It is very important to keep database from containing inconsistant data
+                so the functionality layer is where all the data are checked. We run two tests before the input data is stored
+                into our database.
+            </p>
+            <h2>Testing on the fly</h2>
+            <p>Testing text inputs the user is typing into our forms. This is done with use of regular expressions. There we set a
+            pattern which every text field must follow.</p>
+            <img id="float-left" src="resources/Test1.png" alt="test1" width="40%" height="40%"><p/>
+            <h2>Testing before storing into DB</h2>
+            <p>
+                Those are run to test if all required text fields are filled with valid input and if stored would create
+                one valid entry.
+            </p>
+            <img id="float-left" src="resources/Test2.png" alt="test2" width="40%" height="40%"><p/>
+            <h2>Export to PDF</h2>
+            <p>
+                TODO
+            </p>
+            <img id="float-left" src="resources/Invoicepdf.png" alt="invoice" width="40%" height="40%"><p/>
         </div>
         <!-- /#page-content-wrapper -->
 
