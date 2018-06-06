@@ -1,3 +1,5 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!-- was: no XML declaration present -->
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <article xmlns="http/docbook.org/ns/docbook/">
 	<info>
@@ -7,7 +9,7 @@
 			<surname>David</surname>
 		</author>
 		<abstract>
-			<para>Mým úkolem bylo připravit webové stránky projektu a git hub wiki. Při plnení těchto úkolů jsem zároveň pomáhal testovat výslednou aplikaci při pořizování obrázků pro jednotlivé části webu.</para>
+			<para>Mým úkolem bylo připravit webové stránky projektu a git hub Wiki. Při plnení těchto úkolů jsem zároveň pomáhal testovat výslednou aplikaci při pořizování obrázků pro jednotlivé části webu.</para>
 		</abstract>
 	</info>
 	<section>
