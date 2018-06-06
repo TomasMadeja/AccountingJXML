@@ -15,6 +15,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
 </head>
 
@@ -74,7 +75,7 @@
                 <li>adding new revenue and expenditure</li>
                 <li>calculating income(losses) since the start of accounting period</li>
                 <li>exporting stored invoices into PDF format</li>
-            </ul>                
+            </ul>
             <h2>Development team:</h2>
             <p>
                 Head of the project : <a href="https://github.com/ludekbartek">Mgr. Luděk Bártek, Ph.D</a>
@@ -83,9 +84,9 @@
             </p>
             <ul>
                 <li><a href="https://github.com/MonikaLezatkova">Monika Ležatková</a></li>
-                <li><a href="https://github.com/Zdendav">Zdeněk David</a></li>  
+                <li><a href="https://github.com/Zdendav">Zdeněk David</a></li>
                 <li><a href="https://github.com/TomasMadeja">Tomáš Madeja</a></li>
-                <li><a href="https://github.com/MartinTrubelik">Martin Trubelík</a></li>                  
+                <li><a href="https://github.com/MartinTrubelik">Martin Trubelík</a></li>
             </ul>
             <h2>Application Design</h2>
             <p>
@@ -108,27 +109,28 @@
             </p>
 
             <div class="duck">
-            <img id="float-left" src="resources/Diagram2.png" alt="diagram2" width="15%" height="15%"><br/>
-            <h3>Database</h3>
-            <p>
-                Uses eXist-db as it's native XML database. Provides interface for storing new invoices into the
-                database as well as handling consistency of the database. For the purposes of the project it only
-                allows retrieval ability.<br/>
-                <a href="database.html">More info...</a>
-            </p>
-            <h3>Functionality</h3>
-            <p>
-                Handles application functionality, such as storing new invoices, calculating earnings and losses
-                and exporting data into PDF format. This layer is responsible for checking all input data for
-                validity before being inserted ino the database.<br/>
-                <a href="functionality.html">More info...</a>
-            </p>
-            <h3>GUI</h3>
-            <p>
-                Provides user interface using JavaFX. Also provides hints for user as to a format of input data as well
-                as validation of the data using Functionality layer's functions.<br/>
-                <a href="gui.html">More info...</a>
-            </p>
+                <img class="float-left" src="resources/Diagram2.png" alt="diagram2" width="15%" height="15%"><br/>
+                <h3>Database</h3>
+                <p>
+                    Uses eXist-db as it's native XML database. Provides interface for storing new invoices into the
+                    database as well as handling consistency of the database. For the purposes of the project it only
+                    allows retrieval ability.<br/>
+                    <a href="database.html">More info...</a>
+                </p>
+                <h3>Functionality</h3>
+                <p>
+                    Handles application functionality, such as storing new invoices, calculating earnings and losses
+                    and exporting data into PDF format. This layer is responsible for checking all input data for
+                    validity before being inserted ino the database.<br/>
+                    <a href="functionality.html">More info...</a>
+                </p>
+                <h3>GUI</h3>
+                <p>
+                    Provides user interface using JavaFX. Also provides hints for user as to a format of input data as well
+                    as validation of the data using Functionality layer's functions.<br/>
+                    <a href="gui.html">More info...</a>
+                </p>
+                <div class="clear"></div>
             </div>
 
             <h2>Team assignments</h2>
@@ -137,14 +139,14 @@
                 <li> Database : <a href="database.html">Tomáš Madeja</a></li>
                 <li> Functionality : <a href="functionality.html">Martin Trubelík</a></li>
                 <li> GUI : <a href="gui.html">Monika Ležatková</a> </li>
-                <li> Web, wiki : <a href="index.html">Zdeněk David</a></li>                    
+                <li> Web, wiki : <a href="index.html">Zdeněk David</a></li>
             </ul>
             <h2>Reports</h2>
             <ul>
                 <li><a href="docbookml.html">Monika Ležatková</a></li>
-                <li><a href="docbookzd.html">Zdeněk David</a></li>  
+                <li><a href="docbookzd.html">Zdeněk David</a></li>
                 <li><a href="docbooktm.html">Tomáš Madeja</a></li>
-                <li><a href="docbookmt.html">Martin Trubelík</a></li> 
+                <li><a href="docbookmt.html">Martin Trubelík</a></li>
             </ul>
         </div>
         <!-- /#page-content-wrapper -->
