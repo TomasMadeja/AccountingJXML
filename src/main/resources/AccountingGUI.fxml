@@ -167,7 +167,7 @@
                         <TextArea fx:id="tfWarningCreateInvoice" disable="true" editable="false" layoutX="460.0" layoutY="248.0" prefHeight="70.0" prefWidth="130.0" styleClass="warningArea" visible="false" wrapText="true" />
                         <TextArea fx:id="tfNotifyCreateInvoice" disable="true" editable="false" layoutX="460.0" layoutY="248.0" prefHeight="70.0" prefWidth="130.0" styleClass="notifyArea" visible="false" wrapText="true" />
                         <TextArea fx:id="tfWarningAddContact" disable="true" editable="false" layoutX="460.0" layoutY="140.0" prefHeight="70.0" prefWidth="130.0" styleClass="warningArea" visible="false" wrapText="true" />
-                        <Pane fx:id="pnRecordTrader" disable="true" prefHeight="367.0" prefWidth="450.0" visible="false">
+                        <Pane fx:id="pnRecordTrader" prefHeight="367.0" prefWidth="450.0">
                            <children>
                               <Pane layoutX="-15.0" layoutY="40.0" prefHeight="291.0" prefWidth="455.0" styleClass="layoutPanel" />
                               <Label layoutX="136.0" layoutY="8.0" text="Trader" textFill="#625d5d">
@@ -267,11 +267,12 @@
                               </Label>
                               <TableView fx:id="tvRecordItems" layoutX="10.0" layoutY="45.0" prefHeight="164.0" prefWidth="430.0">
                                  <columns>
-                                    <TableColumn fx:id="tcRecordItemName" prefWidth="128.0" text="Name" />
-                                    <TableColumn fx:id="tcRecordItemQuant" minWidth="0.0" prefWidth="81.0" text="Quantity" />
-                                    <TableColumn fx:id="tcRecordItemUnit" prefWidth="47.0" text="Unit" />
-                                    <TableColumn fx:id="tcRecordItemPrice" prefWidth="71.0" text="Price" />
-                                    <TableColumn fx:id="tcRecordItemDelete" prefWidth="95.0" />
+                                    <TableColumn fx:id="tcRecordItemName" prefWidth="92.0" text="Name" />
+                                    <TableColumn fx:id="tcRecordItemDescription" prefWidth="83.0" text="Description" />
+                                    <TableColumn fx:id="tcRecordItemQuant" minWidth="0.0" prefWidth="62.0" text="Quantity" />
+                                    <TableColumn fx:id="tcRecordItemUnit" prefWidth="51.0" text="Unit" />
+                                    <TableColumn fx:id="tcRecordItemPrice" prefWidth="55.0" text="Price" />
+                                    <TableColumn fx:id="tcRecordItemDelete" prefWidth="75.0" />
                                  </columns>
                               </TableView>
                               <Label layoutX="10.0" layoutY="224.0" text="Name:" />
@@ -311,7 +312,7 @@
                               </TextField>
                            </children>
                         </Pane>
-                        <Pane fx:id="pnRecordInvoiceType" prefHeight="367.0" prefWidth="450.0">
+                        <Pane fx:id="pnRecordInvoiceType" disable="true" prefHeight="367.0" prefWidth="450.0" visible="false">
                            <children>
                               <Label layoutX="10.0" layoutY="10.0" text="Type of invoice" textFill="#625d5d">
                                  <font>

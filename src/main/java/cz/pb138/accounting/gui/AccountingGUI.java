@@ -124,6 +124,7 @@ public class AccountingGUI {
     @FXML private TableColumn<ItemTable, String> tcRecordItemUnit;
     @FXML private TableColumn<ItemTable, String> tcRecordItemPrice;
     @FXML private TableColumn<ItemTable, ItemTable> tcRecordItemDelete;
+    @FXML private TableColumn<ItemTable, String> tcRecordItemDescription;
 
     // Invoice type
     @FXML private Pane pnRecordInvoiceType;
@@ -261,33 +262,40 @@ public class AccountingGUI {
      */
     @FXML
     private void ownerSaveChanges() {
+        Boolean quack = true;
+        tfWarningSaveChanges.setText("");
+
         if (!fn.updateName(tfOwnerName.getText())) {
             tfWarningSaveChanges.appendText("Failed to add name ");
-            revealHideNotice(tfWarningSaveChanges);
+            quack = false;
         }
         if (!fn.updateAddress(tfOwnerAddress.getText())) {
             tfWarningSaveChanges.appendText("Failed to add address ");
-            revealHideNotice(tfWarningSaveChanges);
+            quack = false;
         }
         if (!fn.updateICO(tfOwnerICO.getText())) {
             tfWarningSaveChanges.appendText("Failed to add ICO ");
-            revealHideNotice(tfWarningSaveChanges);
+            quack = false;
         }
         if (!fn.updateDIC(tfOwnerDIC.getText())) {
             tfWarningSaveChanges.appendText("Failed to add DIC ");
-            revealHideNotice(tfWarningSaveChanges);
+            quack = false;
         }
         if (!fn.updateBank(tfOwnerBank.getText())) {
             tfWarningSaveChanges.appendText("Failed to add bank information ");
-            revealHideNotice(tfWarningSaveChanges);
+            quack = false;
         }
         if (!fn.updateNote(tfOwnerNote.getText())) {
             tfWarningSaveChanges.appendText("Failed to add note ");
-            revealHideNotice(tfWarningSaveChanges);
+            quack = false;
         }
 
         if (!fn.updateContacts(ownerContacts, ownerDeletedContacts)) {
             tfWarningSaveChanges.setText("Failed to add contact");
+            quack = false;
+        }
+
+        if (!quack) {
             revealHideNotice(tfWarningSaveChanges);
         }
 
@@ -302,6 +310,8 @@ public class AccountingGUI {
     private void initInvoiceTables() {
         tcRecordItemName.setCellValueFactory(
                 new PropertyValueFactory<>("nameVal"));
+        tcRecordItemDescription.setCellValueFactory(
+                new PropertyValueFactory<>("desc"));
         tcRecordItemQuant.setCellValueFactory(
                 new PropertyValueFactory<>("quantity"));
         tcRecordItemUnit.setCellValueFactory(
