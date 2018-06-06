@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>AccountingJXML</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index.html">
+                        AccountingJXML
+                    </a>
+                </li>
+                <li>
+                    <a href="database.html">Database</a>
+                </li>
+                <li>
+                    <a href="functionality.html">Functionality</a>
+                </li>
+                <li>
+                    <a href="gui.html">GUI</a>
+                </li>
+                <li>
+                    <a href="resources.html">Resources</a>
+                </li>
+                <li>
+                    <a href="reports.html">Reports</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <h2>Závěrečná správa k projektu</h2>
+            <p><b>Autor:</b> Tomáš Madeja</p>
+            <p>
+                <b>Abstract:</b> Mojou úlohou v projekte bola funkcionalita pre interakciu s natívnou 
+                XML databázov (získavanie, zapisovanie záznamov, tvorba tabuliek,...). Taktie som sa
+                podielal na návrhu štruktúry projektu.
+            </p>
+            <h3>db package</h3>
+            <p>
+                Výsledkom bol balík db a v ňom obsiahnuté triedy AccountingDatabase, Record, Owner a
+                Item. AccountingDatabase pre vyššie vrstvy predstavuje celú databázu a skrýva za sebou
+                celú interkaciu s nativnou XML databázou. Owner class predstavuje záznam majiteľa
+                databáze(uívateľ) a informácie spojené s týmto záznamom (meno, adresa, ičo, dič, 
+                bankové informacie, kontaktné informacie). Record class predstavuje dokument, jedna
+                instancia predstavuje jeden dokument. Record obsahuje informácie o predajcovy/platiacom
+                (meno, adresa, ićo, dič, bankové informácie) v zavyslosti od typu dokumentu 
+                (zisk, útrata). Ďalej Record obsahuje informacie o dokumente (dátum splatnosti, dátum
+                zhotovenia), mieste dodania a fakturačné položky. Instancie fakturačnej položky sú
+                reprezentované triedou Item, ktorý obsahuje informácie o polžke (nazov, popis, cena, 
+                kvantita, jednotka).
+            </p>
+            <h3>Natívna XML databáza</h3>
+            <p>Využitou nativnou XML databázou je eXist-db. Pri začiatku implementacie bol eXist
+                používaný v server mode, počom sa v AccountingDatabaseImpl stále nachádzajú zostatkové
+                metódy. Momentálne je eXist v implemenacií v embedded mode (na rozbehnutí embedded
+                mode sa taktiež zúćasnil Martin). Tabuľky sú v ňom ukladané ako XML dokumenty a ich
+                konzistencia udržiavaná pomocou XML Schema. Tabuľky sú ukladané v troch rôznych 
+                dokumentoch a ku kadej je priradená validačná schema, vyuívajúc automatickú XML 
+                verifikáciu v eXiste. Z funkcionality eXist je ďalej vyuitý XQuery k výpočtu strát a
+                ziskou, k získaniu záznamov a celého obsahu databázy, a rozšírené XQuery update funkcie
+                k nastaveniu automatickej validácie. Errory
+            </p>
+            <h3>Reprezentácia databázy</h3>
+            <p>
+                Vo vnútry aplikacie je databáza reprezentovaná pomocou DOM. Tvorba nových záznamov a
+                zmena hodnôt je vyobrazená ako tvorba nových elementov a zmena ich hodnôt. Toto ja
+                využívané namiesto XQuery update funkcionality pre vynútenie zachovania konzistencie 
+                databázy. Jednotlivé DOM záznamy sú neprijamo prístupné z Owner, Record a Item objektov, 
+                ktorých implementacie vynucujú dodržiavanie len základných typov atributov 
+                (presnejšie požiadavky na formát sú prenechané vyšším vrstvam).
+            </p>
+            <h3>Ostatné</h3>
+            <p>
+                Mimo hlavnej časti som sa podielal na návrhu projektu, popisoch projektu na webe, wiki, 
+                a pridávanie funkcionality pre požiadavky ostatných modulov.
+            </p>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>
+ 
