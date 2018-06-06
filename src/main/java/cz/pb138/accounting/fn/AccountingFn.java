@@ -156,6 +156,7 @@ public interface AccountingFn {
     /**
      * Create PDF invoices
      * @param out string
+     * @return true if successful, else false
      */
     boolean getPDF(String out);
 
