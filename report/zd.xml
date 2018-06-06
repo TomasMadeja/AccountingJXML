@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http/docbook.org/ns/docbook/">
+	<info>
+		<title>Závěrečná zpráva k projektu</title>
+		<author>
+			<firstname>Zdeněk</firstname>
+			<surname>David</surname>
+		</author>
+		<abstract>
+			<para>Mým úkolem bylo připravit webové stránky projektu a git hub wiki. Při plnení těchto úkolů jsem zároveň pomáhal testovat výslednou aplikaci při pořizování obrázků pro jednotlivé části webu.</para>
+		</abstract>
+	</info>
+	<section>
+		<title>Webové stránky projektu</title>
+		<para>Webové stránky jsem psal v HTML5. Nejprve jsem chtěl formátování textů vyřešit jednoduchým css souborem, ale byl jsem přesvědčen, že využít bootstrap panel a jejich přidané css bude výhodnější, efektivnější a hezčí řešení. S implementací bootstrapu mi pomohl Tomáš Madeja.</para>
+		<para>Psaní dokumentace projektu jsem často prokládal obrázky, protože je pro cílové čtenáře snazší pochopit funkcionalitu, kterou se snažím popsat, když mají možnost nahlédnutí k obrázkům aplikace.</para>
+		<para>S texty pro dokumentaci databázové části projektu mi také velice pomohl Tomáš. Ostatní části jsem zdokumentoval sám.</para>
+	</section>
+	<section>
+		<title>Git hub Wiki</title>
+		<para>TODO</para>
+	</section>
+</article>
