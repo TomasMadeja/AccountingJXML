@@ -1,5 +1,7 @@
 package cz.pb138.accounting.trying;
 
+import cz.pb138.accounting.db.Owner;
+import cz.pb138.accounting.db.Record;
 import cz.pb138.accounting.db.impl.AccountingDatabaseImpl;
 
 public class ADDBTestMain {
@@ -27,19 +29,50 @@ public class ADDBTestMain {
 //            db.commitChanges();
 //        }
 
-//        db.getOwner().addContact("email", "test@test.tst");
-//        db.commitChanges();
-//
-//        db.addExpenditure().addItem("","","1","","10").getItems()[0]
-//                .setName("duck").name();
-//
-//        db.addExpenditure().addItem("sadsad","adadas","23","l","10");
-//
-//        db.addRevenue().addItem("all","qwe","231","s","30");
-//
-//        db.addRevenue().addItem("gveg","qwe","231","s","30").getItems()[0]
-//                .setName("quack").delete();
+//        Template for fast input, don't change
 
+//        Owner owner = db.getOwner()
+//                .changeValue("name","")
+//                .changeValue("address","")
+//                .changeValue("ico","")
+//                .changeValue("dic","")
+//                .changeValue("bank-information","")
+//                .changeValue("note","")
+//                .addContact("email", "")
+//                .addContact("telephone", "");
+//
+//        Record expenditure = db.addExpenditure()
+//                .changeValue("billing-date","")
+//                .changeValue("issuing-date","")
+//                .changeValue("recipient-address","")
+//
+//                .changeValue("entity-name","")
+//                .changeValue("entity-address","")
+//                .changeValue("entity-ico","")
+//                .changeValue("entity-dic","")
+//                .changeValue("entity-bank-information","")
+//                .changeValue("entity-note","")
+//                .addContact("email", "")
+//                .addContact("telephone", "")
+//
+//                .addItem("","","1","","1");
+//
+//        Record revenue = db.addRevenue()
+//                .changeValue("billing-date","")
+//                .changeValue("issuing-date","")
+//                .changeValue("recipient-address","")
+//
+//                .changeValue("entity-name","")
+//                .changeValue("entity-address","")
+//                .changeValue("entity-ico","")
+//                .changeValue("entity-dic","")
+//                .changeValue("entity-bank-information","")
+//                .changeValue("entity-note","")
+//                .addContact("email", "")
+//                .addContact("telephone", "")
+//
+//                .addItem("","","1","","1");;
+//
 //        db.commitChanges();
 
         System.out.println(db.ownerRecord());
