@@ -8,13 +8,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>AccountingJXML</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap-journal.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
 </head>
 
@@ -51,8 +52,14 @@
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <h1>Database</h1>
-            <h2>eXist-db</h2>
+            <h1 class="underline">Database</h1>
+            <div id="toc" class="toc"><div class="toctitle"><h5>Contents</h2></div>
+                <ul>
+                <li class="toclevel-1 tocsection-1"><a href="#eXits-db">1 eXist-db</a><ul></ul></li>
+                <li class="toclevel-1 tocsection-1"><a href="#Development-Team">2 Implementation</a><ul></ul></li>
+                </ul>
+            </div>
+            <h3 id="eXits-db" class="underline">eXist-db</h3>
         <p>
                 eXist-db (or eXist for short) is an open source software project for NoSQL databases built
                 on XML technology.<br/>
@@ -63,7 +70,7 @@
                 <a href="http://exist-db.org/exist/apps/homepage/index.html">Web</a><br/>
                 <a href="https://github.com/eXist-db/exist">Github</a><br/>
             </p>
-            <h2>Database Implementation</h2>
+            <h3 id="Implementation" class="underline">Implementation</h3>
             <p>
                 Database layer uses eXist-db as it's native XML database with eXist being started in embedded mode.
                 eXist is used for data storage in xml form as well as it's validation using provided schema.
