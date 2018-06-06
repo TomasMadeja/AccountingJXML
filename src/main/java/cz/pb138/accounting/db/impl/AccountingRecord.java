@@ -158,11 +158,11 @@ public class AccountingRecord extends AccountingEntity implements Record {
             attributes = new HashMap<>();
             this.item = doc.createElement("item");
 
-            creatAttribute(DESCRIPTION, description);
-            creatAttribute(QUANTITY, quantity);
-            creatAttribute(UNIT, unit);
-            creatAttribute(PRICE, price);
-            creatAttribute(NAME, name);
+            createAttribute(DESCRIPTION, description);
+            createAttribute(QUANTITY, quantity);
+            createAttribute(UNIT, unit);
+            createAttribute(PRICE, price);
+            createAttribute(NAME, name);
 
             itemRoot.appendChild(item);
             addPrice();
@@ -194,10 +194,13 @@ public class AccountingRecord extends AccountingEntity implements Record {
 
         public AccountingItem changeValue(String name, String value) {
             if (attributes.containsKey(name)) {
-                if (name.compareTo(PRICE) == 0) {
-                    changePrice(value);
+                if (name.compareTo(PRICE) == 0 || name.compareTo(QUANTITY) == 0) {
+                    minusPrice();
                 }
                 attributes.get(name).setTextContent(value);
+                if (name.compareTo(PRICE) == 0 || name.compareTo(QUANTITY) == 0) {
+                    addPrice();
+                }
             }
             return this;
         }
@@ -223,26 +226,25 @@ public class AccountingRecord extends AccountingEntity implements Record {
         }
 
         public void delete() {
-            changePrice("0");
+            minusPrice();
             itemRoot.removeChild(item);
             item = null;
             attributes = null;
         }
 
-        private void creatAttribute(String name, String value) {
+        private void createAttribute(String name, String value) {
             Element e = doc.createElement(name);
             e.setTextContent(value);
             item.appendChild(e);
             attributes.put(name, e);
         }
 
-        private void changePrice(String newPrice) {
+        private void minusPrice() {
             try {
                 AccountingRecord.this.changeValue("total-price",
                         Double.toString(
                                 Double.parseDouble(getValue("total-price"))
-                                - Double.parseDouble(this.price())
-                                + Double.parseDouble(newPrice)
+                                        - Double.parseDouble(this.price())*Double.parseDouble(this.quanitity())
 
                         ));
             } catch (AccountingException ex) {}
@@ -253,7 +255,7 @@ public class AccountingRecord extends AccountingEntity implements Record {
                 AccountingRecord.this.changeValue("total-price",
                         Double.toString(
                                 Double.parseDouble(getValue("total-price"))
-                                        + Double.parseDouble(this.price())
+                                        + Double.parseDouble(this.price())*Double.parseDouble(this.quanitity())
 
                         ));
             } catch (AccountingException ex) {}

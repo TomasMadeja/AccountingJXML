@@ -743,6 +743,6 @@ public class AccountingDatabaseImpl implements AccountingDatabase {
                 .query("for $r in /" + type + "/record\n" +
                         "where $r/" + name + " >= \'" + after + "\' and " +
                         "$r/" + name + " <= \'" + before + "\'\n" +
-                        "return fn:sum($r/itemxs/item/price)");
+                        "return fn:sum($r/total-price)");
     }
 }

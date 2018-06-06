@@ -35,7 +35,7 @@ public class ADDBTestMain {
 //
 //        db.addExpenditure().addItem("sadsad","adadas","23","l","10");
 //
-//        db.addRevenue().addItem("qweq","qwe","231","s","30");
+//        db.addRevenue().addItem("all","qwe","231","s","30");
 //
 //        db.addRevenue().addItem("gveg","qwe","231","s","30").getItems()[0]
 //                .setName("quack").delete();
