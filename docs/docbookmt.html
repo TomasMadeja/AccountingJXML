@@ -59,7 +59,7 @@
                 generování PDF. Při plnění těchto úkolů se spolupracovalo vzájemně mezi členy. 
                 Podílel jsem se též na návrhu projektu.
             </p>
-            <h3>AccountingFn - funkcionalita projektu</h3>
+            <h4>AccountingFn - funkcionalita projektu</h4>
             <p>
                 Je třída, která je mostem mezi databází a grafickým prostředím. Obsahuje v sobě funkce
                 pro zpracování vstupů z GUI a také pro generování obsahu z databáze. Uvnitř této třídy, 
@@ -73,13 +73,22 @@
             <p>
                 Tato třída dále pracuje s třídou pro přepis databáze do HTML5 a zpracováním do PDF formátu.
             </p>
-            <h3>AccountingXSLT - třída pro převod do HTML5</h3>
+            <h4>AccountingXSLT - třída pro převod do HTML5</h4>
+            <p>
+                Přepisuje databazi v XML do HTML5 za pomocí XSLT. Na tvorbě XSLT jsme spolupracovali s 
+                Tomášem. Je to prakticky jediná statická metoda vracející HTML5 ve String. Všechno je 
+                řízeno funkcí transform.
+            </p>
+            <p>
+                Vypracovaní HTML stránky s invoice je upravená šablona z internetu. Využívá se v ní CSS 2.1.
+            </p>
+            <h4>AccountingPDF - převod HTML5 do PDF</h4>
             <p>
                 Ke zpracování HTML5 je využita veřejná knihovna openhtmltopdf. Jedno generované PDF 
-                symbolizuje jednu fakturu či dobropis. Třídá má opět jednu statickou metodu, která při
-                úspěšném zpracování vrací bool hodnotu.
+                symbolizuje jednu fakturu či dobropis. Třídá má opět jednu statickou metodu, která 
+                při úspěšném zpracování vrací bool hodnotu.
             </p>
-            <h3>Návrh projektu</h3>
+            <h4>Návrh projektu</h4>
             <p>
                 Původní návrh projektu pracoval s GUI frameworkem Swing. S aplikací byla v tomto frameworku
                 jen těžká práce, proto jsem navrhnul přechod na framework JavaFX, který byl nezávislý na
