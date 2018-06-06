@@ -72,14 +72,14 @@ public interface AccountingDatabase {
     void commitChanges() throws AccountingException;
 
     /**
-     * Converts entire database into single XML file with <root/> as it's root node
+     * Converts entire database into single XML file with {@code <root/>} as it's root node
      * @return database as InputSource
      * @throws AccountingException contains error code corresponding to error
      */
     InputSource dbAsInputSource()  throws AccountingException;
 
     /**
-     * Converts entire database into single XML file with <root/> as it's root node
+     * Converts entire database into single XML file with {@code <root/>} as it's root node
      * @return database as String
      * @throws AccountingException contains error code corresponding to error
      */
@@ -135,7 +135,16 @@ public interface AccountingDatabase {
 
     /**
      * Returns content of revenues as xml doc in form of
-     * <root><pb138-accowner><record></record></pb138-accowner><pb138-accearnings><record></record></pb138-accearnings></root>
+     * {@code
+     * <root>
+     *     <pb138-accowner>
+     *         <record></record>
+     *     </pb138-accowner>
+     *     <pb138-accearnings>
+     *         <record></record>
+     *     </pb138-accearnings>
+     * </root>
+     * }
      * @return String containing XML content
      * @throws AccountingException contains error code corresponding to error
      */
@@ -143,7 +152,16 @@ public interface AccountingDatabase {
 
     /**
      * Returns content of expenditures as xml doc in form of
-     * <root><pb138-accowner><record></record></pb138-accowner><pb138-expenses><record></record></pb138-expenses></root>
+     * {@code
+     * <root>
+     *     <pb138-accowner>
+     *         <record></record>
+     *     </pb138-accowner>
+     *     <pb138-expenses>
+     *         <record></record>
+     *     </pb138-expenses>
+     * </root>
+     * }
      * @return String containing XML content
      * @throws AccountingException contains error code corresponding to error
      */
