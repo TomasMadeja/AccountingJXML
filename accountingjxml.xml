@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="accountingjxml" default="all">
+  
+  
+  <property file="accountingjxml.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+    <include name="*.swc"/>
+    <include name="*.war"/>
+    <include name="*.zip"/>
+    <include name="*.ane"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="../java-1.8.0-openjdk/jre/lib/charsets.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/ext/cldrdata.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/ext/dnsns.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/ext/jaccess.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/ext/jfxrt.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/ext/localedata.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/ext/nashorn.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/ext/sunec.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/ext/sunjce_provider.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/ext/sunpkcs11.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/ext/zipfs.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/jce.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/jfxswt.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/jsse.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/management-agent.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/resources.jar"/>
+      <include name="../java-1.8.0-openjdk/jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.maven:_antlr:antlr:2.7.7.classpath">
+    <pathelement location="${path.variable.maven_repository}/antlr/antlr/2.7.7/antlr-2.7.7.jar"/>
+  </path>
+  
+  <path id="library.maven:_cglib:cglib:3.2.6.classpath">
+    <pathelement location="${path.variable.maven_repository}/cglib/cglib/3.2.6/cglib-3.2.6.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.evolvedbinary.j8fu:j8fu:1.13.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/evolvedbinary/j8fu/j8fu/1.13/j8fu-1.13.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-core/2.9.4/jackson-core-2.9.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fifesoft:rsyntaxtextarea:2.6.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fifesoft/rsyntaxtextarea/2.6.1/rsyntaxtextarea-2.6.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.github.ben-manes.caffeine:caffeine:2.6.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/github/ben-manes/caffeine/caffeine/2.6.2/caffeine-2.6.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.github.krukow:clj-ds:0.0.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/github/krukow/clj-ds/0.0.4/clj-ds-0.0.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.google.code.findbugs:jsr305:3.0.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.ibm.icu:icu4j:59.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/ibm/icu/icu4j/59.1/icu4j-59.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.mchange:c3p0:0.9.5.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/mchange/c3p0/0.9.5.2/c3p0-0.9.5.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.mchange:mchange-commons-java:0.2.11.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/mchange/mchange-commons-java/0.2.11/mchange-commons-java-0.2.11.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.openhtmltopdf:openhtmltopdf-core:0.0.1-rc13.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/openhtmltopdf/openhtmltopdf-core/0.0.1-RC13/openhtmltopdf-core-0.0.1-RC13.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.openhtmltopdf:openhtmltopdf-java2d:0.0.1-rc13.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/openhtmltopdf/openhtmltopdf-java2d/0.0.1-RC13/openhtmltopdf-java2d-0.0.1-RC13.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.openhtmltopdf:openhtmltopdf-jsoup-dom-converter:0.0.1-rc13.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/openhtmltopdf/openhtmltopdf-jsoup-dom-converter/0.0.1-RC13/openhtmltopdf-jsoup-dom-converter-0.0.1-RC13.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-rc13.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/openhtmltopdf/openhtmltopdf-pdfbox/0.0.1-RC13/openhtmltopdf-pdfbox-0.0.1-RC13.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.siemens.ct.exi:exificient:0.9.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/siemens/ct/exi/exificient/0.9.3/exificient-0.9.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.zaxxer:hikaricp-java6:2.3.13.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/zaxxer/HikariCP-java6/2.3.13/HikariCP-java6-2.3.13.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-codec:commons-codec:1.11.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-codec/commons-codec/1.11/commons-codec-1.11.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-io:commons-io:2.6.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-io/commons-io/2.6/commons-io-2.6.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-logging:commons-logging:1.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-logging/commons-logging/1.2/commons-logging-1.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-pool:commons-pool:1.6.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-pool/commons-pool/1.6/commons-pool-1.6.jar"/>
+  </path>
+  
+  <path id="library.maven:_de.rototor.pdfbox:graphics2d:0.12.classpath">
+    <pathelement location="${path.variable.maven_repository}/de/rototor/pdfbox/graphics2d/0.12/graphics2d-0.12.jar"/>
+  </path>
+  
+  <path id="library.maven:_isorelax:isorelax:20030108.classpath">
+    <pathelement location="${path.variable.maven_repository}/isorelax/isorelax/20030108/isorelax-20030108.jar"/>
+  </path>
+  
+  <path id="library.maven:_javax.servlet:javax.servlet-api:3.1.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_jline:jline:0.9.94.classpath">
+    <pathelement location="${path.variable.maven_repository}/jline/jline/0.9.94/jline-0.9.94.jar"/>
+  </path>
+  
+  <path id="library.maven:_junit:junit:3.8.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/junit/junit/3.8.1/junit-3.8.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.jcip:jcip-annotations:1.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/jcip/jcip-annotations/1.0/jcip-annotations-1.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.sf.saxon:saxon-he:9.6.0-7.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/sf/saxon/Saxon-HE/9.6.0-7/Saxon-HE-9.6.0-7.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.ant:ant-launcher:1.10.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/ant/ant-launcher/1.10.2/ant-launcher-1.10.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.ant:ant:1.10.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/ant/ant/1.10.2/ant-1.10.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.commons:commons-configuration2:2.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/commons/commons-configuration2/2.2/commons-configuration2-2.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.commons:commons-lang3:3.7.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/commons/commons-lang3/3.7/commons-lang3-3.7.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.logging.log4j:log4j-api:2.11.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-api/2.11.0/log4j-api-2.11.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.logging.log4j:log4j-core:2.11.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-core/2.11.0/log4j-core-2.11.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.logging.log4j:log4j-jul:2.11.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-jul/2.11.0/log4j-jul-2.11.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.logging.log4j:log4j-slf4j-impl:2.11.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-slf4j-impl/2.11.0/log4j-slf4j-impl-2.11.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.pdfbox:fontbox:2.0.8.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/pdfbox/fontbox/2.0.8/fontbox-2.0.8.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.pdfbox:pdfbox:2.0.8.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/pdfbox/pdfbox/2.0.8/pdfbox-2.0.8.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.pdfbox:xmpbox:2.0.8.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/pdfbox/xmpbox/2.0.8/xmpbox-2.0.8.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.ws.commons.util:ws-commons-util:1.0.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/ws/commons/util/ws-commons-util/1.0.2/ws-commons-util-1.0.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.xmlrpc:xmlrpc-client:3.1.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/xmlrpc/xmlrpc-client/3.1.3/xmlrpc-client-3.1.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.xmlrpc:xmlrpc-common:3.1.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/xmlrpc/xmlrpc-common/3.1.3/xmlrpc-common-3.1.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.xmlrpc:xmlrpc-server:3.1.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/xmlrpc/xmlrpc-server/3.1.3/xmlrpc-server-3.1.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.aspectj:aspectjrt:1.9.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/aspectj/aspectjrt/1.9.0/aspectjrt-1.9.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.eclipse.jetty:jetty-http:9.4.9.v20180320.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/eclipse/jetty/jetty-http/9.4.9.v20180320/jetty-http-9.4.9.v20180320.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.eclipse.jetty:jetty-io:9.4.9.v20180320.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/eclipse/jetty/jetty-io/9.4.9.v20180320/jetty-io-9.4.9.v20180320.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.eclipse.jetty:jetty-security:9.4.9.v20180320.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/eclipse/jetty/jetty-security/9.4.9.v20180320/jetty-security-9.4.9.v20180320.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.eclipse.jetty:jetty-server:9.4.9.v20180320.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/eclipse/jetty/jetty-server/9.4.9.v20180320/jetty-server-9.4.9.v20180320.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.eclipse.jetty:jetty-util:9.4.9.v20180320.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/eclipse/jetty/jetty-util/9.4.9.v20180320/jetty-util-9.4.9.v20180320.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.exist-db.thirdparty.com.thaiopensource:jing:20151127.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/exist-db/thirdparty/com/thaiopensource/jing/20151127/jing-20151127.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.exist-db.thirdparty.javax.xml.xquery:xqjapi:1.0-fr.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/exist-db/thirdparty/javax/xml/xquery/xqjapi/1.0-fr/xqjapi-1.0-fr.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.exist-db.thirdparty.org.expath:pkg-repo:20170307144900-patched.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/exist-db/thirdparty/org/expath/pkg-repo/20170307144900-patched/pkg-repo-20170307144900-patched.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.exist-db.thirdparty.org.xmldb:xmldb-api:1.0-patched.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/exist-db/thirdparty/org/xmldb/xmldb-api/1.0-patched/xmldb-api-1.0-patched.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.exist-db:exist-core:4.1.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/exist-db/exist-core/4.1.0/exist-core-4.1.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.exist-db:exist-start:4.1.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/exist-db/exist-start/4.1.0/exist-start-4.1.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.gnu:gnu-crypto:2.0.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/gnu/gnu-crypto/2.0.1/gnu-crypto-2.0.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.jctools:jctools-core:2.1.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/jctools/jctools-core/2.1.2/jctools-core-2.1.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.jsoup:jsoup:1.8.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/jsoup/jsoup/1.8.3/jsoup-1.8.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.ow2.asm:asm:6.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/ow2/asm/asm/6.0/asm-6.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.quartz-scheduler:quartz:2.3.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/quartz-scheduler/quartz/2.3.0/quartz-2.3.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.slf4j:slf4j-api:1.8.0-alpha2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/slf4j/slf4j-api/1.8.0-alpha2/slf4j-api-1.8.0-alpha2.jar"/>
+  </path>
+  
+  <path id="library.maven:_se.softhouse:jargo:0.4.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/se/softhouse/jargo/0.4.2/jargo-0.4.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_xalan:serializer:2.7.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/xalan/serializer/2.7.2/serializer-2.7.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_xalan:xalan:2.7.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/xalan/xalan/2.7.2/xalan-2.7.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_xerces:xercesimpl:2.11.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/xerces/xercesImpl/2.11.0/xercesImpl-2.11.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_xml-apis:xml-apis:1.4.01.classpath">
+    <pathelement location="${path.variable.maven_repository}/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01.jar"/>
+  </path>
+  
+  <path id="library.maven:_xml-resolver:xml-resolver:1.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/xml-resolver/xml-resolver/1.2/xml-resolver-1.2.jar"/>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <fileset dir="${javac2.home}">
+      <include name="javac2.jar"/>
+      <include name="jdom.jar"/>
+      <include name="asm-all*.jar"/>
+      <include name="jgoodies-forms.jar"/>
+    </fileset>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module AccountingJXML -->
+  
+  <dirname property="module.accountingjxml.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.accountingjxml" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.accountingjxml" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.accountingjxml" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.accountingjxml" value="-encoding UTF-8 -source 8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="accountingjxml.output.dir" value="${module.accountingjxml.basedir}/target/classes"/>
+  <property name="accountingjxml.testoutput.dir" value="${module.accountingjxml.basedir}/target/test-classes"/>
+  
+  <path id="accountingjxml.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="accountingjxml.module.production.classpath">
+    <path refid="${module.jdk.classpath.accountingjxml}"/>
+    <path refid="library.maven:_org.exist-db:exist-core:4.1.0.classpath"/>
+    <path refid="library.maven:_net.jcip:jcip-annotations:1.0.classpath"/>
+    <path refid="library.maven:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.4.classpath"/>
+    <path refid="library.maven:_com.github.ben-manes.caffeine:caffeine:2.6.2.classpath"/>
+    <path refid="library.maven:_org.jctools:jctools-core:2.1.2.classpath"/>
+    <path refid="library.maven:_com.github.krukow:clj-ds:0.0.4.classpath"/>
+    <path refid="library.maven:_com.siemens.ct.exi:exificient:0.9.3.classpath"/>
+    <path refid="library.maven:_com.ibm.icu:icu4j:59.1.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.2.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.com.thaiopensource:jing:20151127.classpath"/>
+    <path refid="library.maven:_isorelax:isorelax:20030108.classpath"/>
+    <path refid="library.maven:_org.gnu:gnu-crypto:2.0.1.classpath"/>
+    <path refid="library.maven:_com.evolvedbinary.j8fu:j8fu:1.13.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.javax.xml.xquery:xqjapi:1.0-fr.classpath"/>
+    <path refid="library.maven:_jline:jline:0.9.94.classpath"/>
+    <path refid="library.maven:_junit:junit:3.8.1.classpath"/>
+    <path refid="library.maven:_cglib:cglib:3.2.6.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:6.0.classpath"/>
+    <path refid="library.maven:_se.softhouse:jargo:0.4.2.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.11.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-configuration2:2.2.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.6.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.7.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_commons-pool:commons-pool:1.6.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-api:2.11.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.8.0-alpha2.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant:1.10.2.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant-launcher:1.10.2.classpath"/>
+    <path refid="library.maven:_xerces:xercesimpl:2.11.0.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.4.01.classpath"/>
+    <path refid="library.maven:_xalan:xalan:2.7.2.classpath"/>
+    <path refid="library.maven:_xalan:serializer:2.7.2.classpath"/>
+    <path refid="library.maven:_org.apache.xmlrpc:xmlrpc-common:3.1.3.classpath"/>
+    <path refid="library.maven:_org.apache.ws.commons.util:ws-commons-util:1.0.2.classpath"/>
+    <path refid="library.maven:_org.apache.xmlrpc:xmlrpc-client:3.1.3.classpath"/>
+    <path refid="library.maven:_org.apache.xmlrpc:xmlrpc-server:3.1.3.classpath"/>
+    <path refid="library.maven:_org.aspectj:aspectjrt:1.9.0.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-security:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-server:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_javax.servlet:javax.servlet-api:3.1.0.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-http:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-io:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-util:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.org.expath:pkg-repo:20170307144900-patched.classpath"/>
+    <path refid="library.maven:_com.fifesoft:rsyntaxtextarea:2.6.1.classpath"/>
+    <path refid="library.maven:_org.quartz-scheduler:quartz:2.3.0.classpath"/>
+    <path refid="library.maven:_com.mchange:c3p0:0.9.5.2.classpath"/>
+    <path refid="library.maven:_com.mchange:mchange-commons-java:0.2.11.classpath"/>
+    <path refid="library.maven:_com.zaxxer:hikaricp-java6:2.3.13.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.org.xmldb:xmldb-api:1.0-patched.classpath"/>
+    <path refid="library.maven:_org.exist-db:exist-start:4.1.0.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-core:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_org.apache.pdfbox:pdfbox:2.0.8.classpath"/>
+    <path refid="library.maven:_org.apache.pdfbox:fontbox:2.0.8.classpath"/>
+    <path refid="library.maven:_org.apache.pdfbox:xmpbox:2.0.8.classpath"/>
+    <path refid="library.maven:_de.rototor.pdfbox:graphics2d:0.12.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-java2d:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-jsoup-dom-converter:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_org.jsoup:jsoup:1.8.3.classpath"/>
+  </path>
+  
+  <path id="accountingjxml.runtime.production.module.classpath">
+    <pathelement location="${accountingjxml.output.dir}"/>
+    <path refid="library.maven:_org.exist-db:exist-core:4.1.0.classpath"/>
+    <path refid="library.maven:_net.jcip:jcip-annotations:1.0.classpath"/>
+    <path refid="library.maven:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.4.classpath"/>
+    <path refid="library.maven:_com.github.ben-manes.caffeine:caffeine:2.6.2.classpath"/>
+    <path refid="library.maven:_org.jctools:jctools-core:2.1.2.classpath"/>
+    <path refid="library.maven:_com.github.krukow:clj-ds:0.0.4.classpath"/>
+    <path refid="library.maven:_com.siemens.ct.exi:exificient:0.9.3.classpath"/>
+    <path refid="library.maven:_com.ibm.icu:icu4j:59.1.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.2.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.com.thaiopensource:jing:20151127.classpath"/>
+    <path refid="library.maven:_isorelax:isorelax:20030108.classpath"/>
+    <path refid="library.maven:_org.gnu:gnu-crypto:2.0.1.classpath"/>
+    <path refid="library.maven:_com.evolvedbinary.j8fu:j8fu:1.13.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.javax.xml.xquery:xqjapi:1.0-fr.classpath"/>
+    <path refid="library.maven:_jline:jline:0.9.94.classpath"/>
+    <path refid="library.maven:_junit:junit:3.8.1.classpath"/>
+    <path refid="library.maven:_cglib:cglib:3.2.6.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:6.0.classpath"/>
+    <path refid="library.maven:_se.softhouse:jargo:0.4.2.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.11.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-configuration2:2.2.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.6.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.7.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_commons-pool:commons-pool:1.6.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-api:2.11.0.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-core:2.11.0.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-jul:2.11.0.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-slf4j-impl:2.11.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.8.0-alpha2.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant:1.10.2.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant-launcher:1.10.2.classpath"/>
+    <path refid="library.maven:_xerces:xercesimpl:2.11.0.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.4.01.classpath"/>
+    <path refid="library.maven:_xml-resolver:xml-resolver:1.2.classpath"/>
+    <path refid="library.maven:_xalan:xalan:2.7.2.classpath"/>
+    <path refid="library.maven:_xalan:serializer:2.7.2.classpath"/>
+    <path refid="library.maven:_net.sf.saxon:saxon-he:9.6.0-7.classpath"/>
+    <path refid="library.maven:_org.apache.xmlrpc:xmlrpc-common:3.1.3.classpath"/>
+    <path refid="library.maven:_org.apache.ws.commons.util:ws-commons-util:1.0.2.classpath"/>
+    <path refid="library.maven:_org.apache.xmlrpc:xmlrpc-client:3.1.3.classpath"/>
+    <path refid="library.maven:_org.apache.xmlrpc:xmlrpc-server:3.1.3.classpath"/>
+    <path refid="library.maven:_org.aspectj:aspectjrt:1.9.0.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-security:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-server:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_javax.servlet:javax.servlet-api:3.1.0.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-http:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-io:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-util:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.org.expath:pkg-repo:20170307144900-patched.classpath"/>
+    <path refid="library.maven:_com.fifesoft:rsyntaxtextarea:2.6.1.classpath"/>
+    <path refid="library.maven:_org.quartz-scheduler:quartz:2.3.0.classpath"/>
+    <path refid="library.maven:_com.mchange:c3p0:0.9.5.2.classpath"/>
+    <path refid="library.maven:_com.mchange:mchange-commons-java:0.2.11.classpath"/>
+    <path refid="library.maven:_com.zaxxer:hikaricp-java6:2.3.13.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.org.xmldb:xmldb-api:1.0-patched.classpath"/>
+    <path refid="library.maven:_org.exist-db:exist-start:4.1.0.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-core:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_org.apache.pdfbox:pdfbox:2.0.8.classpath"/>
+    <path refid="library.maven:_org.apache.pdfbox:fontbox:2.0.8.classpath"/>
+    <path refid="library.maven:_org.apache.pdfbox:xmpbox:2.0.8.classpath"/>
+    <path refid="library.maven:_de.rototor.pdfbox:graphics2d:0.12.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-java2d:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-jsoup-dom-converter:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_org.jsoup:jsoup:1.8.3.classpath"/>
+  </path>
+  
+  <path id="accountingjxml.module.classpath">
+    <path refid="${module.jdk.classpath.accountingjxml}"/>
+    <pathelement location="${accountingjxml.output.dir}"/>
+    <path refid="library.maven:_org.exist-db:exist-core:4.1.0.classpath"/>
+    <path refid="library.maven:_net.jcip:jcip-annotations:1.0.classpath"/>
+    <path refid="library.maven:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.4.classpath"/>
+    <path refid="library.maven:_com.github.ben-manes.caffeine:caffeine:2.6.2.classpath"/>
+    <path refid="library.maven:_org.jctools:jctools-core:2.1.2.classpath"/>
+    <path refid="library.maven:_com.github.krukow:clj-ds:0.0.4.classpath"/>
+    <path refid="library.maven:_com.siemens.ct.exi:exificient:0.9.3.classpath"/>
+    <path refid="library.maven:_com.ibm.icu:icu4j:59.1.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.2.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.com.thaiopensource:jing:20151127.classpath"/>
+    <path refid="library.maven:_isorelax:isorelax:20030108.classpath"/>
+    <path refid="library.maven:_org.gnu:gnu-crypto:2.0.1.classpath"/>
+    <path refid="library.maven:_com.evolvedbinary.j8fu:j8fu:1.13.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.javax.xml.xquery:xqjapi:1.0-fr.classpath"/>
+    <path refid="library.maven:_jline:jline:0.9.94.classpath"/>
+    <path refid="library.maven:_junit:junit:3.8.1.classpath"/>
+    <path refid="library.maven:_cglib:cglib:3.2.6.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:6.0.classpath"/>
+    <path refid="library.maven:_se.softhouse:jargo:0.4.2.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.11.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-configuration2:2.2.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.6.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.7.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_commons-pool:commons-pool:1.6.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-api:2.11.0.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-core:2.11.0.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-jul:2.11.0.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-slf4j-impl:2.11.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.8.0-alpha2.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant:1.10.2.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant-launcher:1.10.2.classpath"/>
+    <path refid="library.maven:_xerces:xercesimpl:2.11.0.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.4.01.classpath"/>
+    <path refid="library.maven:_xml-resolver:xml-resolver:1.2.classpath"/>
+    <path refid="library.maven:_xalan:xalan:2.7.2.classpath"/>
+    <path refid="library.maven:_xalan:serializer:2.7.2.classpath"/>
+    <path refid="library.maven:_net.sf.saxon:saxon-he:9.6.0-7.classpath"/>
+    <path refid="library.maven:_org.apache.xmlrpc:xmlrpc-common:3.1.3.classpath"/>
+    <path refid="library.maven:_org.apache.ws.commons.util:ws-commons-util:1.0.2.classpath"/>
+    <path refid="library.maven:_org.apache.xmlrpc:xmlrpc-client:3.1.3.classpath"/>
+    <path refid="library.maven:_org.apache.xmlrpc:xmlrpc-server:3.1.3.classpath"/>
+    <path refid="library.maven:_org.aspectj:aspectjrt:1.9.0.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-security:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-server:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_javax.servlet:javax.servlet-api:3.1.0.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-http:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-io:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-util:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.org.expath:pkg-repo:20170307144900-patched.classpath"/>
+    <path refid="library.maven:_com.fifesoft:rsyntaxtextarea:2.6.1.classpath"/>
+    <path refid="library.maven:_org.quartz-scheduler:quartz:2.3.0.classpath"/>
+    <path refid="library.maven:_com.mchange:c3p0:0.9.5.2.classpath"/>
+    <path refid="library.maven:_com.mchange:mchange-commons-java:0.2.11.classpath"/>
+    <path refid="library.maven:_com.zaxxer:hikaricp-java6:2.3.13.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.org.xmldb:xmldb-api:1.0-patched.classpath"/>
+    <path refid="library.maven:_org.exist-db:exist-start:4.1.0.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-core:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_org.apache.pdfbox:pdfbox:2.0.8.classpath"/>
+    <path refid="library.maven:_org.apache.pdfbox:fontbox:2.0.8.classpath"/>
+    <path refid="library.maven:_org.apache.pdfbox:xmpbox:2.0.8.classpath"/>
+    <path refid="library.maven:_de.rototor.pdfbox:graphics2d:0.12.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-java2d:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-jsoup-dom-converter:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_org.jsoup:jsoup:1.8.3.classpath"/>
+  </path>
+  
+  <path id="accountingjxml.runtime.module.classpath">
+    <pathelement location="${accountingjxml.testoutput.dir}"/>
+    <pathelement location="${accountingjxml.output.dir}"/>
+    <path refid="library.maven:_org.exist-db:exist-core:4.1.0.classpath"/>
+    <path refid="library.maven:_net.jcip:jcip-annotations:1.0.classpath"/>
+    <path refid="library.maven:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.4.classpath"/>
+    <path refid="library.maven:_com.github.ben-manes.caffeine:caffeine:2.6.2.classpath"/>
+    <path refid="library.maven:_org.jctools:jctools-core:2.1.2.classpath"/>
+    <path refid="library.maven:_com.github.krukow:clj-ds:0.0.4.classpath"/>
+    <path refid="library.maven:_com.siemens.ct.exi:exificient:0.9.3.classpath"/>
+    <path refid="library.maven:_com.ibm.icu:icu4j:59.1.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.2.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.com.thaiopensource:jing:20151127.classpath"/>
+    <path refid="library.maven:_isorelax:isorelax:20030108.classpath"/>
+    <path refid="library.maven:_org.gnu:gnu-crypto:2.0.1.classpath"/>
+    <path refid="library.maven:_com.evolvedbinary.j8fu:j8fu:1.13.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.javax.xml.xquery:xqjapi:1.0-fr.classpath"/>
+    <path refid="library.maven:_jline:jline:0.9.94.classpath"/>
+    <path refid="library.maven:_junit:junit:3.8.1.classpath"/>
+    <path refid="library.maven:_cglib:cglib:3.2.6.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:6.0.classpath"/>
+    <path refid="library.maven:_se.softhouse:jargo:0.4.2.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.11.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-configuration2:2.2.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.6.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.7.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_commons-pool:commons-pool:1.6.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-api:2.11.0.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-core:2.11.0.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-jul:2.11.0.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-slf4j-impl:2.11.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.8.0-alpha2.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant:1.10.2.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant-launcher:1.10.2.classpath"/>
+    <path refid="library.maven:_xerces:xercesimpl:2.11.0.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.4.01.classpath"/>
+    <path refid="library.maven:_xml-resolver:xml-resolver:1.2.classpath"/>
+    <path refid="library.maven:_xalan:xalan:2.7.2.classpath"/>
+    <path refid="library.maven:_xalan:serializer:2.7.2.classpath"/>
+    <path refid="library.maven:_net.sf.saxon:saxon-he:9.6.0-7.classpath"/>
+    <path refid="library.maven:_org.apache.xmlrpc:xmlrpc-common:3.1.3.classpath"/>
+    <path refid="library.maven:_org.apache.ws.commons.util:ws-commons-util:1.0.2.classpath"/>
+    <path refid="library.maven:_org.apache.xmlrpc:xmlrpc-client:3.1.3.classpath"/>
+    <path refid="library.maven:_org.apache.xmlrpc:xmlrpc-server:3.1.3.classpath"/>
+    <path refid="library.maven:_org.aspectj:aspectjrt:1.9.0.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-security:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-server:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_javax.servlet:javax.servlet-api:3.1.0.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-http:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-io:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.eclipse.jetty:jetty-util:9.4.9.v20180320.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.org.expath:pkg-repo:20170307144900-patched.classpath"/>
+    <path refid="library.maven:_com.fifesoft:rsyntaxtextarea:2.6.1.classpath"/>
+    <path refid="library.maven:_org.quartz-scheduler:quartz:2.3.0.classpath"/>
+    <path refid="library.maven:_com.mchange:c3p0:0.9.5.2.classpath"/>
+    <path refid="library.maven:_com.mchange:mchange-commons-java:0.2.11.classpath"/>
+    <path refid="library.maven:_com.zaxxer:hikaricp-java6:2.3.13.classpath"/>
+    <path refid="library.maven:_org.exist-db.thirdparty.org.xmldb:xmldb-api:1.0-patched.classpath"/>
+    <path refid="library.maven:_org.exist-db:exist-start:4.1.0.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-core:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_org.apache.pdfbox:pdfbox:2.0.8.classpath"/>
+    <path refid="library.maven:_org.apache.pdfbox:fontbox:2.0.8.classpath"/>
+    <path refid="library.maven:_org.apache.pdfbox:xmpbox:2.0.8.classpath"/>
+    <path refid="library.maven:_de.rototor.pdfbox:graphics2d:0.12.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-java2d:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_com.openhtmltopdf:openhtmltopdf-jsoup-dom-converter:0.0.1-rc13.classpath"/>
+    <path refid="library.maven:_org.jsoup:jsoup:1.8.3.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.accountingjxml">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.accountingjxml">
+    <patternset refid="excluded.from.module.accountingjxml"/>
+  </patternset>
+  
+  <path id="accountingjxml.module.sourcepath">
+    <dirset dir="${module.accountingjxml.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.accountingjxml" depends="compile.module.accountingjxml.production,compile.module.accountingjxml.tests" description="Compile module AccountingJXML"/>
+  
+  <target name="compile.module.accountingjxml.production" depends="register.custom.compilers" description="Compile module AccountingJXML; production classes">
+    <mkdir dir="${accountingjxml.output.dir}"/>
+    <javac2 destdir="${accountingjxml.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.accountingjxml}/javac">
+      <compilerarg line="${compiler.args.accountingjxml}"/>
+      <bootclasspath refid="accountingjxml.module.bootclasspath"/>
+      <classpath refid="accountingjxml.module.production.classpath"/>
+      <src refid="accountingjxml.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.accountingjxml"/>
+    </javac2>
+    
+    <copy todir="${accountingjxml.output.dir}">
+      <fileset dir="${module.accountingjxml.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.accountingjxml.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.accountingjxml.tests" depends="register.custom.compilers,compile.module.accountingjxml.production" description="compile module AccountingJXML; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.accountingjxml" description="cleanup module">
+    <delete dir="${accountingjxml.output.dir}"/>
+    <delete dir="${accountingjxml.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.accountingjxml, clean.artifact.accountingjxml" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.accountingjxml" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.accountingjxml" value="${basedir}/../../../../Documents/acc"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="artifact.temp.output.AccountingJXML" value="${artifacts.temp.dir}/AccountingJXML.jar"/>
+    <taskdef resource="com/sun/javafx/tools/ant/antlib.xml" uri="javafx:com.sun.javafx.tools.ant" classpath="${jdk.home.1.8}/lib/ant-javafx.jar"/>
+  </target>
+  
+  <target name="clean.artifact.accountingjxml" description="clean AccountingJXML artifact output">
+    <delete dir="${artifact.output.accountingjxml}"/>
+  </target>
+  
+  <target name="artifact.accountingjxml" depends="init.artifacts, compile.module.accountingjxml" description="Build &#39;AccountingJXML&#39; artifact" xmlns:fx="javafx:com.sun.javafx.tools.ant">
+    <mkdir dir="${artifact.output.accountingjxml}"/>
+    <copy todir="${artifact.temp.output.AccountingJXML}">
+      <fileset dir="${accountingjxml.output.dir}"/>
+    </copy>
+    <copy file="${path.variable.maven_repository}/org/exist-db/exist-core/4.1.0/exist-core-4.1.0.jar" tofile="${artifact.temp.output.AccountingJXML}/exist-core-4.1.0.jar"/>
+    <copy file="${path.variable.maven_repository}/net/jcip/jcip-annotations/1.0/jcip-annotations-1.0.jar" tofile="${artifact.temp.output.AccountingJXML}/jcip-annotations-1.0.jar"/>
+    <copy file="${path.variable.maven_repository}/antlr/antlr/2.7.7/antlr-2.7.7.jar" tofile="${artifact.temp.output.AccountingJXML}/antlr-2.7.7.jar"/>
+    <copy file="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-core/2.9.4/jackson-core-2.9.4.jar" tofile="${artifact.temp.output.AccountingJXML}/jackson-core-2.9.4.jar"/>
+    <copy file="${path.variable.maven_repository}/com/github/ben-manes/caffeine/caffeine/2.6.2/caffeine-2.6.2.jar" tofile="${artifact.temp.output.AccountingJXML}/caffeine-2.6.2.jar"/>
+    <copy file="${path.variable.maven_repository}/org/jctools/jctools-core/2.1.2/jctools-core-2.1.2.jar" tofile="${artifact.temp.output.AccountingJXML}/jctools-core-2.1.2.jar"/>
+    <copy file="${path.variable.maven_repository}/com/github/krukow/clj-ds/0.0.4/clj-ds-0.0.4.jar" tofile="${artifact.temp.output.AccountingJXML}/clj-ds-0.0.4.jar"/>
+    <copy file="${path.variable.maven_repository}/com/siemens/ct/exi/exificient/0.9.3/exificient-0.9.3.jar" tofile="${artifact.temp.output.AccountingJXML}/exificient-0.9.3.jar"/>
+    <copy file="${path.variable.maven_repository}/com/ibm/icu/icu4j/59.1/icu4j-59.1.jar" tofile="${artifact.temp.output.AccountingJXML}/icu4j-59.1.jar"/>
+    <copy file="${path.variable.maven_repository}/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar" tofile="${artifact.temp.output.AccountingJXML}/jsr305-3.0.2.jar"/>
+    <copy file="${path.variable.maven_repository}/org/exist-db/thirdparty/com/thaiopensource/jing/20151127/jing-20151127.jar" tofile="${artifact.temp.output.AccountingJXML}/jing-20151127.jar"/>
+    <copy file="${path.variable.maven_repository}/isorelax/isorelax/20030108/isorelax-20030108.jar" tofile="${artifact.temp.output.AccountingJXML}/isorelax-20030108.jar"/>
+    <copy file="${path.variable.maven_repository}/org/gnu/gnu-crypto/2.0.1/gnu-crypto-2.0.1.jar" tofile="${artifact.temp.output.AccountingJXML}/gnu-crypto-2.0.1.jar"/>
+    <copy file="${path.variable.maven_repository}/com/evolvedbinary/j8fu/j8fu/1.13/j8fu-1.13.jar" tofile="${artifact.temp.output.AccountingJXML}/j8fu-1.13.jar"/>
+    <copy file="${path.variable.maven_repository}/org/exist-db/thirdparty/javax/xml/xquery/xqjapi/1.0-fr/xqjapi-1.0-fr.jar" tofile="${artifact.temp.output.AccountingJXML}/xqjapi-1.0-fr.jar"/>
+    <copy file="${path.variable.maven_repository}/jline/jline/0.9.94/jline-0.9.94.jar" tofile="${artifact.temp.output.AccountingJXML}/jline-0.9.94.jar"/>
+    <copy file="${path.variable.maven_repository}/junit/junit/3.8.1/junit-3.8.1.jar" tofile="${artifact.temp.output.AccountingJXML}/junit-3.8.1.jar"/>
+    <copy file="${path.variable.maven_repository}/cglib/cglib/3.2.6/cglib-3.2.6.jar" tofile="${artifact.temp.output.AccountingJXML}/cglib-3.2.6.jar"/>
+    <copy file="${path.variable.maven_repository}/org/ow2/asm/asm/6.0/asm-6.0.jar" tofile="${artifact.temp.output.AccountingJXML}/asm-6.0.jar"/>
+    <copy file="${path.variable.maven_repository}/se/softhouse/jargo/0.4.2/jargo-0.4.2.jar" tofile="${artifact.temp.output.AccountingJXML}/jargo-0.4.2.jar"/>
+    <copy file="${path.variable.maven_repository}/commons-codec/commons-codec/1.11/commons-codec-1.11.jar" tofile="${artifact.temp.output.AccountingJXML}/commons-codec-1.11.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/commons/commons-configuration2/2.2/commons-configuration2-2.2.jar" tofile="${artifact.temp.output.AccountingJXML}/commons-configuration2-2.2.jar"/>
+    <copy file="${path.variable.maven_repository}/commons-io/commons-io/2.6/commons-io-2.6.jar" tofile="${artifact.temp.output.AccountingJXML}/commons-io-2.6.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/commons/commons-lang3/3.7/commons-lang3-3.7.jar" tofile="${artifact.temp.output.AccountingJXML}/commons-lang3-3.7.jar"/>
+    <copy file="${path.variable.maven_repository}/commons-logging/commons-logging/1.2/commons-logging-1.2.jar" tofile="${artifact.temp.output.AccountingJXML}/commons-logging-1.2.jar"/>
+    <copy file="${path.variable.maven_repository}/commons-pool/commons-pool/1.6/commons-pool-1.6.jar" tofile="${artifact.temp.output.AccountingJXML}/commons-pool-1.6.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-api/2.11.0/log4j-api-2.11.0.jar" tofile="${artifact.temp.output.AccountingJXML}/log4j-api-2.11.0.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-core/2.11.0/log4j-core-2.11.0.jar" tofile="${artifact.temp.output.AccountingJXML}/log4j-core-2.11.0.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-jul/2.11.0/log4j-jul-2.11.0.jar" tofile="${artifact.temp.output.AccountingJXML}/log4j-jul-2.11.0.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-slf4j-impl/2.11.0/log4j-slf4j-impl-2.11.0.jar" tofile="${artifact.temp.output.AccountingJXML}/log4j-slf4j-impl-2.11.0.jar"/>
+    <copy file="${path.variable.maven_repository}/org/slf4j/slf4j-api/1.8.0-alpha2/slf4j-api-1.8.0-alpha2.jar" tofile="${artifact.temp.output.AccountingJXML}/slf4j-api-1.8.0-alpha2.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/ant/ant/1.10.2/ant-1.10.2.jar" tofile="${artifact.temp.output.AccountingJXML}/ant-1.10.2.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/ant/ant-launcher/1.10.2/ant-launcher-1.10.2.jar" tofile="${artifact.temp.output.AccountingJXML}/ant-launcher-1.10.2.jar"/>
+    <copy file="${path.variable.maven_repository}/xerces/xercesImpl/2.11.0/xercesImpl-2.11.0.jar" tofile="${artifact.temp.output.AccountingJXML}/xercesImpl-2.11.0.jar"/>
+    <copy file="${path.variable.maven_repository}/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01.jar" tofile="${artifact.temp.output.AccountingJXML}/xml-apis-1.4.01.jar"/>
+    <copy file="${path.variable.maven_repository}/xml-resolver/xml-resolver/1.2/xml-resolver-1.2.jar" tofile="${artifact.temp.output.AccountingJXML}/xml-resolver-1.2.jar"/>
+    <copy file="${path.variable.maven_repository}/xalan/xalan/2.7.2/xalan-2.7.2.jar" tofile="${artifact.temp.output.AccountingJXML}/xalan-2.7.2.jar"/>
+    <copy file="${path.variable.maven_repository}/xalan/serializer/2.7.2/serializer-2.7.2.jar" tofile="${artifact.temp.output.AccountingJXML}/serializer-2.7.2.jar"/>
+    <copy file="${path.variable.maven_repository}/net/sf/saxon/Saxon-HE/9.6.0-7/Saxon-HE-9.6.0-7.jar" tofile="${artifact.temp.output.AccountingJXML}/Saxon-HE-9.6.0-7.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/xmlrpc/xmlrpc-common/3.1.3/xmlrpc-common-3.1.3.jar" tofile="${artifact.temp.output.AccountingJXML}/xmlrpc-common-3.1.3.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/ws/commons/util/ws-commons-util/1.0.2/ws-commons-util-1.0.2.jar" tofile="${artifact.temp.output.AccountingJXML}/ws-commons-util-1.0.2.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/xmlrpc/xmlrpc-client/3.1.3/xmlrpc-client-3.1.3.jar" tofile="${artifact.temp.output.AccountingJXML}/xmlrpc-client-3.1.3.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/xmlrpc/xmlrpc-server/3.1.3/xmlrpc-server-3.1.3.jar" tofile="${artifact.temp.output.AccountingJXML}/xmlrpc-server-3.1.3.jar"/>
+    <copy file="${path.variable.maven_repository}/org/aspectj/aspectjrt/1.9.0/aspectjrt-1.9.0.jar" tofile="${artifact.temp.output.AccountingJXML}/aspectjrt-1.9.0.jar"/>
+    <copy file="${path.variable.maven_repository}/org/eclipse/jetty/jetty-security/9.4.9.v20180320/jetty-security-9.4.9.v20180320.jar" tofile="${artifact.temp.output.AccountingJXML}/jetty-security-9.4.9.v20180320.jar"/>
+    <copy file="${path.variable.maven_repository}/org/eclipse/jetty/jetty-server/9.4.9.v20180320/jetty-server-9.4.9.v20180320.jar" tofile="${artifact.temp.output.AccountingJXML}/jetty-server-9.4.9.v20180320.jar"/>
+    <copy file="${path.variable.maven_repository}/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar" tofile="${artifact.temp.output.AccountingJXML}/javax.servlet-api-3.1.0.jar"/>
+    <copy file="${path.variable.maven_repository}/org/eclipse/jetty/jetty-http/9.4.9.v20180320/jetty-http-9.4.9.v20180320.jar" tofile="${artifact.temp.output.AccountingJXML}/jetty-http-9.4.9.v20180320.jar"/>
+    <copy file="${path.variable.maven_repository}/org/eclipse/jetty/jetty-io/9.4.9.v20180320/jetty-io-9.4.9.v20180320.jar" tofile="${artifact.temp.output.AccountingJXML}/jetty-io-9.4.9.v20180320.jar"/>
+    <copy file="${path.variable.maven_repository}/org/eclipse/jetty/jetty-util/9.4.9.v20180320/jetty-util-9.4.9.v20180320.jar" tofile="${artifact.temp.output.AccountingJXML}/jetty-util-9.4.9.v20180320.jar"/>
+    <copy file="${path.variable.maven_repository}/org/exist-db/thirdparty/org/expath/pkg-repo/20170307144900-patched/pkg-repo-20170307144900-patched.jar" tofile="${artifact.temp.output.AccountingJXML}/pkg-repo-20170307144900-patched.jar"/>
+    <copy file="${path.variable.maven_repository}/com/fifesoft/rsyntaxtextarea/2.6.1/rsyntaxtextarea-2.6.1.jar" tofile="${artifact.temp.output.AccountingJXML}/rsyntaxtextarea-2.6.1.jar"/>
+    <copy file="${path.variable.maven_repository}/org/quartz-scheduler/quartz/2.3.0/quartz-2.3.0.jar" tofile="${artifact.temp.output.AccountingJXML}/quartz-2.3.0.jar"/>
+    <copy file="${path.variable.maven_repository}/com/mchange/c3p0/0.9.5.2/c3p0-0.9.5.2.jar" tofile="${artifact.temp.output.AccountingJXML}/c3p0-0.9.5.2.jar"/>
+    <copy file="${path.variable.maven_repository}/com/mchange/mchange-commons-java/0.2.11/mchange-commons-java-0.2.11.jar" tofile="${artifact.temp.output.AccountingJXML}/mchange-commons-java-0.2.11.jar"/>
+    <copy file="${path.variable.maven_repository}/com/zaxxer/HikariCP-java6/2.3.13/HikariCP-java6-2.3.13.jar" tofile="${artifact.temp.output.AccountingJXML}/HikariCP-java6-2.3.13.jar"/>
+    <copy file="${path.variable.maven_repository}/org/exist-db/thirdparty/org/xmldb/xmldb-api/1.0-patched/xmldb-api-1.0-patched.jar" tofile="${artifact.temp.output.AccountingJXML}/xmldb-api-1.0-patched.jar"/>
+    <copy file="${path.variable.maven_repository}/org/exist-db/exist-start/4.1.0/exist-start-4.1.0.jar" tofile="${artifact.temp.output.AccountingJXML}/exist-start-4.1.0.jar"/>
+    <copy file="${path.variable.maven_repository}/com/openhtmltopdf/openhtmltopdf-core/0.0.1-RC13/openhtmltopdf-core-0.0.1-RC13.jar" tofile="${artifact.temp.output.AccountingJXML}/openhtmltopdf-core-0.0.1-RC13.jar"/>
+    <copy file="${path.variable.maven_repository}/com/openhtmltopdf/openhtmltopdf-pdfbox/0.0.1-RC13/openhtmltopdf-pdfbox-0.0.1-RC13.jar" tofile="${artifact.temp.output.AccountingJXML}/openhtmltopdf-pdfbox-0.0.1-RC13.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/pdfbox/pdfbox/2.0.8/pdfbox-2.0.8.jar" tofile="${artifact.temp.output.AccountingJXML}/pdfbox-2.0.8.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/pdfbox/fontbox/2.0.8/fontbox-2.0.8.jar" tofile="${artifact.temp.output.AccountingJXML}/fontbox-2.0.8.jar"/>
+    <copy file="${path.variable.maven_repository}/org/apache/pdfbox/xmpbox/2.0.8/xmpbox-2.0.8.jar" tofile="${artifact.temp.output.AccountingJXML}/xmpbox-2.0.8.jar"/>
+    <copy file="${path.variable.maven_repository}/de/rototor/pdfbox/graphics2d/0.12/graphics2d-0.12.jar" tofile="${artifact.temp.output.AccountingJXML}/graphics2d-0.12.jar"/>
+    <copy file="${path.variable.maven_repository}/com/openhtmltopdf/openhtmltopdf-java2d/0.0.1-RC13/openhtmltopdf-java2d-0.0.1-RC13.jar" tofile="${artifact.temp.output.AccountingJXML}/openhtmltopdf-java2d-0.0.1-RC13.jar"/>
+    <copy file="${path.variable.maven_repository}/com/openhtmltopdf/openhtmltopdf-jsoup-dom-converter/0.0.1-RC13/openhtmltopdf-jsoup-dom-converter-0.0.1-RC13.jar" tofile="${artifact.temp.output.AccountingJXML}/openhtmltopdf-jsoup-dom-converter-0.0.1-RC13.jar"/>
+    <copy file="${path.variable.maven_repository}/org/jsoup/jsoup/1.8.3/jsoup-1.8.3.jar" tofile="${artifact.temp.output.AccountingJXML}/jsoup-1.8.3.jar"/>
+    <mkdir dir="${artifact.temp.output.AccountingJXML}/META-INF"/>
+    <copy file="${basedir}/../META-INF/MANIFEST.MF" tofile="${artifact.temp.output.AccountingJXML}/META-INF/MANIFEST.MF"/>
+    <fx:fileset id="all_but_AccountingJXML" dir="${artifact.temp.output.AccountingJXML}" includes="**/*.jar">
+      <exclude name="AccountingJXML.jar"/>
+    </fx:fileset>
+    <fx:fileset id="all_AccountingJXML" dir="${artifact.temp.output.AccountingJXML}" includes="**/*.jar"/>
+    <fx:application id="AccountingJXML_id" name="AccountingJXML" mainClass="cz.pb138.accounting.Main"/>
+    <fx:jar destfile="${artifact.temp.output.AccountingJXML}/AccountingJXML.jar">
+      <fx:application refid="AccountingJXML_id"/>
+      <fileset dir="${artifact.temp.output.AccountingJXML}" excludes="**/*.jar"/>
+      <fx:resources>
+        <fx:fileset refid="all_but_AccountingJXML"/>
+      </fx:resources>
+      <manifest>
+        <attribute name="Implementation-Title" value=""/>
+        <attribute name="Implementation-Version" value=""/>
+        <attribute name="Implementation-Vendor" value=""/>
+      </manifest>
+    </fx:jar>
+    <fx:deploy width="600" height="400" updatemode="background" outdir="${artifact.temp.output.AccountingJXML}/deploy" outfile="AccountingJXML" nativeBundles="all">
+      <fx:application refid="AccountingJXML_id"/>
+      <fx:resources>
+        <fx:fileset refid="all_AccountingJXML"/>
+      </fx:resources>
+    </fx:deploy>
+    <copy todir="${artifact.output.accountingjxml}">
+      <fileset dir="${artifact.temp.output.AccountingJXML}/deploy"/>
+    </copy>
+    <delete includeemptydirs="true">
+      <fileset dir="${artifact.temp.output.AccountingJXML}"/>
+    </delete>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.accountingjxml" description="Build all artifacts">
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>
