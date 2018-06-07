@@ -4,7 +4,6 @@ import cz.pb138.accounting.db.impl.AccountingException;
 import cz.pb138.accounting.fn.*;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
