@@ -7,6 +7,8 @@
 .button {
     -fx-background-color: #625D5D;
     -fx-text-fill: #d6a880;
+    -fx-font-family: "Verdana";
+    -fx-font-size: 11px;
 }
 .button:hover{
     -fx-background-color: #000000;
@@ -122,4 +124,9 @@
 }
 .labelBlue{
     -fx-text-fill: #20bdc5;
+}
+.labelTitle{
+    -fx-text-fill: #625d5d;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
 }
