@@ -298,9 +298,6 @@ public class AccountingGUI {
         if (!quack) {
             revealHideNotice(tfWarningSaveChanges);
         }
-
-        // Lze vypisovat hlasky ze tu nebo onu polozku se nepovedlo pridat
-
     }
 
     /**
@@ -337,9 +334,6 @@ public class AccountingGUI {
         if (!rbRecordPayer.isSelected() && !rbRecordSeller.isSelected()){
             tfWarningCreateInvoice.setText("Failed to create invoice, select type of contract");
             revealHideNotice(tfWarningCreateInvoice);
-
-            // Lze vypsat hlasku ze se nezdarilo vytvorit Invoice
-            // protoze neni vybran typ smlouvy Payer nebo Seller
             return;
         }
 
@@ -361,15 +355,11 @@ public class AccountingGUI {
         )) {
             tfNotifyCreateInvoice.setText("Invoice was created");
             revealHideNotice(tfNotifyCreateInvoice);
-
-            // Lze vypsat hlasku ze se podarilo vytvorit Invoice
             clearInvoice();
             return;
         }
         tfWarningCreateInvoice.setText("Failed to create invoice");
         revealHideNotice(tfWarningCreateInvoice);
-
-        // Lze vypsat hlasku ze se nezdarilo vytvorit Invoice
     }
 
     /**
@@ -429,7 +419,6 @@ public class AccountingGUI {
         }
         tfWarningAddItem.setText("Failed to add content to the table");
         revealHideNotice(tfWarningAddItem);
-        // Lze vypsat hlasku ze se nepovedl pridat obsah do tabulky
     }
 
     /**
@@ -477,8 +466,6 @@ public class AccountingGUI {
         }
         tfWarningAddContact.setText("Failed to add contact");
         revealHideNotice(tfWarningAddContact);
-
-        // Lze vypsat hlasku ze kontakt se nepovedlo pridat
     }
 
     /**
@@ -776,15 +763,10 @@ public class AccountingGUI {
         if (!fn.getPDF(tfFolderSave.getText())) {
             tfWarningExport.setText("Failed to create PDF");
             revealHideNotice(tfWarningExport);
-
-            // Nepodarilo se vytvorit PDF
-            // Hlaska
             return;
         }
         tfNotifyExport.setText("PDF was successfully created");
         revealHideNotice(tfNotifyExport);
-
-        // Uspesne se povedly vytvorit smlouvy v PDF
     }
 
     @FXML
@@ -800,20 +782,24 @@ public class AccountingGUI {
 
         tfWarningSummarize.setText("Date was not selected");
         revealHideNotice(tfWarningSummarize);
-
-        // Lze vypsat hlasku ze neni co scitat Invoice nebyl vytvoren
     }
 
+    /**
+     * Reveal and fade out notifications.
+     * @param field of notice
+     */
     private void revealHideNotice(TextInputControl field){
         field.setVisible(true);
         hideNotice.setNode(field);
         hideNotice.playFromStart();
     }
 
+    /**
+     * Fade out effect.
+     */
     private void initTransition(){
         hideNotice = new FadeTransition(Duration.seconds(6));
         hideNotice.setFromValue(1.0);
         hideNotice.setToValue(0.0);
     }
-
 }
