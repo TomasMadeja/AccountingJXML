@@ -28,6 +28,9 @@
 .table-view .filler{
     -fx-background-color: #ae9279;
 }
+.table-view .table-cell{
+    -fx-alignment: CENTER;
+}
 .tab{
     -fx-background-color: #ae9c8e;
     -fx-focus-color: #20bdc5;

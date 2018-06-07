@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
@@ -17,7 +23,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.pb138.accounting.gui.AccountingGUI">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.pb138.accounting.gui.AccountingGUI">
    <children>
       <TabPane prefHeight="400.0" prefWidth="600.0" styleClass="root" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -40,7 +46,7 @@
                            <font>
                               <Font name="Verdana" size="11.0" />
                            </font></Button>
-                        <Pane fx:id="pnOwnerPersonal" prefHeight="367.0" prefWidth="450.0" styleClass="rightPanel">
+                        <Pane fx:id="pnOwnerPersonal" prefHeight="367.0" prefWidth="449.0" styleClass="rightPanel">
                            <children>
                               <Pane layoutX="-15.0" layoutY="40.0" prefHeight="291.0" prefWidth="455.0" styleClass="layoutPanel" />
                               <Label layoutX="136.0" layoutY="8.0" text="Personal data" textFill="#625d5d">
@@ -150,7 +156,7 @@
                            <font>
                               <Font name="Verdana" size="11.0" />
                            </font></Button>
-                        <Button fx:id="btRecordInvoiceType" layoutX="460.0" layoutY="100.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Type of invoice" textFill="#bf9671">
+                        <Button fx:id="btRecordInvoiceType" layoutX="460.0" layoutY="100.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" text="Invoice details" textFill="#bf9671">
                            <font>
                               <Font name="Verdana" size="11.0" />
                            </font></Button>
@@ -308,24 +314,24 @@
                         </Pane>
                         <Pane fx:id="pnRecordInvoiceType" disable="true" prefHeight="367.0" prefWidth="450.0" visible="false">
                            <children>
-                              <Label layoutX="10.0" layoutY="10.0" text="Type of invoice" textFill="#625d5d">
+                              <Label layoutX="10.0" layoutY="10.0" text="Invoice details" textFill="#625d5d">
                                  <font>
                                     <Font name="System Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="tfRecordRecAdd" layoutX="145.0" layoutY="54.0" prefHeight="27.0" prefWidth="295.0" />
-                              <Label layoutX="10.0" layoutY="59.0" text="Recipients address:" />
-                              <DatePicker fx:id="dpRecordBillingDate" layoutX="145.0" layoutY="111.0" />
-                              <DatePicker fx:id="dpRecordIssuingDate" layoutX="145.0" layoutY="148.0" />
-                              <Label layoutX="10.0" layoutY="116.0" text="Billing date:" />
-                              <Label layoutX="10.0" layoutY="153.0" text="Issuing date:" />
-                              <TextField fx:id="tfRecordWarnRecAdd" disable="true" editable="false" layoutX="145.0" layoutY="81.0" prefHeight="27.0" prefWidth="295.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
+                              <TextField fx:id="tfRecordRecAdd" layoutX="145.0" layoutY="65.0" prefHeight="27.0" prefWidth="295.0" />
+                              <Label layoutX="10.0" layoutY="70.0" text="Recipients address:" />
+                              <DatePicker fx:id="dpRecordBillingDate" layoutX="145.0" layoutY="195.0" />
+                              <DatePicker fx:id="dpRecordIssuingDate" layoutX="145.0" layoutY="149.0" />
+                              <Label layoutX="10.0" layoutY="200.0" text="Due date:" />
+                              <Label layoutX="10.0" layoutY="154.0" text="Issuing date:" />
+                              <TextField fx:id="tfRecordWarnRecAdd" disable="true" editable="false" layoutX="145.0" layoutY="92.0" prefHeight="27.0" prefWidth="295.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" text=" " visible="false">
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
                                  </cursor>
                               </TextField>
-                              <TextField fx:id="tfRecordWarnIssuingDate" disable="true" editable="false" layoutX="145.0" layoutY="175.0" prefHeight="27.0" prefWidth="194.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" visible="false" />
-                              <TextField fx:id="tfRecordWarnBillingDate" disable="true" editable="false" layoutX="145.0" layoutY="138.0" prefHeight="27.0" prefWidth="194.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" visible="false" />
+                              <TextField fx:id="tfRecordWarnIssuingDate" disable="true" editable="false" layoutX="145.0" layoutY="174.0" prefHeight="27.0" prefWidth="194.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" visible="false" />
+                              <TextField fx:id="tfRecordWarnBillingDate" disable="true" editable="false" layoutX="145.0" layoutY="220.0" prefHeight="27.0" prefWidth="194.0" style="-fx-background-color: #cc0000; -fx-text-inner-color: white;" visible="false" />
                            </children>
                         </Pane>
                      </children>
