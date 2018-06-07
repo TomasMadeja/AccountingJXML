@@ -15,6 +15,8 @@
 
     <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 </head>
 
@@ -24,51 +26,61 @@
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="index.html">
-                        AccountingJXML
-                    </a>
-                </li>
-                <li>
-                    <a href="database.html">Database</a>
-                </li>
-                <li>
-                    <a href="functionality.html">Functionality</a>
-                </li>
-                <li>
-                    <a href="gui.html">GUI</a>
-                </li>
-                <li>
-                    <a href="resources.html">Resources</a>
-                </li>
-                <li>
-                    <a href="reports.html">Reports</a>
-                </li>
-            </ul>
-        </div>
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand h1">
+                <a href="index.html">
+                    <i class="fas fa-home"> AccountingJXML</i>
+                </a>
+            </li>
+            <li>
+                <a href="database.html"><i class="fas fa-database h6"> Database</i></a>
+            </li>
+            <li>
+                <a href="functionality.html"><i class="fas fa-cogs h6"> Functionality</i></a>
+            </li>
+            <li>
+                <a href="gui.html"><i class="fas fa-desktop h6"> GUI</i></a>
+            </li>
+            <li>
+                <a href="reports.html"><i class="fas fa-paperclip h6"> Reports</i></a>
+            </li>
+            <li>
+                <a clas="text-right" href="resources.html"><i class="fas fa-cubes h6"> Resources</i></a>
+            </li>
+            <li>
+                <a class="text-left" href="javadoc/index.html" target="_blank"><i class="fab fa-java h6"> JavaDoc</i></a>
+            </li>
+        </ul>
+    </div>
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <h1>Functionality</h1>
-            <p>
-                Functionality is the middle layer between GUI and Database. As such this layer has to connect all requests from
-                users and store/read data from database. It is very important to keep database from containing inconsistant data
-                so the functionality layer is where all the data are checked. We run two tests before the input data is stored
-                into our database.
-            </p>
-            <h2>Testing on the fly</h2>
+
+            <h1 class="underline">Functionality</h1>
+            
+            <!-- TOC -->
+            <div id="toc" class="toc"><div class="toctitle"><h5>Contents</h5></div>
+                <ul>
+                <li class="toclevel-1 tocsection-1"><a href="#Testing-on-the-fly">1 Testing on the fly</a><ul></ul></li>
+                <li class="toclevel-1 tocsection-1"><a href="#Testing-before-storing">2 Testing before storing</a><ul></ul></li>
+                <li class="toclevel-1 tocsection-1"><a href="#Export-to-PDF">3 Export to PDF</a><ul></ul></li>
+                </ul>
+            </div>
+
+            <h3 id="Testing-on-the-fly" class="underline">Testing on the fly</h3>
             <p>Testing text inputs the user is typing into our forms. This is done with use of regular expressions. There we set a
             pattern which every text field must follow.</p>
             <img id="float-left" src="resources/Test1.png" alt="test1" width="40%" height="40%"><p/>
-            <h2>Testing before storing into DB</h2>
+
+            <h3 id="Testing-before-storing" class="underline">Testing before storing</h3>
             <p>
                 Those are run to test if all required text fields are filled with valid input and if stored would create
                 one valid entry.
             </p>
             <img id="float-left" src="resources/Test2.png" alt="test2" width="40%" height="40%"><p/>
-            <h2>Export to PDF</h2>
+
+            <h3 id="Export-to-PDF" class="underline">Export to PDF</h3>
             <p>
                 Exporting to PDF allows simple way how to see all your Invoices. User sets up from/to dates
                 and application makes pdf file with all invoices between selected dates and counts total

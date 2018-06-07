@@ -16,6 +16,7 @@
     <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 </head>
 
@@ -23,149 +24,158 @@
 
 <div id="wrapper">
 
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="index.html">
-                        AccountingJXML
-                    </a>
-                </li>
-                <li>
-                    <a href="database.html">Database</a>
-                </li>
-                <li>
-                    <a href="functionality.html">Functionality</a>
-                </li>
-                <li>
-                    <a href="gui.html">GUI</a>
-                </li>
-                <li>
-                    <a href="resources.html">Resources</a>
-                </li>
-                <li>
-                    <a href="reports.html">Reports</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <h1 class="underline">AccountingJXML</h1>
-            <div id="toc" class="toc"><div class="toctitle"><h5>Contents</h2></div>
-                <ul>
-                <li class="toclevel-1 tocsection-1"><a href="#Overview">1 Overview</a><ul></ul></li>
-                <li class="toclevel-1 tocsection-1"><a href="#Development-Team">2 Development Team</a><ul></ul></li>
-                <li class="toclevel-1 tocsection-1"><a href="#Application-Design">3 Application Design</a><ul></ul></li>
-                <li class="toclevel-1 tocsection-1"><a href="#Team-Assignments">1 Team Assignments</a><ul></ul></li>
-                </ul>
-            </div>
-            <h3 id="Overview" class="underline">Overview</h3>
-            <p>
-                We were assigned to design and develop Java application for recording incomes and expenditures for small
-                business owner, that stores data in native XML database.
-            </p>
-            <p>
-                Every record contains:
-            </p>
-            <ul>
-                <li>payer information</li>
-                <li>recipient information</li>
-                <li>issuing date</li>
-                <li>billing date</li>
-                <li>list of invoiced items</li>
-            </ul>
-            <p>
-                Applications functionality:
-            </p>
-            <ul>
-                <li>adding new revenue and expenditure</li>
-                <li>calculating income(losses) since the start of accounting period</li>
-                <li>exporting stored invoices into PDF format</li>
-            </ul>
-            <h3 id="Development-Team" class="underline">Development team</h3>
-            <p>
-                Head of the project : <a href="https://github.com/ludekbartek">Mgr. Luděk Bártek, Ph.D</a>
-            </p>
-            <p>Team members:
-            </p>
-            <ul>
-                <li><a href="https://github.com/MonikaLezatkova">Monika Ležatková</a></li>
-                <li><a href="https://github.com/Zdendav">Zdeněk David</a></li>
-                <li><a href="https://github.com/TomasMadeja">Tomáš Madeja</a></li>
-                <li><a href="https://github.com/MartinTrubelik">Martin Trubelík</a></li>
-            </ul>
-            <h3 id="Application-Design" class="underline">Application Design</h3>
-            <p>
-                We have decided on splitting the application into three independent layers, with upper layers using the services
-                of the layer directly below it.
-            </p>
-            <p>
-                Going from bottom up, the layers are:
-            </p>
-            <ul>
-                <li>GUI</li>
-                <li>Functionality</li>
-                <li>Database</li>
-            </ul>
-            <p>
-                Database as the first layer handles all communication with native XML database and handles any
-                data retrieval of storage.<br/>
-                Second layer, Functionality, processes data and provides required application functionality.<br/>
-                Third layer is GUI, which providesinterface for interaction with the user.
-            </p>
-
-            <div class="duck">
-                <img class="float-left" src="resources/Diagram2.png" alt="diagram2" width="15%" height="15%"><br/>
-                <h5>Database</h5>
-                <p>
-                    Uses eXist-db as it's native XML database. Provides interface for storing new invoices into the
-                    database as well as handling consistency of the database. For the purposes of the project it only
-                    allows retrieval ability.<br/>
-                    <a href="database.html">More info...</a>
-                </p>
-                <h5>Functionality</h5>
-                <p>
-                    Handles application functionality, such as storing new invoices, calculating earnings and losses
-                    and exporting data into PDF format. This layer is responsible for checking all input data for
-                    validity before being inserted ino the database.<br/>
-                    <a href="functionality.html">More info...</a>
-                </p>
-                <h5>GUI</h5>
-                <p>
-                    Provides user interface using JavaFX. Also provides hints for user as to a format of input data as well
-                    as validation of the data using Functionality layer's functions.<br/>
-                    <a href="gui.html">More info...</a>
-                </p>
-                <div class="clear"></div>
-            </div>
-
-            <h3 id="Team-Assignments" class="underline">Team Assignments</h3>
-            <ul>
-                <li> Database : <a href="database.html">Tomáš Madeja</a></li>
-                <li> Functionality : <a href="functionality.html">Martin Trubelík</a></li>
-                <li> GUI : <a href="gui.html">Monika Ležatková</a> </li>
-                <li> Web, wiki : <a href="index.html">Zdeněk David</a></li>
-            </ul>
-            <a href="https://www.youtube.com/watch?v=IJiHDmyhE1A"> </a
-        </div>
-        <!-- /#page-content-wrapper -->
-
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand h1">
+                <a href="index.html">
+                    <i class="fas fa-home"> AccountingJXML</i>
+                </a>
+            </li>
+            <li>
+                <a href="database.html"><i class="fas fa-database h6"> Database</i></a>
+            </li>
+            <li>
+                <a href="functionality.html"><i class="fas fa-cogs h6"> Functionality</i></a>
+            </li>
+            <li>
+                <a href="gui.html"><i class="fas fa-desktop h6"> GUI</i></a>
+            </li>
+            <li>
+                <a href="reports.html"><i class="fas fa-paperclip h6"> Reports</i></a>
+            </li>
+            <li>
+                <a clas="text-right" href="resources.html"><i class="fas fa-cubes h6"> Resources</i></a>
+            </li>
+            <li>
+                <a class="text-left" href="javadoc/index.html" target="_blank"><i class="fab fa-java h6"> JavaDoc</i></a>
+            </li>
+        </ul>
     </div>
-    <!-- /#wrapper -->
+    <!-- /#sidebar-wrapper -->
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
 
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
+        <h1 class="underline">AccountingJXML</h1>
+        
+        <!-- TOC-->
+        <div id="toc" class="toc"><div class="toctitle"><h5>Contents</h2></div>
+            <ul>
+            <li class="toclevel-1 tocsection-1"><a href="#Overview">1 Overview</a><ul></ul></li>
+            <li class="toclevel-1 tocsection-1"><a href="#Development-Team">2 Development Team</a><ul></ul></li>
+            <li class="toclevel-1 tocsection-1"><a href="#Application-Design">3 Application Design</a><ul></ul></li>
+            <li class="toclevel-1 tocsection-1"><a href="#Team-Assignments">4 Team Assignments</a><ul></ul></li>
+            </ul>
+        </div>
+
+        <h3 id="Overview" class="underline">Overview</h3>
+        <p>
+            We were assigned to design and develop Java application for recording incomes and expenditures for small
+            business owner, that stores data in native XML database.
+        </p>
+        <p>
+            Every record contains:
+        </p>
+        <ul>
+            <li>payer information</li>
+            <li>recipient information</li>
+            <li>issuing date</li>
+            <li>billing date</li>
+            <li>list of invoiced items</li>
+        </ul>
+        <p>
+            Applications functionality:
+        </p>
+        <ul>
+            <li>adding new revenue and expenditure</li>
+            <li>calculating income(losses) since the start of accounting period</li>
+            <li>exporting stored invoices into PDF format</li>
+        </ul>
+
+        <h3 id="Development-Team" class="underline">Development team</h3>
+        <p>
+            Head of the project : <a href="https://github.com/ludekbartek">Mgr. Luděk Bártek, Ph.D</a>
+        </p>
+        <p>Team members:
+        </p>
+        <ul>
+            <li><a href="https://github.com/MonikaLezatkova">Monika Ležatková</a></li>
+            <li><a href="https://github.com/Zdendav">Zdeněk David</a></li>
+            <li><a href="https://github.com/TomasMadeja">Tomáš Madeja</a></li>
+            <li><a href="https://github.com/MartinTrubelik">Martin Trubelík</a></li>
+        </ul>
+
+        <h3 id="Application-Design" class="underline">Application Design</h3>
+        <p>
+            We have decided on splitting the application into three independent layers, with upper layers using the services
+            of the layer directly below it.
+        </p>
+        <p>
+            Going from bottom up, the layers are:
+        </p>
+        <ul>
+            <li>GUI</li>
+            <li>Functionality</li>
+            <li>Database</li>
+        </ul>
+        <p>
+            Database as the first layer handles all communication with native XML database and handles any
+            data retrieval of storage.<br/>
+            Second layer, Functionality, processes data and provides required application functionality.<br/>
+            Third layer is GUI, which providesinterface for interaction with the user.
+        </p>
+
+        <div class="duck">
+	        <img class="float-left" src="resources/Diagram2.png" alt="diagram2" width="15%" height="15%"><br/>
+	        <h5>Database</h5>
+	        <p>
+	            Uses eXist-db as it's native XML database. Provides interface for storing new invoices into the
+	            database as well as handling consistency of the database. For the purposes of the project it only
+	            allows retrieval ability.<br/>
+	            <a href="database.html">More info...</a>
+	        </p>
+	        <h5>Functionality</h5>
+	        <p>
+	            Handles application functionality, such as storing new invoices, calculating earnings and losses
+	            and exporting data into PDF format. This layer is responsible for checking all input data for
+	            validity before being inserted ino the database.<br/>
+	            <a href="functionality.html">More info...</a>
+	        </p>
+	        <h5>GUI</h5>
+	        <p>
+	            Provides user interface using JavaFX. Also provides hints for user as to a format of input data as well
+	            as validation of the data using Functionality layer's functions.<br/>
+	            <a href="gui.html">More info...</a>
+	        </p>
+	        <div class="clear"></div>
+        </div>
+
+        <h3 id="Team-Assignments" class="underline">Team Assignments</h3>
+        <ul>
+            <li> Database : <a href="database.html">Tomáš Madeja</a></li>
+            <li> Functionality : <a href="functionality.html">Martin Trubelík</a></li>
+            <li> GUI : <a href="gui.html">Monika Ležatková</a> </li>
+            <li> Web, wiki : <a href="index.html">Zdeněk David</a></li>
+        </ul>
+        <a href="https://www.youtube.com/watch?v=IJiHDmyhE1A"> </a>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Menu Toggle Script -->
+	<script>
+	$("#menu-toggle").click(function(e) {
+	    e.preventDefault();
+	    $("#wrapper").toggleClass("toggled");
+	});
+	</script>
 
 </body>
 

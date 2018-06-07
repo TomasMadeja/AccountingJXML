@@ -15,6 +15,8 @@
 
     <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 </head>
 
@@ -24,49 +26,58 @@
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="index.html">
-                        AccountingJXML
-                    </a>
-                </li>
-                <li>
-                    <a href="database.html">Database</a>
-                </li>
-                <li>
-                    <a href="functionality.html">Functionality</a>
-                </li>
-                <li>
-                    <a href="gui.html">GUI</a>
-                </li>
-                <li>
-                    <a href="resources.html">Resources</a>
-                </li>
-                <li>
-                    <a href="reports.html">Reports</a>
-                </li>
-            </ul>
-        </div>
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand h1">
+                <a href="index.html">
+                    <i class="fas fa-home"> AccountingJXML</i>
+                </a>
+            </li>
+            <li>
+                <a href="database.html"><i class="fas fa-database h6"> Database</i></a>
+            </li>
+            <li>
+                <a href="functionality.html"><i class="fas fa-cogs h6"> Functionality</i></a>
+            </li>
+            <li>
+                <a href="gui.html"><i class="fas fa-desktop h6"> GUI</i></a>
+            </li>
+            <li>
+                <a href="reports.html"><i class="fas fa-paperclip h6"> Reports</i></a>
+            </li>
+            <li>
+                <a clas="text-right" href="resources.html"><i class="fas fa-cubes h6"> Resources</i></a>
+            </li>
+            <li>
+                <a class="text-left" href="javadoc/index.html" target="_blank"><i class="fab fa-java h6"> JavaDoc</i></a>
+            </li>
+        </ul>
+    </div>
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
             
-            <h1>GUI</h1>
-            <p>
-                Graphical user interface (or GUI for short) is user interface which allows interaction between user
-                and electronic device through graphical icons and indicators.<br/>
-                When we started. We used Swing to create our graphical interface but mostly due to problems with compatibility
-                but also because it is easier to work with and offers more customisation we decided to swing to JavaFX.
-            </p>
-            <h2>JavaFX</h2>
+            <h1 class="underline">GUI</h1>
+
+            <!-- TOC -->
+            <div id="toc" class="toc"><div class="toctitle"><h5>Contents</h5></div>
+                <ul>
+                <li class="toclevel-1 tocsection-1"><a href="#JavaFX">1 JavaFX</a><ul></ul></li>
+                <li class="toclevel-1 tocsection-1"><a href="#Application-GUI">2 Application GUI</a><ul></ul></li>
+                <li class="toclevel-1 tocsection-1"><a href="#Owner-tab">3 Owner tab</a><ul></ul></li>
+                <li class="toclevel-1 tocsection-1"><a href="#Invoice-tab">4 Invoice tab</a><ul></ul></li>
+                <li class="toclevel-1 tocsection-1"><a href="#Tools-tab">5 Tools tab</a><ul></ul></li>
+                </ul>
+            </div>
+
+            <h3 id="JavaFX" class="underline">JavaFX</h3>
             <p>
                 JavaFX is a software platform for creating and delivering desktop applications as well as rich Internet
                 applications (RIAS) that can run across a wide variety of devices. JavaFX has support for desktop comuters
                 and web browsers on Microsoft windows Linux and macOS. Currently JavaFX is intended to slowly replace Swing
                 for creatation GUI for java applications.
             </p>
-            <h2>Application GUI</h2>            
+            <h3 id="Application-GUI" class="underline">Application GUI</h3>            
             <p>
                 Our application's interface consists of three sections.
             </p>
@@ -75,7 +86,7 @@
                 <li>Invoice</li>
                 <li>Tools</li>
             </ul>
-            <h3>Owner</h3>            
+            <h3 id="Owner-tab" class="underline">Owner tab</h3>            
             <p>
                 Section Owner is divided into two subsections and allows reset of all personal data.
             </p>
@@ -86,7 +97,7 @@
             <img src="resources/GUI1.png" alt="pic1" width="40%" height="40%">
             <img src="resources/GUIContacts.png" alt="pic2" width="40%" height="40%">
             <p/>
-            <h3>Invoice</h3>
+            <h3 id="Invoice-tab" class="underline">Invoice tab</h3>
             <p>
                 Section Invoice is divided into four subsections.
             </p>
@@ -101,7 +112,7 @@
             <img src="resources/GUI4.png" alt="pic4" width="40%" height="40%">
             <img src="resources/GUI2.png" alt="pic2" width="40%" height="40%">
             <p/>
-            <h3>Tools</h3>
+            <h3 id="Tools-tab" class="underline">Tools tab</h3>
             <p>
                 Section Tools allowes the user to summarize invoices by selecting from and to date. After summarization
                 it writes the total profit/losses of selected period. It also allowes to export selected Invoices into PDF file.
