@@ -1,6 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?> 
-<!-- was: no XML declaration present -->
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <article xmlns="http/docbook.org/ns/docbook/">
 	<info>
 		<title>Závěrečná zpráva k projektu</title>
@@ -17,9 +15,11 @@
 		<para>Webové stránky jsem psal v HTML5. Nejprve jsem chtěl formátování textů vyřešit jednoduchým css souborem, ale byl jsem přesvědčen, že využít bootstrap panel a jejich přidané css bude výhodnější, efektivnější a hezčí řešení. S implementací bootstrapu mi pomohl Tomáš Madeja.</para>
 		<para>Psaní dokumentace projektu jsem často prokládal obrázky, protože je pro cílové čtenáře snazší pochopit funkcionalitu, kterou se snažím popsat, když mají možnost nahlédnutí k obrázkům aplikace.</para>
 		<para>S texty pro dokumentaci databázové části projektu mi také velice pomohl Tomáš. Ostatní části jsem zdokumentoval sám.</para>
-	</section>
+                <para>Technickou dokumentaci jsem nejdřívě plánoval sepsat sám, ale nakonec jsme se shodli, že využít vygenerovaný JavaDoc je dostačující a elegantní řešení.</para>
+        </section>
 	<section>
-		<title>Git hub Wiki</title>
-		<para>TODO</para>
-	</section>
+		<title>Github Wiki</title>
+		<para>Do Github Wiki jsem vytvořil tři stránky v českém a anglickém jazyce. Popisuji jak s vytvořenou aplikací pracovat, jak je aplikace navrhnutá a použité technologie při řešení tohoto projektu.</para>
+                <para>Popis jak s aplikací pracovat jsem rozdělil na část prvního zapnutí, ve které popisuji uložení majitele, pro kterého se příjmy a výdaje počítají. V návrhu aplikace popisuji jak byl projekt rozdělen a jakou práci měl kdo na starosti. V použitých technologiích jsem připravil několik odkazů na externí technologie, které jsme se pro řešení projektu rozhodli využít.</para>
+        </section>
 </article>
