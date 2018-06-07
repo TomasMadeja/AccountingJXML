@@ -11,15 +11,18 @@
 .button:hover{
     -fx-background-color: #000000;
 }
-.textField{
-    -fx-background-color: #f6f2df;
-}
 .button2{
     -fx-background-color: #ae9279;
     -fx-text-fill: #000000;
 }
 .button2:hover{
     -fx-background-color: #7f6a59;
+}
+.textField{
+    -fx-background-color: #f6f2df;
+}
+.table-view{
+    -fx-focus-color: #20bdc5;
 }
 .table-view .column-header{
     -fx-background-color: #ae9279;
@@ -57,17 +60,17 @@
 .text-field{
     -fx-focus-color: #20bdc5;
 }
-.table-view{
+.text-area{
     -fx-focus-color: #20bdc5;
 }
 .radio-button{
     -fx-focus-color: #20bdc5;
 }
-.text-area{
-    -fx-focus-color: #20bdc5;
-}
 .date-picker{
     -fx-focus-color: #20bdc5;
+}
+.date-picker > .arrow-button{
+    -fx-background-color: #ae9279;
 }
 .date-picker-popup > .month-year-pane{
     -fx-background-color: #ccbfb6;
@@ -119,7 +122,4 @@
 }
 .labelBlue{
     -fx-text-fill: #20bdc5;
-}
-.date-picker > .arrow-button{
-    -fx-background-color: #ae9279;
 }
