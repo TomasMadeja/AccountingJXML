@@ -31,6 +31,9 @@
 .table-view .table-cell{
     -fx-alignment: CENTER;
 }
+.table-row-cell:selected{
+    -fx-background-color: #20bdc5;
+}
 .tab{
     -fx-background-color: #ae9c8e;
     -fx-focus-color: #20bdc5;
